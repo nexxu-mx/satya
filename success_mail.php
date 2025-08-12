@@ -1,8 +1,8 @@
 <?php
-$subject = "$mail_asunto SenciaStudio";
+$subject = "$mail_asunto SATYAStudio";
 $headers = "MIME-Version: 1.0" . "\r\n";
 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-$headers .= 'From: notificaciones@sencia.mx' . "\r\n";
+$headers .= 'From: notificaciones@SATYA.mx' . "\r\n";
 
 $message = '
 <html>
@@ -27,7 +27,7 @@ $message = '
             </div>
             <div class="header">
                 <div style="width: 100%; display: flex; justify-content: center; align-items: center;">
-                    <img src="" style="width: 60%;" alt="Sencia Studio">
+                    <img src="" style="width: 60%;" alt="SATYA Studio">
                 </div>
                 <h1>' . $mail_motivo . '</h1>
             </div>

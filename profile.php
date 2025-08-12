@@ -30,9 +30,9 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sencia Studio</title>
-    <meta name="title" content="Sencia Studio">
-    <meta name="description" content="SENCIA es un espacio dedicado al bienestar y la conexión entre cuerpo y mente, creado por dos hermanas que comparten la pasión por el movimiento y el cuidado integral.">
+    <title>SATYA Studio</title>
+    <meta name="title" content="SATYA Studio">
+    <meta name="description" content="SATYA es un espacio dedicado al bienestar y la conexión entre cuerpo y mente, creado por dos hermanas que comparten la pasión por el movimiento y el cuidado integral.">
     <link rel="shortcut icon" href="./favicon.png" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,20 +56,20 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
       margin: 40px auto;
     }
     .fc .fc-button-primary:not(:disabled).fc-button-active, .fc .fc-button-primary:not(:disabled):active {
-        background-color: var(--fc-button-active-bg-color,#A16A5B);
-        border-color: var(--fc-button-active-border-color,#73534A);
+        background-color: var(--fc-button-active-bg-color,#69685a);
+        border-color: var(--fc-button-active-border-color,#6b6a5f);
     }
     .fc .fc-button-primary {
-        background-color: var(--fc-button-bg-color,#D7B094);
-        border-color: var(--fc-button-border-color,#C19C82);
+        background-color: var(--fc-button-bg-color,rgb(132, 130, 115));
+        border-color: var(--fc-button-border-color,#6b6a5f);
     }
     .fc .fc-button-primary:hover, .fc .fc-button-primary:focus {
-        background-color: var(--fc-button-bg-color,#C49675);
-        border-color: var(--fc-button-border-color,#C1A794); 
+        background-color: var(--fc-button-bg-color,#69685a);
+        border-color: var(--fc-button-border-color,#69685a); 
     }
     .fc .fc-button-primary:disabled {
-        background-color: var(--fc-button-bg-color,#A16A5BC2);
-        border-color: var(--fc-button-border-color,#A16A5B);
+        background-color: var(--fc-button-bg-color,rgb(232, 226, 213));
+        border-color: var(--fc-button-border-color,rgb(180, 177, 171));
     }
     .fc .fc-toolbar-title {
       font-weight: 300;
@@ -84,7 +84,7 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
        font-weight: 400;
     }
     .fc .fc-list-event-dot {
-        border:5px solid #C19C82;
+        border:5px solid #6b6a5f;
         border: calc(var(--fc-list-event-dot-width,10px)/ 2) solid var(--fc-event-border-color,#7CD100);
     }
     .fc .fc-timegrid-axis-cushion {
@@ -114,11 +114,9 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
     <?php include 'header.php'; ?>
 
     
-    <div style="position: fixed; z-index: -1; top: 0; left: 0; width: 100%; height: 100%">
-        <video style="height: 200%;" src="./assets/images/sencia_gradient.mp4" autoplay loop muted></video>
-    </div>
+   
     <!-- MAIN SECTION -->
-    <main>
+    <main style="background: var(--background);">
         <article>
             <section class="secti-on">
                 

@@ -12,7 +12,7 @@ if (!empty($search)) {
     $params[] = "%$search%";
 }
 if (!empty($clases) && $clases !== 'CLASES POR SEMANA') {
-    $sql .= " AND clases = ?";
+    $sql .= " AND nombre = ?";
     $params[] = $clases;
 }
 if (!empty($disciplina) && $disciplina !== 'DISCIPLINA') {

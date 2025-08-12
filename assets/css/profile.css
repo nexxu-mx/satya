@@ -1,5 +1,5 @@
 .p1{
-    background-color: #fff;
+    
     padding: 20px;
     border-radius: 15px;
 }
@@ -284,12 +284,12 @@ form input {
         border: 1px solid #fff; ;
     }
     .p1{
-        background-color: #fff;
+    
         padding: 20px;
         border-radius: 15px;
     }
     .p2{
-        background: linear-gradient(to right, #CFA27A, #E2BAAA);
+        background: var(--c1);
         color: #fff;
         padding: 10px;
         border-radius: 10px;
@@ -328,7 +328,7 @@ form input {
         border-radius: 50%;
         overflow: hidden;
         margin-block: 50px;
-        border: 7px solid #BFA187;
+        border: 7px solid var(--c1);
     }
     .p8{
         width: 100%;

@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sencia Studio</title>
-  <meta name="title" content="Sencia Studio">
-  <meta name="description" content="SENCIA es un espacio dedicado al bienestar y la conexión entre cuerpo y mente, creado por dos hermanas que comparten la pasión por el movimiento y el cuidado integral.">
+  <title>SATYA Studio</title>
+  <meta name="title" content="SATYA Studio">
+  <meta name="description" content="SATYA es un espacio dedicado al bienestar y la conexión entre cuerpo y mente, creado por dos hermanas que comparten la pasión por el movimiento y el cuidado integral.">
   <link rel="shortcut icon" href="./favicon.png" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,23 +53,10 @@
               <img src="assets/images/svg/search.svg" alt="search icon">
             </div>
             <select name="clases" id="clases-input">
-              <option value="" selected>POR CLASES</option>
-              <?php
-              include 'db.php';
-              $sql = "SELECT clases, nombre FROM paquetes";
-              $result = $conn->query($sql);
-              $clases = "";
-              $nombr = "";
-              if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                  $clases .= '<option value="' . $row['clases'] . '" >' . $row['clases'] . '</option>';
-                  $nombr .= '<option value="' . $row['nombre'] . '" >' . $row['nombre'] . '</option>';
-                }
-                
-              }
-              echo $clases;
-              $conn->close();
-              ?>
+              <option value="" selected>POR TIPO</option>
+              <option value="Movement" selected>Movement</option>
+              <option value="Pilates Reformer" selected>Pilates Reformer</option>
+              <option value="Mixto" selected>Mixto</option>
             </select>
             
           </div>
@@ -85,10 +72,6 @@
     </article>
   </main>
   <?php include 'footer.php'; ?>
-  <a href="https://wa.me/524792179429?text=Hola,%Quiero%20más%20información%20de%20SENCIA." class="back-top-btn" aria-label="back to top"
-    data-back-top-btn>
-    <img src="assets/images/svg/whats.svg" alt="Ícono WhatsApp">
-  </a>
   <script src="./assets/js/script.js?v=<?php echo time(); ?>"></script>
   <script type="module"
     src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -96,97 +79,95 @@
     src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <?php include 'script.php'; ?>
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const cardsContainer = document.querySelector(".cards-container");
-      const searchInput = document.querySelector(".buscar-input-container input");
-      const clasesInput = document.querySelector("#clases-input");
+document.addEventListener("DOMContentLoaded", () => {
+  const cardsContainer = document.querySelector(".cards-container");
+  const searchInput = document.querySelector(".buscar-input-container input");
+  const clasesInput = document.querySelector("#clases-input");
 
-      function generarToken(longitud = 132) {
-        const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let token = '';
-        for (let i = 0; i < longitud; i++) {
-          token += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
-        }
-        return token;
-      }
+  const colores = ["var(--c6)", "var(--c2)", "var(--c8)", "var(--c7)"];
 
-      const fetchPaquetes = () => {
-        const params = new URLSearchParams({
-          search: searchInput.value.trim(),
-          clases: clasesInput.value
-        });
+  function generarToken(longitud = 132) {
+    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let token = '';
+    for (let i = 0; i < longitud; i++) {
+      token += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+    }
+    return token;
+  }
 
-        fetch(`get_paquetes.php?${params.toString()}`)
-          .then(res => res.json())
-          .then(data => {
-            cardsContainer.innerHTML = "";
-            if (data.length === 0) {
-              cardsContainer.innerHTML = "<p>No se encontraron paquetes.</p>";
-              return;
-            }
-
-            data.forEach(p => {
-              const card = document.createElement("div");
-              card.className = "card";
-
-              const token = generarToken();
-            function descripcionPersona(p) {
-                  if (p.persona == 1) {
-                      return 'Individual';
-                  } else if (p.persona == 2) {
-                    return '2 Personas';
-                  } else if (p.persona == 4) {
-                    return '4 Personas';
-                  }
-                  return '';
-                }
-                let descuento = "";
-                let precio = `<p class="precio-card">$${Math.floor(p.costo)}<small>MX</small></p>`;
-                
-                if (typeof p.descuento !== 'undefined' && p.descuento !== null) {
-                    descuento =  '<p class="dsco">' + p.descuento + '%</p>';
-                    dell = '<del style="color: #a0a0a0;">$' + p.costo + '</del>';
-                    
-                   const costodesc = (p.costo / 100) * p.descuento;
-                   const costonvo = (p.costo - costodesc);
-                   precio = dell + '<p class="precio-card" style="margin-top: -20px;">$' + costonvo + '<small>MX</small></p>';
-                    
-                }
-                
-
-              card.innerHTML = `
-                               
-                                <p class="numero-clases-card" style="
-                                  ${(p.clases == 'ILIMITADO') ? 'font-size: 4rem; margin-block: 10px' : ''}
-                                ">${p.clases}</p>
-                                <p class="clases-card">Clases</p>
-                                <p class="vigencia-card" style="margin-top: 0">Vigencia ${
-                                  p.vigencia === 365 
-                                    ? 'Anual' 
-                                    : p.vigencia > 30 
-                                      ? Math.round(p.vigencia / 30) + ' meses' 
-                                      : p.vigencia + ' días'
-                                }</p>
-                                ${descuento}
-                                <div class="coust">
-                                ${precio}
-                                <a href="checkout.php?tkn=${token}&id=${p.id}">COMPRAR</a>
-                                </div>
-                            `;
-              cardsContainer.appendChild(card);
-            });
-
-          });
-      };
-
-      searchInput.addEventListener("input", () => {
-        setTimeout(fetchPaquetes, 300);
-      });
-      clasesInput.addEventListener("change", fetchPaquetes);
-
-      fetchPaquetes();
+  const fetchPaquetes = () => {
+    const params = new URLSearchParams({
+      search: searchInput.value.trim(),
+      clases: clasesInput.value
     });
-  </script>
+
+    fetch(`get_paquetes.php?${params.toString()}`)
+      .then(res => res.json())
+      .then(data => {
+        cardsContainer.innerHTML = "";
+        if (data.length === 0) {
+          cardsContainer.innerHTML = "<p>No se encontraron paquetes.</p>";
+          return;
+        }
+
+        data.forEach((p, index) => {
+          const card = document.createElement("div");
+          card.className = "card";
+
+          const token = generarToken();
+          const colorActual = colores[index % colores.length]; // ciclo de colores
+
+          function descripcionPersona(p) {
+            if (p.persona == 1) return 'Individual';
+            if (p.persona == 2) return '2 Personas';
+            if (p.persona == 4) return '4 Personas';
+            return '';
+          }
+
+          let descuento = "";
+          let precio = `<p class="precio-card">$${Math.floor(p.costo)}<small>MX</small></p>`;
+
+          if (typeof p.descuento !== 'undefined' && p.descuento !== null) {
+            descuento = `<p class="dsco">${p.descuento}%</p>`;
+            const dell = `<del style="color: #a0a0a0;">$${p.costo}</del>`;
+            const costodesc = (p.costo / 100) * p.descuento;
+            const costonvo = (p.costo - costodesc);
+            precio = dell + `<p class="precio-card" style="margin-top: -20px;">$${costonvo}<small>MX</small></p>`;
+          }
+
+          card.innerHTML = `
+            <p class="numero-clases-card" style="color: ${colorActual};  ${(p.clases == 'ILIMITADO' || p.clases == 'ANUALIDAD') ? 'font-size: 3.3rem; margin-block: 10px' : ''}">${p.clases}</p>
+            <p class="clases-card" style="color: ${colorActual};">${(p.clases == 'ILIMITADO' || p.clases == 'ANUALIDAD') ? ' ' : 'Clases'}</p>
+            <p class="clases-card" style="font-size: 2rem;">${p.nombre}</p>
+            <p class="vigencia-card" style="margin-top: 0">
+              Vigencia ${
+                p.vigencia === 365 
+                  ? 'Anual' 
+                  : p.vigencia > 30 
+                    ? Math.round(p.vigencia / 30) + ' meses' 
+                    : p.vigencia + ' días'
+              }
+            </p>
+            ${descuento}
+            <div class="coust" style="background: ${colorActual}">
+              ${precio}
+              <a href="checkout.php?tkn=${token}&id=${p.id}">COMPRAR</a>
+            </div>
+          `;
+          cardsContainer.appendChild(card);
+        });
+      });
+  };
+
+  searchInput.addEventListener("input", () => {
+    setTimeout(fetchPaquetes, 300);
+  });
+  clasesInput.addEventListener("change", fetchPaquetes);
+
+  fetchPaquetes();
+});
+</script>
+
 
 </body>
 

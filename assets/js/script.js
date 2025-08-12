@@ -56,15 +56,15 @@ addEventOnElements(navTogglers, "click", toggleNav);
  */
 
 const header = document.querySelector("[data-header]");
-const backTopBtn = document.querySelector("[data-back-top-btn]");
+//const backTopBtn = document.querySelector("[data-back-top-btn]");
 
 const activeElementOnScroll = function () {
   if (window.scrollY > 100) {
     header.classList.add("active");
-    backTopBtn.classList.add("active");
+ //   backTopBtn.classList.add("active");
   } else {
     header.classList.remove("active");
-    backTopBtn.classList.remove("active");
+   // backTopBtn.classList.remove("active");
   }
 }
 
@@ -361,8 +361,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 // Playback Rate Video Footer
-const videoFooter = document.getElementById("video-footer");
-videoFooter.playbackRate = 2;
+// const videoFooter = document.getElementById("video-footer");
+// videoFooter.playbackRate = 2;
 
 const videoIndexTexto = document.getElementById("video-index-texto");
 /* videoIndexTexto.playbackRate = 2; */
@@ -414,7 +414,7 @@ const coloresCoaches = [
   "var(--regina-ivanna-color)",
   "var(--beto-color)",
   "var(--danyfer-karina-color)",
-];
+]; 
 
 const coaches = document.querySelectorAll('.color-coach');
 const disciplineCoachTexts = document.querySelectorAll(".discipline-coach");

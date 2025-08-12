@@ -1,3 +1,7 @@
+<?php
+header("Location: login.php");
+exit;
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -5,9 +9,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sencia Studio</title>
-  <meta name="title" content="Sencia Studio">
-  <meta name="description" content="SENCIA es un espacio dedicado al bienestar y la conexión entre cuerpo y mente, creado por dos hermanas que comparten la pasión por el movimiento y el cuidado integral.">
+  <title>SATYA Studio</title>
+  <meta name="title" content="SATYA Studio">
+  <meta name="description" content="SATYA es un espacio dedicado al bienestar y la conexión entre cuerpo y mente, creado por dos hermanas que comparten la pasión por el movimiento y el cuidado integral.">
   <link rel="shortcut icon" href="./favicon.png" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,7 +59,7 @@
           <div class="hero-banner-elements">
             <div class="img-banner-container">
               <img src="./assets/images/svg/logo-blanco.svg"
-                alt="Sencia Logo">
+                alt="SATYA Logo">
             </div>
             <h1>
               MOVE YOUR BODY,
@@ -67,11 +71,11 @@
       </section>
 
         <section class="descripcion-section">
-          <video id="video-index-texto" src="./assets/images/sencia_gradient.mp4" autoplay loop muted playsinline disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
+          <video id="video-index-texto" src="./assets/images/SATYA_gradient.mp4" autoplay loop muted playsinline disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
           <div class="container section">
-            <img src="assets/images/svg/logo-blanco.svg" alt="logo sencia">
+            <img src="assets/images/svg/logo-blanco.svg" alt="logo SATYA">
             <p>
-            SENCIA es un espacio dedicado al bienestar y la conexión entre cuerpo y mente, creado por dos hermanas que comparten la pasión por el movimiento y el cuidado integral. Su nombre proviene de la palabra “sentir”, representando la experiencia auténtica y consciente que cada persona vivirá en el estudio, donde se fomenta la fuerza, la flexibilidad y la armonía. SENCIA es un refugio donde cada persona puede alcanzar su mejor versión, orientada por el amor, la dedicación y la conexión.
+            SATYA es un espacio dedicado al bienestar y la conexión entre cuerpo y mente, creado por dos hermanas que comparten la pasión por el movimiento y el cuidado integral. Su nombre proviene de la palabra “sentir”, representando la experiencia auténtica y consciente que cada persona vivirá en el estudio, donde se fomenta la fuerza, la flexibilidad y la armonía. SATYA es un refugio donde cada persona puede alcanzar su mejor versión, orientada por el amor, la dedicación y la conexión.
           </p>
           <p>BARRE | YOGA | SCULPT | BALLET | PILATES</p>
         </div>
@@ -176,7 +180,7 @@
 
             <p class="flecha-slider fd" id="next">></p>
           </div>
-         <a href="disciplinas.php"> <p class="coaches-slider-discipline">SENCIA</p></a> 
+         <a href="disciplinas.php"> <p class="coaches-slider-discipline">SATYA</p></a> 
         </div>
       </section>
 
@@ -289,7 +293,7 @@
               <p>Aceptamos tarjeta de crédito/débito, pagos en efectivo y transferencias bancarias.</p>
             </div>
             <button class="accordion">
-              <p>¿Qué tipo de clases ofrece Sencia?</p>
+              <p>¿Qué tipo de clases ofrece SATYA?</p>
             </button>
             <div class="panel">
               <p>Todas nuestras clases son de bajo impacto y están diseñadas para fortalecer cuerpo y mente. Ofrecemos: <br>
@@ -308,10 +312,7 @@
     </article>
   </main>
   <?php include 'footer.php'; ?>
-  <a href="https://wa.me/524792179429?text=Hola,%20Quiero%20m%C3%A1s%20informaci%C3%B3n%20de%20SENCIA." class="back-top-btn" aria-label="back to top"
-    data-back-top-btn>
-    <img src="assets/images/svg/whats.svg" alt="Ícono WhatsApp ">
-  </a>
+
   <script src="./assets/js/script.js?v=<?php echo time(); ?>"></script>
   <script type="module"
     src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

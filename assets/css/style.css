@@ -48,8 +48,8 @@
   --white: #ffffff;
   --black: hsl(0, 0%, 0%);
   --light-brown: rgb( 132, 130, 115);
-  --light-browm-2: #AA9480;
-  --light-brown-3: #BFA187;
+  --light-browm-2: #d8b593;
+  --light-brown-3: #C7b19e;
   --maria-color: #f5f5f5;
   --katya-cons-color: #BEA392;
   --gali-color: #A2AB96;
@@ -958,7 +958,8 @@ span {
   position: absolute;
   background: var(--c6);
   left: 0;
-  height: 250px;
+  bottom: 0;
+  height: 140px;
   margin-top: 40px;
   color: var(--white);
 }
@@ -1652,7 +1653,7 @@ form textarea {
 \*-----------------------------------*/
 
 .login-main-section {
-  background-image: url("../images/contacto.jpg");
+ /*  background-image: url("../images/contacto.jpg"); */
   width: 100%;
   min-height: 100vh;
   background-repeat: no-repeat;
@@ -1665,9 +1666,11 @@ form textarea {
 }
 
 .login-form {
-  background-color: #fff;
+  background-color: rgb(255, 253, 248);
   width: 500px;
-  height: fit-content;
+  height: 350px;
+  overflow: hidden;
+  position: relative;
   text-align: center;
   padding-inline: 20px;
   border-radius: 10px;
@@ -1680,9 +1683,10 @@ form textarea {
 }
 
 .login-form>h2 {
-  color: var(--light-brown);
+  color: var(--c8);
+  font-family: var(--ff-Raleway);
   font-weight: 500;
-  font-size: 20px;
+  font-size: 3.4rem;
 }
 
 .registro-mensaje {
@@ -1710,23 +1714,33 @@ form textarea {
   text-decoration: underline;
   margin-block: 20px;
 }
-
+.div-footer-session{
+  background: rgb(222, 206, 190);
+  display: flex;
+  height: 80px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
 .login-submit-btn {
   width: fit-content;
-  background-color: var(--light-brown);
+  background-color: rgb(255, 253, 248);
   border: none;
-  font-size: 13px;
+  font-size: 1.7rem;
+  font-weight: 500;
   cursor: pointer;
   margin-inline: auto;
-  margin-bottom: 40px;
-  color: #fff;
+  color: rgb(130, 118, 108);
   border-radius: 8px;
   padding: 5px 30px;
   transition: all 500ms ease;
 }
 
 .login-submit-btn:hover {
-  background-color: var(--regina-ivanna-color);
+  background-color: rgb(227, 224, 219);
 }
 
 .btn-code {
