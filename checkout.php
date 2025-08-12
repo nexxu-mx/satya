@@ -110,10 +110,10 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                                                 die(json_encode(['error' => 'Paquete no encontrado']));
                                             }
                                             $rowP = $resultP->fetch_assoc();
-                                            if($rowP['clases'] == "ILIMITADO"){
-                                                $nclases = '<p class="numero-clases-card" style="font-size: 44px; margin-block: 10px;">' . $rowP['clases'] . '</p>';
+                                            if($rowP['clases'] == "ILIMITADO" || $rowP['clases'] == "ANUALIDAD"){
+                                                $nclases = '<p class="numero-clases-card" style="font-size: 44px; margin-block: 10px; color: var(--c6);">' . $rowP['clases'] . '</p>';
                                             }else{
-                                                $nclases = '<p class="numero-clases-card">' . $rowP['clases'] . '</p>';
+                                                $nclases = '<p class="numero-clases-card" style="color: var(--c6);  >' . $rowP['clases'] . '</p>';
                                             }
                                             if(!empty($rowP['descuento'])){
                                                 echo '<p class="dsco">' . $rowP['descuento'] . '%</p>';
@@ -121,15 +121,23 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                                                 $preciods = ($rowP['costo'] / 100) * $rowP['descuento'];
                                                 $costodes =  $rowP['costo'] - $preciods; 
                                                 $costo = '<del style="color: #a0a0a0;">$' . number_format($rowP['costo'], 2) . '</del> 
-                                                        <p class="precio-card" style="margin-top: -20px;" id="costto">MX $' . number_format($costodes, 2) . '</p>';
+                                                        <p class="precio-card" style="margin-top: -20px;" id="costto">$' . number_format($costodes, 2) . '<small>MX</small></p>';
                                                 
                                             }else{
-                                                $costo = '<p class="precio-card" id="costto">MX $' . number_format($rowP['costo'], 2) . '</p>';
+                                                $costo = '<p class="precio-card" id="costto">$' . number_format($rowP['costo']) . '<small>MX</small></p>';
                                             }
-                                            echo '<p class="tipo-card">' . $rowP['nombre'] . '</p>' . $nclases . '
-                                                    <p class="clases-card">CLASES</p>
-                                                    ' . $costo . '
-                                                    <p class="vigencia-card">Vigencia ' . $rowP['vigencia'] . ' días</p>';
+
+                                            echo $nclases . '   <p class="numero-clases-card" style="color: var(--c6);  ">8</p>
+                                                        <p class="clases-card" style="color: var(--c6);">Clases</p>
+                                                        <p class="clases-card" style="font-size: 2rem;">' . $rowP['nombre'] . '</p>
+                                                        <p class="vigencia-card" style="margin-top: 0">
+                                                        Vigencia ' . $rowP['vigencia'] . ' días
+                                                        </p>
+                                                        
+                                                        <div class="coust" style="background: var(--c6)">
+                                                        ' . $costo . '
+                                                       
+                                                        </div>';
 
                                         ?>
                                        
@@ -138,7 +146,10 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                                 
                                 <div class="c2">
                                     <div id="eleccion_pago">
-                                        <a href="https://wa.me/524792179429?text=Hola,%20Quiero%20comprar%20un%20paquete." class="elect"><img src="./assets/images/shop.svg" style="width: 50px" alt="">
+                                        <a href="#" class="elect" style="pointer-events: none;
+  color: gray;
+  cursor: default;
+  text-decoration: none;"><img src="./assets/images/shop.svg" style="width: 50px" alt="" >
                                         Pagar en sitio</a>
                                         <button onclick="payTarjet()" class="elect"><img src="./assets/images/card.svg" style="width: 50px" alt="">Tarjeta Crédito/Débito</button>
                                     </div>

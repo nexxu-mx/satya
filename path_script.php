@@ -52,8 +52,8 @@ require __DIR__ . '/vendor/autoload.php';
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Preference\PreferenceClient;
 use MercadoPago\Exceptions\MPApiException;
-// Agregar las credenciales del ambiente de producción usando MercadoPagoConfig. PR::: APP_USR-5884940483219894-043014-2fc1d8a754811f35c443238d8031c469-21071102 TEST::: TEST-7009180377754289-091823-3aea4b50c4898192e8bd32dac3b11d7c-1940582280
-MercadoPagoConfig::setAccessToken('APP_USR-5884940483219894-043014-2fc1d8a754811f35c443238d8031c469-21071102');
+// Agregar las credenciales del ambiente de producción usando MercadoPagoConfig. PR::: APP_USR-3515522472050913-080415-812b617b5fdf41c6856319cc2ff95872-327557794 TEST::: TEST-7009180377754289-091823-3aea4b50c4898192e8bd32dac3b11d7c-1940582280
+MercadoPagoConfig::setAccessToken('APP_USR-3515522472050913-080415-812b617b5fdf41c6856319cc2ff95872-327557794');
 function createPaymentPreference($product, $payer) {
     // Crear la preferencia de pago
     $preferenceClient = new PreferenceClient();
@@ -61,9 +61,9 @@ function createPaymentPreference($product, $payer) {
         'items' => [$product],
         'payer' => $payer,
         'back_urls' => [
-            "success" => "https://studiosencia.com/pago.php?f9489989srfg482j389fd98f8=" . $idusrv . "&",
-            "failure" => "https://studiosencia.com/pago.php?8237fuhiasfh749849h0f8h=" . $idusrv . "&",
-            "pending" => "https://studiosencia.com/pago.php?000vsjds99040vi0ri=" . $idusrv . "&"
+            "success" => "https://satya-studio.com/pago.php?f9489989srfg482j389fd98f8=" . $idusrv . "&",
+            "failure" => "https://satya-studio.com/pago.php?8237fuhiasfh749849h0f8h=" . $idusrv . "&",
+            "pending" => "https://satya-studio.com/pago.php?000vsjds99040vi0ri=" . $idusrv . "&"
         ],
         'auto_return' => "approved"
     ];
@@ -83,7 +83,7 @@ function createPaymentPreference($product, $payer) {
 // Definir los datos del producto
 $product = [
     "id" => $id,
-    "title" => "SENCIA Studio",
+    "title" => "SATYA Studio",
     "description" => $descrition,
     "currency_id" => "MXN",
     "quantity" => 1,
