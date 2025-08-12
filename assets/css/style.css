@@ -47,13 +47,13 @@
 
   --white: #ffffff;
   --black: hsl(0, 0%, 0%);
-  --light-brown: #986C5D;
+  --light-brown: rgb( 132, 130, 115);
   --light-browm-2: #AA9480;
   --light-brown-3: #BFA187;
   --maria-color: #f5f5f5;
   --katya-cons-color: #BEA392;
   --gali-color: #A2AB96;
-  --regina-ivanna-color: #A16A5B;
+  --regina-ivanna-color: #3f3d32;
   --danyfer-karina-color: #F6ECE5;
   --beto-color: #717076;
 
@@ -1771,7 +1771,6 @@ form textarea {
   display: flex;
   justify-content: center;
   margin-top: 15px;
-  margin-bottom: 89px;
 }
 .lotoreserva img{
   width: 60px;
@@ -2275,6 +2274,256 @@ position: absolute;
 .contenido-modal-coach-container {
   padding: 20px;
 }
+.conf-rese{
+  text-align: center;
+  font-family: var(--ff-Raleway);
+  color: var(--c6);
+  font-size: 2.3rem;
+  font-weight: 500;
+}
+  .class-confirm-fecha{
+    width: 100%;
+    height: 90px;
+    background: rgb(232, 226, 213);
+    border-radius: 15px;
+    display: flex;
+    overflow: hidden;
+  } 
+
+  .cc-horario{
+    background-color: rgb(132, 130, 115);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+  }
+  .cc-horario h3{
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  .cc-fecha{
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+
+  .select-mat{
+    margin-top: 30px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .info-mat{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-inline: 5%;
+    margin-bottom: 70px;
+  }
+  .mat-reser{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .mat-reser p{
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--c9);
+    font-family: var(--ff-Raleway);
+  }
+  .mat-reser svg{
+    height: 17px;
+  }
+  .cls-reser{
+    fill: var(--c6);
+  }
+
+
+  .mat-dispo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .mat-dispo p{
+     font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--c9);
+      font-family: var(--ff-Raleway);
+  }
+.mat-dispo svg{
+    height: 17px;
+  }
+  .cls-dispo{
+    fill: var(--c2);
+  }
+
+  .mat-pad{
+    background: rgb(255, 251, 243);;
+    box-shadow: 4px 5px 5px -2px #5050504d;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .instructo{
+    height: 200px;
+    width: 4%;
+    background-color: var(--c8);
+  }
+  .mat-elegir{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 90%;
+    gap: 13%;
+  }
+  .mat-res{
+    background: var(--c2);
+  }
+  .mat-res:hover, .mat-res:focus{
+    background-color: var(--c9);
+  }
+
+  .mat-res-reservado{
+    background-color: var(--c6);
+  }
+
+  .reformer{
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+  }
+  .select-reformer{
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px;
+  }
+
+  .select-reformer > :nth-child(1) { grid-column: 1; grid-row: 1; }
+  .select-reformer > :nth-child(2) { grid-column: 1; grid-row: 2; }
+  .select-reformer > :nth-child(3) { grid-column: 1; grid-row: 3; }
+  .select-reformer > :nth-child(4) { grid-column: 1; grid-row: 4; }
+  .select-reformer > :nth-child(5) { grid-column: 1; grid-row: 5; }
+
+  .select-reformer > :nth-child(6) { grid-column: 2; grid-row: 1; }
+  .select-reformer > :nth-child(7) { grid-column: 2; grid-row: 2; }
+  .select-reformer > :nth-child(8) { grid-column: 2; grid-row: 3; }
+
+  .select-reformer li{
+
+  }
+  .reformer-select{
+    width: 90%;
+  }
+  .cls-reformer{
+    fill: var(--c2);
+  }
+
+  .cls-reformer:hover, .cls-reformer:focus{
+    fill: var(--c9);
+  }
+  .cls-reformer-reservado{
+    fill: var(--c6);
+  }
+  .reformer-back{
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    filter: drop-shadow(4px 5px 5px #5050504d);
+  }
+  .cls-tapete{
+    fill: rgb(255, 251, 243);
+  }
+  
+
+
+
+
+
+  .confirmation-section {
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 200px;
+    display: none;
+  }
+
+  .confirmation-section h2 {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 500;
+  }
+
+  .confirmation-section .elemento-clase {
+    border-bottom: none;
+  }
+
+  .confirmation-section .fecha-clase-container {
+    margin-bottom: -20px;
+  }
+
+  .confirmation-btns {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .cancelar-confirmacion-reserva-btn, .confirmar-reserva-btn {
+    cursor: pointer;
+    text-align: center;
+    background-color: var(--light-brown);
+    padding: 2px 20px;
+    border-radius: 5px;
+    color: #fff;
+    transition: all 500ms ease;
+  }
+
+  .cancelar-confirmacion-reserva-btn {
+    background-color: #fff;
+    border: 1px solid var(--light-brown);
+    color: var(--light-brown);
+  }
+
+  .confirmar-reserva-btn:hover {
+    background-color: var(--regina-ivanna-color);
+  }
+
+  .cancelar-confirmacion-reserva-btn:hover {
+    background-color: var(--light-brown);
+    color: #fff;
+  } 
+
+  .nota-cancelar-clase {
+    text-align: justify;
+    line-height: 15px;
+    font-size: 13px;
+    margin-top: 20px;
+    color: var(--beto-color);
+  }
+
+  .nota-cancelar-clase span {
+    font-family: var(--ff-neue);
+    color: var(--light-brown);
+    font-weight: bold;
+  }
+
 
 /*-----------------------------------*\
   #FOOTER
@@ -3279,75 +3528,6 @@ position: absolute;
     display: none;
   }
 
-  .confirmation-section {
-    background-color: #fff;
-    margin-top: 80px;
-    padding: 30px;
-    border-radius: 20px;
-    margin-bottom: 200px;
-    display: none;
-  }
-
-  .confirmation-section h2 {
-    text-align: center;
-    font-size: 25px;
-    font-weight: 500;
-  }
-
-  .confirmation-section .elemento-clase {
-    border-bottom: none;
-  }
-
-  .confirmation-section .fecha-clase-container {
-    margin-bottom: -20px;
-  }
-
-  .confirmation-btns {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 20px;
-  }
-
-  .cancelar-confirmacion-reserva-btn, .confirmar-reserva-btn {
-    cursor: pointer;
-    text-align: center;
-    background-color: var(--light-brown);
-    padding: 2px 20px;
-    border-radius: 5px;
-    color: #fff;
-    transition: all 500ms ease;
-  }
-
-  .cancelar-confirmacion-reserva-btn {
-    background-color: #fff;
-    border: 1px solid var(--light-brown);
-    color: var(--light-brown);
-  }
-
-  .confirmar-reserva-btn:hover {
-    background-color: var(--regina-ivanna-color);
-  }
-
-  .cancelar-confirmacion-reserva-btn:hover {
-    background-color: var(--light-brown);
-    color: #fff;
-  } 
-
-  .nota-cancelar-clase {
-    text-align: justify;
-    line-height: 15px;
-    font-size: 13px;
-    margin-top: 20px;
-    color: var(--beto-color);
-  }
-
-  .nota-cancelar-clase span {
-    font-family: var(--ff-neue);
-    color: var(--light-brown);
-    font-weight: bold;
-  }
-
 
   /* FIN RESERVA PAGE */
 
@@ -4115,28 +4295,6 @@ position: absolute;
     display: none;
   }
 
-  .confirmation-section {
-    background-color: #fff;
-    margin-top: 80px;
-    padding: 30px;
-    border-radius: 20px;
-    margin-bottom: 200px;
-    display: none;
-  }
-
-  .confirmation-section h2 {
-    text-align: center;
-    font-size: 25px;
-    font-weight: 500;
-  }
-
-  .confirmation-section .elemento-clase {
-    border-bottom: none;
-  }
-
-  .confirmation-section .fecha-clase-container {
-    margin-bottom: -20px;
-  }
 
   .confirmation-btns {
     display: flex;
@@ -4697,31 +4855,6 @@ position: absolute;
     display: block;
   }
 
-  .confirmation-section {
-    width: 60%;
-    background-color: #fff;
-    margin-top: 80px;
-    padding: 30px;
-    border-radius: 20px;
-    margin-bottom: 200px;
-    display: none;
-    margin-inline: auto;
-  }
-
-  .confirmation-section h2 {
-    text-align: center;
-    font-size: 25px;
-    font-weight: 500;
-  }
-
-  .confirmation-section .elemento-clase {
-    border-bottom: none;
-  }
-
-  .confirmation-section .fecha-clase-container {
-    margin-bottom: -20px;
-  }
-
   .confirmation-btns {
     display: flex;
     justify-content: space-around;
@@ -5191,31 +5324,6 @@ position: absolute;
     display: block;
   }
 
-  .confirmation-section {
-    width: 60%;
-    background-color: #fff;
-    margin-top: 80px;
-    padding: 30px;
-    border-radius: 20px;
-    margin-bottom: 200px;
-    display: none;
-    margin-inline: auto;
-  }
-
-  .confirmation-section h2 {
-    text-align: center;
-    font-size: 25px;
-    font-weight: 500;
-  }
-
-  .confirmation-section .elemento-clase {
-    border-bottom: none;
-  }
-
-  .confirmation-section .fecha-clase-container {
-    margin-bottom: -20px;
-  }
-
   .confirmation-btns {
     display: flex;
     justify-content: space-around;
@@ -5469,30 +5577,7 @@ position: absolute;
     display: block;
   }
 */
-  .confirmation-section {
-    width: 60%;
-    background-color: #fff;
-    margin-top: 80px;
-    padding: 30px;
-    border-radius: 20px;
-    margin-bottom: 200px;
-    display: none;
-    margin-inline: auto;
-  }
-
-  .confirmation-section h2 {
-    text-align: center;
-    font-size: 25px;
-    font-weight: 500;
-  }
-
-  .confirmation-section .elemento-clase {
-    border-bottom: none;
-  }
-
-  .confirmation-section .fecha-clase-container {
-    margin-bottom: -20px;
-  }
+  
 
   .confirmation-btns {
     display: flex;

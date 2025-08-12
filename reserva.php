@@ -14,8 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Rubik:wght@400;500;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css?v=<?php echo time(); ?>">
-    <?php include 'head.php'; ?>
-
+    <?php include 'head.php'; ?> 
 </head>
 
 <body id="top">
@@ -35,32 +34,82 @@
                 <div class="container">
             <!--        <img src="assets/images/svg/logo-blanco.svg" alt="Logo Sencia"> 
             -->
-                    <h1 style="color: var(--c9); margin-top: 60px">Book your class</h1>
+                    <h1 style="color: var(--c9); margin-top: 60px" id="nyclass">Book your class</h1>
+                    <p class="conf-rese" id="dis-res"></p>
                     <div class="lotoreserva"><img src="./assets/img/icono_loto.svg"  alt=""></div>
+                    
                     <div class="confirmation-section"  id="confirm-class">
-                        <h2>Confirmación de Reserva</h2>
-                        <div class="fecha-clase-container elemento-clase">
-                            <p><span id="texto-dia-din-conf" class="texto-fecha-din">Hoy</span>, <span id="mes-din-conf" class="texto-fecha-din">Marzo</span> <span id="numero-dia-din-conf" class="texto-fecha-din">27</span></p>
+                        <div class="class-confirm-fecha">
+                                <div class="cc-horario">
+                                    <h3 id="confirm-horario"></h3>
+                                </div>
+                                <div class="cc-fecha">
+                                         <div class="fecha-clase-container elemento-clase" style="margin-bottom: 0">
+                                                <p> <span id="numero-dia-din-conf" class="texto-fecha-din">27</span> De <span id="mes-din-conf" class="texto-fecha-din">Marzo</span></p>
+                                        </div>
+                                </div>
                         </div>
-                        <div class="clase-container elemento-clase">
-                            <div class="first-flex-clase">
-                                <div class="img-clase-container">
-                                    <img src="assets/images/coaches/unknnow.png" alt="Foto Coach" id="confirm-coach-img">
-                                </div>
-                                <div class="nombrecoach-horarioclase">
-                                    <div class="nombre-coach">
-                                        <p id="confirm-coach"></p>
+                        <div class="select-mat">
+
+                            <div class="info-mat">
+                                    <div class="mat-reser">
+                                        <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53.4 88.89"><defs></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="cls-reser" d="M32.21,24.19a5.91,5.91,0,1,1-5.91-5.91,5.9,5.9,0,0,1,5.91,5.91"/><path class="cls-reser" d="M26.71,88.89A6,6,0,0,1,23.6,88a5.78,5.78,0,0,1-.68-.49c-1.87-1.6-3-5.08-3.56-10.63a69.28,69.28,0,0,1-.26-7.45c.42-14.51,1.58-18.07,2.82-20.7a34.35,34.35,0,0,1,2.91-5,40.32,40.32,0,0,0-5.3-5.43,76.74,76.74,0,0,1-6.07-6,60.26,60.26,0,0,1-4.27-5.16A48.14,48.14,0,0,1,0,.12L3,0a45.21,45.21,0,0,0,8.6,25.49,60.58,60.58,0,0,0,4.05,4.9l.4.44c2.15,2.33,3.92,3.91,5.48,5.32a44.6,44.6,0,0,1,5.17,5.2,44.55,44.55,0,0,1,5.16-5.2,75.16,75.16,0,0,0,5.48-5.32h0l.41-.43a59.23,59.23,0,0,0,4-4.9A45.22,45.22,0,0,0,50.4,0l3,.12a48.14,48.14,0,0,1-9.19,27.15,62.73,62.73,0,0,1-4.27,5.16,76.74,76.74,0,0,1-6.07,6,39.73,39.73,0,0,0-5.3,5.43,34.44,34.44,0,0,1,2.9,5c1.25,2.63,2.4,6.19,2.83,20.7A67.82,67.82,0,0,1,34,76.92c-.52,5.55-1.69,9-3.56,10.63a5,5,0,0,1-.67.49,5.94,5.94,0,0,1-3.09.85m0-42.49a31.22,31.22,0,0,0-2.07,3.66c-1.06,2.23-2.13,5.58-2.53,19.5-.15,5,.47,13.74,2.77,15.7a2.68,2.68,0,0,0,.3.23,3,3,0,0,0,1.54.4,3,3,0,0,0,1.51-.4,1.6,1.6,0,0,0,.3-.23c1.23-1,3.06-6.22,2.78-15.7-.41-13.92-1.48-17.27-2.54-19.5A31.3,31.3,0,0,0,26.7,46.4"/></g></g></svg>
+                                        <p>Reservado</p>
                                     </div>
-                                    <div class="horario-clase">
-                                        <h3 id="confirm-horario"></h3>
-                                        <h4 id="confirm-duracion"></h4>
+                                    <div class="mat-dispo">
+                                        <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53.4 88.89"><defs></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="cls-dispo" d="M32.21,24.19a5.91,5.91,0,1,1-5.91-5.91,5.9,5.9,0,0,1,5.91,5.91"/><path class="cls-dispo" d="M26.71,88.89A6,6,0,0,1,23.6,88a5.78,5.78,0,0,1-.68-.49c-1.87-1.6-3-5.08-3.56-10.63a69.28,69.28,0,0,1-.26-7.45c.42-14.51,1.58-18.07,2.82-20.7a34.35,34.35,0,0,1,2.91-5,40.32,40.32,0,0,0-5.3-5.43,76.74,76.74,0,0,1-6.07-6,60.26,60.26,0,0,1-4.27-5.16A48.14,48.14,0,0,1,0,.12L3,0a45.21,45.21,0,0,0,8.6,25.49,60.58,60.58,0,0,0,4.05,4.9l.4.44c2.15,2.33,3.92,3.91,5.48,5.32a44.6,44.6,0,0,1,5.17,5.2,44.55,44.55,0,0,1,5.16-5.2,75.16,75.16,0,0,0,5.48-5.32h0l.41-.43a59.23,59.23,0,0,0,4-4.9A45.22,45.22,0,0,0,50.4,0l3,.12a48.14,48.14,0,0,1-9.19,27.15,62.73,62.73,0,0,1-4.27,5.16,76.74,76.74,0,0,1-6.07,6,39.73,39.73,0,0,0-5.3,5.43,34.44,34.44,0,0,1,2.9,5c1.25,2.63,2.4,6.19,2.83,20.7A67.82,67.82,0,0,1,34,76.92c-.52,5.55-1.69,9-3.56,10.63a5,5,0,0,1-.67.49,5.94,5.94,0,0,1-3.09.85m0-42.49a31.22,31.22,0,0,0-2.07,3.66c-1.06,2.23-2.13,5.58-2.53,19.5-.15,5,.47,13.74,2.77,15.7a2.68,2.68,0,0,0,.3.23,3,3,0,0,0,1.54.4,3,3,0,0,0,1.51-.4,1.6,1.6,0,0,0,.3-.23c1.23-1,3.06-6.22,2.78-15.7-.41-13.92-1.48-17.27-2.54-19.5A31.3,31.3,0,0,0,26.7,46.4"/></g></g></svg>
+                                        <p>Disponible</p>
                                     </div>
-                                    <div class="disciplina-clase-container">
-                                        <p>Disciplina:</p>
-                                        <h3 id="confirm-disciplina"></h3>
-                                    </div>
-                                </div>
                             </div>
+
+                            <div class="mat-pad">
+                                <div class="instructo"></div>
+                                <ul class="mat-elegir">
+                                    <li class="mat-res"></li>
+                                    <li class="mat-res mat-res-reservado"></li>
+                                    <li class="mat-res"></li>
+                                    <li class="mat-res"></li>
+                                    <li class="mat-res"></li>
+                                    <li class="mat-res"></li>
+                                    <li class="mat-res mat-res-reservado"></li>
+                                    <li class="mat-res"></li>
+                                    <li class="mat-res"></li>
+                                    <li class="mat-res"></li>
+                                </ul>
+                            </div>
+
+
+                             <div class="reformer">
+                                <ul class="select-reformer">
+                                    <li>
+                                       <svg class="reformer-select" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1563.23 439.79"><defs></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="cls-reformer" d="M1342.3,0V9.38H0V77.73H38.58v38.58H0V327.53H38.58v38.58H0v64.3H1342.3v9.38h220.93V0ZM70.34,91.67l549.86,55v14.68H530.31V268H620.2v11.57l-.19-2L70.34,327.48Zm9.35-3.13,540.45,14.22.06-2V142.6Zm-9.35,243L620.2,281.63v70.74L70.34,333.22ZM1193,407.46H70.34v-70.2L620.2,356.41v43.47h441.9V344.42H1193Zm0-71.82H1062.1V288.39H1193Zm0-56H1062.1v-55H1193Zm0-63.76H1062.1v-54.5H1193Zm0-63.28H1062.1V111.11H1193Zm0-50.24H1062.1v-65H620.2V98.72L70.34,84.25V27.83H1193Zm69.15-53.78h-37V80.48h37v268.7h-37v31.93h37v26.35h-49.31V27.83h49.31Zm62.12,351.34h-41.17V42h41.17Z"/></g></g></svg>
+                                    </li>
+                                    <li>
+                                       <svg class="reformer-select" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1563.23 439.79"><defs></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="cls-reformer" d="M1342.3,0V9.38H0V77.73H38.58v38.58H0V327.53H38.58v38.58H0v64.3H1342.3v9.38h220.93V0ZM70.34,91.67l549.86,55v14.68H530.31V268H620.2v11.57l-.19-2L70.34,327.48Zm9.35-3.13,540.45,14.22.06-2V142.6Zm-9.35,243L620.2,281.63v70.74L70.34,333.22ZM1193,407.46H70.34v-70.2L620.2,356.41v43.47h441.9V344.42H1193Zm0-71.82H1062.1V288.39H1193Zm0-56H1062.1v-55H1193Zm0-63.76H1062.1v-54.5H1193Zm0-63.28H1062.1V111.11H1193Zm0-50.24H1062.1v-65H620.2V98.72L70.34,84.25V27.83H1193Zm69.15-53.78h-37V80.48h37v268.7h-37v31.93h37v26.35h-49.31V27.83h49.31Zm62.12,351.34h-41.17V42h41.17Z"/></g></g></svg>
+                                    </li>
+                                    <li>
+                                       <svg class="reformer-select" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1563.23 439.79"><defs></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="cls-reformer" d="M1342.3,0V9.38H0V77.73H38.58v38.58H0V327.53H38.58v38.58H0v64.3H1342.3v9.38h220.93V0ZM70.34,91.67l549.86,55v14.68H530.31V268H620.2v11.57l-.19-2L70.34,327.48Zm9.35-3.13,540.45,14.22.06-2V142.6Zm-9.35,243L620.2,281.63v70.74L70.34,333.22ZM1193,407.46H70.34v-70.2L620.2,356.41v43.47h441.9V344.42H1193Zm0-71.82H1062.1V288.39H1193Zm0-56H1062.1v-55H1193Zm0-63.76H1062.1v-54.5H1193Zm0-63.28H1062.1V111.11H1193Zm0-50.24H1062.1v-65H620.2V98.72L70.34,84.25V27.83H1193Zm69.15-53.78h-37V80.48h37v268.7h-37v31.93h37v26.35h-49.31V27.83h49.31Zm62.12,351.34h-41.17V42h41.17Z"/></g></g></svg>
+                                    </li>
+                                    <li>
+                                       <svg class="reformer-select" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1563.23 439.79"><defs></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="cls-reformer" d="M1342.3,0V9.38H0V77.73H38.58v38.58H0V327.53H38.58v38.58H0v64.3H1342.3v9.38h220.93V0ZM70.34,91.67l549.86,55v14.68H530.31V268H620.2v11.57l-.19-2L70.34,327.48Zm9.35-3.13,540.45,14.22.06-2V142.6Zm-9.35,243L620.2,281.63v70.74L70.34,333.22ZM1193,407.46H70.34v-70.2L620.2,356.41v43.47h441.9V344.42H1193Zm0-71.82H1062.1V288.39H1193Zm0-56H1062.1v-55H1193Zm0-63.76H1062.1v-54.5H1193Zm0-63.28H1062.1V111.11H1193Zm0-50.24H1062.1v-65H620.2V98.72L70.34,84.25V27.83H1193Zm69.15-53.78h-37V80.48h37v268.7h-37v31.93h37v26.35h-49.31V27.83h49.31Zm62.12,351.34h-41.17V42h41.17Z"/></g></g></svg>
+                                    </li>
+                                    <li>
+                                       <svg class="reformer-select" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1563.23 439.79"><defs></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="cls-reformer" d="M1342.3,0V9.38H0V77.73H38.58v38.58H0V327.53H38.58v38.58H0v64.3H1342.3v9.38h220.93V0ZM70.34,91.67l549.86,55v14.68H530.31V268H620.2v11.57l-.19-2L70.34,327.48Zm9.35-3.13,540.45,14.22.06-2V142.6Zm-9.35,243L620.2,281.63v70.74L70.34,333.22ZM1193,407.46H70.34v-70.2L620.2,356.41v43.47h441.9V344.42H1193Zm0-71.82H1062.1V288.39H1193Zm0-56H1062.1v-55H1193Zm0-63.76H1062.1v-54.5H1193Zm0-63.28H1062.1V111.11H1193Zm0-50.24H1062.1v-65H620.2V98.72L70.34,84.25V27.83H1193Zm69.15-53.78h-37V80.48h37v268.7h-37v31.93h37v26.35h-49.31V27.83h49.31Zm62.12,351.34h-41.17V42h41.17Z"/></g></g></svg>
+                                    </li>
+                                    <li>
+                                       <svg class="reformer-select" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1563.23 439.79"><defs></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="cls-reformer cls-reformer-reservado" d="M1342.3,0V9.38H0V77.73H38.58v38.58H0V327.53H38.58v38.58H0v64.3H1342.3v9.38h220.93V0ZM70.34,91.67l549.86,55v14.68H530.31V268H620.2v11.57l-.19-2L70.34,327.48Zm9.35-3.13,540.45,14.22.06-2V142.6Zm-9.35,243L620.2,281.63v70.74L70.34,333.22ZM1193,407.46H70.34v-70.2L620.2,356.41v43.47h441.9V344.42H1193Zm0-71.82H1062.1V288.39H1193Zm0-56H1062.1v-55H1193Zm0-63.76H1062.1v-54.5H1193Zm0-63.28H1062.1V111.11H1193Zm0-50.24H1062.1v-65H620.2V98.72L70.34,84.25V27.83H1193Zm69.15-53.78h-37V80.48h37v268.7h-37v31.93h37v26.35h-49.31V27.83h49.31Zm62.12,351.34h-41.17V42h41.17Z"/></g></g></svg>
+                                    </li>
+                                    <li>
+                                       <svg class="reformer-select" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1563.23 439.79"><defs></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="cls-reformer" d="M1342.3,0V9.38H0V77.73H38.58v38.58H0V327.53H38.58v38.58H0v64.3H1342.3v9.38h220.93V0ZM70.34,91.67l549.86,55v14.68H530.31V268H620.2v11.57l-.19-2L70.34,327.48Zm9.35-3.13,540.45,14.22.06-2V142.6Zm-9.35,243L620.2,281.63v70.74L70.34,333.22ZM1193,407.46H70.34v-70.2L620.2,356.41v43.47h441.9V344.42H1193Zm0-71.82H1062.1V288.39H1193Zm0-56H1062.1v-55H1193Zm0-63.76H1062.1v-54.5H1193Zm0-63.28H1062.1V111.11H1193Zm0-50.24H1062.1v-65H620.2V98.72L70.34,84.25V27.83H1193Zm69.15-53.78h-37V80.48h37v268.7h-37v31.93h37v26.35h-49.31V27.83h49.31Zm62.12,351.34h-41.17V42h41.17Z"/></g></g></svg>
+                                    </li>
+                                    <li>
+                                       <svg class="reformer-select" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1563.23 439.79"><defs></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="cls-reformer" d="M1342.3,0V9.38H0V77.73H38.58v38.58H0V327.53H38.58v38.58H0v64.3H1342.3v9.38h220.93V0ZM70.34,91.67l549.86,55v14.68H530.31V268H620.2v11.57l-.19-2L70.34,327.48Zm9.35-3.13,540.45,14.22.06-2V142.6Zm-9.35,243L620.2,281.63v70.74L70.34,333.22ZM1193,407.46H70.34v-70.2L620.2,356.41v43.47h441.9V344.42H1193Zm0-71.82H1062.1V288.39H1193Zm0-56H1062.1v-55H1193Zm0-63.76H1062.1v-54.5H1193Zm0-63.28H1062.1V111.11H1193Zm0-50.24H1062.1v-65H620.2V98.72L70.34,84.25V27.83H1193Zm69.15-53.78h-37V80.48h37v268.7h-37v31.93h37v26.35h-49.31V27.83h49.31Zm62.12,351.34h-41.17V42h41.17Z"/></g></g></svg>
+                                    </li>
+                                </ul>
+                                <svg class="reformer-back" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 841.45 827.59"><defs></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="cls-tapete" d="M813.1,0H28.35A28.35,28.35,0,0,0,0,28.35V799.24a28.35,28.35,0,0,0,28.35,28.35h375a28.35,28.35,0,0,0,28.35-28.35V533A28.35,28.35,0,0,1,460,504.67H813.1a28.35,28.35,0,0,0,28.35-28.35v-448A28.35,28.35,0,0,0,813.1,0Z"/></g></g></svg>
+                             
+                             </div>
+
                         </div>
                         <div class="confirmation-btns">
                             <p class="cancelar-confirmacion-reserva-btn" onclick="cancelConfirmacion()">Cancelar</p>

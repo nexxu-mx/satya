@@ -317,7 +317,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const diaDin = document.getElementById("texto-dia-din");
     const mesDin = document.getElementById("mes-din");
     const numeroDiaDin = document.getElementById("numero-dia-din");
-    const diaDinConf = document.getElementById("texto-dia-din-conf");
+   
     const mesDinConf = document.getElementById("mes-din-conf");
     const numeroDiaDinConf = document.getElementById("numero-dia-din-conf");
     const textDiaSlider = document.querySelectorAll(".text-day-slider");
@@ -623,12 +623,14 @@ function reservaClase(el) {
   const disciplina = el.dataset.disciplina;
   const iden = el.dataset.id;
   const idCoach = el.dataset.idcoach;
-  const imag = "assets/images/coaches/pro/" + idCoach + ".png";
-  document.getElementById("confirm-coach").innerHTML = nombre;
+  //const imag = "assets/images/coaches/pro/" + idCoach + ".png";
+ // document.getElementById("confirm-coach").innerHTML = nombre;
   document.getElementById("confirm-horario").innerHTML = horario;
-  document.getElementById("confirm-duracion").innerHTML = duracion;
-  document.getElementById("confirm-disciplina").innerHTML = disciplina;
-  document.getElementById("confirm-coach-img").src = imag;
+  //document.getElementById("confirm-duracion").innerHTML = duracion;
+  //document.getElementById("confirm-disciplina").innerHTML = disciplina;
+  document.getElementById("dis-res").innerHTML = disciplina;
+  document.getElementById("nyclass").innerHTML = "Selecciona Tu Mat";
+ 
 
   document.getElementById("confirm-agendar").dataset.id = iden;
   document.getElementById("confirm-agendar").dataset.coach = nombre;
@@ -689,11 +691,12 @@ function confirmacion(el) {
 function cancelConfirmacion() {
   document.querySelector(".confirmation-section").style.display = 'none';
   document.querySelector(".white-container").style.display = 'block';
-  document.getElementById("confirm-coach").innerHTML = " ";
+ // document.getElementById("confirm-coach").innerHTML = " ";
   document.getElementById("confirm-horario").innerHTML = " ";
-  document.getElementById("confirm-duracion").innerHTML = " ";
-  document.getElementById("confirm-disciplina").innerHTML = " ";
-  document.getElementById("confirm-coach-img").src = "assets/images/coaches/pro/unknnow.png";
+ // document.getElementById("confirm-duracion").innerHTML = " ";
+//  document.getElementById("confirm-disciplina").innerHTML = " ";
+ document.getElementById("dis-res").innerHTML = " ";
+ document.getElementById("nyclass").innerHTML = "Book your class";
   document.getElementById("confirm-agendar").dataset.id = " ";
 }
 function usrInf() {
