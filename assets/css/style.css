@@ -27,7 +27,8 @@
 @font-face {
   font-family: "Raleway";
   src: url("../fonts/satya-font/Raleway-VariableFont_wght.ttf") format("truetype-variations");
-  font-weight: 100 900;  /* Rango completo para fuente variable */
+  font-weight: 100 900;
+  /* Rango completo para fuente variable */
   font-style: normal;
   font-display: swap;
 }
@@ -35,10 +36,12 @@
 @font-face {
   font-family: "Raleway";
   src: url("../fonts/satya-font/Raleway-Italic-VariableFont_wght.ttf") format("truetype-variations");
-  font-weight: 100 900;  /* Rango completo para fuente variable */
+  font-weight: 100 900;
+  /* Rango completo para fuente variable */
   font-style: italic;
   font-display: swap;
 }
+
 :root {
 
   /**
@@ -66,7 +69,7 @@
   --c7: #a77867;
   --c8: #442315;
   --c9: #3f3d32;
-  --background:  rgb(244, 240, 231);
+  --background: rgb(244, 240, 231);
 
   /**
    * tipografia
@@ -388,6 +391,7 @@ body.nav-active {
 .header .btn {
   display: none;
 }
+
 .header-mobile {
   width: 100%;
   position: fixed;
@@ -402,26 +406,31 @@ body.nav-active {
   max-width: 100%;
   z-index: 2;
 }
-.logo-mobile{
+
+.logo-mobile {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   height: 30px;
 }
-.cls-nm{
+
+.cls-nm {
   fill: var(--white);
 }
-.header-mobile a{
+
+.header-mobile a {
   font-size: 32px;
   color: #2e2e2e;
 }
-.hmobile{
+
+.hmobile {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.mobile-log{
+
+.mobile-log {
   gap: 3px;
   width: 100%;
   height: 100%;
@@ -431,9 +440,10 @@ body.nav-active {
 }
 
 
-.navbar-mob{
+.navbar-mob {
   display: none;
 }
+
 .header {
   /* position: absolute; */
   top: 0;
@@ -506,12 +516,15 @@ body.nav-active {
   padding: 10px;
   border-bottom: 1px solid #442315;
 }
-.logo svg{
+
+.logo svg {
   height: 30px;
 }
-.cls-logo{
+
+.cls-logo {
   fill: #442315;
 }
+
 .nav-close-btn {
   position: absolute;
   top: 15px;
@@ -526,16 +539,17 @@ body.nav-active {
 }
 
 
-.log-nav-mobile{
-padding-left: 25px;
-padding-bottom: 14px;
-padding-top: 50px;
+.log-nav-mobile {
+  padding-left: 25px;
+  padding-bottom: 14px;
+  padding-top: 50px;
   font-size: 1.6rem;
   font-family: var(--ff-Raleway);
   color: #545454;
   display: flex;
   gap: 10px;
 }
+
 .navbar-link {
   color: var(--c8);
   padding: 10px 24px;
@@ -551,9 +565,11 @@ padding-top: 50px;
   display: flex;
 
 }
-.cls-logo-d{
+
+.cls-logo-d {
   fill: #fff;
 }
+
 .login-bolsa-navbar {
   display: flex;
   justify-content: space-between;
@@ -603,23 +619,26 @@ padding-top: 50px;
   #BODY
 \*-----------------------------------*/
 
-.slide{
+.slide {
   width: 300px;
   height: 250px;
-  overflow:hidden;
+  overflow: hidden;
   display: flex;
   align-items: baseline;
   border-radius: 20px;
 }
-.sli1{
+
+.sli1 {
   width: 280px;
   height: 250px;
   overflow: hidden;
   border-radius: 20px;
 }
-.slide img{
+
+.slide img {
   width: 100%;
 }
+
 .slider-container-global {
   display: flex;
   align-items: center;
@@ -655,17 +674,19 @@ padding-top: 50px;
 .hero-banner {
   background-position: center;
   height: 100dvh;
-  display: flex; 
+  display: flex;
   align-items: center;
   position: relative;
 }
-.bg-b{
+
+.bg-b {
   position: absolute;
   width: 100%;
   height: 100%;
   background-color: #00000057;
   z-index: 0;
 }
+
 .hero-banner .container {
   display: flex;
   justify-content: center;
@@ -902,7 +923,8 @@ span {
   display: none;
   height: 100px;
 }
- /*
+
+/*
 .slider img {
  width: 300px;
 }*/
@@ -953,7 +975,8 @@ span {
   font-size: 3.5rem;
   line-height: 1;
 }
-.coust{
+
+.coust {
   width: 100%;
   position: absolute;
   background: var(--c6);
@@ -962,6 +985,7 @@ span {
   margin-top: 40px;
   color: var(--white);
 }
+
 .precio-card {
   font-weight: 400;
   font-size: 45px;
@@ -969,7 +993,8 @@ span {
   line-height: 1.4;
   margin-top: 23px;
 }
-.precio-card small{
+
+.precio-card small {
   font-size: 1.6rem;
 }
 
@@ -1062,7 +1087,7 @@ span {
   font-size: 20px;
 }
 
-.accordion > p {
+.accordion>p {
   text-align: center;
 }
 
@@ -1104,29 +1129,28 @@ span {
 .logo-container {
   width: 350px;
   margin-inline: auto;
-  margin-top: -50px;
+
 }
 
 .terminos-container {
   color: #fff;
   display: flex;
   justify-content: space-between;
+  gap: 5px;
   align-items: center;
-  gap: 20px;
+  flex-direction: column;
 }
 
 .terminos-container a {
   font-size: 12px;
 }
 
-.powered-container {
-  margin-left: -15%;
-}
 
 .powered-container img {
   width: 100px;
-  margin-left: -20px;
+  margin-inline: -20px;
   margin-top: -5px;
+
 }
 
 .powered-container p {
@@ -1134,11 +1158,13 @@ span {
   display: flex;
   align-items: center;
   color: #fff;
+  height: 3rem;
 }
 
 .icons-container {
   display: flex;
   align-items: center;
+  justify-content: end;
   gap: 10px;
 }
 
@@ -1151,6 +1177,7 @@ span {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 
@@ -1245,16 +1272,19 @@ span {
   font-weight: 500;
   color: var(--c9);
 }
-.loto{
+
+.loto {
   width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 30px;
   margin-bottom: 89px;
 }
-.loto img{
+
+.loto img {
   width: 55px;
 }
+
 .inputs-container {
   display: flex;
   justify-content: center;
@@ -1321,7 +1351,7 @@ span {
 }
 
 .membresias-paquetes .card:hover {
- background-color: rgb(234, 230, 221);
+  background-color: rgb(234, 230, 221);
   color: var(--c9);
 }
 
@@ -1330,11 +1360,11 @@ span {
 }
 
 .membresias-paquetes .card:hover .tipo-card {
-   color: var(--c9);
+  color: var(--c9);
 }
 
 .membresias-paquetes .card:hover .numero-clases-card {
-   color: var(--c9);
+  color: var(--c9);
 }
 
 
@@ -1448,7 +1478,7 @@ span {
   width: 50%;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover  ;
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1766,16 +1796,19 @@ form textarea {
   font-weight: 500;
   margin-top: -70px;
 }
-.lotoreserva{
+
+.lotoreserva {
   width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 15px;
   margin-bottom: 89px;
 }
-.lotoreserva img{
+
+.lotoreserva img {
   width: 60px;
 }
+
 .white-container {
   margin-top: 20px;
   padding: 30px 50px;
@@ -1794,7 +1827,8 @@ form textarea {
 .my-account-link a {
   width: fit-content;
 }
-.mess{
+
+.mess {
   line-height: 3;
   font-size: 2rem;
   font-family: var(--ff-Raleway);
@@ -1916,7 +1950,8 @@ form textarea {
   overflow-x: scroll;
   position: relative;
 }
-.bg-sd{
+
+.bg-sd {
   width: 1000px;
   background-color: rgb(237, 231, 218);
   z-index: 0;
@@ -1955,13 +1990,14 @@ form textarea {
 
 .active-day {
   background-color: rgb(226, 217, 200);
-  
+
 }
 
 .clases-section-container {
   margin-top: 40px;
 }
-.class-card{
+
+.class-card {
   margin-block: 20px;
   height: 180px;
   background-color: rgb(226, 217, 200);
@@ -1975,7 +2011,8 @@ form textarea {
   font-weight: 500;
   text-transform: uppercase;
 }
-.clase-img-container{
+
+.clase-img-container {
   width: 40%;
   height: 180px;
   position: relative;
@@ -1985,11 +2022,13 @@ form textarea {
   align-items: center;
 
 }
-.clase-img-container img{
+
+.clase-img-container img {
   width: 300px;
   position: absolute;
 }
-.disci-clase{
+
+.disci-clase {
   position: absolute;
   bottom: 0;
   z-index: 1;
@@ -2000,14 +2039,15 @@ form textarea {
   justify-content: center;
   background-color: rgb(237, 231, 218);
 }
-.disci-clase h3{
+
+.disci-clase h3 {
   font-size: 1.3rem;
   font-family: var(--ff-Raleway);
   color: var(--c8);
   text-align: center;
 }
 
-.coache-clase{
+.coache-clase {
   position: absolute;
   left: 10px;
   bottom: 35%;
@@ -2030,9 +2070,11 @@ form textarea {
   border-radius: 10px;
   overflow: hidden;
 }
+
 .img-clase-container img {
   width: 100%;
 }
+
 .clase-container {
   display: flex;
   align-items: center;
@@ -2047,8 +2089,8 @@ form textarea {
   overflow: hidden;
 }
 
-.ffs{
-position: absolute;
+.ffs {
+  position: absolute;
   bottom: 0;
   width: 100%;
   height: 50px;
@@ -2101,7 +2143,8 @@ position: absolute;
   width: 60%;
   height: 180px;
 }
-.clase-horario{
+
+.clase-horario {
   margin-top: 5px;
   font-size: 1.4rem;
   line-height: 1;
@@ -2109,30 +2152,35 @@ position: absolute;
   color: #000;
 }
 
-.dura-clases{
+.dura-clases {
   font-size: 1.1rem;
   color: #717076;
   font-weight: 400;
-  
+
 }
-.clase-aforo{
+
+.clase-aforo {
   display: flex;
   align-items: center;
   gap: 3px;
   margin-top: -4px;
   font-weight: 500;
 }
-.clase-aforo svg{
+
+.clase-aforo svg {
   height: 1.2rem;
 }
-.clase-aforo span{
+
+.clase-aforo span {
   color: #545454;
   font-size: 1.2rem;
   font-family: var(--ff-Raleway);
 }
-.cls-aforo{
+
+.cls-aforo {
   fill: #545454;
 }
+
 .nombrecoach-horarioclase {
   display: flex;
   gap: 70px;
@@ -2178,17 +2226,18 @@ position: absolute;
 .disciplina-clase-container>p {
   color: var(--c9);
   margin-bottom: -10px;
-  
+
 }
 
 .disciplina-clase-container>h3 {
   color: var(--c9);
   text-transform: capitalize;
   font-family: var(--ff-Raleway);
- margin-bottom: 15px;
+  margin-bottom: 15px;
   font-weight: 600;
 }
-.btn-reservar-clase-container{
+
+.btn-reservar-clase-container {
   position: absolute;
   bottom: 20px;
   right: 20px;
@@ -2196,6 +2245,7 @@ position: absolute;
   align-items: center;
   justify-content: end;
 }
+
 .btn-reservar-clase-container a {
   background-color: rgb(132, 130, 115);
   padding: 1px 15px;
@@ -2281,29 +2331,24 @@ position: absolute;
 \*-----------------------------------*/
 
 .footer {
-  /* background: hsla(13, 28%, 49%, 1);
-
-  background: radial-gradient(circle, hsla(13, 28%, 49%, 1) 95%, hsla(28, 30%, 64%, 1) 105%);
-
-  background: -moz-radial-gradient(circle, hsla(13, 28%, 49%, 1) 95%, hsla(28, 30%, 64%, 1) 105%);
-
-  background: -webkit-radial-gradient(circle, hsla(13, 28%, 49%, 1) 95%, hsla(28, 30%, 64%, 1) 105%);
-
-  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#A16A5B", endColorstr="#BFA187", GradientType=1); */
-
+  background-color: var(--c2);
   position: relative;
   max-height: 500px;
   overflow: hidden;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.footer .container {
+/* .footer .container {
   position: absolute;
   width: 100%;
   top: 50%;
   left: 50%;
   margin-top: -15%;
   margin-left: -40%;
-}
+} */
 
 .footer video {
   width: 100%;
@@ -2460,18 +2505,21 @@ position: absolute;
 /*-----------------------------------*\
   #MEDIA 
 \*-----------------------------------*/
-@media (max-width: 767px){
-  .header{
+@media (max-width: 767px) {
+  .header {
     display: none;
   }
-  .navbar-mob{
+
+  .navbar-mob {
     display: block;
   }
-  .header-mobile{
+
+  .header-mobile {
     display: grid;
   }
 }
-@media (max-width: 768px){
+
+@media (max-width: 768px) {
 
   .slider {
     display: flex;
@@ -2481,13 +2529,14 @@ position: absolute;
     scroll-behavior: smooth;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    padding-block: 50px;  
+    padding-block: 50px;
   }
-  
+
   .slider::-webkit-scrollbar {
-    display: none; /* Chrome, Safari y Opera */
+    display: none;
+    /* Chrome, Safari y Opera */
   }
-  
+
   .slide {
     position: relative;
     flex: 0 0 33.3333%;
@@ -2497,18 +2546,20 @@ position: absolute;
     box-sizing: border-box;
     transition: transform 0.3s;
   }
-  
+
   /* Primer y último slide centrados */
   .slide:first-child {
     margin-left: calc(33.3333%);
   }
+
   .slide:last-child {
     margin-right: calc(33.3333%);
   }
-  
+
   .slide.center {
     transform: scale(1.2);
   }
+
   .fd {
     font-size: 40px;
     position: absolute;
@@ -2520,6 +2571,7 @@ position: absolute;
     width: 40px;
     justify-content: center;
   }
+
   .fi {
     font-size: 40px;
     position: absolute;
@@ -2531,19 +2583,25 @@ position: absolute;
     width: 40px;
     justify-content: center;
   }
+
   .sli1 {
     width: 240px;
     height: 250px;
     overflow: hidden;
     border-radius: 20px;
-    
+
+  }
 }
-}
+
 @media (min-width: 300px) and (max-width: 399px) {
   :root {
     --headline-lg: 8rem;
     --headline-md: 4.8rem;
 
+  }
+
+  .terminos-container {
+    margin-top: 2rem;
   }
 
   dialog {
@@ -2556,22 +2614,22 @@ position: absolute;
     border-radius: 10px;
     box-shadow: 5px 5px 10px 3px var(--beto-color);
   }
-  
-  dialog > p {
+
+  dialog>p {
     position: absolute;
     top: 0;
     left: 85%;
     font-size: 20px;
     cursor: pointer;
   }
-  
-  dialog > div {
+
+  dialog>div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
-  
+
   dialog .icono-texto-reserva {
     justify-content: left;
     align-items: center;
@@ -2591,12 +2649,12 @@ position: absolute;
 
 
 
-  .header{
+  .header {
     display: none;
   }
 
 
-  .logo img{
+  .logo img {
     filter: invert(1);
     width: 20px;
   }
@@ -2741,10 +2799,10 @@ position: absolute;
   }
 
   .text-video-container {
-    left: 0!important;
+    left: 0 !important;
     right: 0;
     margin-inline: auto;
-    justify-content: center!important;
+    justify-content: center !important;
   }
 
   .text-video-container p {
@@ -2770,7 +2828,7 @@ position: absolute;
     font-size: 30px;
   }
 
-  
+
 
   .membresias-section h2 {
     font-size: 30px;
@@ -2829,10 +2887,17 @@ position: absolute;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 2rem;
   }
 
   .powered-container {
     margin: 0;
+  }
+
+  .powered-icons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .navbar-link {
@@ -2840,10 +2905,10 @@ position: absolute;
   }
 
   .header.active {
-   background-color: var(--c2);
+    background-color: var(--c2);
   }
 
-  
+
   .flecha-slider {
     font-size: 40px;
   }
@@ -2856,9 +2921,10 @@ position: absolute;
   .slider img {
     width: 290px;
   }
+
   /* Primer y último slide centrados */
- 
-  
+
+
   /* .slide.center {
     transform: scale(1.2);
   } */
@@ -3116,7 +3182,7 @@ position: absolute;
     background-size: 10px;
   }
 
- 
+
 
   .second-flex {
     display: none;
@@ -3149,8 +3215,9 @@ position: absolute;
   .text-day-slider {
     font-size: 18px;
   }
-  .bg-sd{
-  height: 50px;
+
+  .bg-sd {
+    height: 50px;
   }
 
   .slider-items-container {
@@ -3309,7 +3376,8 @@ position: absolute;
     margin-top: 20px;
   }
 
-  .cancelar-confirmacion-reserva-btn, .confirmar-reserva-btn {
+  .cancelar-confirmacion-reserva-btn,
+  .confirmar-reserva-btn {
     cursor: pointer;
     text-align: center;
     background-color: var(--light-brown);
@@ -3332,7 +3400,7 @@ position: absolute;
   .cancelar-confirmacion-reserva-btn:hover {
     background-color: var(--light-brown);
     color: #fff;
-  } 
+  }
 
   .nota-cancelar-clase {
     text-align: justify;
@@ -3368,13 +3436,6 @@ position: absolute;
     width: 200%;
     margin-left: -50%;
     transform: rotate(90deg);
-  }
-
-  .footer .container {
-    top: 50%;
-    left: 50%;
-    margin-top: -65%;
-    margin-left: -50%;
   }
 
   .footer-brand {
@@ -3423,22 +3484,22 @@ position: absolute;
     border-radius: 10px;
     box-shadow: 5px 5px 10px 3px var(--beto-color);
   }
-  
-  dialog > p {
+
+  dialog>p {
     position: absolute;
     top: 0;
     left: 85%;
     font-size: 20px;
     cursor: pointer;
   }
-  
-  dialog > div {
+
+  dialog>div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
-  
+
   dialog .icono-texto-reserva {
     justify-content: left;
     align-items: center;
@@ -3449,7 +3510,7 @@ position: absolute;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+
   }
 
   .hint-flex svg {
@@ -3460,9 +3521,10 @@ position: absolute;
   .section {
     padding-block: 44px;
   }
-    .header{
-        display: none;
-    }
+
+  .header {
+    display: none;
+  }
 
 
   .nav-open-btn {
@@ -3488,7 +3550,7 @@ position: absolute;
     background-position: 60%;
     background-size: cover;
   }
-  
+
 
   .hero-banner h1 {
     font-size: 35px;
@@ -3589,10 +3651,10 @@ position: absolute;
   }
 
   .text-video-container {
-    left: 0!important;
+    left: 0 !important;
     right: 0;
     margin-inline: auto;
-    justify-content: center!important;
+    justify-content: center !important;
   }
 
   .text-video-container p {
@@ -3670,6 +3732,13 @@ position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .powered-icons-container {
+    display: flex;
+    flex-direction: column;
     align-items: center;
   }
 
@@ -3951,7 +4020,7 @@ position: absolute;
     font-size: 13px;
   }
 
- 
+
 
 
   .iconos-container {
@@ -3971,9 +4040,11 @@ position: absolute;
   .text-day-slider {
     font-size: 17px;
   }
-.bg-sd{
-  height: 50px;
+
+  .bg-sd {
+    height: 50px;
   }
+
   .slider-items-container {
     gap: 7%;
   }
@@ -4145,7 +4216,8 @@ position: absolute;
     margin-top: 20px;
   }
 
-  .cancelar-confirmacion-reserva-btn, .confirmar-reserva-btn {
+  .cancelar-confirmacion-reserva-btn,
+  .confirmar-reserva-btn {
     cursor: pointer;
     text-align: center;
     background-color: var(--light-brown);
@@ -4168,7 +4240,7 @@ position: absolute;
   .cancelar-confirmacion-reserva-btn:hover {
     background-color: var(--light-brown);
     color: #fff;
-  } 
+  }
 
   .nota-cancelar-clase {
     text-align: justify;
@@ -4211,12 +4283,6 @@ position: absolute;
     transform: rotate(90deg);
   }
 
-  .footer .container {
-    top: 50%;
-    left: 50%;
-    margin-top: -65%;
-    margin-left: -50%;
-  }
 
   .footer-brand {
     grid-column: 1 / 3;
@@ -4240,6 +4306,7 @@ position: absolute;
   }
 
 }
+
 @media (min-width: 768px) {
 
   .slider {
@@ -4250,13 +4317,18 @@ position: absolute;
     scroll-behavior: smooth;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    padding-block: 50px;  
+    padding-block: 50px;
   }
-  
+
+  .terminos-container {
+    align-items: start;
+  }
+
   .slider::-webkit-scrollbar {
-    display: none; /* Chrome, Safari y Opera */
+    display: none;
+    /* Chrome, Safari y Opera */
   }
-  
+
   .slide {
     position: relative;
     flex: 0 0 33.3333%;
@@ -4266,19 +4338,21 @@ position: absolute;
     box-sizing: border-box;
     transition: transform 0.3s;
   }
-  
+
   /* Primer y último slide centrados */
   .slide:first-child {
     margin-left: calc(33.3333%);
   }
+
   .slide:last-child {
     margin-right: calc(33.3333%);
   }
-  
+
   .slide.center {
     transform: scale(1.2);
   }
-  .clase-img-container img{
+
+  .clase-img-container img {
     width: 450px;
   }
 }
@@ -4288,7 +4362,8 @@ position: absolute;
     max-width: 940px;
     margin: 0 auto;
   }
-  .navbar-mob{
+
+  .navbar-mob {
     display: block;
   }
 
@@ -4296,6 +4371,7 @@ position: absolute;
     display: none;
     /* margin-block: auto; */
   }
+
   /* INICIO INDEX PAGE */
 
   .hero-banner {
@@ -4355,7 +4431,7 @@ position: absolute;
     font-size: 30px;
   }
 
- .clase-img-container img{
+  .clase-img-container img {
     width: 550px;
   }
 
@@ -4397,14 +4473,17 @@ position: absolute;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    -ms-overflow-style: none;  /* IE y Edge */
-    scrollbar-width: none;     /* Firefox */
+    -ms-overflow-style: none;
+    /* IE y Edge */
+    scrollbar-width: none;
+    /* Firefox */
   }
-  
+
   .slider::-webkit-scrollbar {
-    display: none; /* Chrome, Safari y Opera */
+    display: none;
+    /* Chrome, Safari y Opera */
   }
-  
+
   .slide {
     position: relative;
     flex: 0 0 33.3333%;
@@ -4413,15 +4492,16 @@ position: absolute;
     box-sizing: border-box;
     transition: transform 0.3s;
   }
-  
+
   /* Primer y último slide centrados */
   .slide:first-child {
     margin-left: calc(33.3333%);
   }
+
   .slide:last-child {
     margin-right: calc(33.3333%);
   }
-  
+
   .slide.center {
     transform: scale(1.2);
   }
@@ -4552,7 +4632,7 @@ position: absolute;
     height: 50vh;
   }
 
-  .coach .image-side > img {
+  .coach .image-side>img {
     object-fit: cover;
   }
 
@@ -4587,7 +4667,7 @@ position: absolute;
     white-space: nowrap;
     text-decoration: none;
   }
-  
+
   .coach2 .discipline-coach {
     border: 1px solid var(--danyfer-karina-color);
     width: fit-content;
@@ -4730,7 +4810,8 @@ position: absolute;
     gap: 10px;
   }
 
-  .cancelar-confirmacion-reserva-btn, .confirmar-reserva-btn {
+  .cancelar-confirmacion-reserva-btn,
+  .confirmar-reserva-btn {
     width: 100%;
     cursor: pointer;
     text-align: center;
@@ -4754,7 +4835,7 @@ position: absolute;
   .cancelar-confirmacion-reserva-btn:hover {
     background-color: var(--light-brown);
     color: #fff;
-  } 
+  }
 
   .nota-cancelar-clase {
     width: fit-content;
@@ -4776,7 +4857,7 @@ position: absolute;
 
   .footer {
     position: relative;
-    height: auto;
+    height: 600px;
   }
 
   .footer.section {
@@ -4784,15 +4865,7 @@ position: absolute;
   }
 
   .footer .container {
-    /* margin-top: 50%;
-    margin-top: -197px;
-    margin-left: 50%;
-    margin-left: -600px; */
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
+    width: 940px;
   }
 
   .footer video {
@@ -4814,9 +4887,10 @@ position: absolute;
 
 @media (min-width: 1000px) and (max-width: 1200px) {
 
-  .clase-img-container img{
+  .clase-img-container img {
     width: 600px;
   }
+
   #profile-inicio {
     margin-bottom: 50px;
   }
@@ -4825,7 +4899,8 @@ position: absolute;
     max-width: 940px;
     margin: 0 auto;
   }
-  .navbar-mob{
+
+  .navbar-mob {
     display: block;
   }
 
@@ -4833,6 +4908,7 @@ position: absolute;
     display: none;
     /* margin-block: auto; */
   }
+
   /* INICIO INDEX PAGE */
 
   .hero-banner {
@@ -4917,7 +4993,7 @@ position: absolute;
   }
 
   .header.active {
-   background-color: var(--c2);
+    background-color: var(--c2);
   }
 
   /* FIN INDEX PAGE */
@@ -5046,7 +5122,7 @@ position: absolute;
     height: 80vh;
   }
 
-  .coach .image-side > img {
+  .coach .image-side>img {
     object-fit: cover;
   }
 
@@ -5081,7 +5157,7 @@ position: absolute;
     white-space: nowrap;
     text-decoration: none;
   }
-  
+
   .coach2 .discipline-coach {
     border: 1px solid var(--danyfer-karina-color);
     width: fit-content;
@@ -5224,7 +5300,8 @@ position: absolute;
     gap: 10px;
   }
 
-  .cancelar-confirmacion-reserva-btn, .confirmar-reserva-btn {
+  .cancelar-confirmacion-reserva-btn,
+  .confirmar-reserva-btn {
     width: 100%;
     cursor: pointer;
     text-align: center;
@@ -5248,7 +5325,7 @@ position: absolute;
   .cancelar-confirmacion-reserva-btn:hover {
     background-color: var(--light-brown);
     color: #fff;
-  } 
+  }
 
   .nota-cancelar-clase {
     width: fit-content;
@@ -5305,9 +5382,10 @@ position: absolute;
 
 @media (min-width: 1200px) {
 
-  .clase-img-container img{
+  .clase-img-container img {
     width: 550px;
   }
+
   .hint-flex svg {
     display: none;
     /* margin-block: auto; */
@@ -5338,10 +5416,7 @@ position: absolute;
   }
 
   .footer .container {
-    margin-top: 50%;
-    margin-top: -197px;
-    margin-left: 50%;
-    margin-left: -600px;
+    width: 1200px;
   }
 
   .modal-detalles-disciplina {
@@ -5410,7 +5485,8 @@ position: absolute;
     all: unset;
     display: block;
   }
-  .navbar-mob{
+
+  .navbar-mob {
     display: none;
   }
 
@@ -5445,7 +5521,7 @@ position: absolute;
   }
 
   .calendar-slider-number:hover {
-   background-color: rgb(226, 217, 200);
+    background-color: rgb(226, 217, 200);
   }
 
   .modal-detalles-coach {
@@ -5464,7 +5540,8 @@ position: absolute;
     box-shadow: 2px 2px 8px 2px #888888;
     cursor: default !important;
   }
-/* 
+
+  /* 
   .nombrecoach-horarioclase {
     display: block;
   }
@@ -5502,7 +5579,8 @@ position: absolute;
     gap: 10px;
   }
 
-  .cancelar-confirmacion-reserva-btn, .confirmar-reserva-btn {
+  .cancelar-confirmacion-reserva-btn,
+  .confirmar-reserva-btn {
     width: 100%;
     cursor: pointer;
     text-align: center;
@@ -5526,7 +5604,7 @@ position: absolute;
   .cancelar-confirmacion-reserva-btn:hover {
     background-color: var(--light-brown);
     color: #fff;
-  } 
+  }
 
   .nota-cancelar-clase {
     width: fit-content;
