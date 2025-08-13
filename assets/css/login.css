@@ -1,0 +1,107 @@
+:root {
+
+    /**
+   * coloress
+   */
+
+    --white: #ffffff;
+    --black: hsl(0, 0%, 0%);
+    --light-brown: #986C5D;
+    --light-browm-2: #AA9480;
+    --light-brown-3: #BFA187;
+    --maria-color: #f5f5f5;
+    --katya-cons-color: #BEA392;
+    --gali-color: #A2AB96;
+    --regina-ivanna-color: #A16A5B;
+    --danyfer-karina-color: #F6ECE5;
+    --beto-color: #717076;
+
+    --c1: #C7b19e;
+    --c2: #d8b593;
+    --c3: #edd9c5;
+    --c4: #f3e6d7;
+    --c5: #f4f0e7;
+    --c6: #838170;
+    --c7: #a77867;
+    --c8: #442315;
+    --c9: #3f3d32;
+    --background: rgb(244, 240, 231);
+
+    /**
+   * tipografia
+   */
+
+    --ff-Avenir: "Avenir", sans-serif;
+    --ff-Raleway: "Raleway", sans-serif;
+
+    --headline-lg: 5rem;
+    --headline-md: 3rem;
+    --headline-sm: 2rem;
+    --title-lg: 1.8rem;
+    --title-md: 1.5rem;
+    --title-sm: 1.4rem;
+
+    --fw-500: 500;
+    --fw-700: 700;
+
+
+
+    --section-padding: 120px;
+
+
+
+    --shadow-1: 0px 2px 20px hsla(209, 36%, 72%, 0.2);
+    --shadow-2: 0 4px 16px hsla(0, 0%, 0%, 0.06);
+
+
+
+    --radius-circle: 50%;
+    --radius-12: 12px;
+    --radius-6: 6px;
+    --radius-4: 4px;
+
+    /**
+   * transition
+   */
+
+    --transition-1: 0.25s ease;
+    --transition-2: 0.5s ease;
+    --transition-3: 1s ease;
+    --cubic-in: cubic-bezier(0.51, 0.03, 0.64, 0.28);
+    --cubic-out: cubic-bezier(0.05, 0.83, 0.52, 0.97);
+
+}
+
+.login-form>h2 {
+    color: var(--c8);
+    font-size: 32px;
+}
+
+.registro-mensaje {
+    color: var(--black);
+}
+
+.registro-mensaje>span>button {
+    color: var(--c6);
+}
+
+form input {
+    font-size: 13px;
+    font-family: var(--ff-Raleway);
+}
+
+.login-submit-btn-container {
+    background-color: var(--c4);
+    width: 100%;
+}
+
+@media (min-width: 300px) and (max-width: 399px) {
+    .login-form label {
+        font-size: 13px;
+    }
+
+    .olv-contra {
+        font-size: 9px;
+        color: var(--c6);
+    }
+}
