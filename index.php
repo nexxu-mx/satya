@@ -1,6 +1,6 @@
 <?php
-header("Location: login.php");
-exit;
+//header("Location: login.php");
+//exit;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,6 +19,8 @@ exit;
     href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Rubik:wght@400;500;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <?php include 'head.php'; ?>
   <style>
     
@@ -49,7 +51,7 @@ exit;
       <section class="hero-banner" style="position: relative">
       <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; display: flex; justify-content: center; align-items: center;">
           <video autoplay loop muted playsinline style="position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; object-fit: cover; transform: translate(-50%, -50%);z-index: 2"
-          poster="./assets/images/hero.png">
+          poster="./assets/img/hero@3x.png">
             <source src="./assets/images/banner-hero3.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
@@ -58,170 +60,197 @@ exit;
         <div class="container">
           <div class="hero-banner-elements">
             <div class="img-banner-container">
-              <img src="./assets/images/svg/logo-blanco.svg"
-                alt="SATYA Logo">
+              <svg class="hero-log" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53.4 88.89"><defs></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="cls-log" d="M32.21,24.19a5.91,5.91,0,1,1-5.91-5.91,5.9,5.9,0,0,1,5.91,5.91"/><path class="cls-log" d="M26.71,88.89A6,6,0,0,1,23.6,88a5.78,5.78,0,0,1-.68-.49c-1.87-1.6-3-5.08-3.56-10.63a69.28,69.28,0,0,1-.26-7.45c.42-14.51,1.58-18.07,2.82-20.7a34.35,34.35,0,0,1,2.91-5,40.32,40.32,0,0,0-5.3-5.43,76.74,76.74,0,0,1-6.07-6,60.26,60.26,0,0,1-4.27-5.16A48.14,48.14,0,0,1,0,.12L3,0a45.21,45.21,0,0,0,8.6,25.49,60.58,60.58,0,0,0,4.05,4.9l.4.44c2.15,2.33,3.92,3.91,5.48,5.32a44.6,44.6,0,0,1,5.17,5.2,44.55,44.55,0,0,1,5.16-5.2,75.16,75.16,0,0,0,5.48-5.32h0l.41-.43a59.23,59.23,0,0,0,4-4.9A45.22,45.22,0,0,0,50.4,0l3,.12a48.14,48.14,0,0,1-9.19,27.15,62.73,62.73,0,0,1-4.27,5.16,76.74,76.74,0,0,1-6.07,6,39.73,39.73,0,0,0-5.3,5.43,34.44,34.44,0,0,1,2.9,5c1.25,2.63,2.4,6.19,2.83,20.7A67.82,67.82,0,0,1,34,76.92c-.52,5.55-1.69,9-3.56,10.63a5,5,0,0,1-.67.49,5.94,5.94,0,0,1-3.09.85m0-42.49a31.22,31.22,0,0,0-2.07,3.66c-1.06,2.23-2.13,5.58-2.53,19.5-.15,5,.47,13.74,2.77,15.7a2.68,2.68,0,0,0,.3.23,3,3,0,0,0,1.54.4,3,3,0,0,0,1.51-.4,1.6,1.6,0,0,0,.3-.23c1.23-1,3.06-6.22,2.78-15.7-.41-13.92-1.48-17.27-2.54-19.5A31.3,31.3,0,0,0,26.7,46.4"/></g></g></svg>
             </div>
             <h1>
-              MOVE YOUR BODY,
-              <span class="hero-banner-text-alt">Change your mind</span>
+             Movement as an act <br> of authenticity
             </h1>
-            <a href="reserva.php" class="reservar-btn-banner">RESERVAR</a>
+            <a href="reserva.php" class="reservar-btn-banner">« RESERVAR »</a>
+          </div>
+        </div>
+      </section>
+      <section class="section" style="background: rgb(242, 231, 219);">
+        <div class="container">
+          <div class="explora-section">
+              <svg class="loto-explora" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92.78 56.13"><defs></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="cls-loto-explora" d="M91.87,42.22a31.52,31.52,0,0,0-19.36-8.55,31.6,31.6,0,0,0,5.08-20.56l-.12-1.25H76.21a31.57,31.57,0,0,0-20,7.37A31.5,31.5,0,0,0,45.48.81L44.53,0l-.89.88a31.2,31.2,0,0,0-8.9,16.92,31.76,31.76,0,0,0-18.17-5.92l-1.25,0-.13,1.25a31.55,31.55,0,0,0,5.08,20.55A31.59,31.59,0,0,0,.91,42.22L0,43.08l.77,1A31.4,31.4,0,0,0,22,55.92a30.61,30.61,0,0,0,3.59.21,31.51,31.51,0,0,0,20.76-7.81,31.52,31.52,0,0,0,20.77,7.81,33.18,33.18,0,0,0,3.58-.2A31.41,31.41,0,0,0,92,44.07l.77-1Zm-21.44,11a29,29,0,0,1-20.56-5.6A31.33,31.33,0,0,0,70.49,36.4l.07-.09a28.77,28.77,0,0,1,18.49,7,28.74,28.74,0,0,1-18.62,9.85Zm-48.08,0h0A28.64,28.64,0,0,1,3.74,43.35a28.76,28.76,0,0,1,18.48-7l.07.09a31.73,31.73,0,0,0,7,6.28,31.46,31.46,0,0,0,13.61,4.93A28.9,28.9,0,0,1,22.35,53.2Zm15.12-16A31.12,31.12,0,0,0,26.2,33.77c-.83-.1-1.7-.16-2.63-.18a28.76,28.76,0,0,1-5.75-18.93A28.92,28.92,0,0,1,34.35,21c-.07.84-.1,1.63-.1,2.4A31.6,31.6,0,0,0,37.47,37.25Zm1.07-12.18A28.61,28.61,0,0,1,45,40.39c-.07.77-.11,1.55-.13,2.34-.58-.58-1.18-1.14-1.79-1.66A29,29,0,0,1,37,23.35C37.55,23.92,38.06,24.49,38.54,25.07ZM30.8,40.39h0a28.69,28.69,0,0,1-4.7-3.87,28.63,28.63,0,0,1,15,6.49c.5.63,1,1.24,1.55,1.82A28.86,28.86,0,0,1,30.8,40.39Zm6.43-20.6a28.32,28.32,0,0,1,7.45-16,28.78,28.78,0,0,1,9.11,17.74c-.63.63-1.17,1.24-1.66,1.83a31.22,31.22,0,0,0-5.74,10.43,31.22,31.22,0,0,0-5.74-10.43A32.54,32.54,0,0,0,37.23,19.79Zm19.4,2.72A28.76,28.76,0,0,1,75,14.65a28.79,28.79,0,0,1-5.75,18.94c-.93,0-1.8.09-2.63.18a31.57,31.57,0,0,0-12.66,4.28A31.67,31.67,0,0,0,56.74,25C56.74,24.21,56.7,23.4,56.63,22.51Zm10,14A27.92,27.92,0,0,1,62,40.4a28.76,28.76,0,0,1-12.28,4.48l.19-.24A28.51,28.51,0,0,1,66.67,36.52ZM54,25.37a28.51,28.51,0,0,1-6.1,17.34c0-.78-.06-1.55-.13-2.3A28.67,28.67,0,0,1,54,25.37Z"/><path class="cls-loto-explora" d="M45.84,24.56a5.13,5.13,0,1,0-5.12-5.12A5.13,5.13,0,0,0,45.84,24.56Zm0-7.51a2.39,2.39,0,1,1-2.38,2.39A2.39,2.39,0,0,1,45.84,17.05Z"/></g></g></svg>
+              <h3>
+                Explora tu <b style="color: var(--c7);  font-weight: 500;">autenticidad</b> a <br>
+                través del cuerpo y <br>
+                la mente
+              </h3>
+              <a href="#">« ABOUT US »</a>
           </div>
         </div>
       </section>
 
-        <section class="descripcion-section">
-          <video id="video-index-texto" src="./assets/images/SATYA_gradient.mp4" autoplay loop muted playsinline disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
-          <div class="container section">
-            <img src="assets/images/svg/logo-blanco.svg" alt="logo SATYA">
-            <p>
-            SATYA es un espacio dedicado al bienestar y la conexión entre cuerpo y mente, creado por dos hermanas que comparten la pasión por el movimiento y el cuidado integral. Su nombre proviene de la palabra “sentir”, representando la experiencia auténtica y consciente que cada persona vivirá en el estudio, donde se fomenta la fuerza, la flexibilidad y la armonía. SATYA es un refugio donde cada persona puede alcanzar su mejor versión, orientada por el amor, la dedicación y la conexión.
-          </p>
-          <p>BARRE | YOGA | SCULPT | BALLET | PILATES</p>
-        </div>
-      </section>
+      
 
-      <section class="desciplinas-section">
-        <div class="nombres-disciplinas">
-          <div class="nombres-disciplinas-container">
-            <h2>NUESTRAS DISCIPLINAS</h2>
-            <ul style="height: 50vh;">
-              <li id="barre" onclick="cambiarTextoVideo(barreTab)">BARRE</li>
-              <li id="sculpt"
-                onclick="cambiarTextoVideo(sculptTab)">SCULPT</li>
-              <li id="pilates" class="active-video"
-                onclick="cambiarTextoVideo(pilatesTab)">PILATES</li>
-              <li id="yoga" onclick="cambiarTextoVideo(yogaTab)">YOGA</li>
-              <li id="ballet"
-                onclick="cambiarTextoVideo(balletTab)">BALLET</li>
-            </ul>
-            <a href="clases.php">CONOCE NUESTRAS CLASES</a>
-          </div>
-        </div>
-        <div class="video">
-        <video autoplay loop muted playsinline class="vosj" id="videodisciplina">
-              <source src="./assets/images/disciplinas/1.mp4?v=<?php echo time(); ?>" type="video/mp4">
-              Your browser does not support the video tag.
-          </video>
-          <div class="text-video-container">
-            <p id="texto-camb-1" class="texto-uppercase">FUERZA</p>
-            <p>|</p>
-            <p id="texto-camb-2" class="texto-uppercase">FLEXIBILIDAD</p>
-            <p>|</p>
-            <p id="texto-camb-3" class="texto-uppercase">FLUIDEZ</p>
-          </div>
-        </div>
+      <section class="section desciplinas-section">
+       <div class="container">
+          <h2>Nuestras Disciplinas</h2>
+
+            <div class="slider-container-global disciplines-slider" style="margin-top: 0;">
+              <div class="swiper-button-prev flecha-slider fi"></div>
+              
+              <div class="swiper-container">
+                <div class="swiper-wrapper">
+                  <!-- Disciplina 1 -->
+                  <div class="swiper-slide">
+                    <div class="card-disciplina">
+                      <h4>Pilates reformer</h4>
+                      <div class="card-disciplina-img">
+                        <img src="./assets/images/disciplinas/2.png" alt="Pilates Reformer">
+                      </div>
+                      <span>Fuerza - Resistencia - Tone</span>
+                    </div>
+                  </div>
+                  
+                  <!-- Disciplina 2 -->
+                  <div class="swiper-slide">
+                    <div class="card-disciplina">
+                      <h4>Yoga</h4>
+                      <div class="card-disciplina-img">
+                        <img src="./assets/images/disciplinas/3.png" alt="Yoga">
+                      </div>
+                      <span>Flexibilidad - Relajación</span>
+                    </div>
+                  </div>
+                  
+                  <!-- Disciplina 3 -->
+                  <div class="swiper-slide">
+                    <div class="card-disciplina">
+                      <h4>Movement</h4>
+                      <div class="card-disciplina-img">
+                        <img src="./assets/images/disciplinas/4.png" alt="Movement">
+                      </div>
+                      <span>Movimiento - Coordinación</span>
+                    </div>
+                  </div>
+                  
+                  <!-- Añade más disciplinas según necesites -->
+                </div>
+              </div>
+              
+              <div class="swiper-button-next flecha-slider fd"></div>
+            </div>
+
+
+          <a href="#" class="a-link" style="margin-top: 20px;">« VER MÁS »</a>
+       </div>
       </section>
 
       <section class="section coaches-section">
         <div class="container">
-          <h2>CONOCE A NUESTRAS <span>Coaches</span></h2>
-          <div class="slider-container-global">
-            <p class="flecha-slider fi" id="prev">
-              <</p>
-
-            <div class="slider-container">
-              <div class="slider" id="slider">
-              <div class="slide" data-disciplina="PILATES">
-                  <div class="sli1"> <img src="assets/images/coaches/pro/6.png" alt="imagen slider"></div>
-                  <a href="coaches.php#connie"><p>CONNIE</p></a>
-                  
+          <h2>Conoce a tu Coach</h2>
+          <div class="slider-container-global coaches-slider">
+            <div class="swiper-button-prev flecha-slider fi"></div>
+            
+            <div class="swiper-container">
+              <div class="swiper-wrapper">
+                <!-- Card coach 1 -->
+                <div class="swiper-slide">
+                  <div class="card-coach-index">
+                    <img src="./assets/images/coaches/18.jpeg" alt="">
+                    <div class="descrip-coach-index">
+                      <h3>Pilates Reformer</h3>
+                      <p>Me gusta impulsar el movimiento auténtico con presencia, equilibrio y conexión.</p>
+                    </div>
+                    <a href="#">Valeria</a>
+                  </div>
                 </div>
-               
-                <div class="slide" data-disciplina="SCULPT">
-                  <div class="sli1"><img src="assets/images/coaches/pro/1.png" alt="imagen slider"></div>
-                  <a href="coaches.php#dulce"><p>DULCE</p></a>
                 
+                <!-- Card coach 2 -->
+                <div class="swiper-slide">
+                  <div class="card-coach-index">
+                    <img src="./assets/images/coaches/18.jpeg" alt="">
+                    <div class="descrip-coach-index">
+                      <h3>Yoga</h3>
+                      <p>Descripción del coach de yoga.</p>
+                    </div>
+                    <a href="#">María</a>
+                  </div>
                 </div>
-                <div class="slide" data-disciplina="BARRE">
-                 <div class="sli1" >
-                  <img src="assets/images/coaches/pro/2.png" alt="imagen slider">
-                 </div>
-                  <a href="coaches.php#katia"><p>KATYA</p></a>
-                  
-                </div>
-                <div class="slide" data-disciplina="YOGA">
-                  <div class="sli1"><img src="assets/images/coaches/pro/4.png" alt="imagen slider"></div>
-                  <a href="coaches.php#regina"><p>REGINA</p></a>
-                  
-                </div>
-                <div class="slide" data-disciplina="YOGA">
-                  <div class="sli1"><img src="assets/images/coaches/pro/10.png" alt="imagen slider"></div>
-                  <a href="coaches.php#maria"><p>MARÍA</p></a>
-               
-                </div>
-                <div class="slide" data-disciplina="BARRE">
-                  <div class="sli1"><img src="assets/images/coaches/pro/5.png" alt="imagen slider"></div>
-                  <a href="coaches.php#danyfer"><p>DANYFER</p></a>
-               
-                </div>
-                <div class="slide" data-disciplina="SCULPT">
-                  <div class="sli1"><img src="assets/images/coaches/pro/8.png" alt="imagen slider"></div>
-                  <a href="coaches.php#beto"><p>BETO</p></a>
-                 
-                </div>
-                <div class="slide" data-disciplina="BARRE">
-                  <div class="sli1"><img src="assets/images/coaches/pro/9.png" alt="imagen slider"></div>
-                  <a href="coaches.php#karina"><p>KARINA</p></a>
-                  
-                </div>
-                <div class="slide" data-disciplina="BARRE">
-                  <div class="sli1"><img src="assets/images/coaches/pro/3.png" alt="imagen slider"></div>
-                  <a href="coaches.php#gali"><p>GALI</p></a>
-               
-                </div>
-                <div class="slide" data-disciplina="BALLET">
-                  <div class="sli1"><img src="assets/images/coaches/pro/13.png" alt="imagen slider"></div>
-                  <a href="coaches.php#reginas"><p>REGINA</p></a>
-                  <p></p>
-                </div>
+                
+                <!-- Agrega más cards según necesites -->
               </div>
             </div>
-
-            <p class="flecha-slider fd" id="next">></p>
+            
+            <div class="swiper-button-next flecha-slider fd"></div>
           </div>
-         <a href="disciplinas.php"> <p class="coaches-slider-discipline">SATYA</p></a> 
+          <a href="#" class="a-link">« VER MÁS »</a>
         </div>
       </section>
 
       <section class="section membresias-section">
         <div class="container">
-          <h2>CONOCE A NUESTRAS <span>Membresías</span></h2>
-          <div class="cards-container">
-            <div class="card">
-              <p class="tipo-card">FLOW</p>
-              <p class="numero-clases-card">4</p>
-              <p class="clases-card">CLASES</p>
-              <p class="precio-card">MX $650</p>
-              <p class="vigencia-card">Vigencia 15 días</p>
-              <a href="paquetes.php">COMPRAR</a>
+          <h2>Nuestros Paquetes</h2>
+            <!--slider paquetes-->
+            <div class="slider-container-global packages-slider">
+              <div class="swiper-button-prev flecha-slider fi"></div>
+              
+              <div class="swiper-container">
+                <div class="swiper-wrapper">
+                  <!-- Paquete 1 -->
+                  <div class="swiper-slide">
+                    <div class="card">
+                      <p class="numero-clases-card" style="color: var(--c6);">8</p>
+                      <p class="clases-card" style="color: var(--c6);">Clases</p>
+                      <p class="clases-card" style="font-size: 2rem;">Mixto</p>
+                      <p class="vigencia-card" style="margin-top: 0">Vigencia 30 días</p>
+                      
+                      <div class="coust" style="background: var(--c6)">
+                        <p class="precio-card">$1129<small>MX</small></p>
+                        <a href="checkout.php?tkn=BrX0IT4rpOWO2XOTS5uMDg3maKIF3AL5SgN7lzrLYaAwNvgbQXcUXFVt7TCqsM6HRrqGOh8VceLnvgw0pLvxSjEPSXuoLmzqa45JFmT3af5NE6NeSISkkEuX1dap2gMA4llO&amp;id=9">COMPRAR</a>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Paquete 2 -->
+                  <div class="swiper-slide">
+                    <div class="card">
+                      <p class="numero-clases-card" style="color: var(--c2);">12</p>
+                      <p class="clases-card" style="color: var(--c2);">Clases</p>
+                      <p class="clases-card" style="font-size: 2rem;">Mixto</p>
+                      <p class="vigencia-card" style="margin-top: 0">Vigencia 30 días</p>
+                      
+                      <div class="coust" style="background: var(--c2)">
+                        <p class="precio-card">$1479<small>MX</small></p>
+                        <a href="checkout.php?tkn=EBJE8KdJZqcU9sqwPWEaNrEkGsDQ7fk2fbkbfAoll45swrj22N1mxmSCN2zPZ5dxtcrl7BK9qDewX1AcvnhQXVxaIJbINSZlHNAqPEgJmll4X6Whw1TdMAX5X5NxtfGCZ37Y&amp;id=2">COMPRAR</a>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Paquete 3 -->
+                  <div class="swiper-slide">
+                    <div class="card">
+                      <p class="numero-clases-card" style="color: var(--c8); font-size: 3.3rem; margin-block: 10px;margin-top: 13%;">ILIMITADO</p>
+                      <p class="clases-card" style="color: var(--c8);"> </p>
+                      <p class="clases-card" style="font-size: 2rem;">Mixto</p>
+                      <p class="vigencia-card" style="margin-top: 0">Vigencia 30 días</p>
+                      
+                      <div class="coust" style="background: var(--c8)">
+                        <p class="precio-card">$1799<small>MX</small></p>
+                        <a href="checkout.php?tkn=COrltLwRZsZ9NouqPwOuWpzr0zGZG1zegEvt6L7STpDlCPPLvDxvqgRGzE3Gtzj2SWgoyiLK2HjUVs5Opv0wvc6U063ppNse5kNaK5T6SPLAs4YkAEJx3eSansX9ajtCpvuX&amp;id=11">COMPRAR</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="swiper-button-next flecha-slider fd" style="color: var(--c2)"></div>
             </div>
-            <div class="card">
-              <p class="tipo-card">ELEVATE</p>
-              <p class="numero-clases-card">12</p>
-              <p class="clases-card">CLASES</p>
-              <p class="precio-card">MX $1,699</p>
-              <p class="vigencia-card">Vigencia 30 días</p>
-              <a href="paquetes.php">COMPRAR</a>
-            </div>
-            <div class="card">
-              <p class="tipo-card">DÚO</p>
-              <p class="numero-clases-card">22</p>
-              <p class="clases-card">CLASES</p>
-              <p class="precio-card">MX $2,860</p>
-              <p class="vigencia-card">Vigencia 30 días</p>
-              <a href="paquetes.php">COMPRAR</a>
-            </div>
-          </div>
-          <a href="paquetes.php" class="ver-mas-paquetes-btn">VER MÁS PAQUETES</a>
+            <!-- slider paquetes--> 
+         
         </div>
       </section>
 
       <section class="section preguntas-section">
         <div class="container">
-          <h2>PREGUNTAS FRECUENTES</h2>
+          
 
           <div class="preguntas-container">
+            <h2>Preguntas Frecuentes</h2>
+            <div class="preguntas-division"></div>
             <button class="accordion">
               <p>¿Puedo hacer ejercicio si tengo alguna lesión?</p>
             </button>
@@ -304,8 +333,9 @@ exit;
                 Puedes consultar la descripción de cada clase para saber cuál se adapta mejor a tus objetivos.
               </p>
             </div>
+            <a class="ayuda-btn" href="contacto.php">AYUDA</a>
           </div>
-          <a class="ayuda-btn" href="contacto.php">AYUDA</a>
+          
         </div>
       </section>
 

@@ -54,13 +54,13 @@
             </div>
             <select name="clases" id="clases-input">
               <option value="" selected>POR TIPO</option>
-              <option value="Movement" selected>Movement</option>
-              <option value="Pilates Reformer" selected>Pilates Reformer</option>
-              <option value="Mixto" selected>Mixto</option>
+              <option value="Movement">Movement</option>
+              <option value="Pilates Reformer" >Pilates Reformer</option>
+              <option value="Mixto" >Mixto</option>
             </select>
             
           </div>
-          <section class="section membresias-section membresias-paquetes">
+          <section class="section membresias-section membresias-paquetes" style="background: none">
             <div class="container">
               <div class="cards-container">
 
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
           card.innerHTML = `
-            <p class="numero-clases-card" style="color: ${colorActual};  ${(p.clases == 'ILIMITADO' || p.clases == 'ANUALIDAD') ? 'font-size: 3.3rem; margin-block: 10px' : ''}">${p.clases}</p>
+            <p class="numero-clases-card" style="color: ${colorActual};  ${(p.clases == 'ILIMITADO' || p.clases == 'ANUALIDAD') ? 'font-size: 3.3rem; margin-block: 10px; margin-top: 30%;' : ''}">${p.clases}</p>
             <p class="clases-card" style="color: ${colorActual};">${(p.clases == 'ILIMITADO' || p.clases == 'ANUALIDAD') ? ' ' : 'Clases'}</p>
             <p class="clases-card" style="font-size: 2rem;">${p.nombre}</p>
             <p class="vigencia-card" style="margin-top: 0">

@@ -39,14 +39,14 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
     <?php include 'ofer.php'; ?> 
     <?php include 'header.php'; ?>
 
-    
+     
 
     <!-- MAIN SECTION -->
     <main style="background: var(--background);">
         <article>
             <section class="login-main-section">
                 <div class="container" id="loginForm" >
-                    <form action="loger.php" method="post" class="login-form" style="padding-top: 20px">
+                    <form action="loger.php" method="post" class="login-form" style="padding-top: 20px; height: 350px">
                         <h2>Inicia sesión</h2>
                         <p class="registro-mensaje">¿Es tu primera vez? <span><button type="button" onclick="openRegistro()">Regístrate</button></span></p>
         
@@ -65,10 +65,10 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                         
                     </form> 
                 </div>
-                <div class="container" id="registro" style="margin-block: 20px; display: none">
+                <div class="container" id="registro" style="margin-block: 100px; display: none">
                     <form action="registro.php" method="post" class="login-form">
-                        <img src="assets/images/svg/logo-negro.svg" alt="Logo SATYA">
-                        <h2>VAMOS A REGISTRARTE</h2>
+                        
+                        <h2 style="font-size: 2rem">VAMOS A REGISTRARTE</h2>
                         <p class="registro-mensaje">¿Ya tienes cuenta? <span><button type="button" onclick="closeRegistro()">Iniciar Sesión</button></span></p>
                         <label for="nombreR">Nombre*</label>
                         <input type="text" name="nombreR" id="nombreR" placeholder="Adriana Alba" maxlength="100" minlength="5" required>
@@ -96,7 +96,7 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                             <input type="checkbox" style="width: 20px" required>
                             <small>Acepto los Términos y Condiciones</small>
                         </div>
-                            <button class="login-submit-btn" type="submit" id="registrarse" disabled>REGISTRARME</button>
+                            <button class="login-submit-btn" style="background:  var(--c2); margin-bottom: 30px; color: #fff;" type="submit" id="registrarse" disabled>Registrarme</button>
                     </form>
                 </div>
                 <div class="container" id="contraseña" style="margin-block: 20px; display: none">
@@ -114,7 +114,7 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                         </div>
                         <div id="passd" style="text-align: initial;"></div>
                        
-                        <button class="login-submit-btn" type="submit" id="changecontra" disabled>Cambiar contraseña</button>
+                        <button class="login-submit-btn" style="background:  var(--c2); margin-bottom: 30px; color: #fff;" type="submit" id="changecontra" disabled>Cambiar contraseña</button>
                     </form>
                 </div>
                 

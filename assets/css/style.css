@@ -181,6 +181,7 @@ body {
   color: var(--independece);
   line-height: 1.8;
   font-family: var(--ff-Avenir);
+  letter-spacing: -0.1rem;
 }
 
 body.loaded {
@@ -613,7 +614,7 @@ padding-top: 50px;
 }
 .sli1{
   width: 280px;
-  height: 250px;
+  height: 450px;
   overflow: hidden;
   border-radius: 20px;
 }
@@ -621,21 +622,79 @@ padding-top: 50px;
   width: 100%;
 }
 .slider-container-global {
+  margin-top: 50px;
   display: flex;
   align-items: center;
   width: 100%;
   justify-content: center;
 }
+/**
+*SWIPER INDEX
+*/
 
+.swiper-container {
+  width: 100%;
+  padding: 10px 0;
+  overflow: hidden;
+}
+.swiper-slide {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+  display: flex !important;
+  justify-content: center !important;
+}
+.swiper-wrapper {
+  display: flex;
+}
+
+.card-coach-index {
+  /* Tus estilos actuales para las cards */
+  height: 100%;
+}
+
+/* Estilos para las flechas de navegación */
+.swiper-button-prev, 
+.swiper-button-next {
+  cursor: pointer;
+  user-select: none;
+  color: #000; /* Ajusta el color según tu diseño */
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .swiper-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+.swiper-button-prev::after, .swiper-rtl .swiper-button-next::after {
+  content: 'prev';
+  color: var(--c8);
+}
 /* * {
   outline: solid 1px red;
 } */
 
+.swiper-slide .card{
+  width: 240px;
+  height: 350px;
+  padding: 50px 0px;
+}
+.packages-slider .swiper-button-next::after{
+  color: var(--c6);
+}
+.packages-slider .swiper-button-prev::after{
+  color: var(--c6);
+}
 .slider-container {
   display: flex;
   align-items: center;
   gap: 5rem;
-  margin-left: 50px;
 }
 
 .texto-uppercase {
@@ -663,7 +722,7 @@ padding-top: 50px;
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: #00000057;
+/*  background-color: #00000057; */
   z-index: 0;
 }
 .hero-banner .container {
@@ -680,13 +739,17 @@ padding-top: 50px;
   width: 150px;
   margin: 0 auto;
 }
-
+.hero-log{
+  width: 3rem;
+}
+.cls-log{
+  fill: var(--white);
+}
 .hero-banner h1 {
-  color: var(--danyfer-karina-color);
-  white-space: pre-line;
+  color: var(--white);
   font-size: 60px;
   line-height: 55px;
-  font-weight: 500;
+  font-weight: 300;
 }
 
 .hero-banner-elements {
@@ -698,11 +761,12 @@ padding-top: 50px;
 }
 
 .reservar-btn-banner {
-  color: var(--danyfer-karina-color);
-  padding: 1px 30px;
+  color: var(--c8);
   font-size: 18px;
-  border: 1px solid var(--danyfer-karina-color);
-  border-radius: 10px;
+  font-family: var(--ff-Raleway);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
   width: fit-content;
   margin-inline: auto;
   margin-top: 30px;
@@ -710,10 +774,41 @@ padding-top: 50px;
 }
 
 .reservar-btn-banner:hover {
-  background-color: var(--danyfer-karina-color);
-  color: #000;
+  color: var(--c9);
 }
 
+.explora-section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-block: 15vh;
+}
+.loto-explora{
+  width: 50px;
+  margin-bottom: 30px;
+}
+.cls-loto-explora{
+  fill: var(--c8);
+}
+.explora-section h3{
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--c8);
+  font-family: var(--ff-Raleway);
+  line-height: 1.2;
+  font-weight: 600;
+}
+.explora-section a{
+  margin-top: 60px;
+  font-size: 1.2rem;
+  font-family: var(--ff-Raleway);
+  font-weight: 600;
+  transition: all 0.5s ease;
+}
+.explora-section a:hover, .explora-section a:focus{
+  color: var(--c9);
+}
 .descripcion-section {
   display: flex;
   justify-content: center;
@@ -749,10 +844,59 @@ padding-top: 50px;
 }
 
 .desciplinas-section {
-  display: grid;
-  grid-template-columns: 32% 68%;
-  height: 100vh;
-  margin-top: -1px;
+  background-color: rgb(196, 179, 162);
+  position: relative;
+}
+
+.desciplinas-section .swiper-button-next::after{
+  color: var(--c9);
+}
+.desciplinas-section .swiper-button-prev::after{
+  color: var(--c9);
+}
+/**disciplina slide */
+.card-disciplina{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.desciplinas-section h2{
+  text-align: center;
+  font-size: 3.2rem;
+  font-weight: 600;
+  font-family: var(--ff-Raleway);
+  color: var(--c9);
+  margin-bottom: 20px;
+}
+.card-disciplina h4{
+  font-size: 2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--c9);
+  margin-bottom: 10px;
+}
+.card-disciplina-img{
+  width: 250px;
+  height: 340px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-disciplina-img img{
+  width: fit-content;
+  max-width: 200%;
+  position: absolute;
+}
+.card-disciplina span{
+  color: var(--c9);
+  font-size: 1.8rem;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .nombres-disciplinas {
@@ -839,13 +983,14 @@ span {
 
 .coaches-section {
   margin-top: -1px;
-  background-color: var(--light-brown-3);
+  background-color: var(--background);
 }
 
 .coaches-section h2 {
-  color: #fff;
+  color: var(--c8);
   text-align: center;
-  font-weight: 500;
+  font-family: var(--ff-Raleway);
+  font-weight: 600;
   font-size: 35px;
 }
 
@@ -866,15 +1011,98 @@ span {
   justify-content: center;
   gap: 30px;
   margin-top: 50px;
+  position: relative;
 }
-
+.swiper-button-next::after, .swiper-rtl .swiper-button-prev::after {
+  content: 'next';
+  color: var(--c8);
+}
+.swiper-button-prev, .swiper-rtl .swiper-button-next {
+  left: var(--swiper-navigation-sides-offset,10px);
+  right: auto;
+  color: var(--c8);
+}
 .flecha-slider {
-  color: #fff;
+  color: var(--c8);
   font-size: 100px;
   cursor: pointer;
 }
 
+/*.  slide coaches */
 
+.a-link{
+  margin-top: 60px;
+  font-size: 1.3rem;
+  font-family: var(--ff-Raleway);
+  font-weight: 600;
+  transition: all 0.5s ease;
+  text-align: center;
+  color: var(--c8);
+}
+.a-link:hover, .a-link:focus{
+  color: var(--c9);
+}
+
+
+.card-coach-index{
+  position: relative;
+  width: 250px;
+  height: 380px;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-coach-index img{
+  width: max-content;
+  max-width: 250%;
+  position: absolute;
+}
+.descrip-coach-index{
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(237, 231, 218);
+  width: 100%;
+  height: 130px;
+  color: var(--c8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  color: var(--c8);
+}
+.descrip-coach-index h3{
+  font-size: 1.8rem;
+  font-weight: 700;
+  font-family: var(--ff-Raleway);
+}
+.descrip-coach-index p{
+  font-family: var(--ff-Raleway);
+  font-size: 1.2rem;
+  line-height: 1.1;
+  text-align: center;
+  letter-spacing: normal;
+}
+.card-coach-index a{
+  position: absolute;
+  z-index: 1;
+  background-color: rgb(237, 231, 218);
+  left: 5%;
+  top: 51%;
+  width: fit-content;
+  padding: 6px 14px; 
+  line-height: 1;
+  border-radius: 15px;
+  font-weight: 500;
+  font-size: 2.3rem;
+  color: var(--c8);
+
+}
 
 .slide p {
   position: absolute;
@@ -908,14 +1136,15 @@ span {
 }*/
 
 .membresias-section {
-  background-color: none;
+  background-color: rgb(235, 219, 201);
 }
 
 .membresias-section h2 {
   text-align: center;
   font-size: 35px;
-  font-weight: 500;
-  color: var(--light-brown);
+  font-weight: 600;
+  font-family: var(--ff-Raleway);
+  color: var(--c6);
 }
 
 .membresias-section h2 span {
@@ -1030,23 +1259,32 @@ span {
 }
 
 .preguntas-section {
-  background-color: var(--maria-color);
+  background-color: var(--background);
 }
 
-.preguntas-section h2 {
+.preguntas-container h2 {
   text-align: center;
-  font-size: 35px;
+  font-size: 2.3rem;
   font-weight: 500;
-  color: var(--light-brown);
+  color: var(--c6);
 }
 
 .preguntas-container {
   margin-top: 50px;
+  background: rgb(232, 226, 213);
+  padding-block: 20px;
+  border-radius: 20px;
+  
 }
-
+.preguntas-division{
+  width: 100%;
+  height: 15px;
+  border-bottom: 1px solid var(--c6);
+  margin-bottom: 15px;
+}
 /* accordion */
 .accordion {
-  color: var(--light-brown);
+  color: var(--c6);
   cursor: pointer;
   padding: 10px;
   width: 100%;
@@ -1083,22 +1321,22 @@ span {
   overflow: hidden;
   transition: max-height 0.1s ease-out;
   color: var(--light-brown);
-  border-bottom: solid var(--light-browm-2) 0.5px;
+  border-bottom: solid var(--c6) 1px;
 }
 
 .ayuda-btn {
-  border: 1px solid var(--light-brown);
+  background: var(--c6);
   width: fit-content;
   margin-inline: auto;
   margin-top: 70px;
-  color: var(--light-brown);
-  padding: 2px 40px;
-  border-radius: 10px;
+  color: var(--white);
+  padding: 0px 30px;
+  border-radius: 7px;
   transition: all 500ms ease;
 }
 
 .ayuda-btn:hover {
-  background-color: var(--light-brown);
+  background-color: var(--c9);
   color: #fff;
 }
 
@@ -1653,7 +1891,7 @@ form textarea {
 \*-----------------------------------*/
 
 .login-main-section {
- /*  background-image: url("../images/contacto.jpg"); */
+  background-image: url("../img/fondo_login@3x.png");
   width: 100%;
   min-height: 100vh;
   background-repeat: no-repeat;
@@ -1668,7 +1906,6 @@ form textarea {
 .login-form {
   background-color: rgb(255, 253, 248);
   width: 500px;
-  height: 350px;
   overflow: hidden;
   position: relative;
   text-align: center;
@@ -2792,13 +3029,7 @@ position: absolute;
     width: 40px;
     justify-content: center;
   }
-  .sli1 {
-    width: 240px;
-    height: 250px;
-    overflow: hidden;
-    border-radius: 20px;
-    
-}
+ 
 }
 @media (min-width: 300px) and (max-width: 399px) {
   :root {
@@ -2917,10 +3148,6 @@ position: absolute;
     margin-bottom: 50px;
   }
 
-  .desciplinas-section {
-    display: block;
-    height: fit-content;
-  }
 
   .nombres-disciplinas-container {
     position: relative;
@@ -3012,9 +3239,7 @@ position: absolute;
     font-size: 13px;
   }
 
-  .coaches-section {
-    margin-top: -20px;
-  }
+ 
 
   .coaches-section h2 {
     font-size: 30px;
@@ -3045,11 +3270,7 @@ position: absolute;
     gap: 20px;
   }
 
-  .card {
-    width: 90%;
-    height: 400px;
-    padding: 20px 20px;
-  }
+ 
 
   .tipo-card {
     width: 100%;
@@ -3693,9 +3914,7 @@ position: absolute;
     margin-bottom: 50px;
   }
 
-  .desciplinas-section {
-    display: block;
-  }
+  
 
   .nombres-disciplinas-container {
     position: relative;
@@ -3705,9 +3924,7 @@ position: absolute;
     justify-content: space-between;
   }
 
-  .desciplinas-section {
-    height: fit-content;
-  }
+ 
 
   .nombres-disciplinas-container ul {
     font-size: 40px;
@@ -3786,9 +4003,7 @@ position: absolute;
     font-size: 15px;
   }
 
-  .coaches-section {
-    margin-top: -20px;
-  }
+  
 
   .coaches-section h2 {
     font-size: 35px;
@@ -4472,9 +4687,7 @@ position: absolute;
     margin: 0 auto;
   }
 
-  .desciplinas-section {
-    height: 80vh;
-  }
+ 
 
   .nombres-disciplinas {
     height: 80vh;
@@ -4536,7 +4749,6 @@ position: absolute;
 
   .numero-clases-card {
     font-size: 100px;
-    margin-top: -40px;
   }
 
   /* * {
@@ -4976,9 +5188,6 @@ position: absolute;
     margin: 0 auto;
   }
 
-  .desciplinas-section {
-    height: 80dvh;
-  }
 
   .video img {
     height: 100%;
@@ -5032,7 +5241,6 @@ position: absolute;
 
   .numero-clases-card {
     font-size: 100px;
-    margin-top: -40px;
   }
 
   /* * {

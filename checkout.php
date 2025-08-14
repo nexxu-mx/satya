@@ -111,7 +111,7 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                                             }
                                             $rowP = $resultP->fetch_assoc();
                                             if($rowP['clases'] == "ILIMITADO" || $rowP['clases'] == "ANUALIDAD"){
-                                                $nclases = '<p class="numero-clases-card" style="font-size: 44px; margin-block: 10px; color: var(--c6);">' . $rowP['clases'] . '</p>';
+                                                $nclases = '<p class="numero-clases-card" style="font-size: 44px; margin-block: 10px; color: var(--c6);margin-top: 30%;">' . $rowP['clases'] . '</p>';
                                             }else{
                                                 $nclases = '<p class="numero-clases-card" style="color: var(--c6);  >' . $rowP['clases'] . '</p>';
                                             }

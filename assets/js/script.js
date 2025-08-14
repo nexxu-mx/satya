@@ -741,87 +741,58 @@ if (document.getElementById('loginForm')) {
 }
 
 
-
-/**
- * INDEX COACHES SLIDER
+/***
+ * SWIPER INDEX
  */
-
-let slider = document.getElementById('slider');
-if (slider == null) { slider = 0; }
-let slides;
-if (slider != 0) { slides = slider.querySelectorAll('.slide'); }
-const prevBtn = document.getElementById('prev');
-const nextBtn = document.getElementById('next');
-
-if (slider != 0) {
-  // Cambiar el índice inicial a 3 (cuarto elemento)
-  let currentIndex = 3;
-
-  function scrollToIndex(index) {
-    const slideWidth = slides[0].offsetWidth;
-    const offset = index * slideWidth;
-    slider.scrollTo({ left: offset, behavior: 'smooth' });
-    highlightCenter(index);
-  }
-
-  function detectCenter() {
-    const sliderRect = slider.getBoundingClientRect();
-    const centerX = sliderRect.left + sliderRect.width / 2;
-    let closest = null;
-    let closestDist = Infinity;
-
-    slides.forEach((slide, i) => {
-      const slideRect = slide.getBoundingClientRect();
-      const slideCenter = slideRect.left + slideRect.width / 2;
-      const dist = Math.abs(slideCenter - centerX);
-      if (dist < closestDist) {
-        closestDist = dist;
-        closest = i;
+document.addEventListener('DOMContentLoaded', function() {
+  // Configuración para el slider de coaches
+  const coachSwiper = new Swiper('.coaches-slider .swiper-container', {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    navigation: {
+      nextEl: '.coaches-slider .swiper-button-next',
+      prevEl: '.coaches-slider .swiper-button-prev',
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 3,
+        spaceBetween: 30
       }
-    });
-
-    currentIndex = closest;
-    highlightCenter(currentIndex);
-
-    const centerSlide = slides[currentIndex];
-
-    const slideDiscipline = centerSlide ? centerSlide.getAttribute('data-disciplina') : '';
-
-    // Mostrar la disciplina en el cuadro de abajo
-    const displayBox = document.querySelector('.coaches-slider-discipline');
-    if (displayBox) {
-      displayBox.textContent = slideDiscipline;
     }
-  }
-
-  function highlightCenter(index) {
-    slides.forEach(slide => slide.classList.remove('center'));
-    if (slides[index]) {
-      slides[index].classList.add('center');
-    }
-  }
-
-  slider.addEventListener('scroll', () => {
-    clearTimeout(slider._timeout);
-    slider._timeout = setTimeout(detectCenter, 100);
   });
-
-  prevBtn.addEventListener('click', () => {
-    if (currentIndex > 0) {
-      currentIndex--;
-      scrollToIndex(currentIndex);
+  // slider paquetes
+  const packageSwiper = new Swiper('.packages-slider .swiper-container', {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    navigation: {
+      nextEl: '.packages-slider .swiper-button-next',
+      prevEl: '.packages-slider .swiper-button-prev',
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        // Opcional: centrar slides cuando no hay suficientes
+        centeredSlides: false
+      }
     }
   });
 
-  nextBtn.addEventListener('click', () => {
-    if (currentIndex < slides.length - 1) {
-      currentIndex++;
-      scrollToIndex(currentIndex);
+  // Configuración para el slider de disciplinas
+  const disciplineSwiper = new Swiper('.disciplines-slider .swiper-container', {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    navigation: {
+      nextEl: '.disciplines-slider .swiper-button-next',
+      prevEl: '.disciplines-slider .swiper-button-prev',
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        centeredSlides: false // Opcional: centrar slides
+      }
     }
   });
-
-  // Asegurarse de que se desplace al cuarto elemento al cargar
-  window.addEventListener('load', () => scrollToIndex(currentIndex));
-  window.addEventListener('resize', () => scrollToIndex(currentIndex));
-}
+});
 
