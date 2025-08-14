@@ -167,7 +167,7 @@
             <img src="./assets/img/login.svg" style="width: 20px" alt="">
             <?php
     
-          
+            session_start();
               if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                   
                   echo 'Login';
