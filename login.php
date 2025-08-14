@@ -23,6 +23,7 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Rubik:wght@400;500;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css?v=<?php echo time(); ?>"> 
+    <link rel="stylesheet" href="./assets/css/login.css?v=<?php echo time(); ?>">
     <?php include 'head.php'; ?>
     <style>
         .btn-code {
@@ -59,10 +60,8 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                         </div>
         
                         <button type="button" class="olv-contra" onclick="openCo()">Olvide mi contraseña.</button>
-                        <div class="div-footer-session">
-                            <input class="login-submit-btn" type="submit" id="log" value="Iniciar Sesión">
-                        </div>
-                        
+        
+                        <input class="login-submit-btn" type="submit" id="log" value="INICIAR SESIÓN">
                     </form> 
                 </div>
                 <div class="container" id="registro" style="margin-block: 100px; display: none">
