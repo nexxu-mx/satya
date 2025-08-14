@@ -181,7 +181,7 @@
         </li>
 
         <li class="navbar-item">
-          <a href="#" class="navbar-link title-md">Choaches</a>
+          <a href="#" class="navbar-link title-md">Coaches</a>
         </li>
 
          <li class="navbar-item">
