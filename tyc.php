@@ -34,12 +34,7 @@
     <main>
         <article>
             <section class="banner-about-us-section">
-                <div class="container">
-                    <div class="logo-banner-about-us-container">
-                        <img src="assets/images/svg/logo-blanco.svg" alt="Logo SATYA">
-                    </div>
-                    
-                </div>
+                
             </section>
 
             <section class="section">
