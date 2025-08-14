@@ -118,9 +118,9 @@ session_start();
                   <!-- Disciplina 3 -->
                   <div class="swiper-slide">
                     <div class="card-disciplina">
-                      <h4>Movement</h4>
+                      <h4>Pilates Mat</h4>
                       <div class="card-disciplina-img">
-                        <img src="./assets/images/disciplinas/4.png" alt="Movement">
+                        <img src="./assets/images/disciplinas/5.png" alt="Pilates Mat">
                       </div>
                       <span>Movimiento - Coordinación</span>
                     </div>
@@ -149,7 +149,7 @@ session_start();
                 <!-- Card coach 1 -->
                 <div class="swiper-slide">
                   <div class="card-coach-index">
-                    <img src="./assets/images/coaches/18.jpeg" alt="">
+                    <img src="./assets/images/coaches/1.png" alt="">
                     <div class="descrip-coach-index">
                       <h3>Pilates Reformer</h3>
                       <p>Me gusta impulsar el movimiento auténtico con presencia, equilibrio y conexión.</p>
@@ -161,7 +161,7 @@ session_start();
                 <!-- Card coach 2 -->
                 <div class="swiper-slide">
                   <div class="card-coach-index">
-                    <img src="./assets/images/coaches/18.jpeg" alt="">
+                    <img src="./assets/images/coaches/2.png" alt="">
                     <div class="descrip-coach-index">
                       <h3>Yoga</h3>
                       <p>Descripción del coach de yoga.</p>
