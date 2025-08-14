@@ -3129,6 +3129,8 @@ position: absolute;
     padding-inline: 5px;
   }
 
+
+
   /* BODY */
 
   /* INICIO INDEX PAGE */
@@ -3324,8 +3326,11 @@ position: absolute;
     margin: 0;
   }
 
-  .navbar-link {
-    color: var(--black);
+     .navbar-link {
+    color: var(--c8);
+    font-size: 2.3rem;
+    font-weight: 500;
+    padding: 2px 24px;
   }
 
   .header.active {

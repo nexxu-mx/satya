@@ -25,20 +25,13 @@
       </div>
 
       <ul class="navbar-list">
-         <li class="navbar-item">
-          <a href="reserva.php" class="navbar-link title-md">Reserva</a>
+       
+        <li class="navbar-item">
+          <a href="#" class="navbar-link title-md">About Us</a>
         </li>
 
         <li class="navbar-item">
-          <a href="paquetes.php" class="navbar-link title-md">Paquetes</a>
-        </li>
-<!---
-        <li class="navbar-item">
-          <a href="aboutus.php" class="navbar-link title-md">About Us</a>
-        </li>
-
-        <li class="navbar-item">
-          <a href="clases.php" class="navbar-link title-md">Clases</a>
+          <a href="#" class="navbar-link title-md">Clases</a>
         </li>
 
         <li class="navbar-item">
@@ -50,22 +43,17 @@
         </li>
 
         <li class="navbar-item">
-          <a href="coaches.php" class="navbar-link title-md">Coaches</a>
+          <a href="#" class="navbar-link title-md">Coaches</a>
         </li>
 
         <li class="navbar-item">
-          <a href="contacto.php" class="navbar-link title-md">Contacto</a>
+          <a href="#" class="navbar-link title-md">Contacto</a>
         </li>
--->
+
       </ul>
 
       <ul class="social-list">
 
-        <li>
-          <a href="#" class="social-link">
-            <ion-icon name="logo-twitter"></ion-icon>
-          </a>
-        </li>
 
         <li>
           <a href="#" class="social-link">
@@ -73,11 +61,7 @@
           </a>
         </li>
 
-        <li>
-          <a href="#" class="social-link">
-            <ion-icon name="logo-pinterest"></ion-icon>
-          </a>
-        </li>
+        
 
         <li>
           <a href="#" class="social-link">
@@ -85,11 +69,7 @@
           </a>
         </li>
 
-        <li>
-          <a href="#" class="social-link">
-            <ion-icon name="logo-youtube"></ion-icon>
-          </a>
-        </li>
+       
 
       </ul>
 
@@ -182,19 +162,14 @@
             
           </a>
         </li>
-         <li class="navbar-item">
-          <a href="reserva.php" class="navbar-link title-md">Reserva</a>
-        </li>
-         <li class="navbar-item">
-          <a href="paquetes.php" class="navbar-link title-md">Paquetes</a>
-        </li>
-        <!--
+         
+        
         <li class="navbar-item">
-          <a href="aboutus.php" class="navbar-link title-md">About Us</a>
+          <a href="#" class="navbar-link title-md">About Us</a>
         </li>
 
         <li class="navbar-item">
-          <a href="clases.php" class="navbar-link title-md">Clases</a>
+          <a href="#" class="navbar-link title-md">Clases</a>
         </li>
 
         <li class="navbar-item">
@@ -206,17 +181,17 @@
         </li>
 
         <li class="navbar-item">
-          <a href="coaches.php" class="navbar-link title-md">Choaches</a>
+          <a href="#" class="navbar-link title-md">Choaches</a>
         </li>
 
          <li class="navbar-item">
-          <a href="coaches.php" class="navbar-link title-md">Online</a>
+          <a href="#" class="navbar-link title-md">Online</a>
         </li>
 
         <li class="navbar-item">
-          <a href="contacto.php" class="navbar-link title-md">Contacto</a>
+          <a href="#" class="navbar-link title-md">Contacto</a>
         </li>
-            -->
+            
       </ul>
 
       <ul class="social-list">
