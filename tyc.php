@@ -33,11 +33,9 @@
 
     <main>
         <article>
-            <section class="banner-about-us-section">
-                
-            </section>
+            
 
-            <section class="section">
+            <section class="section" style="margin-top: 100px">
                 <div class="container tyc">
                 <h1>Términos y Condiciones de Uso de la Aplicación Web de SATYA</h1>
 
@@ -101,9 +99,7 @@
         </article>
     </main>
     <?php include 'footer.php'; ?>
-    <a href="https://wa.me/524792179429?text=Hola,%Quiero%20más%20información%20de%20SATYA." class="back-top-btn" aria-label="back to top" data-back-top-btn>
-        <img src="assets/images/svg/whats.svg" alt="Ícono WhatsApp">
-    </a>
+
     <script src="./assets/js/script.js?v=<?php echo time(); ?>"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

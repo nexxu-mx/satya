@@ -33,11 +33,9 @@
 
     <main>
         <article>
-            <section class="banner-about-us-section">
-                <
-            </section>
 
-            <section class="section">
+
+            <section class="section" style="margin-top: 100px">
                 <div class="container tyc">
                 <h1>Política de Privacidad de SATYA</h1>
 
