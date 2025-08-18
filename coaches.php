@@ -24,6 +24,7 @@ session_start();
     <div class="preloader" data-preloader>
         <div class="circle"></div>
     </div>
+  
 
     <?php include 'ofer.php'; ?>
 
@@ -31,6 +32,8 @@ session_start();
 
     <main>
         <article>
+            <section class="section">
+                <div class="container">
 
             <?php 
             include 'db.php';
@@ -60,67 +63,43 @@ session_start();
                 // Validación de disciplina
                 $disciplina = isset($idDisciplinas[$fila['id_disciplina']]) 
                                 ? $idDisciplinas[$fila['id_disciplina']] 
-                                : 'Disciplina desconocida';
+                                : 'SATYA';
                 $coachPath = "./assets/images/coaches/" . $fila['id'] . ".mp4";
-                $defaultPath = "./assets/images/coaches/pro/" . $fila['id'] . ".png";
+                $defaultPath = "./assets/images/coaches/" . $fila['id'] . ".png";
         
                 if (!file_exists($coachPath)) {
-                    $imgC = '<img src="'. $defaultPath .'" alt="Foto Coach" style="width: 100%; height: 100%; object-fit: cover;">';
+                    $imgC = '<img src="'. $defaultPath .'" alt="">';
 
                 }else{
                     $imgC = '<video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;"
-                                poster="./assets/images/hero.png">
+                                poster="./assets/images/coaches/unknow.jpg">
                                 <source src="' . $coachPath . '" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>';
                 }
 
-                if ($intercalador == 1) { 
-                    echo '
-                        <section class="training-for-life-section coach coach1">
-                            <div class="image-side">
-                                ' . $imgC . '
-                            </div>
-                            <div class="text-side color-coach">
-                                <div>
-                                    <h3><span>'. $fila['nombre_coach'] .'</span></h3>
-                                    <p>
-                                        '. $fila['descripcion_coach'] .'
-                                    </p>
-                                    <a href="reserva.php">Reserva con nuestra coach</a>
-                                    <a href="reserva.php" class="discipline-coach">'. $disciplina .'</a>
-                                </div>
-                            </div>
-                        </section>
-                    ';
-                    $intercalador = 0;
-                } else {
-                    echo '
-                        <section class="training-for-life-section coach coach2">
-                            <div class="text-side color-coach">
-                                <div>
-                                    <h3><span>'. $fila['nombre_coach'] .'</span></h3>
-                                    <p>
-                                        '. $fila['descripcion_coach'] .'
-                                    </p>
-                                    <a href="reserva.php">Reserva con nuestra coach</a>
-                                    <a href="reserva.php" class="discipline-coach">'. $disciplina .'</a>
-                                </div>
-                            </div>
-                            <div class="image-side">
-                               ' . $imgC . '
-                            </div>
-                        </section>
-                    ';
-                    $intercalador = 1;
-                }
+                echo '
+                
+                    <div class="card-coach-index">
+                    ' . $imgC . '
+                    <div class="descrip-coach-index">
+                      <h3>'. $disciplina .'</h3>
+                      <p>'. $fila['descripcion_coach'] .'</p>
+                    </div>
+                    <a href="#">'. $fila['nombre_coach'] .'</a>
+                  </div>
+                ';
             }
 
             $conn->close();
         ?>
 
+                </div>
+            </section>
         </article>
-    </main>
+    </main> 
+
+    
     <?php include 'footer.php'; ?>
   
     <script src="./assets/js/script.js?v=<?php echo time(); ?>"></script> 

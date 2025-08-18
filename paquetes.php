@@ -118,7 +118,16 @@ document.addEventListener("DOMContentLoaded", () => {
           card.className = "card";
 
           const token = generarToken();
-          const colorActual = colores[index % colores.length]; // ciclo de colores
+          let colorActual 
+
+          if(p.nombre == "Movement"){
+            colorActual = "var(--c6)";
+
+          }else if(p.nombre == "Mixto"){
+            colorActual = "var(--c8)";
+          }else{
+            colorActual = "var(--c2)";
+          }
 
           function descripcionPersona(p) {
             if (p.persona == 1) return 'Individual';
@@ -126,7 +135,14 @@ document.addEventListener("DOMContentLoaded", () => {
             if (p.persona == 4) return '4 Personas';
             return '';
           }
+           if(p.nombre == "Movement"){
+           const colorActual = "var(--c6)";
 
+          }else if(p.nombre == "Mixto"){
+            const colorActual = "var(--c8)";
+          }else{
+             const colorActual = "var(--c2)";
+          }
           let descuento = "";
           let precio = `<p class="precio-card">$${Math.floor(p.costo)}<small>MX</small></p>`;
 

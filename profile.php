@@ -14,7 +14,7 @@ $realProfilePath = "./assets/images/profiles/" . $profileFilename;
 if (file_exists($realProfilePath)) {
     $profilePath = $realProfilePath . "?v=$timest";
 } else {
-    $profilePath = "./assets/images/profiles/unknow.png?v=$timest";
+    $profilePath = "./assets/images/profiles/unknow.jpg?v=$timest";
 }
 
 if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {

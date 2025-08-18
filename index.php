@@ -98,7 +98,7 @@ session_start();
                     <div class="card-disciplina">
                       <h4>Pilates reformer</h4>
                       <div class="card-disciplina-img">
-                        <img src="./assets/images/disciplinas/2.png" alt="Pilates Reformer">
+                        <img src="./assets/images/disciplinas/provicional.jpg" alt="Pilates Reformer">
                       </div>
                       <span>Fuerza - Resistencia - Tone</span>
                     </div>
@@ -109,7 +109,7 @@ session_start();
                     <div class="card-disciplina">
                       <h4>Yoga</h4>
                       <div class="card-disciplina-img">
-                        <img src="./assets/images/disciplinas/3.png" alt="Yoga">
+                        <img src="./assets/images/disciplinas/provicional.jpg" alt="Yoga">
                       </div>
                       <span>Flexibilidad - Relajación</span>
                     </div>
@@ -120,7 +120,7 @@ session_start();
                     <div class="card-disciplina">
                       <h4>Pilates Mat</h4>
                       <div class="card-disciplina-img">
-                        <img src="./assets/images/disciplinas/5.png" alt="Pilates Mat">
+                        <img src="./assets/images/disciplinas/provicional.jpg" alt="Pilates Mat">
                       </div>
                       <span>Movimiento - Coordinación</span>
                     </div>
