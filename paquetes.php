@@ -56,7 +56,7 @@ session_start();
               <img src="assets/images/svg/search.svg" alt="search icon">
             </div>
             <select name="clases" id="clases-input">
-              <option value="" selected>POR TIPO</option>
+              <option value="" selected>Todos</option>
               <option value="Movement">Movement</option>
               <option value="Pilates Reformer" >Pilates Reformer</option>
               <option value="Mixto" >Mixto</option>
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
             colorActual = "var(--c6)";
 
           }else if(p.nombre == "Mixto"){
-            colorActual = "var(--c8)";
+            colorActual = "var(--c7)";
           }else{
             colorActual = "var(--c2)";
           }
