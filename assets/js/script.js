@@ -279,23 +279,25 @@ function cargarClases(day) {
       console.error("Error al obtener las clases:", error);
     });
 }
+  if(document.getElementById('slc-disciplina')){
+  document.getElementById('slc-disciplina').addEventListener("change", function(){
+      const select = document.getElementById('slc-disciplina');
+      const titul = document.getElementById('tipoClase');
+      const hoy = document.getElementById('numero-dia-din').innerHTML;
+      const mes = document.getElementById('mes-din').innerText
+      const date = hoy + "-" + mes;
+      
+      const textoSeleccionado = select.options[select.selectedIndex].text;
+      if(textoSeleccionado == "Todos"){
+        titul.innerText = "";
+      }else{
+        titul.innerHTML = textoSeleccionado;
+      }
+      cargarClases(date);
+      
+  });
+  }
 
-document.getElementById('slc-disciplina').addEventListener("change", function(){
-    const select = document.getElementById('slc-disciplina');
-    const titul = document.getElementById('tipoClase');
-    const hoy = document.getElementById('numero-dia-din').innerHTML;
-    const mes = document.getElementById('mes-din').innerText
-    const date = hoy + "-" + mes;
-    
-    const textoSeleccionado = select.options[select.selectedIndex].text;
-    if(textoSeleccionado == "Todos"){
-      titul.innerText = "";
-    }else{
-      titul.innerHTML = textoSeleccionado;
-    }
-    cargarClases(date);
-    
-});
 /**
  * Calendar Slider
  */
