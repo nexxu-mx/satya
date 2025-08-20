@@ -14,7 +14,7 @@ try {
     while ($row = $result->fetch_assoc()) {
 
         $disciplinaPath = "../assets/images/disciplinas/" . $row['id'] . ".png";
-        $defaultPathD = "../assets/images/disciplinas/unknow.png";
+        $defaultPathD = "../assets/images/disciplinas/unknow.jpg";
 
         if (!file_exists($disciplinaPath)) {
             $disciplinaPath = $defaultPathD;

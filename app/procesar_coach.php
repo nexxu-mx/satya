@@ -17,24 +17,25 @@ if (
     $descCoach = $_POST['desc_coach'];
     $idDisciplina = $_POST['nombre_disc'];
     $activo = $_POST['activo'];
+    $idCoach = $_POST['usuario'];
     $imagen = $_FILES['imagen'];
- 
-    $idCoachImage;
 
     // Consulta del insert para agregar al coach en la base de datos
     $insert = "INSERT INTO coaches (nombre_coach, descripcion_coach, id_disciplina, activo) VALUES ('$nombreCoach', '$descCoach', '$idDisciplina', '$activo')";
 
     $resultadoInsert = $conn->query($insert);
 
-    // select para obtener el id y el nombre del coach donde el nombre del coach sea igual al que recibimos
-    $selectCoach = "SELECT id, nombre_coach FROM coaches WHERE nombre_coach = '$nombreCoach'";
+    $idCoachImage = $conn->insert_id;
 
-    $resultadoSelectCoach = $conn->query($selectCoach);
-
-    while ($filaSelectCoach = mysqli_fetch_assoc($resultadoSelectCoach)) {
-        // Igualamos el id de la imagen del coach con el id del coach que acabamos de agregar para el nombre de la imagen
-        $idCoachImage = $filaSelectCoach['id'];
+    $sqlU = "UPDATE users SET iduser = ? WHERE id = ?";
+    $stmt = $conn->prepare($sqlU);
+    $stmt->bind_param("si", $idCoachImage, $idCoach);
+     if ($stmt->execute()) {
+        echo "Actualización exitosa";
+    } else {
+        echo "Error al ejecutar: " . $stmt->error;
     }
+
 
     // If para saber si se recibió de manera correcta la imagen
     if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {

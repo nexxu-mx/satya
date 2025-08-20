@@ -29,7 +29,7 @@ function generarToken16Digitos() {
 }
 
 // CONSULTA CON FILTRO DE FECHAS  
-$sql = "SELECT id, alumno, clase, idClase, instructor, invitado, activo, dura, inicio, fin, fechaReserva 
+$sql = "SELECT id, alumno, clase, idClase, instructor, invitado, activo, dura, inicio, fin, lugar, fechaReserva 
         FROM reservaciones 
         WHERE alumno = ? AND inicio BETWEEN ? AND ?";
 $stmt = $conn->prepare($sql);
@@ -41,7 +41,7 @@ $eventos = [];
 
 while ($row = $result->fetch_assoc()) {
   $token = generarToken16Digitos();
-  $invitado = $row["invitado"] ?? "0";
+  $lugar = $row["lugar"];
   $idClase = $row["idClase"];
 
    $cancelable = (strtotime($row["inicio"]) - time()) > 21600 ? true : false;
@@ -59,7 +59,7 @@ while ($row = $result->fetch_assoc()) {
       $reservados = $rowC['reservados'];
   }
 
-  $qr = $row["id"] . '-' . $token . '-' . $row["alumno"] . '-' . $invitado . '-' . $row["activo"];
+  $qr = $row["id"] . '-' . $token . '-' . $row["alumno"] . '-' . $lugar . '-' . $row["activo"];
   $aforo = $reservados . "/" . $aforo;
 
   $res = intval(trim($reservados));
@@ -105,7 +105,7 @@ while ($row = $result->fetch_assoc()) {
     "id" => $row["id"],
     "title" => $row["clase"],
     "instructor" => $row["instructor"],
-    "invitado" => $invitado,
+    "lugar" => $lugar,
     "qr" => $qr,
     "aforo" => $aforo,
     "estatus" => $estatus,

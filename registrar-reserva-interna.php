@@ -15,6 +15,11 @@ $instructor = $data['coach'];
 $clase = $data['disciplina'];
 $dura = $data['duracion'];
 $idInstructor = $data['id_coach'];
+if($data['lugar'] == 0){
+    $lugar = null;
+}else{
+    $lugar = $data['lugar'];
+}
 $invitado = 0;
 $activo = "1";
 date_default_timezone_set('America/Mexico_City');
@@ -54,8 +59,8 @@ if ($resultCredit->num_rows === 0) {
 
 
 // Insertar en la tabla reservaciones
-$stmt = $conn->prepare("INSERT INTO reservaciones (clase, idClase, alumno, dura, instructor, idInstructor, invitado, activo, inicio, fin, fechaReserva) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("sssssssssss", $clase, $idClase, $alumno, $dura, $instructor, $idInstructor, $invitado, $activo, $inicio, $fin, $fechaReserva);
+$stmt = $conn->prepare("INSERT INTO reservaciones (clase, idClase, alumno, dura, instructor, idInstructor, invitado, activo, inicio, fin, lugar, fechaReserva) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("ssssssssssss", $clase, $idClase, $alumno, $dura, $instructor, $idInstructor, $invitado, $activo, $inicio, $fin, $lugar, $fechaReserva);
 
 if ($stmt->execute()) {
             $stmtR = $conn->prepare("UPDATE clases SET reservados = reservados + 1 WHERE id = ?");

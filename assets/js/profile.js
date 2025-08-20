@@ -63,9 +63,10 @@ eventClick: function(info) {
         width: 300,
         height: 300
     });
-    var invit = parseInt(info.event.extendedProps.invitado) + 1;
-
-        document.getElementById('modalInvitado').innerHTML = `<ion-icon name="person" aria-hidden="true"></ion-icon> x${invit}`;
+    if(info.event.extendedProps.lugar != null){
+        var lugar = parseInt(info.event.extendedProps.lugar);
+         document.getElementById('modalInvitado').innerHTML = `<ion-icon name="checkbox-outline" aria-hidden="true"></ion-icon> Lugar: ${lugar}`;
+    }
     
     if(info.event.extendedProps.cancelable === true){
         document.getElementById("buttonModal").innerHTML = `

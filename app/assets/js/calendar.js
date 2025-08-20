@@ -158,7 +158,7 @@ function openEventModal(event) {
         <span class="btn-label"><i class="fas fa-times"></i></span>
         Cancelar Clase
       </button>
-      <button class="btn btn-primary" onclick="addClient(${event.id}, '${event.title}', '${event.extendedProps.coach}', '${event.extendedProps.dura}', ${event.extendedProps.idcoach})">
+      <button class="btn btn-primary" onclick="addClient(${event.id}, '${event.title}', '${event.extendedProps.coach}', '${event.extendedProps.dura}', ${event.extendedProps.idcoach}, ${event.extendedProps.esp})">
         <span class="btn-label"><i class="fas fa-user-plus"></i></span>
       </button>`;
   } else {
@@ -177,13 +177,105 @@ function openEventModal(event) {
 }
 
 
-  function addClient(id_event, disciplina, coach, duracion, idcoach){
+  function addClient(id_event, disciplina, coach, duracion, idcoach, esp){
       document.getElementById('id-event').value = id_event;
       document.getElementById('disciplina-event').value = disciplina;
       document.getElementById('coach-event').value = coach;
       document.getElementById('duracion-event').value = duracion;
       document.getElementById('idcoach-event').value = idcoach;
       document.getElementById('add_alumnos').style.display = "flex";
+      document.getElementById("esp").innerHTML = "";
+      if(esp != null){
+        
+          if(esp == 1){
+              fetch(`../get-lugares.php?especial=1&id=${id_event}`)
+                  .then(res => {
+                      if (!res.ok) {
+                          throw new Error('Error en la respuesta del servidor');
+                      }
+                      return res.json();
+                  })
+                  .then(data => {
+                      // Verificar que data.ocupados exista y sea un array
+                      const ocupados = data.ocupados || [];
+                      
+                      // Crear SELECT
+                      const select = document.createElement("select");
+                      select.className = "form-select";
+                      select.setAttribute("id", `lugar-event`);
+
+                      // Generar 10 lugares (1 al 10)
+                      for (let i = 1; i <= 10; i++) {
+                          const option = document.createElement("option");
+                          option.textContent = i;
+                          option.value = i;
+
+                          if (ocupados.includes(i)) {
+                              // Lugar ocupado - CORRECCIÓN AQUÍ
+                              option.disabled = true;
+                              option.textContent += " (Ocupado)";
+                          }
+
+                          select.appendChild(option);
+                      }
+
+                      document.getElementById("esp").appendChild(select);
+                  })
+                  .catch(err => console.error("Error consultando lugares:", err));
+          }else if(esp == 2){
+          
+              fetch(`../get-lugares.php?especial=1&id=${id_event}`)
+                  .then(res => {
+                      if (!res.ok) {
+                          throw new Error('Error en la respuesta del servidor');
+                      }
+                      return res.json();
+                  })
+                  .then(data => {
+                      // Verificar que data.ocupados exista y sea un array
+                      const ocupados = data.ocupados || [];
+                      
+                      // Crear SELECT
+                      const select = document.createElement("select");
+                      select.className = "form-select";
+                      select.setAttribute("id", `lugar-event`);
+
+                      // Generar 10 lugares (1 al 10)
+                      for (let i = 1; i <= 8; i++) {
+                          const option = document.createElement("option");
+                          option.textContent = i;
+                          option.value = i;
+
+                          if (ocupados.includes(i)) {
+                              // Lugar ocupado - CORRECCIÓN AQUÍ
+                              option.disabled = true;
+                              option.textContent += " (Ocupado)";
+                          }
+
+                          select.appendChild(option);
+                      }
+
+                      document.getElementById("esp").appendChild(select);
+                  })
+                  .catch(err => console.error("Error consultando lugares:", err));
+          }else{
+            const div = document.getElementById('esp');
+            const input = document.createElement("input");
+            input.setAttribute("type", 'hidden');
+            input.setAttribute("id", `lugar_event`);
+            div.appendChild(input);
+          }
+
+        
+      }else{
+            const div = document.getElementById('esp');
+            const input = document.createElement("input");
+            input.setAttribute("type", 'hidden');
+            input.setAttribute("id", `lugar-event`);
+            input.value = '0';
+            div.appendChild(input);
+          }
+      
   }
   function registrarReservaInterna() {
   const idEvento = document.getElementById('id-event').value;
@@ -192,6 +284,7 @@ function openEventModal(event) {
   const duracion = document.getElementById('duracion-event').value;
   const idCoach = document.getElementById('idcoach-event').value;
   const idAlumno = document.getElementById('alumn-event').value;
+   const LugarAlumno = document.getElementById('lugar-event').value;
   
 
   // Validar que haya alumno seleccionado
@@ -211,7 +304,8 @@ function openEventModal(event) {
       coach: coach,
       duracion: duracion,
       id_coach: idCoach,
-      id_alumno: idAlumno
+      id_alumno: idAlumno,
+      lugar: LugarAlumno
     })
   })
   .then(response => response.json())
@@ -219,8 +313,11 @@ function openEventModal(event) {
         if (data.success) {
         
              renderCalendar();
-        
-          closeEv();
+            closeEv();
+        }else if(data.status == 'nocredit'){
+          alert("El Usuario no cuenta con créditos para reservar");
+        }else{
+          alert("Hubo un error al registrar la reservación")
         }
 
   })
@@ -233,6 +330,7 @@ function openEventModal(event) {
     document.getElementById('eventoModal').style.display = "none";
     document.getElementById('evento-form').style.display = 'none';
     document.getElementById('oves').style.display = "none";
+    document.getElementById('add_alumnos').style.display = "none";
   }
 
   function cancelReserv(eventId, userId, clasId, tieneInvitado, title) {

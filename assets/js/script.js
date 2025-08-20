@@ -216,7 +216,9 @@ for (i = 0; i < accordion.length; i++) {
 }
 /** FUNCION LLAMADO DE CLASES */
 function cargarClases(day) {
-  fetch(`get_clases.php?day=${encodeURIComponent(day)}`)
+  const ssa = document.getElementById('slc-disciplina').value;
+   const url = `get_clases.php?day=${encodeURIComponent(day)}&ssa=${encodeURIComponent(ssa)}`;
+  fetch(url)
     .then(response => response.json())
     .then(data => {
       const msn2 = document.getElementById("clazx");
@@ -232,14 +234,14 @@ function cargarClases(day) {
         btn.className = "class-card";
         var reservable = '<a class="btn-rcoloresCoaches[index]eservar" style="background: #b5b5b5;">Reservar</a>';;
         if (clase.abierta == "1") {
-          reservable = `<a class="btn-reservar" href="#reserv" onclick="reservaClase(this)" data-nombre="${clase.nombre_coach}" data-horario="${clase.horario}" data-duracion="${clase.duracion}" data-disciplina="${clase.disciplina}" data-iddisciplina="${clase.id_disciplina}" data-id="${clase.id}" data-idcoach="${clase.id_coach}">RESERVAR</a>`;
+          reservable = `<a class="btn-reservar" href="#reserv" onclick="reservaClase(this)" data-nombre="${clase.nombre_coach}" data-horario="${clase.horario}" data-duracion="${clase.duracion}" data-disciplina="${clase.disciplina}" data-iddisciplina="${clase.id_disciplina}" data-id="${clase.id}" data-idcoach="${clase.id_coach}" data-esp="${clase.esp_disciplina}">RESERVAR</a>`;
         }
         btn.innerHTML = `
      
                                 <div class="clase-container elemento-clase">
                                     <!--img-->
                                     <div class="clase-img-container">
-                                         <img src="./assets/images/coaches/${clase.id_coach}.png" alt="Foto Coach">
+                                         <img src="${clase.pathimg}" alt="Foto Coach">
                                         <div class="disci-clase">
                                             <h3>${clase.disciplina}</h3>
                                         </div>
@@ -278,6 +280,22 @@ function cargarClases(day) {
     });
 }
 
+document.getElementById('slc-disciplina').addEventListener("change", function(){
+    const select = document.getElementById('slc-disciplina');
+    const titul = document.getElementById('tipoClase');
+    const hoy = document.getElementById('numero-dia-din').innerHTML;
+    const mes = document.getElementById('mes-din').innerText
+    const date = hoy + "-" + mes;
+    
+    const textoSeleccionado = select.options[select.selectedIndex].text;
+    if(textoSeleccionado == "Todos"){
+      titul.innerText = "";
+    }else{
+      titul.innerHTML = textoSeleccionado;
+    }
+    cargarClases(date);
+    
+});
 /**
  * Calendar Slider
  */
@@ -295,7 +313,6 @@ window.addEventListener('DOMContentLoaded', () => {
         diaDin.innerHTML = textDiaSlider[index].innerHTML;
         mesDin.innerHTML = diasMes[day.innerHTML].mes;
         numeroDiaDinConf.innerHTML = day.innerHTML;
-        diaDinConf.innerHTML = textDiaSlider[index].innerHTML;
         mesDinConf.innerHTML = diasMes[day.innerHTML].mes;
 
         const dayconsulta = day.innerHTML + '-' + diasMes[day.innerHTML].mes;
@@ -623,6 +640,7 @@ function reservaClase(el) {
   const disciplina = el.dataset.disciplina;
   const iden = el.dataset.id;
   const idCoach = el.dataset.idcoach;
+  const esp = el.dataset.esp;
   //const imag = "assets/images/coaches/pro/" + idCoach + ".png";
  // document.getElementById("confirm-coach").innerHTML = nombre;
   document.getElementById("confirm-horario").innerHTML = horario;
@@ -630,6 +648,109 @@ function reservaClase(el) {
   //document.getElementById("confirm-disciplina").innerHTML = disciplina;
   document.getElementById("dis-res").innerHTML = disciplina;
   document.getElementById("nyclass").innerHTML = "Selecciona Tu Mat";
+
+  if(esp == 1){
+    document.getElementById('infmat').style.display = "flex";
+    document.getElementById('esp2').style.display = "none";
+    document.getElementById('esp').style.display = "flex";
+    fetch(`get-lugares.php?especial=1&id=${iden}`)
+        .then(res => res.json())
+        .then(data => {
+            // Crear UL
+            const ul = document.createElement("ul");
+            ul.className = "mat-elegir";
+
+            // Generar 10 lugares (1 al 10)
+            for (let i = 1; i <= 10; i++) {
+                const li = document.createElement("li");
+                li.dataset.lugar = i;
+                li.classList.add("mat-res");
+
+                if (data.ocupados.includes(i)) {
+                    // Lugar ocupado
+                    li.classList.add("mat-res-reservado");
+                    li.style.pointerEvents = "none"; // bloquea hover, click, focus
+                } else {
+                    // Lugar libre
+                    li.setAttribute("onclick", `lugar(${i}, 1)`);
+                    li.setAttribute("id", `lugar${i}`)
+                }
+
+                ul.appendChild(li);
+            }
+
+            // Insertar en #esp
+            const div = document.createElement("div");
+            div.classList.add("instructo");
+
+            document.getElementById("esp").innerHTML = "";
+            document.getElementById("esp").appendChild(div);
+            document.getElementById("esp").appendChild(ul);
+        })
+        .catch(err => console.error("Error consultando lugares:", err));
+
+        document.getElementById("confirm-agendar").style.pointerEvents = "none";
+
+
+  }else if(esp == 2){
+    document.getElementById('infmat').style.display = "flex";
+    document.getElementById('esp').style.display = "none";
+    document.getElementById('esp2').style.display = "block";
+     fetch(`get-lugares.php?especial=2&id=${iden}`)
+        .then(res => res.json())
+        .then(data => {
+            const ul = document.createElement("ul");
+            ul.className = "select-reformer";
+
+            const totalLugares = 8; 
+
+            for (let i = 1; i <= totalLugares; i++) {
+                const li = document.createElement("li");
+
+                // SVG base
+                const svg = `
+                    <svg class="reformer-select" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1563.23 439.79"><defs></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="cls-reformer" d="M1342.3,0V9.38H0V77.73H38.58v38.58H0V327.53H38.58v38.58H0v64.3H1342.3v9.38h220.93V0ZM70.34,91.67l549.86,55v14.68H530.31V268H620.2v11.57l-.19-2L70.34,327.48Zm9.35-3.13,540.45,14.22.06-2V142.6Zm-9.35,243L620.2,281.63v70.74L70.34,333.22ZM1193,407.46H70.34v-70.2L620.2,356.41v43.47h441.9V344.42H1193Zm0-71.82H1062.1V288.39H1193Zm0-56H1062.1v-55H1193Zm0-63.76H1062.1v-54.5H1193Zm0-63.28H1062.1V111.11H1193Zm0-50.24H1062.1v-65H620.2V98.72L70.34,84.25V27.83H1193Zm69.15-53.78h-37V80.48h37v268.7h-37v31.93h37v26.35h-49.31V27.83h49.31Zm62.12,351.34h-41.17V42h41.17Z"/></g></g></svg>`;
+
+                li.innerHTML = svg;
+
+                const path = li.querySelector("path");
+
+                if (data.ocupados.includes(i)) {
+                    // ocupado
+                    path.classList.add("cls-reformer-reservado");
+                    li.style.pointerEvents = "none";
+                } else {
+                    // libre
+                    li.onclick = () => lugar(i);
+                    li.setAttribute("onclick", `lugar(${i}, 2)`);
+                    li.setAttribute("id", `lugar${i}`)
+                }
+
+                ul.appendChild(li);
+            }
+
+            // Insertar en el div #esp
+            const contenedor = document.getElementById("esp2");
+            contenedor.innerHTML = "";
+            const svg2 = `
+            <svg class="reformer-back" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 841.45 827.59"><defs></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="cls-tapete" d="M813.1,0H28.35A28.35,28.35,0,0,0,0,28.35V799.24a28.35,28.35,0,0,0,28.35,28.35h375a28.35,28.35,0,0,0,28.35-28.35V533A28.35,28.35,0,0,1,460,504.67H813.1a28.35,28.35,0,0,0,28.35-28.35v-448A28.35,28.35,0,0,0,813.1,0Z"/></g></g></svg>
+            `;
+      
+            contenedor.appendChild(ul);
+            contenedor.insertAdjacentHTML("beforeend", svg2);
+        })
+        .catch(err => console.error("Error consultando lugares:", err));
+
+        document.getElementById("confirm-agendar").style.pointerEvents = "none";
+
+  }else{
+    document.getElementById('esp').style.display = "none";
+    document.getElementById('esp2').style.display = "none";
+    document.getElementById('infmat').style.display = "none";
+
+   document.getElementById("confirm-agendar").style.pointerEvents = "auto";
+
+  }
  
 
   document.getElementById("confirm-agendar").dataset.id = iden;
@@ -642,12 +763,41 @@ function reservaClase(el) {
   confirmationSection.style.display = 'block';
   classesContainer.style.display = 'none';
 }
+
+function lugar(id, tipo) {
+   
+  const lugar = "lugar" + id;
+ if(tipo == 1){
+  const lista = document.querySelectorAll("#esp li");
+  lista.forEach(li => {
+    li.removeAttribute("style");
+  });
+   document.getElementById(lugar).style.background = "#442315";
+ }else{
+  const lista = document.querySelectorAll("#esp2 li path");
+  lista.forEach(li => {
+    li.removeAttribute("style");
+  });
+
+
+
+   const li = document.getElementById(lugar);
+   const path = li.querySelector("path");
+    path.style = "fill: #442315";
+ }
+  document.getElementById("confirm-agendar").dataset.id_lugar = id;
+  document.getElementById("confirm-agendar").style.pointerEvents = "auto";
+
+}
+
 function confirmacion(el) {
   const idClas = el.dataset.id;
   const ncoach = el.dataset.coach;
   const ndisciplina = el.dataset.disciplina;
   const durac = el.dataset.duracion;
   const idcoach = el.dataset.id_inst;
+  const lugar = el.dataset.id_lugar;
+  
 
   fetch('registrar_reservacion.php', {
     method: 'POST',
@@ -659,7 +809,8 @@ function confirmacion(el) {
       ncoach: ncoach,
       ndisciplina: ndisciplina,
       durac: durac,
-      idcoach: idcoach
+      idcoach: idcoach,
+      lugar: lugar
     })
   })
     .then(response => response.json())

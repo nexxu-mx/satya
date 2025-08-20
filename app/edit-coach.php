@@ -29,20 +29,6 @@ $coachez = $_GET['id'];
             $id_d = $row['id_disciplina'];
             
             
-            if(isset($id_d)){
-                $sqlD = "SELECT nombre_disciplina FROM disciplinas WHERE id = ?";
-                $smtpD = $conn->prepare($sqlD);
-                $smtpD->bind_param("i", $id_d);
-                $smtpD->execute();
-                
-                $resultD = $smtpD->get_result();
-                
-                if($resultD->num_rows > 0){
-                    $rowD = $resultD->fetch_assoc();
-                    
-                    $name_disciplina = $rowD['nombre_disciplina'];
-                }
-            }
         }
         
         
@@ -56,7 +42,7 @@ $coachez = $_GET['id'];
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>SATYAApp</title>
+    <title>SATYA App</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <link rel="icon" href="./favico.png" type="image/x-icon" />
     <script src="./assets/js/plugin/webfont/webfont.min.js"></script>
@@ -132,6 +118,8 @@ $coachez = $_GET['id'];
                                     $img = "../assets/images/coaches/pro/" . $coachez . ".png";
                                     if(file_exists($img)){
                                         echo 'src="' . $img . '"';
+                                    }else{
+                                       echo  'src="../assets/images/coaches/pro/unknow.jpg"';
                                     }
                                 ?> style="max-width: 50%; margin-top: 20px; border-radius: 15px; box-shadow: 1px 5px 12px #00000054;">
                             </div>
@@ -145,9 +133,13 @@ $coachez = $_GET['id'];
                                 $resultD = $conn->query($queryD);
                                 
                                 if ($resultD->num_rows > 0) {
-                                    echo '<option value="' . $id_d . '" selected>' . htmlspecialchars($name_disciplina) . '</option>';
+                                   
                                     while ($rowD = $resultD->fetch_assoc()) {
-                                        echo '<option value="' . $rowD['id'] . '">' . htmlspecialchars($rowD['nombre_disciplina']) . '</option>';
+                                        $checked = "";
+                                        if($rowD['id'] == $id_d){
+                                            $checked = 'checked=""';
+                                        }
+                                        echo '<option value="' . $rowD['id'] . '"' . $checked . '>' . htmlspecialchars($rowD['nombre_disciplina']) . '</option>';
                                     }
                                    
                                 } else {

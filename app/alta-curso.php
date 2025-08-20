@@ -91,27 +91,51 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
                                
                                 $idDisciplinaEdit = $_GET['id'];
 
-                                $selectDisciplina = $conn->prepare("SELECT id, nombre_disciplina, descripcion_disciplina, subdescripcion_texto1, subdescripcion_texto2, subdescripcion_texto3, id_coach, activo FROM disciplinas WHERE id = ?");
+                                $selectDisciplina = $conn->prepare("SELECT id, nombre_disciplina, descripcion_disciplina, subdescripcion_texto1, subdescripcion_texto2, subdescripcion_texto3, aforo, esp, activo FROM disciplinas WHERE id = ?");
                                 $selectDisciplina->bind_param("i", $idDisciplinaEdit);
                                 $selectDisciplina->execute();
                                 $resultadoSelectDisciplina = $selectDisciplina->get_result();
 
                                 $filaSelectDisciplina = $resultadoSelectDisciplina->fetch_assoc();
 
-                                $selectCoach = $conn->prepare("SELECT id, nombre_coach, descripcion_coach, id_disciplina, activo FROM coaches WHERE id = ?");
-                                $selectCoach->bind_param("i", $filaSelectDisciplina['id_coach']);
-                                $selectCoach->execute();
-                                $resultadoSelectCoach = $selectCoach->get_result();
-
-                                $filaSelectCoach = $resultadoSelectCoach->fetch_assoc();
                                 $button = "Guardar Edición";
                                 $nombreDisciplina = $filaSelectDisciplina['nombre_disciplina'];
                                 $descDisc = $filaSelectDisciplina['descripcion_disciplina'];
                                 $subdesctext1 = $filaSelectDisciplina['subdescripcion_texto1'];
                                 $subdesctext2 = $filaSelectDisciplina['subdescripcion_texto2'];
                                 $subdesctext3 = $filaSelectDisciplina['subdescripcion_texto3'];
-                                $idCoach = $filaSelectDisciplina['id_coach'];
+                                $aforo = $filaSelectDisciplina['aforo'];
                                 $activo = $filaSelectDisciplina['activo'];
+                                $esp = $filaSelectDisciplina['esp'];
+
+                                if($esp == 1){
+                                    $selectEsp = '<div class="form-group form-group-default">
+                                                <label for="esp">Tipo de Lugar</label>
+                                                <select class="form-select" id="esp" name="esp">
+                                                    <option value="0">Ninguno</option>
+                                                    <option value="1" selected="">Mat</option>
+                                                    <option value="2">Reformer</option>
+                                                </select>
+                                            </div>';
+                                }elseif($esp == 2){
+                                    $selectEsp = '<div class="form-group form-group-default">
+                                                <label for="esp">Tipo de Lugar</label>
+                                                <select class="form-select" id="esp" name="esp">
+                                                    <option value="0">Ninguno</option> 
+                                                    <option value="1">Mat</option>
+                                                    <option value="2" selected="">Reformer</option>
+                                                </select>
+                                            </div>';
+                                }else{
+                                    $selectEsp = '<div class="form-group form-group-default">
+                                                <label for="esp">Tipo de Lugar</label>
+                                                <select class="form-select" id="esp" name="esp">
+                                                    <option value="0" selected="">Ninguno</option>
+                                                    <option value="1">Mat</option>
+                                                    <option value="2">Reformer</option>
+                                                </select>
+                                            </div>';
+                                }
 
                             } else{
                                 $button = "Agregar Disciplina";
@@ -122,23 +146,35 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
                                 $subdesctext3 = "";
                                 $idCoach = "";
                                 $activo = "";
+                                $aforo = "";
+                                $idDisciplinaEdit = "0";
+                                
+                                $selectEsp = '<div class="form-group form-group-default">
+                                                <label for="esp">Tipo de Lugar</label>
+                                                <select class="form-select" id="esp" name="esp">
+                                                    <option value="0" selected="">Ninguno</option>
+                                                    <option value="1">Mat</option>
+                                                    <option value="2">Reformer</option>
+                                                </select>
+                                            </div>';
                             }
                             ?>
                             <input type="text" id="nombre_disc" name="nombre_disc" placeholder="Nombre de la Disciplina..." class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" value="<?php echo $nombreDisciplina;?>" required>
                                     <textarea name="desc_disc" id="desc_disc" class="form-control no-resize mb-3 p-3 bg-body-secondary" required><?php echo $descDisc;?></textarea>
 
                                     <div class="d-flex justify-content-lg-center gap-3 mb-3">
-                                        <input type="text" id="palabra-desc-1" name="palabra-desc-1" class="p-3 flex-fill form-control bg-body-secondary" placeholder="Palabra Descriptiva 1..." required>
-                                        <input type="text" id="palabra-desc-2" name="palabra-desc-2" class="p-3 flex-fill form-control bg-body-secondary" placeholder="Palabra Descriptiva 2..." required>
-                                        <input type="text" id="palabra-desc-3" name="palabra-desc-3" class="p-3 flex-fill form-control bg-body-secondary" placeholder="Palabra Descriptiva 3..." required>
+                                        <input type="text" id="palabra-desc-1" name="palabra-desc-1" class="p-3 flex-fill form-control bg-body-secondary" value="<?php echo $subdesctext1; ?>" placeholder="Keyword" required>
+                                        <input type="text" id="palabra-desc-2" name="palabra-desc-2" class="p-3 flex-fill form-control bg-body-secondary" value="<?php echo $subdesctext2; ?>" placeholder="Keyword" required>
+                                        <input type="text" id="palabra-desc-3" name="palabra-desc-3" class="p-3 flex-fill form-control bg-body-secondary" value="<?php echo $subdesctext3; ?>" placeholder="Keyword" required>
                                     </div>
-                                    <input type="text" id="nombre_coach" name="nombre_coach" class="form-control p-3 bg-body-secondary" placeholder="Coach que la Imparte (Solo primer nombre)..." required>
+                                    <?php echo $selectEsp;?>
+                                    <input type="text" id="aforo" name="aforo" class="form-control p-3 bg-body-secondary" placeholder="Aforo" value="<?php echo $aforo; ?>" required>
                                     <label for="imagen" class="my-3">SUBE UN VIDEO DE LA DISCIPLINA</label>
                                     <input type="file" id="imagen-disciplina" name="imagen-disciplina" class="form-control mt-0 p-3 bg-body-secondary" accept=".mp4,.mov,.avi,.wmv" onchange="mostrarVistaPrevia(event)" >
                                     <div class="d-flex justify-content-center">
                                         <video id="vistaPrevia" style="max-width: 50%; margin-top: 20px;" autoplay muted></video>
                                     </div>
-                                    <input type="hidden" value="0" id="id_disciplina_edit" name="id_disciplina_edit"/>
+                                    <input type="hidden" value="<?php echo $idDisciplinaEdit; ?>" id="id_disciplina_edit" name="id_disciplina_edit"/>
                             <div class="d-flex justify-content-center mt-3">
                             <button type="submit" class="btn btn-primary"><?php echo $button; ?></button>
                             </div>

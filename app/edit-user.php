@@ -64,7 +64,7 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
                             if (isset($_GET['id'])) {
                                 $idUsr = $_GET['id'];
                                 $profilePath = "../assets/images/profiles/" . $idUsr . ".png";
-                                $defaultPath = "../assets/images/profiles/unknow.png";
+                                $defaultPath = "../assets/images/profiles/unknow.jpg";
                         
                                 if (!file_exists($profilePath)) {
                                     $profilePath = $defaultPath;
@@ -237,11 +237,11 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
                                 $movimientos_html = "";
                                 $valemail = 'onblur="validarCorreo()"';
                                 $valnum = 'onblur="validarNumero()"';
-                                $profilePath = "../assets/images/profiles/unknow.png";
+                                $profilePath = "../assets/images/profiles/unknow.jpg";
                             }
                           
                             ?>
-								<div class="card-body">
+								<div class="card-body"> 
                                     <form action="save_user.php" method="post"  onsubmit="trimTrailingSpaces()">
                                     <div class="row">
                                        <div class="col-md-12" style="display: flex; align-items: center;justify-content: center; margin-block: 20px">

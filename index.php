@@ -1,5 +1,6 @@
 <?php
 session_start();
+include './db.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -93,38 +94,32 @@ session_start();
               
               <div class="swiper-container">
                 <div class="swiper-wrapper">
-                  <!-- Disciplina 1 -->
-                  <div class="swiper-slide">
-                    <div class="card-disciplina">
-                      <h4>Pilates reformer</h4>
-                      <div class="card-disciplina-img">
-                        <img src="./assets/images/disciplinas/provicional.jpg" alt="Pilates Reformer">
-                      </div>
-                      <span>Fuerza - Resistencia - Tone</span>
-                    </div>
-                  </div>
-                  
-                  <!-- Disciplina 2 -->
-                  <div class="swiper-slide">
-                    <div class="card-disciplina">
-                      <h4>Yoga</h4>
-                      <div class="card-disciplina-img">
-                        <img src="./assets/images/disciplinas/provicional.jpg" alt="Yoga">
-                      </div>
-                      <span>Flexibilidad - Relajación</span>
-                    </div>
-                  </div>
-                  
-                  <!-- Disciplina 3 -->
-                  <div class="swiper-slide">
-                    <div class="card-disciplina">
-                      <h4>Pilates Mat</h4>
-                      <div class="card-disciplina-img">
-                        <img src="./assets/images/disciplinas/provicional.jpg" alt="Pilates Mat">
-                      </div>
-                      <span>Movimiento - Coordinación</span>
-                    </div>
-                  </div>
+
+                <?php
+                    $sqlDI = ("SELECT id, nombre_disciplina, descripcion_disciplina, subdescripcion_texto1, subdescripcion_texto2, subdescripcion_texto3 FROM disciplinas");
+                    $stmtDI = $conn->prepare($sqlDI);
+                    $stmtDI->execute();
+                    $resultDI = $stmtDI->get_result();
+
+                    while($rowDI = $resultDI->fetch_assoc()){
+
+                      $imgDI = './assets/images/disciplinas/' . $rowDI['id'] . '.png';
+                      if(!file_exists($imgDI)){
+                        $imgDI = "./assets/images/disciplinas/unknow.jpg";
+                      }
+
+                      echo '<div class="swiper-slide">
+                              <div class="card-disciplina">
+                                <h4>' . $rowDI['nombre_disciplina'] . '</h4>
+                                <div class="card-disciplina-img">
+                                  <img src="' . $imgDI . '" alt="SATYA ' . $rowDI['nombre_disciplina'] . '">
+                                </div>
+                                <span>' . $rowDI['subdescripcion_texto1'] . ' - ' . $rowDI['subdescripcion_texto2'] . ' - ' . $rowDI['subdescripcion_texto1'] . '</span>
+                              </div>
+                            </div>';
+                    }
+                ?>
+                 
                   
                   <!-- Añade más disciplinas según necesites -->
                 </div>
@@ -146,29 +141,69 @@ session_start();
             
             <div class="swiper-container">
               <div class="swiper-wrapper">
-                <!-- Card coach 1 -->
-                <div class="swiper-slide">
-                  <div class="card-coach-index">
-                    <img src="./assets/images/coaches/1.png" alt="">
-                    <div class="descrip-coach-index">
-                      <h3>Pilates Reformer</h3>
-                      <p>Me gusta impulsar el movimiento auténtico con presencia, equilibrio y conexión.</p>
+                <?php 
+            include 'db.php';
+
+            ini_set('display_errors', 1);
+            error_reporting(E_ALL);
+
+            $idDisciplinas = [];
+
+            $query = "SELECT id, nombre_coach, descripcion_coach, id_disciplina FROM coaches";
+            $query2 = "SELECT id, nombre_disciplina FROM disciplinas";
+
+            $resultado = $conn->query($query);
+            $resultado2 = $conn->query($query2);
+
+            if (!$resultado || !$resultado2) {
+                die("Error en la consulta: " . $conn->error);
+            }
+
+            $intercalador = 1;
+
+            while ($fila2 = mysqli_fetch_assoc($resultado2)) {
+                $idDisciplinas[$fila2['id']] = $fila2['nombre_disciplina'];
+            }
+
+            while ($fila = mysqli_fetch_assoc($resultado)) {
+                // Validación de disciplina
+                $disciplina = isset($idDisciplinas[$fila['id_disciplina']]) 
+                                ? $idDisciplinas[$fila['id_disciplina']] 
+                                : 'SATYA';
+                $coachPath = "./assets/images/coaches/" . $fila['id'] . ".mp4";
+                $defaultPath = "./assets/images/coaches/" . $fila['id'] . ".png";
+        
+                if (!file_exists($coachPath)) {
+                    $imgC = '<img src="'. $defaultPath .'" alt="">';
+                    if (!file_exists($defaultPath)) {
+                        $imgC = '<img src="./assets/images/coaches/unknow.jpg" alt="">';
+                    }
+
+                }else{
+                    $imgC = '<video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;"
+                                poster="./assets/images/coaches/unknow.jpg">
+                                <source src="' . $coachPath . '" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>';
+                }
+
+                echo '
+                    <div class="swiper-slide">
+                      <div class="card-coach-index">
+                      ' . $imgC . '
+                      <div class="descrip-coach-index">
+                        <h3>'. $disciplina .'</h3>
+                        <p>'. $fila['descripcion_coach'] .'</p>
+                      </div>
+                      <a href="coaches.php?#'. $fila['nombre_coach'] .'">'. $fila['nombre_coach'] .'</a>
                     </div>
-                    <a href="#">Valeria</a>
                   </div>
-                </div>
+                ';
+            }
+
+            
+        ?>
                 
-                <!-- Card coach 2 -->
-                <div class="swiper-slide">
-                  <div class="card-coach-index">
-                    <img src="./assets/images/coaches/2.png" alt="">
-                    <div class="descrip-coach-index">
-                      <h3>Yoga</h3>
-                      <p>Descripción del coach de yoga.</p>
-                    </div>
-                    <a href="#">María</a>
-                  </div>
-                </div>
                 
                 <!-- Agrega más cards según necesites -->
               </div>
@@ -189,50 +224,35 @@ session_start();
               
               <div class="swiper-container">
                 <div class="swiper-wrapper">
-                  <!-- Paquete 1 -->
-                  <div class="swiper-slide">
-                    <div class="card">
-                      <p class="numero-clases-card" style="color: var(--c6);">8</p>
-                      <p class="clases-card" style="color: var(--c6);">Clases</p>
-                      <p class="clases-card" style="font-size: 2rem;">Mixto</p>
-                      <p class="vigencia-card" style="margin-top: 0">Vigencia 30 días</p>
-                      
-                      <div class="coust" style="background: var(--c6)">
-                        <p class="precio-card">$1129<small>MX</small></p>
-                        <a href="checkout.php?tkn=BrX0IT4rpOWO2XOTS5uMDg3maKIF3AL5SgN7lzrLYaAwNvgbQXcUXFVt7TCqsM6HRrqGOh8VceLnvgw0pLvxSjEPSXuoLmzqa45JFmT3af5NE6NeSISkkEuX1dap2gMA4llO&amp;id=9">COMPRAR</a>
+                  <?php
+                    $sqlPI = ("SELECT clases, costo, nombre, vigencia FROM paquetes WHERE clases = 8");
+                    $stmtPI = $conn->prepare($sqlPI);
+                    $stmtPI->execute();
+                    $resultPI = $stmtPI->get_result();
+
+                    while($rowPI = $resultPI->fetch_assoc()){
+
+                      echo '
+                      <div class="swiper-slide">
+                        <div class="card">
+                          <p class="numero-clases-card" style="color: var(--c6);">' . $rowPI['clases'] . '</p>
+                          <p class="clases-card" style="color: var(--c6);">Clases</p>
+                          <p class="clases-card" style="font-size: 2rem;">' . $rowPI['nombre'] . '</p>
+                          <p class="vigencia-card" style="margin-top: 0">Vigencia ' . $rowPI['vigencia'] . ' días</p>
+                          
+                          <div class="coust" style="background: var(--c6)">
+                            <p class="precio-card">$' . $rowPI['costo'] . '<small>MX</small></p>
+                            <a href="paquetes.php">Ver Todos</a>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  
-                  <!-- Paquete 2 -->
-                  <div class="swiper-slide">
-                    <div class="card">
-                      <p class="numero-clases-card" style="color: var(--c2);">12</p>
-                      <p class="clases-card" style="color: var(--c2);">Clases</p>
-                      <p class="clases-card" style="font-size: 2rem;">Mixto</p>
-                      <p class="vigencia-card" style="margin-top: 0">Vigencia 30 días</p>
-                      
-                      <div class="coust" style="background: var(--c2)">
-                        <p class="precio-card">$1479<small>MX</small></p>
-                        <a href="checkout.php?tkn=EBJE8KdJZqcU9sqwPWEaNrEkGsDQ7fk2fbkbfAoll45swrj22N1mxmSCN2zPZ5dxtcrl7BK9qDewX1AcvnhQXVxaIJbINSZlHNAqPEgJmll4X6Whw1TdMAX5X5NxtfGCZ37Y&amp;id=2">COMPRAR</a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <!-- Paquete 3 -->
-                  <div class="swiper-slide">
-                    <div class="card">
-                      <p class="numero-clases-card" style="color: var(--c8); font-size: 3.3rem; margin-block: 10px;margin-top: 13%;">ILIMITADO</p>
-                      <p class="clases-card" style="color: var(--c8);"> </p>
-                      <p class="clases-card" style="font-size: 2rem;">Mixto</p>
-                      <p class="vigencia-card" style="margin-top: 0">Vigencia 30 días</p>
-                      
-                      <div class="coust" style="background: var(--c8)">
-                        <p class="precio-card">$1799<small>MX</small></p>
-                        <a href="checkout.php?tkn=COrltLwRZsZ9NouqPwOuWpzr0zGZG1zegEvt6L7STpDlCPPLvDxvqgRGzE3Gtzj2SWgoyiLK2HjUVs5Opv0wvc6U063ppNse5kNaK5T6SPLAs4YkAEJx3eSansX9ajtCpvuX&amp;id=11">COMPRAR</a>
-                      </div>
-                    </div>
-                  </div>
+                      ';
+
+                    }
+                    $conn->close();
+                ?>
+                 
+                 
                 </div>
               </div>
               

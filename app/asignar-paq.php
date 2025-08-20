@@ -71,9 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $bienvenida = ($paquete == 1 || $row['claseBienvenida'] == 1) ? 1 : null;
         
         // Actualizar usuario
-        $sql_update = "UPDATE users SET credit = ?, venceCredit = ?, fechaCredit = ?, maxInvitados = ?, claseBienvenida = ?, statu = ?, idpago = ?, montoPagado = ? WHERE id = ?";
+        $sql_update = "UPDATE users SET credit = ?, venceCredit = ?, fechaCredit = ?, paquete = ?, maxInvitados = ?, claseBienvenida = ?, statu = ?, idpago = ?, montoPagado = ? WHERE id = ?";
         $stmt_update = $conn->prepare($sql_update);
-        $stmt_update->bind_param("ssssssssi", $credits, $vigencia, $fvencimiento, $invitados, $bienvenida, $status, $idpago, $cargo1, $idusrv);
+        $stmt_update->bind_param("sssssssssi", $credits, $vigencia, $fvencimiento, $paquete, $invitados, $bienvenida, $status, $idpago, $cargo1, $idusrv);
         $stmt_update->execute();
         
         // Registrar transacción

@@ -238,7 +238,7 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
                           <input type="hidden" id="coach-event" name="coach-event">
                            <input type="hidden" id="duracion-event" name="duracion-event"> 
                             <input type="hidden" id="idcoach-event" name="idcoach-event">
-                            
+						<div id="esp"></div>
                         <button type="button" onclick="registrarReservaInterna()" class="btn btn-icon btn-round btn-info">
 							<i class="fas fa-user-plus"></i>
 						</button>

@@ -179,7 +179,8 @@ try {
     $sql_update = "UPDATE users 
                    SET credit = ?, 
                        venceCredit = ?, 
-                       fechaCredit = ?, 
+                       fechaCredit = ?,
+                       paquete = ?, 
                        maxInvitados = ?, 
                        claseBienvenida = ?, 
                        statu = ?, 
@@ -197,6 +198,7 @@ try {
         $new_credit,
         $dias,      // venceCredit
         $vence, // fechaCredit
+        $paquete,
         $invitados,
         $bienvenida,
         $payment_status,

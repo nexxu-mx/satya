@@ -263,7 +263,7 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                     <h4 class="m6"><ion-icon name="time-outline" aria-hidden="true"></ion-icon> <p id="modalDuracion"></p></h4>
                     <div class="m7">
                             <div class="m8">
-                                <small style="display: flex; align-items: first baseline; gap: 2px" id="modalInvitado"><ion-icon name="person" aria-hidden="true"></ion-icon> x1</small><br>
+                                <small style="display: flex; align-items: first baseline; gap: 2px" id="modalInvitado"><br></small>
                                 <small>Inicio</small>
                                 <p id="modalInicio"></p>
                             </div>

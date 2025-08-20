@@ -4,13 +4,14 @@ include '../error_log.php';
 
 $sql = "SELECT id, id_coach, aforo, reservados, id_disciplina, hora_inicio, hora_fin FROM clases";
 $result = $conn->query($sql);
-$stmtD = $conn->prepare("SELECT nombre_disciplina FROM disciplinas WHERE id = ?");
+$stmtD = $conn->prepare("SELECT nombre_disciplina, esp FROM disciplinas WHERE id = ?");
 $stmtC = $conn->prepare("SELECT nombre_coach FROM coaches WHERE id = ?");
 $sqlA = "SELECT 
             users.nombre, 
             reservaciones.id AS reservacion_id, 
             reservaciones.alumno, 
-            reservaciones.invitado
+            reservaciones.invitado,
+            reservaciones.lugar
          FROM reservaciones 
          INNER JOIN users ON reservaciones.alumno = users.id 
          WHERE reservaciones.idClase = ?";
@@ -24,8 +25,10 @@ while ($row = $result->fetch_assoc()) {
     $resultD = $stmtD->get_result();
     if ($rowD = $resultD->fetch_assoc()) {
         $disciplina = $rowD['nombre_disciplina'];
+        $esp = $rowD['esp'];
     } else {
         $disciplina = "Sin Disciplina";
+        $esp = null;
     }
     $stmtC->bind_param("i", $row['id_coach']);
     $stmtC->execute();
@@ -71,11 +74,17 @@ while ($row = $result->fetch_assoc()) {
         $a1 = $rowA['reservacion_id'];
         $a2 = $rowA['alumno'];
         $a3 = $rowA['invitado'];
+        $a4 = $rowA['lugar'];
+        if(!$a4 == null){
+            $lugar = "(Lugar: $a4)";
+        }else{
+            $lugar = "";
+        }
     
         $onclick = "cancelReserv($a1,$a2,$idEvent,$a3,'$disciplina')";
         $onclick2 = "addInvitado($a1,$a2,$idEvent)";
         $asistencia = 1 + $rowA['invitado'];
-        $alumnos.= '<li style="display: flex;justify-content: space-between;"><p>' . $name . ' (x' . $asistencia . ')</p><div style="display: flex;gap: 10px;"><i class="fas fa-trash-alt trash" onclick="' . $onclick . '"></i> <i class="fas fa-user-plus add" onclick="' . $onclick2 . '"></i></div></li>';
+        $alumnos.= '<li style="display: flex;justify-content: space-between;"><p>' . $name . ' (x' . $asistencia . ')' . $lugar . '</p><div style="display: flex;gap: 10px;"><i class="fas fa-trash-alt trash" onclick="' . $onclick . '"></i> <i class="fas fa-user-plus add" onclick="' . $onclick2 . '"></i></div></li>';
     }
     $alumnos .= "</ul>";
 
@@ -89,7 +98,8 @@ while ($row = $result->fetch_assoc()) {
     'start' => $row['hora_inicio'],
     'end' => $row['hora_fin'],
     'idcoach' => $row['id_coach'],
-    'open' => $open
+    'open' => $open,
+    'esp' => $esp
     
   ];
 }

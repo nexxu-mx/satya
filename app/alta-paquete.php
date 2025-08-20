@@ -16,7 +16,7 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>SenciaApp</title>
+    <title>SATYA App</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <link rel="icon" href="./favico.png" type="image/x-icon" />
     <script src="./assets/js/plugin/webfont/webfont.min.js"></script>
@@ -111,7 +111,7 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
                             if (isset($_GET['id'])) {
                                 $idPaqueteEdit = $_GET['id'];
 
-                                $selectPaquete = "SELECT id, clases, costo, nombre, vigencia, invitados, persona, descuento, finalizadsc FROM paquetes WHERE id = '$idPaqueteEdit'";
+                                $selectPaquete = "SELECT id, clases, costo, nombre, vigencia, disciplinas, invitados, persona, descuento, finalizadsc FROM paquetes WHERE id = '$idPaqueteEdit'";
 
                                 $resultadoSelectPaquete = $conn->query($selectPaquete);
 
@@ -123,12 +123,39 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
                                     <input type="text" id="numero_clases" name="numero_clases" placeholder="Agrega el número de clases" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required value="'. $filaPaquete['clases'] .'">
                                     <label for="costo_paquete">Costo del Paquete:</label>
                                     <input type="text" id="costo_paquete" name="costo_paquete" placeholder="Agrega el costo del Paquete" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required value="'. $filaPaquete['costo'] .'">
-                                    <label for="vigencia_paquete">Vigencia del Paquete:</label>
+                                    <label for="vigencia_paquete">Vigencia del Paquete (Días):</label>
                                     <input type="text" id="vigencia_paquete" name="vigencia_paquete" placeholder="Agrega la vigencia del Paquete en Días" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required value="'. $filaPaquete['vigencia'] .'">
-                                    <label for="invitados_paquete">Número de Posibles Invitados Paquete:</label>
+                                    <label for="invitados_paquete">Número de Invitados Máximos:</label>
                                     <input type="text" id="invitados_paquete" name="invitados_paquete" placeholder="Agrega el Número de Invitados que puede tener el Paquete" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required value="'. $filaPaquete['invitados'] .'">
                                     <label for="personas_paquete">Personas en el Paquete:</label>
                                     <input type="text" id="personas_paquete" name="personas_paquete" placeholder="Personas que están Invitadas al Paquete" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required value="'. $filaPaquete['persona'] .'">
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Disciplinas incluidas</label>
+                                        <div class="selectgroup selectgroup-pills">
+                                        ';
+                                        $disciplinasActivas = $filaPaquete['disciplinas'];
+                                        $disciplinasArray = explode('|', $disciplinasActivas);
+
+                                        $sqlDisciplinas = ("SELECT id, nombre_disciplina FROM disciplinas");
+                                        $stmtD = $conn->prepare($sqlDisciplinas);
+                                        $stmtD->execute();
+                                        $resultD = $stmtD->get_result();
+
+                                        while ($rowD = $resultD->fetch_assoc()) {
+                                            $checked = '';
+                                            if (in_array($rowD['id'], $disciplinasArray)) {
+                                                $checked = ' checked';
+                                            }
+                                            echo '<label class="selectgroup-item">
+                                                    <input type="checkbox" name="disciplinas[]" value="' . $rowD['id'] . '" class="selectgroup-input"' . $checked . '>
+                                                    <span class="selectgroup-button">' . $rowD['nombre_disciplina'] . '</span>
+                                                </label>';
+                                        }
+
+                                    echo '
+                                        </div>
+                                    </div>
                                     <label for="personas_paquete">Descuento:</label>
                                     <div style="display: flex; justify-content: center; align-items: center; gap: 20px;border: 1px solid #efefef;padding: 10px;">
                                     <input type="text" id="dsc" name="dsc" placeholder="10" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" value="'. $filaPaquete['descuento'] .'">
@@ -145,15 +172,37 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
                                     <input type="text" id="numero_clases" name="numero_clases" placeholder="Agrega el número de clases" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required>
                                     <label for="costo_paquete">Costo del Paquete:</label>
                                     <input type="text" id="costo_paquete" name="costo_paquete" placeholder="Agrega el costo del Paquete" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required>
-                                    <label for="vigencia_paquete">Vigencia del Paquete:</label>
+                                    <label for="vigencia_paquete">Vigencia del Paquete (Días):</label>
                                     <input type="text" id="vigencia_paquete" name="vigencia_paquete" placeholder="Agrega la vigencia del Paquete en Días" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required>
-                                    <label for="invitados_paquete">Número de Posibles Invitados Paquete:</label>
+                                    <label for="invitados_paquete">Número de Invitados Máximos:</label>
                                     <input type="text" id="invitados_paquete" name="invitados_paquete" placeholder="Agrega el Número de Invitados que puede tener el Paquete" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required>
                                     <label for="personas_paquete">Personas en el Paquete:</label>
                                     <input type="text" id="personas_paquete" name="personas_paquete" placeholder="Personas que están Invitadas al Paquete" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Disciplinas incluidas</label>
+                                        <div class="selectgroup selectgroup-pills">
+                                        ';
+                                        $sqlDisciplinas = ("SELECT id, nombre_disciplina FROM disciplinas");
+                                        $stmtD = $conn->prepare($sqlDisciplinas);
+                                        $stmtD->execute();
+                                        $resultD = $stmtD->get_result();
+
+                                        while ($rowD = $resultD->fetch_assoc()){
+                                            echo '<label class="selectgroup-item">
+                                                    <input type="checkbox" name="disciplinas[]" value="' . $rowD['id'] . '" class="selectgroup-input">
+                                                    <span class="selectgroup-button">' . $rowD['nombre_disciplina'] . '</span>
+                                                    </label>';
+                                        }
+
+                                    echo '
+                                        </div>
+                                    </div>
                                 ';
                             }
                             ?>
+
+
                             <div class="d-flex justify-content-center mt-3">
                                 <?php
                                 if (isset($_GET['id'])) {

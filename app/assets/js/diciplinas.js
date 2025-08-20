@@ -19,16 +19,13 @@ $(document).ready(function() {
             var cursosHTML = '';
             
             response.cursos.forEach(function(curso) {
-                var imgAutor = "unknnow";
-                if(curso.autor == "Diana González"){
-                    imgAutor = "diana";
-                } else if(curso.autor == "Michel Gómez"){
-                    imgAutor = "michel";
-                }
+              
                 cursosHTML += `
                     <div class="col-md-4 mb-4">
-                        <div class="card card-post card-round">
-                            <img class="card-img-top" src="${curso.imagen}" alt="${curso.nombre}">
+                        <div class="card card-post card-round" style="height: 400px;">
+                            <div style="overflow: hidden;width: 100%;height: 200px;display: flex;justify-content: center;align-items: center; position: relative">
+                                <img class="card-img-top" style="position: absolute;object-fit: cover;width: 100%;height: 100%;" src="${curso.imagen}" alt="${curso.nombre}">
+                            </div>
                             <div class="card-body">
                                 
                                 <div class="separator-solid"></div>
@@ -37,7 +34,7 @@ $(document).ready(function() {
                                 </h3>
                                 <p class="card-text text-muted">${curso.descripcion.substring(0, 100)}${curso.descripcion.length > 100 ? '...' : ''}</p>
                                 <div class="d-flex justify-content-between">
-                                    <a href="./alta-curso.php?id=${curso.id}" class="btn btn-primary btn-rounded btn-sm"><i class="far fa-edit"></i> Editar</a>
+                                    <a href="./alta-curso.php?id=${curso.id}" class="btn btn-primary btn-rounded btn-sm"><i class="far fa-edit"></i> Ver</a>
                                     
                                 </div>
                             </div>

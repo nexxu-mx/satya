@@ -26,7 +26,7 @@ try {
         $ID_disciplina = $row['id_disciplina'];
 
         $profilePath = "../assets/images/coaches/pro/" . $row['id'] . ".png";
-        $defaultPath = "../assets/images/coaches/pro/unknow.png";
+        $defaultPath = "../assets/images/coaches/pro/unknow.jpg";
         if (!file_exists($profilePath)) {
             $profilePath = $defaultPath;
         }
@@ -40,7 +40,7 @@ try {
         }
 
         $disciplinaPath = "../assets/images/disciplinas/" . $ID_disciplina . ".png";
-        $defaultPathD = "../assets/images/disciplinas/unknow.png";
+        $defaultPathD = "../assets/images/disciplinas/unknow.jpg";
 
         if (!file_exists($disciplinaPath)) {
             $disciplinaPath = $defaultPathD;

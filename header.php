@@ -25,7 +25,9 @@
       </div>
 
       <ul class="navbar-list">
-       
+       <li class="navbar-item">
+          <a href="index.php" class="navbar-link title-md">Inicio</a>
+        </li>
         <li class="navbar-item">
           <a href="#" class="navbar-link title-md">About Us</a>
         </li>
@@ -43,7 +45,7 @@
         </li>
 
         <li class="navbar-item">
-          <a href="#" class="navbar-link title-md">Coaches</a>
+          <a href="coaches.php" class="navbar-link title-md">Coaches</a>
         </li>
 
         <li class="navbar-item">
@@ -162,7 +164,9 @@
             
           </a>
         </li>
-         
+         <li class="navbar-item">
+          <a href="index.php" class="navbar-link title-md">Inicio</a>
+        </li>
         
         <li class="navbar-item">
           <a href="#" class="navbar-link title-md">About Us</a>
@@ -181,7 +185,7 @@
         </li>
 
         <li class="navbar-item">
-          <a href="#" class="navbar-link title-md">Coaches</a>
+          <a href="coaches.php" class="navbar-link title-md">Coaches</a>
         </li>
 
          <li class="navbar-item">

@@ -9,11 +9,12 @@ if(isset($_SESSION['idUser'])){
 }
 
 $day = $_GET['day'] ?? '';
+$busqueda = $_GET['ssa'] ?? '';
 if ($day) {
     // Separar el día y el mes
     list($d, $mesTexto) = explode("-", strtolower($day));
 
-    // Mapeo manual de meses en español a números
+    // Mapeo manual de meses en español a números 
     $meses = [
         "enero" => "01",
         "febrero" => "02",
@@ -28,18 +29,74 @@ if ($day) {
         "noviembre" => "11",
         "diciembre" => "12"
     ];
+//valida que paquete compro el usuario y que disciplinas puede reservar
+        $sqlUser = "SELECT p.disciplinas 
+                FROM users u 
+                INNER JOIN paquetes p ON u.paquete = p.id 
+                WHERE u.id = ?";
+
+        $stmtUser = $conn->prepare($sqlUser);
+        $stmtUser->bind_param("i", $idUser);
+        $stmtUser->execute();
+        $resultUser = $stmtUser->get_result();
+
+        if ($rowUser = $resultUser->fetch_assoc()) {
+            $autorizados = $rowUser['disciplinas'];
+        } else {
+            $autorizados = ""; 
+        }
 
     // Obtener el número del mes
     $mesNumero = $meses[$mesTexto] ?? "00"; // por si no coincide
     // Armar la fecha completa
     $fecha = "2025-$mesNumero-" . str_pad($d, 2, "0", STR_PAD_LEFT);
     $dia = "$fecha%";
-    $stmt = $conn->prepare("SELECT id, id_coach, hora_inicio, hora_fin, aforo, reservados, id_disciplina, estatus FROM clases WHERE hora_inicio LIKE ? ORDER BY hora_inicio ASC");
-    $stmt->bind_param("s", $dia);
-    $stmt->execute();
+        // 1. Convertir string a array de integers
+        $ids_array = explode('|', $autorizados);
+        $ids_autorizados = array_map('intval', $ids_array);
+
+        // 2. Crear los placeholders para IN (?, ?, ?)
+        $cantidad_ids = count($ids_autorizados);
+        $placeholders = implode(',', array_fill(0, $cantidad_ids, '?'));
+
+        // 3. Construir la consulta SQL
+        if($busqueda){
+                $sql = "SELECT id, id_coach, hora_inicio, hora_fin, aforo, reservados, id_disciplina, estatus 
+                FROM clases 
+                WHERE hora_inicio LIKE ? 
+                AND id_disciplina IN ($placeholders)
+                AND id_disciplina = $busqueda
+                ORDER BY hora_inicio ASC";   
+        }else{
+        $sql = "SELECT id, id_coach, hora_inicio, hora_fin, aforo, reservados, id_disciplina, estatus 
+                FROM clases 
+                WHERE hora_inicio LIKE ? 
+                AND id_disciplina IN ($placeholders)
+                ORDER BY hora_inicio ASC";
+        }
+        // 4. Preparar la consulta
+        $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            die("Error en la consulta: " . $conn->error);
+        }
+
+        // 5. Crear string de tipos de parámetros
+        // 's' para el string del LIKE, 'i' repetido para cada ID
+        $tipos_parametros = 's' . str_repeat('i', $cantidad_ids);
+
+        // 6. Combinar todos los valores en un array
+        $valores_parametros = array_merge([$dia], $ids_autorizados);
+
+        // 7. Bind parameters usando spread operator (...)
+        $stmt->bind_param($tipos_parametros, ...$valores_parametros);
+
+        // 8. Ejecutar
+        if (!$stmt->execute()) {
+            die("Error al ejecutar: " . $stmt->error);
+        }
     $result = $stmt->get_result();
     $stmtC = $conn->prepare("SELECT nombre_coach FROM coaches WHERE id = ?");
-    $stmtD = $conn->prepare("SELECT nombre_disciplina FROM disciplinas WHERE id = ?");
+    $stmtD = $conn->prepare("SELECT nombre_disciplina, esp FROM disciplinas WHERE id = ?");
     $stmtU = $conn->prepare("SELECT activo FROM reservaciones WHERE alumno = ? AND idClase = ?");
     $clases = [];
     while ($row = $result->fetch_assoc()) {
@@ -61,6 +118,11 @@ if ($day) {
     
         if ($disciplina = $resultD->fetch_assoc()) {
             $nombre_disciplina =  $disciplina['nombre_disciplina'];
+            $especial_disciplina =  $disciplina['esp'];
+
+            ///aquí logica para manejar el tapete si esp es 1 o 2
+
+            
         } else {
             $nombre_disciplina = "-";
         }
@@ -159,16 +221,24 @@ if ($day) {
             $estatus = '<img class="icono-reserva" src="assets/images/svg/waiting_list.svg" alt="Wait List ícono">';
         }
 
+        $pathimg = './assets/images/coaches/' . $row['id_coach'] . '.png';
+
+        if(!file_exists($pathimg)){
+            $pathimg = "./assets/images/coaches/unknow.jpg";
+        }
+
         $clases[] = [
             "id" => $row['id'],
             "id_coach" => $row['id_coach'],
             "nombre_coach" => $nombre_coach,
             "horario" => $horario,
             "duracion" => $duracion,
+            "pathimg" => $pathimg,
             "aforo" => $aforo,
             "estatus" => $estatus,
             "disciplina" => $nombre_disciplina,
             "id_disciplina" => $row['id_disciplina'],
+            "esp_disciplina" => $especial_disciplina,
             "abierta" => $abierta
         ];
         

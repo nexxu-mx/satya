@@ -16,29 +16,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $palabraDesc1 = trim($_POST['palabra-desc-1']);
     $palabraDesc2 = trim($_POST['palabra-desc-2']);
     $palabraDesc3 = trim($_POST['palabra-desc-3']);
+    $esp = trim($_POST['esp']);
+    $aforo = trim($_POST['aforo']);
     $nombreCoach = trim(ucfirst($_POST['nombre_coach']));
     $idCoach;
     $idDisciplinaImage;
-    $activo;
-
-    $selectCoach = $conn->prepare("SELECT id, nombre_coach, activo FROM coaches WHERE nombre_coach = ?");
-    $selectCoach->bind_param("i", $nombreCoach);
-    $selectCoach->execute();
-    $resultadoSelectCoach = $selectCoach->get_result();
-
-    $filaSelectCoach = $resultadoSelectCoach->fetch_assoc();
-
-    $idCoach = $filaSelectCoach['id'];
-    $activo = $filaSelectCoach['activo'];
-
-    echo "Id del coach sacado: " . $idCoach;
+  
+    $activo = 1;
+    
+    if($esp == 0){
+        $esp = null;
+    }
 
     if ($_POST['id_disciplina_edit'] == 0) {
-        $insertDisciplina = $conn->prepare("INSERT INTO disciplinas (nombre_disciplina, descripcion_disciplina, subdescripcion_texto1, subdescripcion_texto2, subdescripcion_texto3, id_coach, activo) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $insertDisciplina->bind_param("sssssii", $nombreDisc, $descDisc, $palabraDesc1, $palabraDesc2, $palabraDesc3, $idCoach, $activo);
+        $insertDisciplina = $conn->prepare("INSERT INTO disciplinas (nombre_disciplina, descripcion_disciplina, subdescripcion_texto1, subdescripcion_texto2, subdescripcion_texto3, aforo, esp, activo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $insertDisciplina->bind_param("sssssiii", $nombreDisc, $descDisc, $palabraDesc1, $palabraDesc2, $palabraDesc3, $aforo, $esp, $activo);
         $insertDisciplina->execute();
-
-        echo "Dentro del else de insertar disciplina";
 
 
        
@@ -46,8 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $idDisciplinaEdit = $_POST['id_disciplina_edit'];
 
-        $updateDisciplina = $conn->prepare("UPDATE disciplinas SET nombre_disciplina = ?, descripcion_disciplina = ?, subdescripcion_texto1 = ?, subdescripcion_texto2 = ?, subdescripcion_texto3 = ?, id_coach = ?, activo = ? WHERE id = ?");
-        $updateDisciplina->bind_param("sssssiii", $nombreDisc, $descDisc, $palabraDesc1, $palabraDesc2, $palabraDesc3, $idCoach, $activo, $idDisciplinaEdit);
+        $updateDisciplina = $conn->prepare("UPDATE disciplinas SET nombre_disciplina = ?, descripcion_disciplina = ?, subdescripcion_texto1 = ?, subdescripcion_texto2 = ?, subdescripcion_texto3 = ?, aforo = ?, esp = ?, activo = ? WHERE id = ?");
+        $updateDisciplina->bind_param("sssssiiii", $nombreDisc, $descDisc, $palabraDesc1, $palabraDesc2, $palabraDesc3, $aforo, $esp, $activo, $idDisciplinaEdit);
         $updateDisciplina->execute();
 
         /* header("location: diciplinas.php"); */

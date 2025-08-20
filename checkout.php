@@ -113,7 +113,7 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                                             if($rowP['clases'] == "ILIMITADO" || $rowP['clases'] == "ANUALIDAD"){
                                                 $nclases = '<p class="numero-clases-card" style="font-size: 34px;  color: var(--c6);margin-top: 30%;">' . $rowP['clases'] . '</p>';
                                             }else{
-                                                $nclases = '<p class="numero-clases-card" style="color: var(--c6);  >' . $rowP['clases'] . '</p>
+                                                $nclases = '<p class="numero-clases-card" style="color: var(--c6);">' . $rowP['clases'] . '</p>
                                                             <p class="clases-card" style="color: var(--c6);">Clases</p>';
                                             }
                                             if(!empty($rowP['descuento'])){

@@ -135,7 +135,12 @@ button,
 ion-icon {
   display: block;
 }
-
+h1,
+h2,
+h3,
+h4 {
+   letter-spacing: -0.1rem;
+}
 a {
   color: inherit;
   text-decoration: none;
@@ -181,7 +186,6 @@ body {
   color: var(--independece);
   line-height: 1.8;
   font-family: var(--ff-Avenir);
-  letter-spacing: -0.1rem;
 }
 
 body.loaded {
@@ -401,7 +405,7 @@ body.nav-active {
   padding-right: 15px;
   height: 60px;
   max-width: 100%;
-  z-index: 2;
+  z-index: 11;
 }
 .logo-mobile{
   position: absolute;
@@ -485,7 +489,7 @@ body.nav-active {
 }
 
 .navbar {
-  left: -300px;
+  left: 300px;
   max-width: 100%;
   background-color: #f3e6d7eb;
   z-index: 3;
@@ -494,7 +498,7 @@ body.nav-active {
 }
 
 .navbar.active {
-  transform: translateX(300px);
+  transform: translateX(-300px);
   visibility: visible;
   transition: 0.5s var(--cubic-out);
 }
@@ -1512,7 +1516,7 @@ span {
 }
 
 .inputs-container select {
-  width: 20%;
+  width: 100%;
   background-color: rgb(244, 240, 231);
   border: none;
   padding: 10px 15px;
@@ -1545,12 +1549,12 @@ span {
 /* .inputs-container select:: */
 
 .buscar-input-container {
-  width: 20%;
+  width: 100%;
   position: relative;
 }
 
 .buscar-input-container img {
-  width: 30px;
+  width: 20px;
   position: absolute;
   top: 15%;
   left: 85%;
@@ -1820,6 +1824,27 @@ form textarea {
   #COACHES PAGE
 \*-----------------------------------*/
 
+.tittle-coaches{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--c9);
+  margin-block: 60px;
+}
+.tittle-coaches h3{
+  line-height: 1;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 2rem;
+}
+.tittle-coaches h2{
+  line-height: 1;
+  font-size: 3.6rem;
+  font-weight: 400;
+  margin-top: 10px;
+}
+
 .coach .image-side {
   width: 50%;
   background-image: none;
@@ -1893,6 +1918,13 @@ form textarea {
   margin-top: 40px;
   white-space: nowrap;
   text-decoration: none;
+}
+
+.section-coaches{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 10px;
+  justify-items: center;
 }
 
 /*-----------------------------------*\
@@ -2067,10 +2099,14 @@ form textarea {
   align-items: center;
   margin-top: 30px;
 }
+.hint-flex{
+  width: 100%;
+}
 
 .first-flex h2 {
   font-size: 33px;
   line-height: 1;
+  text-align: center;
   font-weight: 500;
   font-family: var(--ff-Raleway);
   color: var(--c9);
@@ -2280,7 +2316,11 @@ form textarea {
 }
 
 
-
+.reservas-list{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 0;
+}
 
 
 .img-clase-container {
@@ -2587,6 +2627,7 @@ position: absolute;
     justify-content: space-around;
     padding-inline: 5%;
     margin-bottom: 70px;
+    gap: 20px;
   }
   .mat-reser{
     display: flex;
@@ -2653,7 +2694,7 @@ position: absolute;
     background: var(--c2);
   }
   .mat-res:hover, .mat-res:focus{
-    background-color: var(--c9);
+    background-color: var(--c8);
   }
 
   .mat-res-reservado{
@@ -2697,7 +2738,7 @@ position: absolute;
   }
 
   .cls-reformer:hover, .cls-reformer:focus{
-    fill: var(--c9);
+    fill: var(--c8);
   }
   .cls-reformer-reservado{
     fill: var(--c6);
@@ -2976,6 +3017,23 @@ position: absolute;
   .header-mobile{
     display: grid;
   }
+}
+@media (min-width: 767px) {
+  .reservas-list{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.class-card{
+  height: 230px;
+}
+.clase-img-container{
+  height: 230px;
+}
+.my-account-link{
+  font-size: 1.6rem;
+}
+  
 }
 @media (max-width: 768px){
 
@@ -4303,7 +4361,9 @@ position: absolute;
   }
 
   /* FIN COACHES PAGE */
-
+  .section-coaches{
+  grid-template-columns: repeat(1, 1fr);
+}
   /* INICIO CONTACT PAGE */
 
   .general-form-container {
@@ -4983,7 +5043,9 @@ position: absolute;
     white-space: nowrap;
     text-decoration: none;
   }
-
+  .section-coaches{
+  grid-template-columns: repeat(2, 1fr);
+}
   /* FIN COACHES PAGE */
 
   /* INICIO CONTACT PAGE */
@@ -5133,7 +5195,7 @@ position: absolute;
 
   .footer {
     position: relative;
-    height: 600px;
+    height: 200px;
   }
 
   .footer.section {
@@ -5164,7 +5226,7 @@ position: absolute;
 @media (min-width: 1000px) and (max-width: 1200px) {
 
   .clase-img-container img{
-    width: 600px;
+    width: 400px;
   }
   #profile-inicio {
     margin-bottom: 50px;
@@ -5440,7 +5502,9 @@ position: absolute;
     white-space: nowrap;
     text-decoration: none;
   }
-
+.section-coaches{
+  grid-template-columns: repeat(3, 1fr);
+}
   /* FIN COACHES PAGE */
 
   /* INICIO CONTACT PAGE */
@@ -5626,7 +5690,7 @@ position: absolute;
 @media (min-width: 1200px) {
 
   .clase-img-container img{
-    width: 550px;
+    width: 450px;
   }
   .hint-flex svg {
     display: none;
@@ -5787,6 +5851,9 @@ position: absolute;
   }
 */
   
+.section-coaches{
+  grid-template-columns: repeat(3, 1fr);
+}
 
   .confirmation-btns {
     display: flex;

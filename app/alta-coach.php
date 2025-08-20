@@ -87,7 +87,25 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
                     <div id="form-disc" class="container-sm w-50 form-control p-5 mt-5">
                         <form action="procesar_coach.php" method="POST" class="needs-validation" enctype="multipart/form-data">
                             <input type="text" id="nombre_coach" name="nombre_coach" placeholder="Nombre del Coach (Solo primer Nombre)..." class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required>
-                            <textarea name="desc_coach" id="desc_coach" class="form-control no-resize mb-3 p-3 bg-body-secondary" placeholder="Ingresa la Descripción del Coach..." ></textarea>
+                             <select name="usuario" id="usuario" class="form-control mt-3 bg-body-secondary p-3" required>
+                                <?php
+                                $queryU = "SELECT id, nombre, apellido FROM users WHERE tipoUser = 2";
+                                $resultU = $conn->query($queryU);
+                                
+                                if ($resultU->num_rows > 0) {
+                                   
+                                    while ($rowU = $resultU->fetch_assoc()) {
+                                        echo '<option value="' . $rowU['id'] . '">' . htmlspecialchars($rowU['nombre']) . ' '  . htmlspecialchars($rowU['apellido']) . '</option>';
+                                    }
+                                   
+                                } else {
+                                    echo 'No hay coaches disponibles.';
+                                }
+                                
+                                
+                                ?>
+                            </select> 
+                            <textarea name="desc_coach" style="margin-top: 20px" id="desc_coach" class="form-control no-resize mb-3 p-3 bg-body-secondary" placeholder="Ingresa la Descripción del Coach..." ></textarea>
                              <select name="nombre_disc" id="nombre_disc" class="form-control mt-3 bg-body-secondary p-3" required>
                                 <?php
                                 $queryD = "SELECT id, nombre_disciplina FROM disciplinas";
@@ -106,6 +124,7 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
                                 
                                 ?>
                             </select>
+                            
                             
                             <select name="activo" id="activo" class="form-control mt-3 bg-body-secondary p-3" required>
                                 <option value="1" selected>Activo</option>

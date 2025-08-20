@@ -1,6 +1,7 @@
 <?php
 
 include '../db.php';
+include '../error_log.php';
 
 if (
     isset($_POST['nombre_paquete']) &&
@@ -25,19 +26,23 @@ if (
     $finalizadsc = $finalizadsc === '' ? null : $finalizadsc;
     }
 
+    $disciplinas = $_POST['disciplinas'];
+
+    $disciplinas = implode('|', $disciplinas);
+
     if (isset($_POST['id_paquete_edit'])) {
         $idPaqueteEdit = $_POST['id_paquete_edit'];
 
-        $updatePaquete = $conn->prepare("UPDATE paquetes SET clases = ?, costo = ?, nombre = ?, vigencia = ?, invitados = ?, persona = ?, descuento = ?, finalizadsc = ? WHERE id = ?");
-        $updatePaquete->bind_param("ssssssssi", $numeroClases, $costoPaquete, $nombrePaquete, $vigenciaPaquete, $invitadosPaquete, $personasPaquete, $descuento, $finalizadsc, $idPaqueteEdit); 
+        $updatePaquete = $conn->prepare("UPDATE paquetes SET clases = ?, costo = ?, nombre = ?, vigencia = ?, disciplinas = ?, invitados = ?, persona = ?, descuento = ?, finalizadsc = ? WHERE id = ?");
+        $updatePaquete->bind_param("sssssssssi", $numeroClases, $costoPaquete, $nombrePaquete, $vigenciaPaquete, $disciplinas, $invitadosPaquete, $personasPaquete, $descuento, $finalizadsc, $idPaqueteEdit); 
 
         $resultadoUpdatePaquete = $updatePaquete->execute();
         
         header('location: paquetes.php');
         exit;
     } else {
-        $insertPaquete = $conn->prepare("INSERT INTO paquetes (clases, costo, nombre, vigencia, invitados, persona) VALUES (?, ?, ?, ?, ?, ?)");
-        $insertPaquete->bind_param("ssssss", $numeroClases, $costoPaquete, $nombrePaquete, $vigenciaPaquete, $invitadosPaquete, $personasPaquete);
+        $insertPaquete = $conn->prepare("INSERT INTO paquetes (clases, costo, nombre, vigencia, disciplinas, invitados, persona) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $insertPaquete->bind_param("sssssss", $numeroClases, $costoPaquete, $nombrePaquete, $vigenciaPaquete, $disciplinas, $invitadosPaquete, $personasPaquete);
 
         $resultadoInsert = $insertPaquete->execute();
 

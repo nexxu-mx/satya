@@ -60,8 +60,10 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                         </div>
         
                         <button type="button" class="olv-contra" onclick="openCo()">Olvide mi contraseña.</button>
-        
-                        <input class="login-submit-btn" type="submit" id="log" value="INICIAR SESIÓN">
+                        <div style="position: absolute;bottom: 0;left: 0;width: 100%;height: 100px;background: var(--c3);display: flex;justify-content: center;align-items: center;">
+                                <input class="login-submit-btn" type="submit" id="log" value="INICIAR SESIÓN">
+                        </div>
+                       
                     </form> 
                 </div>
                 <div class="container" id="registro" style="margin-block: 100px; display: none">
