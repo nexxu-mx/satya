@@ -6,6 +6,10 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
     header("Location: ../login.php");
     exit;
 }
+if((int)$_SESSION['tipoUser'] !== 3){
+	header("Location: ./index.php?s=" . $_SESSION['tipoUser']);
+    exit;
+}
 $coachez = $_GET['id'];
     if(empty($coachez)){
         header("Location:coach.php");

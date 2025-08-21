@@ -931,6 +931,41 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+  // slider paquetes2
+  const packageSwiper2 = new Swiper('.packages-slider2 .swiper-container', {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    navigation: {
+      nextEl: '.packages-slider2 .swiper-button-next',
+      prevEl: '.packages-slider2 .swiper-button-prev',
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        // Opcional: centrar slides cuando no hay suficientes
+        centeredSlides: false
+      }
+    }
+  });
+
+   // slider paquetes2
+  const packageSwiper3 = new Swiper('.packages-slider3 .swiper-container', {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    navigation: {
+      nextEl: '.packages-slider3 .swiper-button-next',
+      prevEl: '.packages-slider3 .swiper-button-prev',
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        // Opcional: centrar slides cuando no hay suficientes
+        centeredSlides: false
+      }
+    }
+  });
   // Configuración para el slider de disciplinas
   const disciplineSwiper = new Swiper('.disciplines-slider .swiper-container', {
     slidesPerView: 1,

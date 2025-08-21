@@ -6,6 +6,11 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
     exit;  
 }
 
+if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
+	header("Location: ./index.php?s=" . $_SESSION['tipoUser']);
+    exit;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

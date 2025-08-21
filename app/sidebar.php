@@ -26,7 +26,10 @@
 			<div class="sidebar-wrapper scrollbar scrollbar-inner">
 				<div class="sidebar-content">
 					<ul class="nav nav-secondary">
-						<li class="nav-item">
+						<?php
+							if((int)$_SESSION['tipoUser'] == 3){
+								echo '
+								<li class="nav-item">
 							<a href="index.php">
 							  <i class="fas fa-home"></i>
 							  <p>Inicio</p>
@@ -89,6 +92,49 @@
 							  <p>Soporte</p>
 							</a>
 						</li>
+								';
+							}elseif((int)$_SESSION['tipoUser'] == 4){
+								echo '
+								<li class="nav-item">
+									<a href="index.php">
+									<i class="fas fa-home"></i>
+									<p>Inicio</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="registra-class.php">
+									<i class="fas fa-qrcode"></i>
+									<p>Asistencia</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="clientes.php">
+									<i class="fas fa-users"></i>
+									<p>Usuarios</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="clases.php">
+									<i class="fas fa-award"></i>
+									<p>Clases</p>
+									</a>
+								</li>
+								
+								<li class="nav-item">
+									<a href="../profile.php">
+									<i class="fas fa-power-off"></i>
+									<p>Salir</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="soporte.php">
+									<i class="fas fa-headset"></i>
+									<p>Soporte</p>
+									</a>
+								</li>
+								';
+							}
+						?>
 					</ul>
 				</div>
 			</div>

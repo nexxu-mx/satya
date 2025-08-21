@@ -17,10 +17,7 @@ if (file_exists($realProfilePath)) {
     $profilePath = "./assets/images/profiles/unknow.jpg?v=$timest";
 }
 
-if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
-    header("Location: login.php");
-    exit();
-}
+
 
 ?>
 <!DOCTYPE html>
@@ -154,7 +151,8 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                             <!-- <button class="p3"><ion-icon name="library-outline" aria-hidden="true" class="p2" style="background: #c5c5c5;"></ion-icon> <p class="p4">Comunidad</p></button>-->
                             <button class="p3" onclick="closeSession()"><ion-icon name="power" aria-hidden="true" class="p2"></ion-icon> <p class="p4">Cerrar Sesión</p></button>
                             <?php 
-                            if($_SESSION['tipoUser'] == 3){
+                            
+                            if($_SESSION['tipoUser'] == 3 || $_SESSION['tipoUser'] == 4){
                                 echo '<button class="p3" onclick="openAdmin()"><ion-icon name="newspaper-outline" aria-hidden="true" class="p2"></ion-icon> <p class="p4">Administración</p></button>';
                             }
                             ?>

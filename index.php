@@ -217,15 +217,15 @@ include './db.php';
 
       <section class="section membresias-section">
         <div class="container">
-          <h2>Nuestros Paquetes</h2>
+          <h2>Pilates Reformer</h2>
             <!--slider paquetes-->
-            <div class="slider-container-global packages-slider">
+            <div class="slider-container-global packages-slider2" style="margin-top: 0;">
               <div class="swiper-button-prev flecha-slider fi"></div>
               
               <div class="swiper-container">
                 <div class="swiper-wrapper">
                   <?php
-                    $sqlPI = ("SELECT id, clases, costo, nombre, vigencia FROM paquetes ORDER BY RAND() LIMIT 3");
+                    $sqlPI = ("SELECT id, clases, costo, nombre, vigencia FROM paquetes WHERE nombre = 'Pilates Reformer'");
                     $stmtPI = $conn->prepare($sqlPI);
                     $stmtPI->execute();
                     $resultPI = $stmtPI->get_result();
@@ -267,7 +267,8 @@ include './db.php';
                       ';
 
                     }
-                    $conn->close();
+                    $stmtPI->close();
+                    
                 ?>
                  
                  
@@ -278,9 +279,141 @@ include './db.php';
             </div>
 
             <!-- slider paquetes--> 
+
+        </div>
+        <div class="container">
+          <h2>Movement</h2>
+            <!--slider paquetes-->
+            <div class="slider-container-global packages-slider" style="margin-top: 0;">
+              <div class="swiper-button-prev flecha-slider fi"></div>
+              
+              <div class="swiper-container">
+                <div class="swiper-wrapper">
+                  <?php
+                    $sqlPI = ("SELECT id, clases, costo, nombre, vigencia FROM paquetes WHERE nombre = 'Movement'");
+                    $stmtPI = $conn->prepare($sqlPI);
+                    $stmtPI->execute();
+                    $resultPI = $stmtPI->get_result();
+
+                    while($rowPI = $resultPI->fetch_assoc()){
+                       if($rowPI['nombre'] == "Movement"){
+                        $colorActual = "var(--c6)";
+
+                        }else if($rowPI['nombre'] == "Mixto"){
+                          $colorActual = "var(--c8)";
+                        }else{
+                          $colorActual = "var(--c2)";
+                        }
+
+                         if($rowPI['clases'] == "ILIMITADO" || $rowPI['clases'] == "ANUALIDAD"){
+                              $nclases = '<p class="numero-clases-card" style="font-size: 34px;  color: ' . $colorActual . ';margin-top: 20%;">' . $rowPI['clases'] . '</p>';
+                          }else{
+                              if($rowPI['clases'] == 1){
+                                $claz = "Clase";
+                              }else{
+                                $claz = "Clases";
+                              }
+                              $nclases = '<p class="numero-clases-card" style="color: ' . $colorActual . '">' . $rowPI['clases'] . '</p>
+                                          <p class="clases-card" style="color: ' . $colorActual . ');">' . $claz . '</p>';
+                          }
+                      echo '
+                      <div class="swiper-slide">
+                        <div class="card">
+                          ' . $nclases . '
+                          <p class="clases-card" style="font-size: 2rem;">' . $rowPI['nombre'] . '</p>
+                          <p class="vigencia-card" style="margin-top: 0">Vigencia ' . $rowPI['vigencia'] . ' días</p>
+                          
+                          <div class="coust" style="background: ' . $colorActual . '">
+                            <p class="precio-card">$' . $rowPI['costo'] . '<small>MX</small></p>
+                            <a href="checkout.php?tkn=4VKZkLL1nkJ8ulKru0nymfKW8IX34TDS2vtF72RT9o5HwkbMvI8xF3do1XndhUoZepPQNfAvIsTwEtto3h7IzRFwxDXmF3evJOeCLUaWVhPOBh7bRxcoeN10SJjlWGCzxIVy&id=' . $rowPI['id'] . '">Comprar</a>
+                          </div>
+                        </div>
+                      </div>
+                      ';
+
+                    }
+                    $stmtPI->close();
+                    
+                ?>
+                 
+                 
+                </div>
+              </div>
+              
+              <div class="swiper-button-next flecha-slider fd" style="color: var(--c2)"></div>
+            </div>
+
+            <!-- slider paquetes--> 
+        </div>
+        <div class="container">
+          <h2>Mixto</h2>
+            <!--slider paquetes-->
+            <div class="slider-container-global packages-slider3" style="margin-top: 0;">
+              <div class="swiper-button-prev flecha-slider fi"></div>
+              
+              <div class="swiper-container">
+                <div class="swiper-wrapper">
+                  <?php
+                    $sqlPI = ("SELECT id, clases, costo, nombre, vigencia FROM paquetes WHERE nombre = 'Mixto' ");
+                    $stmtPI = $conn->prepare($sqlPI);
+                    $stmtPI->execute();
+                    $resultPI = $stmtPI->get_result();
+
+                    while($rowPI = $resultPI->fetch_assoc()){
+                       if($rowPI['nombre'] == "Movement"){
+                        $colorActual = "var(--c6)";
+
+                        }else if($rowPI['nombre'] == "Mixto"){
+                          $colorActual = "var(--c8)";
+                        }else{
+                          $colorActual = "var(--c2)";
+                        }
+
+                         if($rowPI['clases'] == "ILIMITADO" || $rowPI['clases'] == "ANUALIDAD"){
+                              $nclases = '<p class="numero-clases-card" style="font-size: 34px;  color: ' . $colorActual . ';margin-top: 20%;">' . $rowPI['clases'] . '</p>';
+                          }else{
+                              if($rowPI['clases'] == 1){
+                                $claz = "Clase";
+                              }else{
+                                $claz = "Clases";
+                              }
+                              $nclases = '<p class="numero-clases-card" style="color: ' . $colorActual . '">' . $rowPI['clases'] . '</p>
+                                          <p class="clases-card" style="color: ' . $colorActual . ');">' . $claz . '</p>';
+                          }
+                      echo '
+                      <div class="swiper-slide">
+                        <div class="card">
+                          ' . $nclases . '
+                          <p class="clases-card" style="font-size: 2rem;">' . $rowPI['nombre'] . '</p>
+                          <p class="vigencia-card" style="margin-top: 0">Vigencia ' . $rowPI['vigencia'] . ' días</p>
+                          
+                          <div class="coust" style="background: ' . $colorActual . '">
+                            <p class="precio-card">$' . $rowPI['costo'] . '<small>MX</small></p>
+                            <a href="checkout.php?tkn=4VKZkLL1nkJ8ulKru0nymfKW8IX34TDS2vtF72RT9o5HwkbMvI8xF3do1XndhUoZepPQNfAvIsTwEtto3h7IzRFwxDXmF3evJOeCLUaWVhPOBh7bRxcoeN10SJjlWGCzxIVy&id=' . $rowPI['id'] . '">Comprar</a>
+                          </div>
+                        </div>
+                      </div>
+                      ';
+
+                    }
+                    $stmtPI->close();
+                    
+                ?>
+                 
+                 
+                </div>
+              </div>
+              
+              <div class="swiper-button-next flecha-slider fd" style="color: var(--c2)"></div>
+            </div>
+
+            <!-- slider paquetes--> 
+             
+             
                     <a href="paquetes.php" class="a-link" style="margin-top: 20px;">« VER TODOS »</a>
         </div>
       </section>
+
 
       <section class="section preguntas-section">
         <div class="container">
