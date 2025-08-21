@@ -153,10 +153,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const costonvo = (p.costo - costodesc);
             precio = dell + `<p class="precio-card" style="margin-top: -20px;">$${costonvo}<small>MX</small></p>`;
           }
-
+          if(p.clases == 1){
+            const nclas = "Clase";
+          }else{
+            const nclas = "Clases";
+          }
           card.innerHTML = `
             <p class="numero-clases-card" style="color: ${colorActual};  ${(p.clases == 'ILIMITADO' || p.clases == 'ANUALIDAD') ? 'font-size: 3.3rem; margin-block: 10px; margin-top: 30%;' : ''}">${p.clases}</p>
-            <p class="clases-card" style="color: ${colorActual};">${(p.clases == 'ILIMITADO' || p.clases == 'ANUALIDAD') ? ' ' : 'Clases'}</p>
+            <p class="clases-card" style="color: ${colorActual};">${(p.clases == 'ILIMITADO' || p.clases == 'ANUALIDAD') ? ' ' : nclas}</p>
             <p class="clases-card" style="font-size: 2rem;">${p.nombre}</p>
             <p class="vigencia-card" style="margin-top: 0">
               Vigencia ${

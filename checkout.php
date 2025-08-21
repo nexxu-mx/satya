@@ -113,8 +113,13 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                                             if($rowP['clases'] == "ILIMITADO" || $rowP['clases'] == "ANUALIDAD"){
                                                 $nclases = '<p class="numero-clases-card" style="font-size: 34px;  color: var(--c6);margin-top: 30%;">' . $rowP['clases'] . '</p>';
                                             }else{
+                                                if($rowP['clases'] == 1){
+                                                    $claz = "Clase";
+                                                }else{
+                                                    $claz = "Clases";
+                                                }
                                                 $nclases = '<p class="numero-clases-card" style="color: var(--c6);">' . $rowP['clases'] . '</p>
-                                                            <p class="clases-card" style="color: var(--c6);">Clases</p>';
+                                                            <p class="clases-card" style="color: var(--c6);">' . $claz . '</p>';
                                             }
                                             if(!empty($rowP['descuento'])){
                                                 echo '<p class="dsco">' . $rowP['descuento'] . '%</p>';

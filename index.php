@@ -225,7 +225,7 @@ include './db.php';
               <div class="swiper-container">
                 <div class="swiper-wrapper">
                   <?php
-                    $sqlPI = ("SELECT id, clases, costo, nombre, vigencia FROM paquetes ORDER BY RAND()");
+                    $sqlPI = ("SELECT id, clases, costo, nombre, vigencia FROM paquetes ORDER BY RAND() LIMIT 3");
                     $stmtPI = $conn->prepare($sqlPI);
                     $stmtPI->execute();
                     $resultPI = $stmtPI->get_result();
@@ -239,11 +239,22 @@ include './db.php';
                         }else{
                           $colorActual = "var(--c2)";
                         }
+
+                         if($rowPI['clases'] == "ILIMITADO" || $rowPI['clases'] == "ANUALIDAD"){
+                              $nclases = '<p class="numero-clases-card" style="font-size: 34px;  color: ' . $colorActual . ';margin-top: 30%;">' . $rowPI['clases'] . '</p>';
+                          }else{
+                              if($rowPI['clases'] == 1){
+                                $claz = "Clase";
+                              }else{
+                                $claz = "Clases";
+                              }
+                              $nclases = '<p class="numero-clases-card" style="color: ' . $colorActual . '">' . $rowPI['clases'] . '</p>
+                                          <p class="clases-card" style="color: ' . $colorActual . ');">' . $claz . '</p>';
+                          }
                       echo '
                       <div class="swiper-slide">
                         <div class="card">
-                          <p class="numero-clases-card" style="color: ' . $colorActual . ';">' . $rowPI['clases'] . '</p>
-                          <p class="clases-card" style="color: ' . $colorActual . ';">Clases</p>
+                          ' . $nclases . '
                           <p class="clases-card" style="font-size: 2rem;">' . $rowPI['nombre'] . '</p>
                           <p class="vigencia-card" style="margin-top: 0">Vigencia ' . $rowPI['vigencia'] . ' días</p>
                           
