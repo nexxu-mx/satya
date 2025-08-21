@@ -241,7 +241,7 @@ include './db.php';
                         }
 
                          if($rowPI['clases'] == "ILIMITADO" || $rowPI['clases'] == "ANUALIDAD"){
-                              $nclases = '<p class="numero-clases-card" style="font-size: 34px;  color: ' . $colorActual . ';margin-top: 30%;">' . $rowPI['clases'] . '</p>';
+                              $nclases = '<p class="numero-clases-card" style="font-size: 34px;  color: ' . $colorActual . ';margin-top: 20%;">' . $rowPI['clases'] . '</p>';
                           }else{
                               if($rowPI['clases'] == 1){
                                 $claz = "Clase";
