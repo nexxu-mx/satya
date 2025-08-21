@@ -59,7 +59,6 @@ function renderCalendar() {
         const coach = document.getElementById('coach-select').value;
         const horain = document.getElementById('hora-inicio').value;
         const horafin = document.getElementById('hora-fin').value;
-        const afoo = document.getElementById('aforo-select').value;
 
         const diasSeleccionados = Array.from(document.querySelectorAll('input[name="dayrepeat"]:checked'))
             .map(cb => parseInt(cb.value));
@@ -80,8 +79,7 @@ function renderCalendar() {
                 end: fechaStr,       
                 horain: horain,      
                 horafin: horafin,   
-                coach: coach,
-                aforo: afoo
+                coach: coach
             });
         } else {
             // Si hay días seleccionados, crea eventos para esos días durante el mes
@@ -102,8 +100,7 @@ function renderCalendar() {
                         end: fechaStr,       
                         horain: horain,      
                         horafin: horafin,   
-                        coach: coach,
-                        aforo: afoo
+                        coach: coach
                     });
                 }
             }
@@ -341,7 +338,7 @@ function openEventModal(event) {
       datos.append("classID", clasId);
       datos.append("title", title);
       datos.append("invitado", tieneInvitado);
-  
+   
       fetch("../cancel_reserv.php", {
         method: "POST",
         headers: {

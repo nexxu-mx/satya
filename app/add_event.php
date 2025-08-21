@@ -13,11 +13,23 @@ foreach ($eventos as $evento) {
     $end = $conn->real_escape_string($evento['end']);
     $horaInicio = $conn->real_escape_string($evento['horain']);
     $horaFin = $conn->real_escape_string($evento['horafin']);
-    $aforo = $conn->real_escape_string($evento['aforo']);
+  //  $aforo = $conn->real_escape_string($evento['aforo']);
     $coach = $conn->real_escape_string($evento['coach']);
     $estatus = 1;
     $reservado = 0;
-
+    //extrae aforo de disciplinas
+        $sqlD = ("SELECT aforo FROM disciplinas WHERE id = ?");
+        $stmtD = $conn->prepare($sqlD);
+        $stmtD->bind_param("i", $title);
+        $stmtD->execute();
+        $resultD = $stmtD->get_result();
+        if($rowD = $resultD->fetch_assoc()){
+            $aforo = $rowD['aforo'];
+        }else{
+            $response['results'][] = 'Sin Aforo';
+            exit;
+        }
+    //aforo fin
     $hora_inicio = $start . ' ' . $horaInicio . ':00';
     $hora_fin = $end . ' ' . $horaFin . ':00';
 

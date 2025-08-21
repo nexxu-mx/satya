@@ -47,7 +47,7 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
         <article>
             <section class="login-main-section">
                 <div class="container" id="loginForm" >
-                    <form action="loger.php" method="post" class="login-form" style="padding-top: 20px; height: 350px">
+                    <form action="loger.php" method="post" class="login-form" style="padding-top: 20px; height: 400px">
                         <h2>Inicia sesión</h2>
                         <p class="registro-mensaje">¿Es tu primera vez? <span><button type="button" onclick="openRegistro()">Regístrate</button></span></p>
         

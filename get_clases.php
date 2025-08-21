@@ -46,6 +46,9 @@ if ($day) {
             $autorizados = ""; 
         }
 
+        if(empty($idUser)){
+            $autorizados = "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15";
+        }
     // Obtener el número del mes
     $mesNumero = $meses[$mesTexto] ?? "00"; // por si no coincide
     // Armar la fecha completa
