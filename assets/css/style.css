@@ -3020,20 +3020,31 @@ position: absolute;
 }
 @media (min-width: 767px) {
   .reservas-list{
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-.class-card{
-  height: 230px;
-}
-.clase-img-container{
-  height: 230px;
-}
-.my-account-link{
-  font-size: 1.6rem;
-}
-  
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .class-card{
+    height: 230px;
+  }
+  .clase-img-container{
+    height: 230px;
+  }
+  .my-account-link{
+    font-size: 1.6rem;
+  }
+  .cc-horario h3 {
+    font-size: 2rem;
+  }
+  .info-mat {
+    gap: 20%;
+  }
+  .mat-dispo p {
+    font-size: 1.9rem;
+  }
+  .mat-reser p {
+    font-size: 1.9rem;
+  }
 }
 @media (max-width: 768px){
 

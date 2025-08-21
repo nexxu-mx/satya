@@ -44,7 +44,7 @@ while ($row = $result->fetch_assoc()) {
   $lugar = $row["lugar"];
   $idClase = $row["idClase"];
 
-   $cancelable = (strtotime($row["inicio"]) - time()) > 21600 ? true : false;
+   $cancelable = (strtotime($row["inicio"]) - time()) > 36000 ? true : false;
 
  
   $stmtC->bind_param("i", $idClase);
