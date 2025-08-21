@@ -3045,6 +3045,15 @@ position: absolute;
   .mat-reser p {
     font-size: 1.9rem;
   }
+  .explora-section h3 {
+    font-size: 4.5rem;
+  }
+  .explora-section a {
+    font-size: 1.6rem;
+  }
+  .a-link {
+     font-size: 1.6rem;
+  }
 }
 @media (max-width: 768px){
 

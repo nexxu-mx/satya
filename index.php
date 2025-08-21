@@ -225,24 +225,31 @@ include './db.php';
               <div class="swiper-container">
                 <div class="swiper-wrapper">
                   <?php
-                    $sqlPI = ("SELECT clases, costo, nombre, vigencia FROM paquetes WHERE clases = 8");
+                    $sqlPI = ("SELECT id, clases, costo, nombre, vigencia FROM paquetes ORDER BY RAND()");
                     $stmtPI = $conn->prepare($sqlPI);
                     $stmtPI->execute();
                     $resultPI = $stmtPI->get_result();
 
                     while($rowPI = $resultPI->fetch_assoc()){
+                       if($rowPI['nombre'] == "Movement"){
+                        $colorActual = "var(--c6)";
 
+                        }else if($rowPI['nombre'] == "Mixto"){
+                          $colorActual = "var(--c8)";
+                        }else{
+                          $colorActual = "var(--c2)";
+                        }
                       echo '
                       <div class="swiper-slide">
                         <div class="card">
-                          <p class="numero-clases-card" style="color: var(--c6);">' . $rowPI['clases'] . '</p>
-                          <p class="clases-card" style="color: var(--c6);">Clases</p>
+                          <p class="numero-clases-card" style="color: ' . $colorActual . ';">' . $rowPI['clases'] . '</p>
+                          <p class="clases-card" style="color: ' . $colorActual . ';">Clases</p>
                           <p class="clases-card" style="font-size: 2rem;">' . $rowPI['nombre'] . '</p>
                           <p class="vigencia-card" style="margin-top: 0">Vigencia ' . $rowPI['vigencia'] . ' días</p>
                           
-                          <div class="coust" style="background: var(--c6)">
+                          <div class="coust" style="background: ' . $colorActual . '">
                             <p class="precio-card">$' . $rowPI['costo'] . '<small>MX</small></p>
-                            <a href="paquetes.php">Ver Todos</a>
+                            <a href="checkout.php?tkn=4VKZkLL1nkJ8ulKru0nymfKW8IX34TDS2vtF72RT9o5HwkbMvI8xF3do1XndhUoZepPQNfAvIsTwEtto3h7IzRFwxDXmF3evJOeCLUaWVhPOBh7bRxcoeN10SJjlWGCzxIVy&id=' . $rowPI['id'] . '">Comprar</a>
                           </div>
                         </div>
                       </div>
@@ -258,8 +265,9 @@ include './db.php';
               
               <div class="swiper-button-next flecha-slider fd" style="color: var(--c2)"></div>
             </div>
+
             <!-- slider paquetes--> 
-         
+                    <a href="paquetes.php" class="a-link" style="margin-top: 20px;">« VER TODOS »</a>
         </div>
       </section>
 
