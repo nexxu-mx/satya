@@ -66,7 +66,7 @@ while ($row = $result->fetch_assoc()) {
                             users.nombre, 
                             reservaciones.id AS reservacion_id, 
                             reservaciones.alumno,
-                            eservaciones.notas, 
+                            reservaciones.notas, 
                             reservaciones.invitado,
                             reservaciones.lugar
                         FROM reservaciones 
