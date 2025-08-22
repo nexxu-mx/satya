@@ -65,7 +65,8 @@ while ($row = $result->fetch_assoc()) {
                 $sqlA = "SELECT 
                             users.nombre, 
                             reservaciones.id AS reservacion_id, 
-                            reservaciones.alumno, 
+                            reservaciones.alumno,
+                            eservaciones.notas, 
                             reservaciones.invitado,
                             reservaciones.lugar
                         FROM reservaciones 
@@ -77,7 +78,7 @@ while ($row = $result->fetch_assoc()) {
                 $stmtA->execute();
                 $resultA = $stmtA->get_result();
                 // Imprimir lista
-                $alumnos = "<ul>";
+                $alumnos = '<ul style="width: 100%;">';
               
                 while ($rowA = $resultA->fetch_assoc()) {
                     $name = htmlspecialchars($rowA['nombre']);
@@ -96,7 +97,14 @@ while ($row = $result->fetch_assoc()) {
                 
                     $onclick = "notausuario('$nota')";
                     $asistencia = 1 + $rowA['invitado'];
-                    $alumnos.= '<li style="display: flex;justify-content: space-between;"><p>' . $name . ' (x' . $asistencia . ')' . $lugar . '</p><div style="display: flex;gap: 10px;"><ion-icon name="information-circle-outline" aria-hidden="true" onclick="' . $onclick . '"></ion-icon></div></li>';
+                    if(!empty($rowA['notas'])){
+                      $nuser = $rowA['notas'];
+                      $nota = "notausuario('$nuser')";
+                      $iconota = '<ion-icon name="information-circle-outline" style="font-size: 2.5rem;color: var(--c2);" aria-hidden="true" onclick="' . $nota . '"></ion-icon>';
+                    }else{
+                      $nota = "";
+                    }
+                    $alumnos.= '<li style="display: flex;justify-content: space-between; align-items: center;"><p>' . $name . ' (x' . $asistencia . ')' . $lugar . '</p><div style="display: flex;gap: 10px;">' . $iconota . '</div></li>';
                 }
                 $alumnos .= "</ul>";
     
