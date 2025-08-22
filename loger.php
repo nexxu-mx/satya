@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!preg_match('/^\d{9,10}$/', $number)) {
         die('Datos inválidos.');
     }
-    $stmt = $conn->prepare("SELECT id, nombre, mail, numero, tipoUser FROM users WHERE numero = ? AND pass = ?");
+    $stmt = $conn->prepare("SELECT id, iduser, nombre, mail, numero, tipoUser FROM users WHERE numero = ? AND pass = ?");
     $stmt->bind_param("ss", $number, $code);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['idUser'] = (int)$user['id'];
         $_SESSION['email'] = $user['mail'];
         $_SESSION['number'] = $user['numero'];
+        $_SESSION['coach'] = $user['iduser'];
         $_SESSION['nombre'] = htmlspecialchars($user['nombre'], ENT_QUOTES, 'UTF-8');
         $_SESSION['attempts'] = 0;
         header("Location: profile.php");

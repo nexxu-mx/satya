@@ -6,7 +6,7 @@ if ($conn->connect_error) {
 }
 
 session_start();
-$id = $_SESSION['idUser'];
+$id = $_SESSION['coach']; 
 date_default_timezone_set('America/Mexico_City');
 
 // Obtener y formatear los parámetros de la URL
@@ -52,17 +52,45 @@ while ($row = $result->fetch_assoc()) {
                 <path d="M256 464c-114.69 0-208-93.31-208-208S141.31 48 256 48s208 93.31 208 208-93.31 208-208 208z"></path>
               </svg>'; 
 
-    $alumnos = '
-                <ul class="al1">
-                <p class="al">Asistentes</p>
-                    <li class="al2">Andrea</li>
-                    <li class="al2">Jimena</li>
-                    <li class="al2">Marcela</li>
-                    <li class="al2">Andrea</li>
-                    <li class="al2">Jimena</li>
-                    <li class="al2">Marcela</li>
-                    <li class="al2">Andrea</li>
-                </ul>';
+              // lista de alumnos
+                $sqlA = "SELECT 
+                            users.nombre, 
+                            reservaciones.id AS reservacion_id, 
+                            reservaciones.alumno, 
+                            reservaciones.invitado,
+                            reservaciones.lugar
+                        FROM reservaciones 
+                        INNER JOIN users ON reservaciones.alumno = users.id 
+                        WHERE reservaciones.idClase = ?";
+
+                $stmtA = $conn->prepare($sqlA);
+                $stmtA->bind_param("i", $row['id']);
+                $stmtA->execute();
+                $resultA = $stmtA->get_result();
+                // Imprimir lista
+                $alumnos = "<ul>";
+              
+                while ($rowA = $resultA->fetch_assoc()) {
+                    $name = htmlspecialchars($rowA['nombre']);
+                    $idEvent = $row['id'];
+                    $Ndisciplina = "'$disciplina'";
+                    $a1 = $rowA['reservacion_id'];
+                    $a2 = $rowA['alumno'];
+                    $a3 = $rowA['invitado'];
+                    $a4 = $rowA['lugar'];
+                    $nota = "Solo para comentar que esto es una nota.";
+                    if(!$a4 == null){
+                        $lugar = "(Lugar: $a4)";
+                    }else{
+                        $lugar = "";
+                    }
+                
+                    $onclick = "notausuario('$nota')";
+                    $asistencia = 1 + $rowA['invitado'];
+                    $alumnos.= '<li style="display: flex;justify-content: space-between;"><p>' . $name . ' (x' . $asistencia . ')' . $lugar . '</p><div style="display: flex;gap: 10px;"><i class="fas fa-info" onclick="' . $onclick . '"></i></div></li>';
+                }
+                $alumnos .= "</ul>";
+    
                 
   $eventos[] = [
     "id" => $row["id"],
