@@ -96,7 +96,7 @@ while ($row = $result->fetch_assoc()) {
                 
                     $onclick = "notausuario('$nota')";
                     $asistencia = 1 + $rowA['invitado'];
-                    $alumnos.= '<li style="display: flex;justify-content: space-between;"><p>' . $name . ' (x' . $asistencia . ')' . $lugar . '</p><div style="display: flex;gap: 10px;"><i class="fas fa-info" onclick="' . $onclick . '"></i></div></li>';
+                    $alumnos.= '<li style="display: flex;justify-content: space-between;"><p>' . $name . ' (x' . $asistencia . ')' . $lugar . '</p><div style="display: flex;gap: 10px;"><ion-icon name="information-circle-outline" aria-hidden="true" onclick="' . $onclick . '"></ion-icon></div></li>';
                 }
                 $alumnos .= "</ul>";
     
