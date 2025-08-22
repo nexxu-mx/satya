@@ -29,7 +29,7 @@ function generarToken16Digitos() {
 }
 
 // CONSULTA CON FILTRO DE FECHAS 
-$sql = "SELECT id, alumno, clase, instructor, invitado, activo, dura, inicio, fin, fechaReserva 
+$sql = "SELECT id, alumno, clase, idClase, instructor, invitado, activo, dura, inicio, fin, fechaReserva 
         FROM reservaciones 
         WHERE idInstructor = ? AND inicio BETWEEN ? AND ?";
 $stmt = $conn->prepare($sql);
@@ -44,8 +44,17 @@ while ($row = $result->fetch_assoc()) {
   $invitado = $row["invitado"] ?? "0";
 
   $cancelable = (time() - $row["fechaReserva"]) > 7200 ? false : true;
-
-  $aforo = "9/14";
+  $sqlF = ("SELECT aforo, reservados FROM clases WHERE id = ?");
+  $stmtF = $conn->prepare($sqlF);
+  $stmtF->bind_param("i", $row["idClase"]);
+  $stmtF->execute();
+  $resultF = $stmtF->get_result();
+  if($rowF = $resultF->fetch_assoc()){
+    $aforo = $rowF['reservados'] . "/" . $rowF['aforo'];
+  }else{
+    $aforo = "-";
+  }
+ 
   $estatus = '<svg xmlns="http://www.w3.org/2000/svg" class="ionicon clase-en-curso-punto" viewBox="0 0 512 512">
                 <defs><style>.ionicon { fill: #986C5D; }</style></defs>
                 <title>Ellipse</title>
