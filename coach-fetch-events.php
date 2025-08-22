@@ -88,21 +88,21 @@ while ($row = $result->fetch_assoc()) {
                     $a2 = $rowA['alumno'];
                     $a3 = $rowA['invitado'];
                     $a4 = $rowA['lugar'];
-                    $nota = "Solo para comentar que esto es una nota.";
                     if(!$a4 == null){
                         $lugar = "(Lugar: $a4)";
                     }else{
                         $lugar = "";
                     }
                 
-                    $onclick = "notausuario('$nota')";
+
                     $asistencia = 1 + $rowA['invitado'];
-                    if(!empty($rowA['notas'])){
+
+                    if($rowA['notas'] !== null){
                       $nuser = $rowA['notas'];
                       $nota = "notausuario('$nuser')";
                       $iconota = '<ion-icon name="information-circle-outline" style="font-size: 2.5rem;color: var(--c2);" aria-hidden="true" onclick="' . $nota . '"></ion-icon>';
                     }else{
-                      $nota = "";
+                      $iconota = "";
                     }
                     $alumnos.= '<li style="display: flex;justify-content: space-between; align-items: center;"><p>' . $name . ' (x' . $asistencia . ')' . $lugar . '</p><div style="display: flex;gap: 10px;">' . $iconota . '</div></li>';
                 }
