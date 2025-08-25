@@ -170,18 +170,18 @@ include './db.php';
                 $disciplina = isset($idDisciplinas[$fila['id_disciplina']]) 
                                 ? $idDisciplinas[$fila['id_disciplina']] 
                                 : 'SATYA';
-                $coachPath = "./assets/images/coaches/" . $fila['id'] . ".mp4";
-                $defaultPath = "./assets/images/coaches/" . $fila['id'] . ".png";
+                $coachPath = "./assets/images/coaches/pro/" . $fila['id'] . ".mp4";
+                $defaultPath = "./assets/images/coaches/pro/" . $fila['id'] . ".png";
         
                 if (!file_exists($coachPath)) {
                     $imgC = '<img src="'. $defaultPath .'" alt="">';
                     if (!file_exists($defaultPath)) {
-                        $imgC = '<img src="./assets/images/coaches/unknow.jpg" alt="">';
+                        $imgC = '<img src="./assets/images/coaches/pro/unknow.jpg" alt="">';
                     }
 
                 }else{
                     $imgC = '<video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;"
-                                poster="./assets/images/coaches/unknow.jpg">
+                                poster="./assets/images/coaches/pro/unknow.jpg">
                                 <source src="' . $coachPath . '" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>';

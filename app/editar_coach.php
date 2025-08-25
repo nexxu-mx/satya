@@ -57,7 +57,7 @@ if (
         $nuevoNombre = $idCoachImage . '.png';
 
         // Carpeta donde se guardarán las imágenes
-        $carpetaDestino = '../assets/images/coaches/pro';
+        $carpetaDestino = '../assets/images/coaches/pro/';
 
         $rutaDestino = $carpetaDestino . $nuevoNombre;
 
