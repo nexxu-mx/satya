@@ -46,8 +46,7 @@ if ($day) {
         }else{
         $sql = "SELECT id, id_coach, hora_inicio, hora_fin, aforo, reservados, id_disciplina, estatus 
                 FROM clases 
-                WHERE hora_inicio LIKE ? 
-                AND id_disciplina IN ($placeholders)
+                WHERE hora_inicio 
                 ORDER BY hora_inicio ASC";
         }
         // 4. Preparar la consulta
