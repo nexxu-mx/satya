@@ -55,7 +55,7 @@ include './db.php';
     <article>
       <section class="hero-banner" style="position: relative">
       <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; display: flex; justify-content: center; align-items: center;">
-          <video autoplay loop muted playsinline style="position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; object-fit: cover; transform: translate(-50%, -50%);z-index: 2"
+          <video autoplay loop muted playsinline style="position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; object-fit: cover; transform: translate(-50%, -50%);z-index: 2; filter: brightness(0.7);"
           poster="./assets/images/hero-ban.png">
             <source src="./assets/images/hero-bann.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -108,9 +108,11 @@ include './db.php';
 
                     while($rowDI = $resultDI->fetch_assoc()){
 
-                      $imgDI = './assets/images/disciplinas/' . $rowDI['id'] . '.png?=' . time();
+                      $imgDI = './assets/images/disciplinas/' . $rowDI['id'] . '.png';
                       if(!file_exists($imgDI)){
                         $imgDI = "./assets/images/disciplinas/unknow.jpg";
+                      }else{
+                        $imgDI = $imgDI . "?=v" . time();
                       }
 
                       echo '<div class="swiper-slide">
