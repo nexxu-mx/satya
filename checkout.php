@@ -152,15 +152,8 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                                 </div>
                                 
                                 <div class="c2">
-                                    <div id="eleccion_pago">
-                                        <a href="#" class="elect" style="pointer-events: none;
-  color: gray;
-  cursor: default;
-  text-decoration: none;"><img src="./assets/images/shop.svg" style="width: 50px" alt="" >
-                                        Pagar en sitio</a>
-                                        <button onclick="payTarjet()" class="elect"><img src="./assets/images/card.svg" style="width: 50px" alt="">Tarjeta Crédito/Débito</button>
-                                    </div>
-                                   <div id="metodo_pago" style="display: none">
+                                    
+                                   <div id="metodo_pago" >
                                         <input type="hidden" id="coust" name="coust" value="<?php echo $IDpaquete; ?>"/>
                                         <input type="hidden" id="idusrv" name="idusrv" value="3"/>
                                         <div id="paymentBrick_container" class="c10"></div>

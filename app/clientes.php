@@ -16,7 +16,7 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
 <html lang="en">
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>SATYAApp</title>
+	<title>SATYA App</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" href="../favicon.svg" type="image/x-icon"/>
 	<script src="assets/js/plugin/webfont/webfont.min.js"></script>

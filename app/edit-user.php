@@ -329,13 +329,13 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
                                         </div>
                                         <div class="col-md-1">
                                             <div class="form-floating form-floating-custom mb-3">
-                                                <input type="text" class="form-control" id="creditos" name="creditos" value="<?php echo $credit;?>" placeholder="name@example.com">
+                                                <input type="text" class="form-control" id="creditos" name="creditos" value="<?php echo $credit;?>" placeholder="name@example.com" <?php if((int)$_SESSION['tipoUser'] == 4){echo "readonly";};?> >
                                                 <label for="creditos">Créditos</label>
                                             </div>
                                        </div>
                                        <div class="col-md-2">
                                             <div class="form-floating form-floating-custom mb-3">
-                                                <input type="date" class="form-control" id="vencecreditos" name="vencecreditos" value="<?php echo $credVenci;?>" placeholder="name@example.com">
+                                                <input type="date" class="form-control" id="vencecreditos" name="vencecreditos" value="<?php echo $credVenci;?>" placeholder="name@example.com" <?php if((int)$_SESSION['tipoUser'] == 4){echo "readonly";};?>>
                                                 <label for="vencecreditos">Vencen el</label>
                                             </div>
                                        </div>

@@ -23,7 +23,12 @@ include './db.php';
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <?php include 'head.php'; ?>
   <style>
-    
+    .swiper-button-next{
+      z-index: 3;
+    }
+     .swiper-button-prev{
+        z-index: 3;
+     }
     .vosj{
       width: 101%;
       height: auto; 
