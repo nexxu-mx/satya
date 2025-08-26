@@ -40,13 +40,13 @@ if ($day) {
         if($busqueda){
                 $sql = "SELECT id, id_coach, hora_inicio, hora_fin, aforo, reservados, id_disciplina, estatus 
                 FROM clases 
-                WHERE hora_inicio LIKE ? 
+                WHERE hora_inicio LIKE ?
                 AND id_disciplina = $busqueda
                 ORDER BY hora_inicio ASC";   
         }else{
         $sql = "SELECT id, id_coach, hora_inicio, hora_fin, aforo, reservados, id_disciplina, estatus 
                 FROM clases 
-                WHERE hora_inicio 
+                WHERE hora_inicio LIKE ?
                 ORDER BY hora_inicio ASC";
         }
         // 4. Preparar la consulta
@@ -55,6 +55,7 @@ if ($day) {
             die("Error en la consulta: " . $conn->error);
         }
 
+        $stmt->bind_param("s", $dia);
         // 8. Ejecutar
         if (!$stmt->execute()) {
             die("Error al ejecutar: " . $stmt->error);
