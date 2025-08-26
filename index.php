@@ -232,7 +232,7 @@ include './db.php';
               <div class="swiper-container">
                 <div class="swiper-wrapper">
                   <?php
-                    $sqlPI = ("SELECT id, clases, costo, nombre, vigencia FROM paquetes WHERE nombre = 'Pilates Reformer'");
+                    $sqlPI = ("SELECT id, clases, costo, nombre, vigencia FROM paquetes WHERE nombre = 'Pilates Reformer'  ORDER BY CAST(costo AS DECIMAL(10,2)) ASC");
                     $stmtPI = $conn->prepare($sqlPI);
                     $stmtPI->execute();
                     $resultPI = $stmtPI->get_result();
@@ -297,16 +297,16 @@ include './db.php';
               <div class="swiper-container">
                 <div class="swiper-wrapper">
                   <?php
-                    $sqlPI = ("SELECT id, clases, costo, nombre, vigencia FROM paquetes WHERE nombre = 'Movement'");
+                    $sqlPI = ("SELECT id, clases, costo, nombre, vigencia FROM paquetes WHERE nombre = 'Movement' ORDER BY CAST(costo AS DECIMAL(10,2)) ASC");
                     $stmtPI = $conn->prepare($sqlPI);
                     $stmtPI->execute();
                     $resultPI = $stmtPI->get_result();
 
                     while($rowPI = $resultPI->fetch_assoc()){
-                       if($rowPI['nombre'] == "Movement"){
+                       if($rowPI['nombre'] == "MOVEMENT"){
                         $colorActual = "var(--c6)";
 
-                        }else if($rowPI['nombre'] == "Mixto"){
+                        }else if($rowPI['nombre'] == "MIXTO"){
                           $colorActual = "var(--c8)";
                         }else{
                           $colorActual = "var(--c2)";
@@ -361,16 +361,16 @@ include './db.php';
               <div class="swiper-container">
                 <div class="swiper-wrapper">
                   <?php
-                    $sqlPI = ("SELECT id, clases, costo, nombre, vigencia FROM paquetes WHERE nombre = 'Mixto' ");
+                    $sqlPI = ("SELECT id, clases, costo, nombre, vigencia FROM paquetes WHERE nombre = 'Mixto' ORDER BY CAST(costo AS DECIMAL(10,2)) ASC");
                     $stmtPI = $conn->prepare($sqlPI);
                     $stmtPI->execute();
                     $resultPI = $stmtPI->get_result();
 
                     while($rowPI = $resultPI->fetch_assoc()){
-                       if($rowPI['nombre'] == "Movement"){
+                       if($rowPI['nombre'] == "MOVEMENT"){
                         $colorActual = "var(--c6)";
 
-                        }else if($rowPI['nombre'] == "Mixto"){
+                        }else if($rowPI['nombre'] == "MIXTO"){
                           $colorActual = "var(--c8)";
                         }else{
                           $colorActual = "var(--c2)";
@@ -508,7 +508,7 @@ include './db.php';
             </div>
             <a class="ayuda-btn" href="#">AYUDA</a>
           </div>
-          
+           
         </div>
       </section>
 
