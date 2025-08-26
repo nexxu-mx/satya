@@ -808,7 +808,7 @@ function addNote() {
     const btnAceptar = document.createElement('button');
     btnAceptar.textContent = 'Aceptar';
     btnAceptar.style.padding = '8px 16px';
-    btnAceptar.style.backgroundColor = '#007bff';
+    btnAceptar.style.backgroundColor = 'var(--light-brown)';
     btnAceptar.style.color = 'white';
     btnAceptar.style.border = 'none';
     btnAceptar.style.borderRadius = '4px';
@@ -824,7 +824,7 @@ function addNote() {
     btnCancelar.style.cursor = 'pointer';
     
     // Agregar elementos al modal
-    modalContent.innerHTML = '<h3>Deja una nota a tu Coach</h3>';
+    modalContent.innerHTML = '<h3 style="font-weight: 200;">Deja una nota a tu Coach</h3>';
     modalContent.appendChild(input);
     buttonContainer.appendChild(btnCancelar);
     buttonContainer.appendChild(btnAceptar);
@@ -933,7 +933,7 @@ function confirmacion(el) {
           <a href="paquetes.php" class="confirmar-reserva-btn">Ver Paquetes</a>
           </div>`;
 
-      } else if (data.status === 'nocredit') {
+      } else if (data.status === 'nodisciplina') {
          document.getElementById('confirm-class').innerHTML = `
           <h2>Tu paquete no incluye esta clase</h2>
           <div style="display: flex;flex-direction: column;align-items: center;gap: 30px;">
