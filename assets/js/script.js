@@ -767,6 +767,107 @@ function reservaClase(el) {
   confirmationSection.style.display = 'block';
   classesContainer.style.display = 'none';
 }
+function addNote() {
+    // Crear el modal/alert personalizado
+    const modal = document.createElement('div');
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.backgroundColor = 'rgba(0,0,0,0.5)';
+    modal.style.display = 'flex';
+    modal.style.justifyContent = 'center';
+    modal.style.alignItems = 'center';
+    modal.style.zIndex = '1000';
+    
+    // Crear el contenido del modal
+    const modalContent = document.createElement('div');
+    modalContent.style.backgroundColor = 'white';
+    modalContent.style.padding = '20px';
+    modalContent.style.borderRadius = '8px';
+    modalContent.style.width = '300px';
+    modalContent.style.textAlign = 'center';
+    
+    // Crear el input
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = 'Escribe tu nota aquí...';
+    input.style.width = '100%';
+    input.style.padding = '10px';
+    input.style.margin = '10px 0';
+    input.style.border = '1px solid #ccc';
+    input.style.borderRadius = '4px';
+    
+    // Crear botones
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.display = 'flex';
+    buttonContainer.style.justifyContent = 'space-between';
+    buttonContainer.style.marginTop = '15px';
+    
+    const btnAceptar = document.createElement('button');
+    btnAceptar.textContent = 'Aceptar';
+    btnAceptar.style.padding = '8px 16px';
+    btnAceptar.style.backgroundColor = '#007bff';
+    btnAceptar.style.color = 'white';
+    btnAceptar.style.border = 'none';
+    btnAceptar.style.borderRadius = '4px';
+    btnAceptar.style.cursor = 'pointer';
+    
+    const btnCancelar = document.createElement('button');
+    btnCancelar.textContent = 'Cancelar';
+    btnCancelar.style.padding = '8px 16px';
+    btnCancelar.style.backgroundColor = '#6c757d';
+    btnCancelar.style.color = 'white';
+    btnCancelar.style.border = 'none';
+    btnCancelar.style.borderRadius = '4px';
+    btnCancelar.style.cursor = 'pointer';
+    
+    // Agregar elementos al modal
+    modalContent.innerHTML = '<h3>Deja una nota a tu Coach</h3>';
+    modalContent.appendChild(input);
+    buttonContainer.appendChild(btnCancelar);
+    buttonContainer.appendChild(btnAceptar);
+    modalContent.appendChild(buttonContainer);
+    modal.appendChild(modalContent);
+    
+    // Agregar modal al body
+    document.body.appendChild(modal);
+    
+    // Función para eliminar el modal
+    function removerModal() {
+        document.body.removeChild(modal);
+    }
+    
+    // Eventos de los botones
+    btnAceptar.onclick = function() {
+        const nota = input.value.trim();
+        document.getElementById('confirm-agendar').dataset.nota = nota;
+        console.log('Nota almacenada:', nota);
+        removerModal();
+    };
+    
+    btnCancelar.onclick = function() {
+        removerModal();
+    };
+    
+    // Cerrar al hacer click fuera del contenido
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            removerModal();
+        }
+    };
+    
+    // Enfocar el input automáticamente
+    input.focus();
+    
+    // Permitir enviar con Enter
+    input.onkeypress = function(e) {
+        if (e.key === 'Enter') {
+            btnAceptar.click();
+        }
+    };
+}
 
 function lugar(id, tipo) {
    
@@ -829,6 +930,15 @@ function confirmacion(el) {
           <div style="display: flex;flex-direction: column;align-items: center;gap: 30px;">
           <img src="assets/images/wait.svg" style="width: 100px" alt="">
           <p>Para seguir reservando tus clases, por favor adquiere nuevos créditos.</p>
+          <a href="paquetes.php" class="confirmar-reserva-btn">Ver Paquetes</a>
+          </div>`;
+
+      } else if (data.status === 'nocredit') {
+         document.getElementById('confirm-class').innerHTML = `
+          <h2>Tu paquete no incluye esta clase</h2>
+          <div style="display: flex;flex-direction: column;align-items: center;gap: 30px;">
+          <img src="assets/images/wait.svg" style="width: 100px" alt="">
+          <p>Para poder agendar esta clase, adquiere un nuevo paquete.</p>
           <a href="paquetes.php" class="confirmar-reserva-btn">Ver Paquetes</a>
           </div>`;
 

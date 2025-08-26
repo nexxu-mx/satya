@@ -2281,7 +2281,7 @@ form textarea {
 
 }
 .clase-img-container img{
-  width: 300px;
+  width: 150px;
   position: absolute;
 }
 .disci-clase{
@@ -2732,6 +2732,25 @@ position: absolute;
   }
   .reformer-select{
     width: 90%;
+  }
+  .notediv{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+  }
+  .noteres{
+    border: 1px solid var(--c9);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 15px;
+    line-height: 1;
+    font-size: 1.3rem;
+    gap: 4px;
+    color: var(--c9);
   }
   .cls-reformer{
     fill: var(--c2);
@@ -4746,7 +4765,7 @@ position: absolute;
     transform: scale(1.2);
   }
   .clase-img-container img{
-    width: 450px;
+    width: 150px;
   }
 }
 
@@ -4821,7 +4840,7 @@ position: absolute;
   }
 
  .clase-img-container img{
-    width: 550px;
+    width: 180px;
   }
 
   .cards-container {
@@ -5248,7 +5267,7 @@ position: absolute;
 @media (min-width: 1000px) and (max-width: 1200px) {
 
   .clase-img-container img{
-    width: 400px;
+    width: 200px;
   }
   #profile-inicio {
     margin-bottom: 50px;
@@ -5712,7 +5731,7 @@ position: absolute;
 @media (min-width: 1200px) {
 
   .clase-img-container img{
-    width: 450px;
+    width: 230px;
   }
   .hint-flex svg {
     display: none;

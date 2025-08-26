@@ -1,8 +1,8 @@
 <?php
-$subject = "$mail_asunto SATYAStudio";
+$subject = "$mail_asunto SATYA Studio";
 $headers = "MIME-Version: 1.0" . "\r\n";
 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-$headers .= 'From: notificaciones@SATYA.mx' . "\r\n";
+$headers .= 'From: notificaciones@studio-satya.com' . "\r\n";
 
 $message = '
 <html>

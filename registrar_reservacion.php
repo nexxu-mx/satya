@@ -128,7 +128,7 @@ if ($stmt->execute()) {
             $mail_motivo = "$clase";
             $mail_motivo2 = "Te esperamos en $clase el $inicio";
             $mail_descripcion = "Tu reservación de $clase con $instructor el $inicio, se agendó de manera exitosa! Puedes revistar los detalles de tu reserva en tu perfil.";
-            $mail_tabla = "Recuerda que puedes cancelar tu reservación hasta con 6 horas de anticipación.";
+            $mail_tabla = "Recuerda que puedes cancelar tu reservación hasta con 10 horas de anticipación.";
             include 'success_mail.php';
 
             echo json_encode(["status" => "success"]);
