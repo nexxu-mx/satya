@@ -114,7 +114,7 @@ include './db.php';
                                 <div class="card-disciplina-img">
                                   <img src="' . $imgDI . '" alt="SATYA ' . $rowDI['nombre_disciplina'] . '">
                                 </div>
-                                <span>' . $rowDI['subdescripcion_texto1'] . ' - ' . $rowDI['subdescripcion_texto2'] . ' - ' . $rowDI['subdescripcion_texto1'] . '</span>
+                                <span>' . $rowDI['subdescripcion_texto1'] . ' - ' . $rowDI['subdescripcion_texto2'] . ' - ' . $rowDI['subdescripcion_texto3'] . '</span>
                               </div>
                             </div>';
                     }
@@ -231,10 +231,10 @@ include './db.php';
                     $resultPI = $stmtPI->get_result();
 
                     while($rowPI = $resultPI->fetch_assoc()){
-                       if($rowPI['nombre'] == "Movement"){
+                       if($rowPI['nombre'] == "MOVEMENT"){
                         $colorActual = "var(--c6)";
 
-                        }else if($rowPI['nombre'] == "Mixto"){
+                        }else if($rowPI['nombre'] == "MIXTO"){
                           $colorActual = "var(--c8)";
                         }else{
                           $colorActual = "var(--c2)";

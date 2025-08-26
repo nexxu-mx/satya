@@ -120,10 +120,10 @@ document.addEventListener("DOMContentLoaded", () => {
           const token = generarToken();
           let colorActual 
 
-          if(p.nombre == "Movement"){
+          if(p.nombre == "MOVEMENT"){
             colorActual = "var(--c6)";
 
-          }else if(p.nombre == "Mixto"){
+          }else if(p.nombre == "MIXTO"){
             colorActual = "var(--c7)";
           }else{
             colorActual = "var(--c2)";
@@ -135,10 +135,10 @@ document.addEventListener("DOMContentLoaded", () => {
             if (p.persona == 4) return '4 Personas';
             return '';
           }
-           if(p.nombre == "Movement"){
+           if(p.nombre == "MOVEMENT"){
            const colorActual = "var(--c6)";
 
-          }else if(p.nombre == "Mixto"){
+          }else if(p.nombre == "MIXTO"){
             const colorActual = "var(--c8)";
           }else{
              const colorActual = "var(--c2)";

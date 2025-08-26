@@ -15,7 +15,7 @@
                                     return;
                                 }
                     
-                                // Actualizar los valores en el DOM
+                                // Actualizar los valores en el DOM 
                                 $('#Ivisitas').text(formatNumber(response.visitas));
                                 $('#Ileads').text(formatNumber(response.leads));
                                 $('#Icyc').text(formatNumber(response.cyc));

@@ -39,7 +39,7 @@
                 <div class="container tyc">
                 <h1>Términos y Condiciones de Uso de la Aplicación Web de SATYA</h1>
 
-                    <p>El presente documento establece los términos y condiciones bajo los cuales se regula el acceso y uso de la aplicación web de <strong>SATYA</strong>, propiedad de <em>studioSATYA.com</em>, por cualquier persona (en adelante, el "usuario") que haga uso de los servicios digitales ofrecidos. Al acceder, navegar o utilizar esta aplicación, el usuario declara haber leído, entendido y aceptado de forma expresa e irrevocable estos Términos y Condiciones, así como el Aviso de Privacidad correspondiente.</p>
+                    <p>El presente documento establece los términos y condiciones bajo los cuales se regula el acceso y uso de la aplicación web de <strong>SATYA</strong>, propiedad de <em>satya-studio.com</em>, por cualquier persona (en adelante, el "usuario") que haga uso de los servicios digitales ofrecidos. Al acceder, navegar o utilizar esta aplicación, el usuario declara haber leído, entendido y aceptado de forma expresa e irrevocable estos Términos y Condiciones, así como el Aviso de Privacidad correspondiente.</p>
 
                     <h2>1. Aceptación de los Términos</h2>
                     <p>Al utilizar la plataforma digital de SATYA, el usuario reconoce que ha leído, comprendido y aceptado los presentes Términos y Condiciones en su totalidad. En caso de no estar de acuerdo con alguna de las disposiciones aquí señaladas, deberá abstenerse de utilizar la aplicación web. La aceptación se considera vinculante desde el primer momento en que el usuario interactúe con la plataforma, incluyendo el registro, la navegación o la solicitud de servicios.</p>

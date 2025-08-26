@@ -90,7 +90,7 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
 									</div>
 									<div class="col-7 col-stats">
 									  <div class="numbers">
-										<p class="card-category">Clientes</p>
+										<p class="card-category">Transacciones</p>
 										<h4 class="card-title ca33" id="Ileads"></h4>
 									  </div>
 									</div>
@@ -110,7 +110,7 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
 									<div class="col-7 col-stats">
 									  <div class="numbers">
 										<p class="card-category">Ventas</p>
-										<h4 class="card-title ca33" id="Iclientes"></h4>
+										<h4 class="card-title ca33" id="Iclientes"></h4> 
 									  </div>
 									</div>
 								  </div>
