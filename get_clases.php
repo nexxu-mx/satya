@@ -55,16 +55,6 @@ if ($day) {
             die("Error en la consulta: " . $conn->error);
         }
 
-        // 5. Crear string de tipos de parámetros
-        // 's' para el string del LIKE, 'i' repetido para cada ID
-        $tipos_parametros = 's' . str_repeat('i', $cantidad_ids);
-
-        // 6. Combinar todos los valores en un array
-        $valores_parametros = array_merge([$dia], $ids_autorizados);
-
-        // 7. Bind parameters usando spread operator (...)
-        $stmt->bind_param($tipos_parametros, ...$valores_parametros);
-
         // 8. Ejecutar
         if (!$stmt->execute()) {
             die("Error al ejecutar: " . $stmt->error);
