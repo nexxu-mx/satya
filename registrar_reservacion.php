@@ -143,7 +143,7 @@ if ($stmt->execute()) {
 }
 
 // Cerrar todas las conexiones
-$stmtCredit->close();
+
 $stmtC->close();
 $stmt->close();
 $conn->close();
