@@ -892,7 +892,7 @@ padding-top: 50px;
 }
 .card-disciplina-img img{
   width: fit-content;
-  max-width: 200%;
+  max-width: 120%;
   position: absolute;
 }
 .card-disciplina span{

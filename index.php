@@ -430,88 +430,83 @@ include './db.php';
             <h2>Preguntas Frecuentes</h2>
             <div class="preguntas-division"></div>
             <button class="accordion">
-              <p>¿Puedo hacer ejercicio si tengo alguna lesión?</p>
+              <p>¿Puedo tomar clases si tengo alguna lesión o condición médica?</p>
             </button>
             <div class="panel">
-              <p>Sí. Es importante que nos informes con anticipación. Nuestras instructoras están capacitadas para adaptar los ejercicios según tus necesidades. Siempre consulta previamente con tu médico antes de iniciar cualquier actividad física.</p>
+              <p>Sí, siempre que tu médico lo autorice. Te pedimos avisarnos antes de tu clase para que podamos ajustar los ejercicios a tus necesidades y asegurar tu bienestar.</p>
             </div>
 
             <button class="accordion">
-              <p>¿Puedo practicar estas disciplinas si estoy embarazada o en etapa de posparto?</p>
+              <p>¿Puedo practicar si estoy embarazada o en etapa de posparto?</p>
             </button>
             <div class="panel">
-              <p>Sí, ofrecemos clases adaptadas para mujeres embarazadas o en proceso de recuperación postparto, siempre con autorización médica. Es importante contar con autorización médica antes de comenzar.</p>
+              <p>Claro. Contamos con adaptaciones para mujeres embarazadas y en recuperación postparto. Solo es importante contar con la aprobación de tu médico antes de comenzar.</p>
             </div>
 
             
 
             <button class="accordion">
-              <p>¿Necesito experiencia previa para empezar?</p>
+              <p>¿Necesito experiencia previa para inscribirme?</p>
             </button>
             <div class="panel">
-              <p>No. Nuestras clases están diseñadas para todos los niveles. Las instructoras te guiarán y ajustarán los movimientos según tus capacidades. No necesitas experiencia previa para comenzar.</p>
+              <p>No. Nuestras clases están diseñadas para todos los niveles. Cada persona avanza a su propio ritmo con la guía de nuestros coaches.</p>
             </div>
             <button class="accordion">
-              <p>¿Qué debo llevar a clase?</p>
+              <p>¿Qué ropa debo usar para la clase?</p>
             </button>
             <div class="panel">
-              <p> Ropa cómoda que te permita moverte con libertad. Recomendamos el uso de calcetines antideslizantes para mayor seguridad.</p>
+              <p>Te sugerimos ropa deportiva cómoda y que permita libertad de movimiento. Los calcetines antiderrapantes son la mejor opción para entrenar con mayor estabilidad.</p>
             </div>
             <button class="accordion">
-              <p>¿Cuántas veces a la semana debería tomar clases?</p>
+              <p>¿Cuánto dura cada clase?</p>
             </button>
             <div class="panel">
-              <p>Para obtener resultados visibles y sentir los beneficios físicos y mentales, recomendamos practicar al menos 2 veces por semana.</p>
+              <p>Cada sesión tiene una duración aproximada de 50 a 60 minutos.</p>
             </div>
             <button class="accordion">
-              <p>¿Cuánto duran las clases?</p>
+              <p>¿Es necesario reservar mi lugar o puedo llegar directo?</p>
             </button>
             <div class="panel">
-              <p>La mayoría de nuestras clases tienen una duración de entre 50 y 60 minutos.</p>
+              <p>Sí, es necesario reservar con anticipación. El cupo de las clases es limitado para asegurar una experiencia más personalizada.</p>
             </div>
             <button class="accordion">
-              <p>¿Se requiere reservar o puedo llegar directamente?</p>
+              <p>¿Puedo cancelar o reagendar una clase?</p>
             </button>
             <div class="panel">
-              <p>Es necesario reservar tu lugar con anticipación, ya que los espacios son limitados para garantizar una atención personalizada.</p>
+              <p>Sí. Puedes hacerlo con al menos 10 horas de anticipación; de lo contrario, la clase se dará por tomada.</p>
             </div>
             <button class="accordion">
-              <p>¿Puedo cancelar o reprogramar una clase?</p>
+              <p>¿Cuál es la edad mínima para asistir?</p>
             </button>
             <div class="panel">
-              <p>Sí. Aceptamos cancelaciones con al menos 6 horas de anticipación (ajustable según política). De lo contrario, la clase se considerará como tomada.</p>
+              <p>A partir de los 12 años, siempre que puedan usar los materiales y realizar los ejercicios con comodidad. Si no estás seguro/segura, podemos orientarte para saber</p>
             </div>
             <button class="accordion">
-              <p>¿Cuál es la edad mínima para asistir a clases?</p>
+              <p>¿Cómo puedo reservar una clase?</p>
             </button>
             <div class="panel">
-              <p>A partir de los 13 años, con autorización de un adulto o tutor.</p>
+              <p>A través de nuestra página web, por WhatsApp o directamente en el estudio. Solo necesitas tener tu comprobante de pago.</p>
             </div>
             <button class="accordion">
-              <p>¿Cómo reservo una clase?</p>
+              <p>¿Qué métodos de pago aceptan?</p>
             </button>
             <div class="panel">
-              <p>Puedes reservar a través de nuestra página web, app, o directamente por WhatsApp o teléfono.</p>
+              <p>Tarjeta de crédito/débito, transferencias y efectivo.</p>
             </div>
             <button class="accordion">
-              <p>¿Cuáles son los métodos de pago aceptados?</p>
+              <p>¿Cuáles son los horarios de atención?</p>
             </button>
             <div class="panel">
-              <p>Aceptamos tarjeta de crédito/débito, pagos en efectivo y transferencias bancarias.</p>
+              <p>De lunes a viernes de 7:00 a 11:00 a.m. y de 6:00 a 8:00 p.m. <br> Sábados y domingos de 8:00 a 11:00 a.m..</p>
             </div>
             <button class="accordion">
-              <p>¿Qué tipo de clases ofrece SATYA?</p>
+              <p>¿Qué disciplinas puedo encontrar en SATYA?</p>
             </button>
             <div class="panel">
-              <p>Todas nuestras clases son de bajo impacto y están diseñadas para fortalecer cuerpo y mente. Ofrecemos: <br>
-                • Pilates Mat <br>
-                • Barre <br>
-                • Sculpt <br>
-                • Yoga <br>
-                Puedes consultar la descripción de cada clase para saber cuál se adapta mejor a tus objetivos.
+              <p>Ofrecemos Barre, Pilates Reformer, Pilates Mat y Yoga. Cada una está pensada para fortalecer, alinear y conectar cuerpo y mente desde diferentes enfoques, siempre en un ambiente consciente y accesible para todos los niveles.
               </p>
             </div>
-            <a class="ayuda-btn" href="contacto.php">AYUDA</a>
+            <a class="ayuda-btn" href="#">AYUDA</a>
           </div>
           
         </div>
