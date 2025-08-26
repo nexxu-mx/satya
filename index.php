@@ -108,7 +108,7 @@ include './db.php';
 
                     while($rowDI = $resultDI->fetch_assoc()){
 
-                      $imgDI = './assets/images/disciplinas/' . $rowDI['id'] . '.png';
+                      $imgDI = './assets/images/disciplinas/' . $rowDI['id'] . '.png?=' . time();
                       if(!file_exists($imgDI)){
                         $imgDI = "./assets/images/disciplinas/unknow.jpg";
                       }
@@ -216,7 +216,7 @@ include './db.php';
             
             <div class="swiper-button-next flecha-slider fd"></div>
           </div>
-          <a href="#" class="a-link">« VER MÁS »</a>
+          <a href="coaches.php" class="a-link">« VER MÁS »</a>
         </div>
       </section>
 

@@ -29,45 +29,18 @@ if ($day) {
         "noviembre" => "11",
         "diciembre" => "12"
     ];
-//valida que paquete compro el usuario y que disciplinas puede reservar
-        $sqlUser = "SELECT p.disciplinas 
-                FROM users u 
-                INNER JOIN paquetes p ON u.paquete = p.id 
-                WHERE u.id = ?";
 
-        $stmtUser = $conn->prepare($sqlUser);
-        $stmtUser->bind_param("i", $idUser);
-        $stmtUser->execute();
-        $resultUser = $stmtUser->get_result();
-
-        if ($rowUser = $resultUser->fetch_assoc()) {
-            $autorizados = $rowUser['disciplinas'];
-        } else {
-            $autorizados = ""; 
-        }
-
-        if(empty($idUser)){
-            $autorizados = "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15";
-        }
     // Obtener el número del mes
     $mesNumero = $meses[$mesTexto] ?? "00"; // por si no coincide
     // Armar la fecha completa
     $fecha = "2025-$mesNumero-" . str_pad($d, 2, "0", STR_PAD_LEFT);
     $dia = "$fecha%";
-        // 1. Convertir string a array de integers
-        $ids_array = explode('|', $autorizados);
-        $ids_autorizados = array_map('intval', $ids_array);
-
-        // 2. Crear los placeholders para IN (?, ?, ?)
-        $cantidad_ids = count($ids_autorizados);
-        $placeholders = implode(',', array_fill(0, $cantidad_ids, '?'));
 
         // 3. Construir la consulta SQL
         if($busqueda){
                 $sql = "SELECT id, id_coach, hora_inicio, hora_fin, aforo, reservados, id_disciplina, estatus 
                 FROM clases 
                 WHERE hora_inicio LIKE ? 
-                AND id_disciplina IN ($placeholders)
                 AND id_disciplina = $busqueda
                 ORDER BY hora_inicio ASC";   
         }else{
@@ -231,7 +204,7 @@ if ($day) {
         }else{
             $pathimg = $pathimg . "?v=" . time();
         }
-
+ 
         $clases[] = [
             "id" => $row['id'],
             "id_coach" => $row['id_coach'],

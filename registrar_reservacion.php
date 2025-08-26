@@ -22,6 +22,7 @@ $instructor = $data['ncoach'];
 $clase = $data['ndisciplina'];
 $dura = $data['durac'];
 $idInstructor = $data['idcoach'];
+$id_disciplina = $data['idDisciplina'];
 
 if(isset($data['lugar'])){
 
@@ -67,24 +68,47 @@ if ($resultC->num_rows === 0) {
     $fin = $rowC['hora_fin'];
 }
 
-// TERCERO: Verificar créditos disponibles
-$stmtCredit = $conn->prepare("SELECT credit FROM users WHERE id = ?");
-$stmtCredit->bind_param("i", $alumno);
-$stmtCredit->execute();
-$resultCredit = $stmtCredit->get_result();
+// TERCERO: Verificar créditos disponibles y disciplinas autorizado
+        $sqlUser = "SELECT p.disciplinas, u.credit
+                FROM users u 
+                INNER JOIN paquetes p ON u.paquete = p.id 
+                WHERE u.id = ?";
 
-if ($resultCredit->num_rows === 0) {
-    echo json_encode(["error" => "usuario no encontrado"]);
-    exit();
-} else {
-    $rowCredit = $resultCredit->fetch_assoc();
-    $creditDisponible = $rowCredit['credit'];
-    
-    if ($creditDisponible <= 0) {
-        echo json_encode(["status" => "nocredit"]);
+        $stmtUser = $conn->prepare($sqlUser);
+        $stmtUser->bind_param("i", $alumno);
+        $stmtUser->execute();
+        $resultUser = $stmtUser->get_result();
+    if ($resultUser->num_rows === 0) {
+        echo json_encode(["error" => "usuario no encontrado"]);
         exit();
+    }else{
+        if ($rowUser = $resultUser->fetch_assoc()) {
+            $creditDisponible = $rowUser['credit'];
+    
+            if ($creditDisponible <= 0) {
+                echo json_encode(["status" => "nocredit"]);
+                exit();
+            }
+            $autorizados = $rowUser['disciplinas'];
+        } else {
+            $autorizados = "0"; 
+        }
     }
+        
+
+
+// valida que corresponda a disciplinas autorizadas
+
+$array_autorizados = explode('|', $autorizados);
+
+// Verificar si el ID está en el array
+if (in_array($id_disciplina, $array_autorizados)) {
+    $molajf = "ok";
+} else {
+    echo json_encode(["status" => "nodisciplina"]);
+    exit();
 }
+
 
 // CUARTO: Insertar la reserva (si pasó todas las validaciones)
 $stmt = $conn->prepare("INSERT INTO reservaciones (clase, idClase, alumno, dura, instructor, idInstructor, invitado, activo, inicio, fin, lugar, fechaReserva) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");

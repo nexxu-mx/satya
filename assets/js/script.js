@@ -643,6 +643,7 @@ function reservaClase(el) {
   const iden = el.dataset.id;
   const idCoach = el.dataset.idcoach;
   const esp = el.dataset.esp;
+  const idDi = el.dataset.iddisciplina;
   //const imag = "assets/images/coaches/pro/" + idCoach + ".png";
  // document.getElementById("confirm-coach").innerHTML = nombre;
   document.getElementById("confirm-horario").innerHTML = horario;
@@ -760,6 +761,7 @@ function reservaClase(el) {
   document.getElementById("confirm-agendar").dataset.disciplina = disciplina;
   document.getElementById("confirm-agendar").dataset.duracion = duracion;
   document.getElementById("confirm-agendar").dataset.id_inst = idCoach;
+  document.getElementById("confirm-agendar").dataset.id_Disc = idDi;
 
 
   confirmationSection.style.display = 'block';
@@ -799,6 +801,7 @@ function confirmacion(el) {
   const durac = el.dataset.duracion;
   const idcoach = el.dataset.id_inst;
   const lugar = el.dataset.id_lugar;
+  const idDix = el.dataset.id_Disc;
   
 
   fetch('registrar_reservacion.php', {
@@ -812,7 +815,8 @@ function confirmacion(el) {
       ndisciplina: ndisciplina,
       durac: durac,
       idcoach: idcoach,
-      lugar: lugar
+      lugar: lugar,
+      idDisciplina: idDix
     })
   })
     .then(response => response.json())

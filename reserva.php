@@ -73,6 +73,9 @@ session_start();
                              <div class="reformer" id="esp2"></div>
 
                         </div>
+                        <div>
+                            <button><ion-icon name="reader-outline"></ion-icon> Agregar Nota</button>
+                        </div>
                         <div class="confirmation-btns">
                             <p class="cancelar-confirmacion-reserva-btn" onclick="cancelConfirmacion()">Cancelar</p>
                             <p class="confirmar-reserva-btn" id="confirm-agendar" onclick="confirmacion(this)">Confirmar Reserva</p>
