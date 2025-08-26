@@ -171,7 +171,7 @@ include './db.php';
                                 ? $idDisciplinas[$fila['id_disciplina']] 
                                 : 'SATYA';
                 $coachPath = "./assets/images/coaches/pro/" . $fila['id'] . ".mp4";
-                $defaultPath = "./assets/images/coaches/pro/" . $fila['id'] . ".png";
+                $defaultPath = "./assets/images/coaches/pro/" . $fila['id'] . ".png?v=" . time();
         
                 if (!file_exists($coachPath)) {
                     $imgC = '<img src="'. $defaultPath .'" alt="">';
