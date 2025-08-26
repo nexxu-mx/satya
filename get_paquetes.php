@@ -20,6 +20,9 @@ if (!empty($disciplina) && $disciplina !== 'DISCIPLINA') {
     $params[] = $disciplina;
 }
 
+// Agregar ORDER BY para ordenar por costo de menor a mayor
+$sql .= " ORDER BY CAST(costo AS DECIMAL(10,2)) ASC";
+
 $stmt = $conn->prepare($sql);
 
 if (!empty($params)) {

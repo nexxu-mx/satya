@@ -66,7 +66,7 @@
         
 
         <li>
-          <a href="#" class="social-link">
+          <a href="https://www.instagram.com/satyastudiowellness?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-link">
             <ion-icon name="logo-instagram"></ion-icon>
           </a>
         </li>

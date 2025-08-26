@@ -15,7 +15,7 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
 <html lang="en">
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>SATYAApp</title>
+	<title>SATYA App</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" href="../favicon.svg" type="image/x-icon"/>
 	<script src="assets/js/plugin/webfont/webfont.min.js"></script>
@@ -315,7 +315,7 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
                                        </div>
                                        <div class="col-md-3">
                                             <div class="form-floating form-floating-custom mb-3">
-                                                <input type="text" class="form-control" id="pass" name="pass" value="<?php echo $pass;?>" placeholder="name@example.com" maxlength="10" minlength="9" required="">
+                                                <input type="text" class="form-control" id="pass" name="pass" value="<?php echo $pass;?>" placeholder="name@example.com"  minlength="5" required="">
                                                 <label for="pass">Contraseña</label>
                                             </div>
                                        </div>
