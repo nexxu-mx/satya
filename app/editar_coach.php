@@ -63,6 +63,9 @@ if (
 
         if (move_uploaded_file($nombreTemporal, $rutaDestino)) {
             echo "Todo Correcto";
+        }else{
+            echo "error al update img";
+        exit();
         }
     } else {
         

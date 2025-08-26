@@ -226,7 +226,7 @@ function cargarClases(day) {
 
       if (data.length === 0) {
         msn2.innerHTML = '<p>No hay clases para este día.</p>';
-        return;
+        return; 
       }
 
       data.forEach(clase => {

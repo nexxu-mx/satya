@@ -224,10 +224,10 @@ if ($day) {
             $estatus = '<img class="icono-reserva" src="assets/images/svg/waiting_list.svg" alt="Wait List ícono">';
         }
 
-        $pathimg = './assets/images/coaches/' . $row['id_coach'] . '.png';
+        $pathimg = './assets/images/coaches/pro/' . $row['id_coach'] . '.png';
 
         if(!file_exists($pathimg)){
-            $pathimg = "./assets/images/coaches/unknow.jpg";
+            $pathimg = "./assets/images/coaches/pro/unknow.jpg";
         }
 
         $clases[] = [
