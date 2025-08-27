@@ -19,6 +19,7 @@ if((int)$row["credit"] > 90){
 }else{
     $credits = $row["credit"];
 }
+$credits = 3;
 $row = $result->fetch_assoc();
 echo json_encode([
     "nombre" => $row["nombre"],
