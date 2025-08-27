@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/config-mail.php';
 $subject = "$mail_asunto SATYA Studio";
 $headers = "MIME-Version: 1.0" . "\r\n";
 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -50,7 +51,7 @@ $message = '
 </html>
 ';
 
-if (mail($mail_mailing, $subject, $message, $headers)) {
+if (smail($mail_mailing, $subject, $message, $headers)) {
    $celjk = "ok";
 }
 
