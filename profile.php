@@ -117,7 +117,7 @@ if (file_exists($realProfilePath)) {
         <article>
             <section class="secti-on">
                 
-                <!-- INICIO -->
+                <!-- INICIO --> 
                 <div class="container p1" id="profile-inicio">
                     <div class="p6">
                         <div class="p7">

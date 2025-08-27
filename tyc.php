@@ -77,7 +77,7 @@
                     <p>La plataforma permite a los usuarios realizar reservaciones para eventos, sesiones o servicios específicos ofrecidos por SATYA. Al momento de confirmar una reservación, el usuario se compromete a cumplir con los términos acordados.</p>
 
                     <ul>
-                    <li>El usuario podrá cancelar una reservación sin penalización siempre y cuando lo haga con al menos <strong>6 horas de anticipación</strong> al inicio del evento.</li>
+                    <li>El usuario podrá cancelar una reservación sin penalización siempre y cuando lo haga con al menos <strong>10 horas de anticipación</strong> al inicio del evento.</li>
                     <li>Las cancelaciones posteriores a ese plazo no serán procesadas ni reembolsadas bajo ninguna circunstancia.</li>
                     <li>SATYA se reserva el derecho de cancelar cualquier reservación sin previo aviso, ya sea por razones operativas, de fuerza mayor o incumplimiento de políticas internas.</li>
                     </ul>

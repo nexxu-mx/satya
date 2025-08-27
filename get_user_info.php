@@ -14,11 +14,15 @@ if ($result->num_rows === 0) {
     echo json_encode(["error" => "Usuario no encontrado"]);
     exit;
 }
-
+if($row["credit"] > 90){
+    $credits = "Ilimitados";
+}else{
+    $credits = $row["credit"];
+}
 $row = $result->fetch_assoc();
 echo json_encode([
     "nombre" => $row["nombre"],
-    "credit" => $row["credit"],
+    "credit" => $credits,
     "fechaCredit" => $row["fechaCredit"]
 ]);
 ?>
