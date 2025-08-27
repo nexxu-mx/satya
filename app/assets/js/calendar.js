@@ -221,7 +221,7 @@ function openEventModal(event) {
                   .catch(err => console.error("Error consultando lugares:", err));
           }else if(esp == 2){
           
-              fetch(`../get-lugares.php?especial=1&id=${id_event}`)
+              fetch(`../get-lugares.php?especial=2&id=${id_event}`)
                   .then(res => {
                       if (!res.ok) {
                           throw new Error('Error en la respuesta del servidor');
