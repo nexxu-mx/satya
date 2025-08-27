@@ -242,7 +242,7 @@ include './db.php';
                         $colorActual = "var(--c6)";
 
                         }else if($rowPI['nombre'] == "MIXTO"){
-                          $colorActual = "var(--c8)";
+                          $colorActual = "var(--c7)";
                         }else{
                           $colorActual = "var(--c2)";
                         }
@@ -307,7 +307,7 @@ include './db.php';
                         $colorActual = "var(--c6)";
 
                         }else if($rowPI['nombre'] == "MIXTO"){
-                          $colorActual = "var(--c8)";
+                          $colorActual = "var(--c7)";
                         }else{
                           $colorActual = "var(--c2)";
                         }
@@ -371,7 +371,7 @@ include './db.php';
                         $colorActual = "var(--c6)";
 
                         }else if($rowPI['nombre'] == "MIXTO"){
-                          $colorActual = "var(--c8)";
+                          $colorActual = "var(--c7)";
                         }else{
                           $colorActual = "var(--c2)";
                         }
