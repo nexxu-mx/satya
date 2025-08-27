@@ -14,13 +14,19 @@ if ($result->num_rows === 0) {
     echo json_encode(["error" => "Usuario no encontrado"]);
     exit;
 }
-if((int)$row["credit"] > 90){
-    $credits = "Ilimitados";
-}else{
-    $credits = $row["credit"];
-}
-$credits = 3;
 $row = $result->fetch_assoc();
+$cleanCredit = filter_var($row["credit"], FILTER_SANITIZE_NUMBER_INT);
+$creditValue = (int)$cleanCredit;
+
+if($creditValue > 90){
+    $credits = "Ilimitados";
+}elseif(empty($row["credit"])){
+   $credits = "Sin ";
+}else{
+    $credits = $creditValue; // Ahora es int(8)
+}
+
+
 echo json_encode([
     "nombre" => $row["nombre"],
     "credit" => $credits,
