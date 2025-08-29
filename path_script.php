@@ -53,7 +53,7 @@ use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Preference\PreferenceClient;
 use MercadoPago\Exceptions\MPApiException;
 // Agregar las credenciales del ambiente de producción usando MercadoPagoConfig. PR::: APP_USR-3515522472050913-080415-812b617b5fdf41c6856319cc2ff95872-327557794 TEST::: TEST-7009180377754289-091823-3aea4b50c4898192e8bd32dac3b11d7c-1940582280
-MercadoPagoConfig::setAccessToken('APP_USR-3515522472050913-080415-812b617b5fdf41c6856319cc2ff95872-327557794');
+MercadoPagoConfig::setAccessToken('TEST-3515522472050913-080415-ae93b6ccf353a310f7018282834aa24a-327557794');
 function createPaymentPreference($product, $payer) {
     // Crear la preferencia de pago
     $preferenceClient = new PreferenceClient();
