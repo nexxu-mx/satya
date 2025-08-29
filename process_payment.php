@@ -1,15 +1,16 @@
 <?php
 // Iniciar buffer de salida para capturar posibles warnings/errors
 
-ob_start();
+//ob_start();
 date_default_timezone_set('America/Mexico_City');
 
-error_reporting(E_ALL & ~E_DEPRECATED);
+//error_reporting(E_ALL & ~E_DEPRECATED);
 header('Content-Type: application/json');
 
 // Obtener datos del request
 $data = json_decode(file_get_contents('php://input'), true);
 include './db.php';
+include './error_log.php';
 
 if ($conn->connect_error) {
     ob_end_clean();
@@ -194,7 +195,7 @@ try {
     }
 
     $stmt_update->bind_param(
-        "issiissdi",
+        "issiiissdi",
         $new_credit,
         $dias,      // venceCredit
         $vence, // fechaCredit
