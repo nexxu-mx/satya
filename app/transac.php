@@ -36,11 +36,11 @@ if ($result->num_rows > 0) {
         
         // Método de pago
         if ($row['metodo'] == '1') {
-            $producto['metodo'] = "Efectivo";
+            $producto['metodo'] = "Transferencia";
         } elseif ($row['metodo'] == '3') {
             $producto['metodo'] = "App";
         } else {
-            $producto['metodo'] = "Tarjeta";
+            $producto['metodo'] = "Terminal";
         }
 
         $producto['fecha'] = $row['fecha'];

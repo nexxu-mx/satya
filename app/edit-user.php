@@ -96,18 +96,18 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
                                 $iniciales = strtoupper(($nombre[0] ?? '').($apellido[0] ?? ''));
                                 if (empty($iniciales)) $iniciales = 'NA';
 
-                                if($fsmt['tipoUser'] == 1){
+                                if((int)$fsmt['tipoUser'] == 1){
                                     $tipus = '<option value="1" selected="">Cliente</option>
                                                     <option value="2">Coach</option>
                                                     <option value="3">Administrador</option>
                                                     <option value="4">Recepción</option>';
-                                }elseif($fsmt['tipoUser'] == 2){
+                                }elseif((int)$fsmt['tipoUser'] == 2){
                                     $tipus = '
                                     <option value="1">Cliente</option>
                                                     <option value="2" selected="">Coach</option>
                                                     <option value="3">Administrador</option>
                                                     <option value="4">Recepción</option>';
-                                }if($fsmt['tipoUser'] == 3){
+                                }if((int)$fsmt['tipoUser'] == 3){
                                     $tipus = '<option value="1">Cliente</option>
                                                     <option value="2">Coach</option>
                                                     <option value="3" selected="">Administrador</option>
@@ -418,8 +418,8 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
                         <div class="form-group form-group-default">
                             <label>Metodo de Pago</label>
                             <select class="form-select" id="metod" name="metod">
-                                <option value="1">Efectivo</option>
-                                <option value="2">Tarjeta</option>
+                                <option value="1">Transferencia</option>
+                                <option value="2">Terminal</option>
                             </select>
                         </div>
                     
