@@ -53,12 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mail = $row['mail'];
     $customer_id = $row['customer_id'];
 
-    if($credits == "ILIMITADO"){
-        if($vigencia == 30){
+    if($credits == "ILIMITADO"){  
             $credits = 30;
-        }else{
-             $credits = 365;
-        } 
+    }elseif($credits == "ANUALIDAD"){
+            $credits = 365;
     }
     $new_credit = $credits;
     $status = "approved";
