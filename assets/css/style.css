@@ -1541,6 +1541,7 @@ span {
   font-family: var(--ff-Raleway);
   font-size: 3.5rem;
   font-weight: 500;
+  line-height: 1.1;
 }
 .cla6 p{
   text-align: center;
@@ -2546,6 +2547,10 @@ form textarea {
   padding: 2px 10px;
   border-radius: 15px;
   background-color: rgb(237, 231, 218);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%;
 }
 
 

@@ -672,7 +672,7 @@ function reservaClase(el) {
 
                 // Crear span para mostrar el número o "coach"
                 const span = document.createElement("span");
-                span.textContent = i === 8 ? "coach" : i;
+                span.textContent = i === 8 ? "C" : i;
                 li.appendChild(span);
 
                 if (data.ocupados.includes(i)) {
