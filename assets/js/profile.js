@@ -69,13 +69,22 @@ eventClick: function(info) {
     }
     
     if(info.event.extendedProps.cancelable === true){
-        document.getElementById("buttonModal").innerHTML = `
-            <button class="m11" onclick="cancelReserv(${info.event.id}, ${info.event.extendedProps.alumno}, ${info.event.extendedProps.classID}, ${info.event.extendedProps.invitado}, '${info.event.title}')">
+            document.getElementById("buttonModal").innerHTML = `
+                        <button class="m11" onclick="cancelReserv(${info.event.id}, ${info.event.extendedProps.alumno}, ${info.event.extendedProps.classID}, ${info.event.extendedProps.invitado}, '${info.event.title}')">
+                            <ion-icon name="close-circle-outline" aria-hidden="true"></ion-icon>
+                            Cancelar
+                        </button>
+                        `;  
+        }else{
+             document.getElementById("buttonModal").innerHTML = `
+            <button class="m11" onclick="cancelableFalse()">
                 <ion-icon name="close-circle-outline" aria-hidden="true"></ion-icon>
                 Cancelar
             </button>
             `;  
-    }
+        }
+       
+    
     
     if(info.event.extendedProps.invitable === true){
         document.getElementById("invitarModal").innerHTML = `
@@ -178,6 +187,9 @@ eventClick: function(info) {
 
         }
         };
+}
+function cancelableFalse(){
+    alert("Por política de SATYA, solo puedes cancelar la clase con 10 horas de anticipación.");
 }
 function cargarOpcionesFecha() {
     const selectDia = document.getElementById("dia");
