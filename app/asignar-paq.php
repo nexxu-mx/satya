@@ -54,7 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $customer_id = $row['customer_id'];
 
     if($credits == "ILIMITADO"){
-        $credits = 9999;
+        if($vigencia == 30){
+            $credits = 30;
+        }else{
+             $credits = 365;
+        } 
     }
     $new_credit = $credits;
     $status = "approved";

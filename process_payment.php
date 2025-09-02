@@ -161,8 +161,13 @@ try {
     file_put_contents('./log.txt', date("Y-m-d H:i:s") . " - " . json_encode($payment) . PHP_EOL, FILE_APPEND);
 
     $payment_status = $payment->status;
+    
     if($credits == "ILIMITADO"){
-        $credits = 9999;
+        if($vigencia == 30){
+            $credits = 30;
+        }else{
+             $credits = 365;
+        } 
     }
     $new_credit = $credits;
     
