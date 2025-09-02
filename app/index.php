@@ -85,7 +85,7 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
 								  <div class="row">
 									<div class="col-5">
 									  <div class="icon-big text-center">
-										<i class="icon-people text-success"></i>
+										<i class="icon-credit-card text-success"></i>
 									  </div>
 									</div>
 									<div class="col-7 col-stats">
@@ -104,12 +104,12 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
 								  <div class="row">
 									<div class="col-5">
 									  <div class="icon-big text-center">
-										<i class="icon-handbag text-danger"></i>
+										<i class="icon-people text-danger"></i>
 									  </div>
 									</div>
 									<div class="col-7 col-stats">
 									  <div class="numbers">
-										<p class="card-category">Ventas</p>
+										<p class="card-category">Clientes</p>
 										<h4 class="card-title ca33" id="Iclientes"></h4> 
 									  </div>
 									</div>
@@ -128,7 +128,7 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
 									</div>
 									<div class="col-7 col-stats">
 									  <div class="numbers">
-										<p class="card-category">% Aforo</p>
+										<p class="card-category">Coaches</p>
 										<h4 class="card-title ca33" id="Icyc"></h4>
 									  </div>
 									</div>

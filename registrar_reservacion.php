@@ -23,6 +23,7 @@ $clase = $data['ndisciplina'];
 $dura = $data['durac'];
 $idInstructor = $data['idcoach'];
 $id_disciplina = $data['idDisciplina'];
+$nota = isset($data['nota']) && $data['nota'] !== '' ? $data['nota'] : null;
 
 if(isset($data['lugar'])){
 
@@ -40,20 +41,9 @@ $fechaReserva = time();
 $inicio = null;
 $fin = null;
 
-// PRIMERO: Verificar si el usuario ya tiene reserva para esta clase
-$stmtCheck = $conn->prepare("SELECT id FROM reservaciones WHERE alumno = ? AND idClase = ? AND activo = '1'");
-$stmtCheck->bind_param("ii", $alumno, $idClase);
-$stmtCheck->execute();
-$resultCheck = $stmtCheck->get_result();
 
-if ($resultCheck->num_rows > 0) {
-    echo json_encode(["status" => "duplicate", "message" => "Ya tienes una reserva activa para esta clase"]);
-    $stmtCheck->close();
-    exit();
-}
-$stmtCheck->close();
 
-// SEGUNDO: Obtener información de la clase
+// PRIMERO: Obtener información de la clase
 $stmtC = $conn->prepare("SELECT hora_inicio, hora_fin FROM clases WHERE id = ?");
 $stmtC->bind_param("i", $idClase);
 $stmtC->execute();
@@ -65,9 +55,38 @@ if ($resultC->num_rows === 0) {
 } else {
     $rowC = $resultC->fetch_assoc();
     $inicio = $rowC['hora_inicio'];
+    $fecha_clase = $rowC['hora_inicio'];
     $fin = $rowC['hora_fin'];
 }
 
+// SEGUNDO: Verificar si el usuario ya tiene reserva para esta clase
+$stmtCheck = $conn->prepare("
+    SELECT id 
+    FROM reservaciones 
+    WHERE alumno = ? 
+      AND DATE(inicio) = ? 
+      AND activo = '1'
+    LIMIT 1
+");
+
+// extraer solo la parte de fecha (YYYY-MM-DD) de $fecha_clase
+$fechaSolo = date("Y-m-d", strtotime($fecha_clase));
+
+$stmtCheck->bind_param("is", $alumno, $fechaSolo);
+$stmtCheck->execute();
+$resultCheck = $stmtCheck->get_result();
+
+if ($resultCheck->num_rows > 0) {
+    echo json_encode([
+        "status" => "duplicate", 
+        "message" => "Ya tienes una reserva activa para este día"
+    ]);
+    $stmtCheck->close();
+    exit();
+}
+
+
+$stmtCheck->close();
 // TERCERO: Verificar créditos disponibles y disciplinas autorizado
         $sqlUser = "SELECT p.disciplinas, u.credit
                 FROM users u 
@@ -111,8 +130,8 @@ if (in_array($id_disciplina, $array_autorizados)) {
 
 
 // CUARTO: Insertar la reserva (si pasó todas las validaciones)
-$stmt = $conn->prepare("INSERT INTO reservaciones (clase, idClase, alumno, dura, instructor, idInstructor, invitado, activo, inicio, fin, lugar, fechaReserva) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("ssssssssssss", $clase, $idClase, $alumno, $dura, $instructor, $idInstructor, $invitado, $activo, $inicio, $fin, $lugar, $fechaReserva);
+$stmt = $conn->prepare("INSERT INTO reservaciones (clase, idClase, alumno, notas, dura, instructor, idInstructor, invitado, activo, inicio, fin, lugar, fechaReserva) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("sssssssssssss", $clase, $idClase, $alumno, $nota, $dura, $instructor, $idInstructor, $invitado, $activo, $inicio, $fin, $lugar, $fechaReserva);
 
 if ($stmt->execute()) {
     $stmtR = $conn->prepare("UPDATE clases SET reservados = reservados + 1 WHERE id = ?");

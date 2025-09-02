@@ -263,6 +263,7 @@ function cargarClases(day) {
                                                 <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53.4 88.89"><defs></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="cls-aforo" d="M32.21,24.19a5.91,5.91,0,1,1-5.91-5.91,5.9,5.9,0,0,1,5.91,5.91"/><path class="cls-aforo" d="M26.71,88.89A6,6,0,0,1,23.6,88a5.78,5.78,0,0,1-.68-.49c-1.87-1.6-3-5.08-3.56-10.63a69.28,69.28,0,0,1-.26-7.45c.42-14.51,1.58-18.07,2.82-20.7a34.35,34.35,0,0,1,2.91-5,40.32,40.32,0,0,0-5.3-5.43,76.74,76.74,0,0,1-6.07-6,60.26,60.26,0,0,1-4.27-5.16A48.14,48.14,0,0,1,0,.12L3,0a45.21,45.21,0,0,0,8.6,25.49,60.58,60.58,0,0,0,4.05,4.9l.4.44c2.15,2.33,3.92,3.91,5.48,5.32a44.6,44.6,0,0,1,5.17,5.2,44.55,44.55,0,0,1,5.16-5.2,75.16,75.16,0,0,0,5.48-5.32h0l.41-.43a59.23,59.23,0,0,0,4-4.9A45.22,45.22,0,0,0,50.4,0l3,.12a48.14,48.14,0,0,1-9.19,27.15,62.73,62.73,0,0,1-4.27,5.16,76.74,76.74,0,0,1-6.07,6,39.73,39.73,0,0,0-5.3,5.43,34.44,34.44,0,0,1,2.9,5c1.25,2.63,2.4,6.19,2.83,20.7A67.82,67.82,0,0,1,34,76.92c-.52,5.55-1.69,9-3.56,10.63a5,5,0,0,1-.67.49,5.94,5.94,0,0,1-3.09.85m0-42.49a31.22,31.22,0,0,0-2.07,3.66c-1.06,2.23-2.13,5.58-2.53,19.5-.15,5,.47,13.74,2.77,15.7a2.68,2.68,0,0,0,.3.23,3,3,0,0,0,1.54.4,3,3,0,0,0,1.51-.4,1.6,1.6,0,0,0,.3-.23c1.23-1,3.06-6.22,2.78-15.7-.41-13.92-1.48-17.27-2.54-19.5A31.3,31.3,0,0,0,26.7,46.4"/></g></g></svg>
                                                 <!--svg--->
                                                 <span>${clase.aforo}</span>
+                                                <p style="position: absolute;bottom: 0;font-size: 1rem;color: var(--c6);font-style: italic;">${clase.nota}</p>
                                             </div>
                                         </div>
                                         <div class="btn-reservar-clase-container">
@@ -659,7 +660,7 @@ function reservaClase(el) {
     fetch(`get-lugares.php?especial=1&id=${iden}`)
         .then(res => res.json())
         .then(data => {
-            // Crear UL
+           // Crear UL
             const ul = document.createElement("ul");
             ul.className = "mat-elegir";
 
@@ -669,6 +670,11 @@ function reservaClase(el) {
                 li.dataset.lugar = i;
                 li.classList.add("mat-res");
 
+                // Crear span para mostrar el número o "coach"
+                const span = document.createElement("span");
+                span.textContent = i === 8 ? "coach" : i;
+                li.appendChild(span);
+
                 if (data.ocupados.includes(i)) {
                     // Lugar ocupado
                     li.classList.add("mat-res-reservado");
@@ -676,7 +682,7 @@ function reservaClase(el) {
                 } else {
                     // Lugar libre
                     li.setAttribute("onclick", `lugar(${i}, 1)`);
-                    li.setAttribute("id", `lugar${i}`)
+                    li.setAttribute("id", `lugar${i}`);
                 }
 
                 ul.appendChild(li);
@@ -699,6 +705,7 @@ function reservaClase(el) {
     document.getElementById('infmat').style.display = "flex";
     document.getElementById('esp').style.display = "none";
     document.getElementById('esp2').style.display = "block";
+    document.getElementById('nyclass').innerHTML = "Selecciona Tu Reformer";
      fetch(`get-lugares.php?especial=2&id=${iden}`)
         .then(res => res.json())
         .then(data => {
@@ -709,13 +716,19 @@ function reservaClase(el) {
 
             for (let i = 1; i <= totalLugares; i++) {
                 const li = document.createElement("li");
+                li.classList.add("mat-res2");
 
+
+                
                 // SVG base
                 const svg = `
                     <svg class="reformer-select" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1563.23 439.79"><defs></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="cls-reformer" d="M1342.3,0V9.38H0V77.73H38.58v38.58H0V327.53H38.58v38.58H0v64.3H1342.3v9.38h220.93V0ZM70.34,91.67l549.86,55v14.68H530.31V268H620.2v11.57l-.19-2L70.34,327.48Zm9.35-3.13,540.45,14.22.06-2V142.6Zm-9.35,243L620.2,281.63v70.74L70.34,333.22ZM1193,407.46H70.34v-70.2L620.2,356.41v43.47h441.9V344.42H1193Zm0-71.82H1062.1V288.39H1193Zm0-56H1062.1v-55H1193Zm0-63.76H1062.1v-54.5H1193Zm0-63.28H1062.1V111.11H1193Zm0-50.24H1062.1v-65H620.2V98.72L70.34,84.25V27.83H1193Zm69.15-53.78h-37V80.48h37v268.7h-37v31.93h37v26.35h-49.31V27.83h49.31Zm62.12,351.34h-41.17V42h41.17Z"/></g></g></svg>`;
 
                 li.innerHTML = svg;
-
+                                // Crear span para mostrar el número o "coach"
+                const span = document.createElement("span");
+                span.textContent = i;
+                li.appendChild(span);
                 const path = li.querySelector("path");
 
                 if (data.ocupados.includes(i)) {
@@ -750,7 +763,7 @@ function reservaClase(el) {
     document.getElementById('esp').style.display = "none";
     document.getElementById('esp2').style.display = "none";
     document.getElementById('infmat').style.display = "none";
-
+ document.getElementById('nyclass').innerHTML = "Confirma Tu Asistencia";
    document.getElementById("confirm-agendar").style.pointerEvents = "auto";
 
   }
@@ -793,6 +806,7 @@ function addNote() {
     const input = document.createElement('input');
     input.type = 'text';
     input.placeholder = 'Escribe tu nota aquí...';
+    input.maxLength = '200';
     input.style.width = '100%';
     input.style.padding = '10px';
     input.style.margin = '10px 0';
@@ -903,7 +917,8 @@ function confirmacion(el) {
   const idcoach = el.dataset.id_inst;
   const lugar = el.dataset.id_lugar;
   const idDix = el.dataset.id_Disc;
-  
+  const nota = el.dataset.nota;
+  document.getElementById('confirm-agendar').disabled = true;
 
   fetch('registrar_reservacion.php', {
     method: 'POST',
@@ -917,11 +932,13 @@ function confirmacion(el) {
       durac: durac,
       idcoach: idcoach,
       lugar: lugar,
+      nota: nota,
       idDisciplina: idDix
     })
   })
     .then(response => response.json())
     .then(data => {
+        document.getElementById('confirm-agendar').disabled = false;
       if (data.status === 'success') {
         window.location.href = 'profile.php?set=reservaciones';
       } else if (data.status === 'nocredit') {
@@ -944,6 +961,14 @@ function confirmacion(el) {
 
       } else if (data.status === 'nosession') {
         window.location.href = 'profile.php';
+      }else if((data.status === 'duplicate')){
+                document.getElementById('confirm-class').innerHTML = `
+                  <h2>Ya tienes una reservación para este día</h2>
+                  <div style="display: flex;flex-direction: column;align-items: center;gap: 30px;">
+                  <img src="assets/images/wait.svg" style="width: 100px" alt="">
+                  <p>Recuerda que tu paquete solo incluye una reserva por día.</p>
+                  <a href="reserva.php" class="confirmar-reserva-btn">Regresar</a>
+                  </div>`;
       }
       else {
         alert('Error al registrar reservación');

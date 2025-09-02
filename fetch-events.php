@@ -114,6 +114,7 @@ while ($row = $result->fetch_assoc()) {
     "cancelable" => $cancelable,
     "classID" => $row["idClase"],
     "invitable" => $invitable,
+    "invitado" => $invitado,
     "start" => $row["inicio"],
     "end" => $row["fin"]
   ];

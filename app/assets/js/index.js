@@ -7,7 +7,7 @@
                         // Cargar estadísticas via AJAX
                         $.ajax({
                             url: 'get-gral-stats.php',
-                            type: 'GET',
+                            type: 'GET', 
                             dataType: 'json',
                             success: function(response) {
                                 if (response.error) {

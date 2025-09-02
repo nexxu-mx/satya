@@ -74,7 +74,7 @@ eventClick: function(info) {
                 <ion-icon name="close-circle-outline" aria-hidden="true"></ion-icon>
                 Cancelar
             </button>
-            `; 
+            `;  
     }
     
     if(info.event.extendedProps.invitable === true){

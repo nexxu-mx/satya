@@ -167,6 +167,8 @@ if ($day) {
                 continue;
         }
 
+        
+
         // Formatear horario en formato AM/PM
         $horario = $start->format("g:i A") . " - " . $end->format("g:i A");
         $duracion = $duracionTexto;
@@ -195,7 +197,31 @@ if ($day) {
         }else{
             $pathimg = $pathimg . "?v=" . time();
         }
- 
+        ///Anticipacion para reservar
+        $hoy = new DateTime('today');
+        $manana = new DateTime('tomorrow');
+        $resw = "";
+        // Caso 1: $start es mañana antes de las 12:00pm
+        $limite1 = (clone $hoy)->setTime(22, 0); // hoy a las 10:00pm
+        if ($start->format('Y-m-d') === $manana->format('Y-m-d') && $start->format('H') < 12) {
+            if ($now <= $limite1) {
+                $abierta = 1;
+            }else{
+                $abierta = 0;
+                $resw = "*Puedes reservar por WhatsApp.";
+            }
+        }
+
+        // Caso 2: $start es hoy después de las 12:00pm
+        $limite2 = (clone $hoy)->setTime(11, 0); // hoy a las 12:00pm
+        if ($start->format('Y-m-d') === $hoy->format('Y-m-d') && $start->format('H') >= 12) {
+            if ($now <= $limite2) {
+                $abierta = 1;
+            }else{
+                $abierta = 0;
+                $resw = "*Puedes reservar por WhatsApp.";
+            }
+        }
         $clases[] = [
             "id" => $row['id'],
             "id_coach" => $row['id_coach'],
@@ -208,7 +234,8 @@ if ($day) {
             "disciplina" => $nombre_disciplina,
             "id_disciplina" => $row['id_disciplina'],
             "esp_disciplina" => $especial_disciplina,
-            "abierta" => $abierta
+            "abierta" => $abierta,
+            "nota" => $resw
         ];
         
     }

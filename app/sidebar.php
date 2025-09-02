@@ -53,6 +53,12 @@
 							  <p>Clases</p>
 							</a>
 						</li>
+						<li class="nav-item">
+							<a href="clases-online.php">
+							  <i class="fas fa-chalkboard-teacher"></i>
+							  <p>Online</p>
+							</a>
+						</li>
 						
 						<li class="nav-item">
 							<a href="finanzas.php">

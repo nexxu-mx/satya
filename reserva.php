@@ -78,7 +78,7 @@ session_start();
                         </div>
                         <div class="confirmation-btns">
                             <p class="cancelar-confirmacion-reserva-btn" onclick="cancelConfirmacion()">Cancelar</p>
-                            <p class="confirmar-reserva-btn" id="confirm-agendar" onclick="confirmacion(this)">Confirmar Reserva</p>
+                            <button class="confirmar-reserva-btn" id="confirm-agendar" onclick="confirmacion(this)">Confirmar Reserva</button>
                         </div>
                         <p class="nota-cancelar-clase"><span>Nota</span>: Puedes cancelar tu reservación, con hasta 10 horas de anticipación desde "Mis Reservas"</p>
                     </div>

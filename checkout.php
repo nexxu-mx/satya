@@ -154,7 +154,9 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                                 <div class="c2">
                                     <div id="eleccion_pago">
                                         <button onclick="payTarjet()" class="elect"><img src="./assets/images/card.svg" style="width: 50px" alt="">Tarjeta Crédito/Débito</button>
+                                         <a href="https://wa.me/524778996360?text=Hola,%20Quiero%20comprar%20el%20paquete%20número%20<?php echo $IDpaquete; ?>%20con%20transferencia." target="Blank_" class="elect"><svg style="width: 50px; color: #BFA187;" xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M320 176v-40a40 40 0 00-40-40H88a40 40 0 00-40 40v240a40 40 0 0040 40h192a40 40 0 0040-40v-40M384 176l80 80-80 80M191 256h273" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>Transferencia Bancaria</a>
                                     </div>
+                                
                                    <div id="metodo_pago" >
                                         <input type="hidden" id="coust" name="coust" value="<?php echo $IDpaquete; ?>"/>
                                         <input type="hidden" id="idusrv" name="idusrv" value="3"/>

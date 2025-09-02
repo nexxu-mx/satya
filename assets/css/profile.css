@@ -1,5 +1,4 @@
 .p1{
-    
     padding: 20px;
     border-radius: 15px;
 }
@@ -284,7 +283,7 @@ form input {
         border: 1px solid #fff; ;
     }
     .p1{
-        margin-block: 65px;
+        margin-bottom: 65px;
         padding: 20px;
         border-radius: 15px;
     }

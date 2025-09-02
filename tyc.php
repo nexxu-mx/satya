@@ -72,6 +72,21 @@
                     </ul>
 
                     <p>SATYA se reserva el derecho de suspender temporal o permanentemente la cuenta de cualquier usuario que incumpla estas disposiciones, sin necesidad de notificación previa ni responsabilidad alguna.</p>
+                    
+                    <h2>4.1 Vigencia</h2>
+                    <p>Todos los paquetes tienen una duración determinada desde la fecha de compra. Una vez vencido el periodo, las clases no utilizadas se perderán.</p>
+
+                    <h2>4.2 Límite diario de clases</h2>
+                    <p>Cada paquete permite tomar solo 1 clase por día.</p>
+                    
+                    <h2>4.3 Política de cancelación y agenda</h2>
+                    <p>Las clases deben ser canceladas o reagendadas con al menos 10 horas de anticipación.</p>
+                    <p>Si no se cumple con este plazo, la clase se contabilizará como tomada.</p>
+                    
+                    <h2>4.4 No transferibles ni reembolsables</h2>
+
+                    <p>Los paquetes son personales e intransferibles. No se hacen reembolsos por clases no tomadas.</p>
+
 
                     <h2>5. Reservaciones y Cancelaciones</h2>
                     <p>La plataforma permite a los usuarios realizar reservaciones para eventos, sesiones o servicios específicos ofrecidos por SATYA. Al momento de confirmar una reservación, el usuario se compromete a cumplir con los términos acordados.</p>

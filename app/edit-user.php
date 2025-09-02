@@ -92,7 +92,6 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
                                 $credit = $fsmt['credit'];
                                 $credVenci = !empty($fsmt['fechaCredit']) ? date("Y-m-d", strtotime($fsmt['fechaCredit'])) : '';
 
-                                
                                 $iniciales = strtoupper(($nombre[0] ?? '').($apellido[0] ?? ''));
                                 if (empty($iniciales)) $iniciales = 'NA';
 
@@ -107,7 +106,7 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
                                                     <option value="2" selected="">Coach</option>
                                                     <option value="3">Administrador</option>
                                                     <option value="4">Recepción</option>';
-                                }if((int)$fsmt['tipoUser'] == 3){
+                                }elseif((int)$fsmt['tipoUser'] == 3){
                                     $tipus = '<option value="1">Cliente</option>
                                                     <option value="2">Coach</option>
                                                     <option value="3" selected="">Administrador</option>

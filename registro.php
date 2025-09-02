@@ -67,8 +67,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $credit = 0;
     $fecha = date('Y-m-d H:i:s');
     // Insertar en la base de datos
-    $insertStmt = $conn->prepare("INSERT INTO users (tipoUser, nombre, apellido, mail, numero, pass, fecha_nacimiento, credit, activo, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $insertStmt->bind_param("ssssssssss", $tipoUser, $nombre, $apellido, $email, $numero, $pass, $fechaNacimiento, $credit, $activo, $fecha);
+    $insertStmt = $conn->prepare("INSERT INTO users (tipoUser, nombre, apellido, mail, numero, pass, fecha_nacimiento, credit, activo, codeInvitado, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $insertStmt->bind_param("sssssssssss", $tipoUser, $nombre, $apellido, $email, $numero, $pass, $fechaNacimiento, $credit, $activo, $invitacion, $fecha);
     
     if ($insertStmt->execute()) {
         header("Location: login.php");

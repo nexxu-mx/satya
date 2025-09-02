@@ -1,10 +1,43 @@
-
-
 $(document).ready(function() {
     // Inicializar DataTable con la opción de orden descendente en la primera columna
     let tabla = $('#basic-datatables').DataTable({
-        "order": [[0, 'desc']]  // Ordenar por la primera columna (índice 0) en orden descendente
+        "order": [],  // Ordenar por la primera columna (índice 0) en orden descendente
+        "columns": [
+            { "title": "ID Pago" },
+            { "title": "Cliente" },
+            { "title": "Monto (Recibido)" },
+            { "title": "Créditos" },
+            { "title": "Método" },
+            { "title": "Fecha" },
+            { "title": "Acciones", "orderable": false }  // Nueva columna para acciones
+        ]
     });
+
+    // Función para eliminar una transacción
+    function eliminarTransaccion(idPago) {
+        if (confirm('¿Estás seguro de que deseas eliminar esta transacción? Restará los créditos correspondientes y esta acción no se puede revertir.')) {
+            $.ajax({
+                url: 'eliminar_transaccion.php',  // Archivo PHP para eliminar la transacción
+                type: 'POST',
+                data: { 
+                    idpago: idPago 
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        alert('Transacción eliminada correctamente');
+                        cargarProductos(); // Recargar la tabla
+                    } else {
+                        alert('Error al eliminar la transacción: ' + (response.message || 'Error desconocido'));
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('Error al eliminar la transacción: ' + error);
+                    console.error('Error:', xhr.responseText);
+                }
+            });
+        }
+    }
 
     // Función para cargar los productos en la tabla
     function cargarProductos() {
@@ -14,22 +47,38 @@ $(document).ready(function() {
             dataType: 'json',  // Esperamos una respuesta en JSON
             success: function(data) {
                 // Limpiar el contenido actual de la tabla
-                tabla.clear().draw();
+                tabla.clear();
 
                 // Insertar filas dinámicamente con los datos obtenidos
                 data.forEach(function(producto) {
-                    // Agregar una fila a la tabla con los datos de cada producto
-                    tabla.row.add([
-                        producto.idpago,
-                        producto.cliente,
-                        "$ " + producto.monto + " (" + producto.recibido + ")",
-                        producto.creditos,
-                        producto.metodo,
-                        producto.fecha
-
+                    // Verificar que el producto tenga todas las propiedades necesarias
+                    if (producto && producto.idpago !== undefined && producto.cliente !== undefined && 
+                        producto.monto !== undefined && producto.recibido !== undefined && 
+                        producto.creditos !== undefined && producto.metodo !== undefined && 
+                        producto.fecha !== undefined) {
                         
-                    ]).draw();
+                        // Crear botón de eliminar
+                        var botonEliminar = `<button class="btn btn-danger btn-sm eliminar-btn" 
+                                           data-idpago="${producto.id}" 
+                                           title="Eliminar transacción">
+                                           <i class="fa fa-trash"></i> Cancelar
+                                         </button>`;
+                        
+                        // Agregar una fila a la tabla con los datos de cada producto
+                        tabla.row.add([
+                            producto.idpago,
+                            producto.cliente,
+                            "$ " + producto.monto + " (" + producto.recibido + ")",
+                            producto.creditos,
+                            producto.metodo,
+                            producto.fecha,
+                            botonEliminar  // Nueva columna con botón de eliminar
+                        ]);
+                    }
                 });
+                
+                // Dibujar la tabla una vez que todas las filas han sido agregadas
+                tabla.draw();
             },
             error: function() {
                 alert('Error al cargar los productos');
@@ -37,10 +86,17 @@ $(document).ready(function() {
         });
     }
 
+    // Event listener para los botones de eliminar (usando delegación de eventos)
+    $(document).on('click', '.eliminar-btn', function(e) {
+        e.preventDefault();
+        var idPago = $(this).data('idpago');
+        eliminarTransaccion(idPago);
+    });
+
     // Cargar productos cuando se cargue la página
     cargarProductos();
 
-    // Hacer la solicitud AJAX al archivo PHP
+    // Hacer la solicitud AJAX al archivo PHP para el balance
     $.ajax({
         url: 'balance.php', // El archivo PHP que devuelve los datos en formato JSON
         method: 'GET',
@@ -175,7 +231,6 @@ $(document).ready(function() {
         }
     });
 });
-
 
 function formatearPrecio(input) {
     let valor = parseFloat(input.value);

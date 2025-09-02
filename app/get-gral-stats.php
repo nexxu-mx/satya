@@ -29,17 +29,12 @@ try {
     $stmt->execute();
     $cursos = $stmt->get_result()->fetch_assoc()['total'];
 
-    $query_recursos = "SELECT COUNT(*) as total FROM disciplinas";
-    $stmt = $conn->prepare($query_recursos);
-    $stmt->execute();
-    $recursos = $stmt->get_result()->fetch_assoc()['total'];
-
-    $Tcyc = $cursos + $recursos;
+    $Tcyc = $cursos;
 
     // 4. Total de clientes (paymentusrs con idpago NOT NULL y skus academy)
     $query_clientes = "
         SELECT COUNT(DISTINCT mail) as total
-        FROM users
+        FROM users WHERE tipoUser = 1
     ";
     $stmt = $conn->prepare($query_clientes);
     $stmt->execute();

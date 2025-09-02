@@ -83,7 +83,7 @@ include './db.php';
                 través del cuerpo y <br>
                 la mente
               </h3>
-              <a href="#">« ABOUT US »</a>
+              <a href="aboutus.php">« ABOUT US »</a>
           </div>
         </div>
       </section>
@@ -136,7 +136,7 @@ include './db.php';
             </div>
 
 
-          <a href="#" class="a-link" style="margin-top: 20px;">« VER MÁS »</a>
+          <a href="clases.php" class="a-link" style="margin-top: 20px;">« VER MÁS »</a>
        </div>
       </section>
 
@@ -506,7 +506,7 @@ include './db.php';
               <p>Ofrecemos Barre, Pilates Reformer, Pilates Mat y Yoga. Cada una está pensada para fortalecer, alinear y conectar cuerpo y mente desde diferentes enfoques, siempre en un ambiente consciente y accesible para todos los niveles.
               </p>
             </div>
-            <a class="ayuda-btn" href="#">AYUDA</a>
+            <a class="ayuda-btn" href="contacto.php">AYUDA</a>
           </div>
            
         </div>

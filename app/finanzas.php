@@ -77,6 +77,7 @@ if((int)$_SESSION['tipoUser'] !== 3){
                                                                 <th>Créditos</th>
                                                                 <th>Metodo</th>
                                                                 <th>Fecha</th>
+                                                                <th>Acciones</th>
                                                             </tr>
                                                         </thead>
                                                         
