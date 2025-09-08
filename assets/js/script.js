@@ -949,6 +949,9 @@ function confirmacion(el) {
           <p>Para seguir reservando tus clases, por favor adquiere nuevos créditos.</p>
           <a href="paquetes.php" class="confirmar-reserva-btn">Ver Paquetes</a>
           </div>`;
+           setTimeout(function() {
+            window.location.href = "paquetes.php";
+          }, 3000);
 
       } else if (data.status === 'nodisciplina') {
          document.getElementById('confirm-class').innerHTML = `

@@ -11,7 +11,9 @@ $sqlA = "SELECT
             reservaciones.id AS reservacion_id, 
             reservaciones.alumno, 
             reservaciones.invitado,
-            reservaciones.lugar
+            reservaciones.lugar,
+            reservaciones.notas,
+            reservaciones.asiste
          FROM reservaciones 
          INNER JOIN users ON reservaciones.alumno = users.id 
          WHERE reservaciones.idClase = ?";
@@ -80,11 +82,22 @@ while ($row = $result->fetch_assoc()) {
         }else{
             $lugar = "";
         }
-    
+        $asistio = $rowA['asiste'];
         $onclick = "cancelReserv($a1,$a2,$idEvent,$a3,'$disciplina')";
         $onclick2 = "addInvitado($a1,$a2,$idEvent)";
         $asistencia = 1 + $rowA['invitado'];
-        $alumnos.= '<li style="display: flex;justify-content: space-between;"><p>' . $name . ' (x' . $asistencia . ')' . $lugar . '</p><div style="display: flex;gap: 10px;"><i class="fas fa-trash-alt trash" onclick="' . $onclick . '"></i> <i class="fas fa-user-plus add" onclick="' . $onclick2 . '"></i></div></li>';
+
+        if(!empty($rowA['notas'])){
+            $nots = '<i class="fas fa-receipt" onclick="shownota(this)" data-nota="' . $rowA['notas'] . '"></i>';
+        }else{
+            $nots = "";
+        }
+        if($asistio == 1){
+             $alumnos.= '<li style="display: flex;justify-content: space-between;"><p style="color: green;">' . $nots . '  ' . $name . ' (x' . $asistencia . ')' . $lugar . '</p><div style="display: flex;gap: 10px;"><i class="fas fa-trash-alt trash" onclick="' . $onclick . '"></i> <i class="fas fa-user-plus add" onclick="' . $onclick2 . '"></i></div></li>';
+        }else{
+            $alumnos.= '<li style="display: flex;justify-content: space-between;"><p style="color: red;">' . $nots . '  ' . $name . ' (x' . $asistencia . ')' . $lugar . '</p><div style="display: flex;gap: 10px;"><i class="fas fa-trash-alt trash" onclick="' . $onclick . '"></i> <i class="fas fa-user-plus add" onclick="' . $onclick2 . '"></i></div></li>';
+        }
+        
     }
     $alumnos .= "</ul>";
 

@@ -1,6 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
     renderCalendar();
+    
+
   });
+  function shownota(el) {
+      const nota = el.dataset.nota; // lee el atributo data-nota
+      alert(nota);
+    }
   function cargarOpciones() {
     fetch('get_disciplinas_couches.php')
       .then(response => response.json())

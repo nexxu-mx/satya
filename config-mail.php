@@ -22,7 +22,7 @@ function smail($to, $subject, $message, $headers = '')
         $mail->isSMTP();
         $mail->Host       = 'smtp.hostinger.com';   // Servidor SMTP
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'notificaciones@studio-satya.com'; // Usuario SMTP
+        $mail->Username   = 'notificaciones@satya-studio.com'; // Usuario SMTP
         $mail->Password   = 'Satya2025*';          // Contraseña SMTP
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port       = 465;
@@ -57,7 +57,7 @@ function smail($to, $subject, $message, $headers = '')
 
         // Si no se especificó From, asignar uno por defecto
         if (!$fromSet) {
-            $mail->setFrom('notificaciones@studio-satya.com', 'Satya');
+            $mail->setFrom('notificaciones@satya-studio.com', 'Satya');
         }
 
         // Destinatario

@@ -2986,6 +2986,18 @@ position: absolute;
   .select-reformer > :nth-child(7) { grid-column: 2; grid-row: 2; }
   .select-reformer > :nth-child(8) { grid-column: 2; grid-row: 3; }
 
+  .select-reformer > :nth-child(6) svg{ 
+     transform: rotate(180deg); 
+    }
+    .select-reformer > :nth-child(7) svg{ 
+     transform: rotate(180deg); 
+    }
+   .select-reformer > :nth-child(8) svg{ 
+     transform: rotate(180deg); 
+    }
+
+ 
+
   .select-reformer li{
 
   }

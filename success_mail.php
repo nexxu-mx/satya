@@ -3,7 +3,7 @@ require_once __DIR__ . '/config-mail.php';
 $subject = "$mail_asunto SATYA Studio";
 $headers = "MIME-Version: 1.0" . "\r\n";
 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-$headers .= 'From: notificaciones@studio-satya.com' . "\r\n";
+$headers .= 'From: notificaciones@satya-studio.com' . "\r\n"; 
 
 $message = '
 <html>

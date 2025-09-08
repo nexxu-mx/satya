@@ -314,8 +314,14 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
                                        </div>
                                        <div class="col-md-3">
                                             <div class="form-floating form-floating-custom mb-3">
-                                                <input type="text" class="form-control" id="pass" name="pass" value="<?php echo $pass;?>" placeholder="name@example.com"  minlength="5" required="">
-                                                <label for="pass">Contraseña</label>
+                                                <input type="<?php 
+                                                                if ((int)$_SESSION['tipoUser'] == 4) {
+                                                                echo "hidden";
+                                                                } else {
+                                                                echo "text"; // o lo que quieras en caso contrario
+                                                                }
+                                                                ?>" class="form-control" id="pass" name="pass" value="<?php echo $pass;?>" placeholder="name@example.com"  minlength="5" required="">
+                                                <label for="pass" <?php if((int)$_SESSION['tipoUser'] == 4){echo "style='display: none'";};?>>Contraseña</label>
                                             </div>
                                        </div>
                                     </div>

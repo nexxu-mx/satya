@@ -207,8 +207,12 @@ if ($day) {
             if ($now <= $limite1) {
                 $abierta = 1;
             }else{
-                $abierta = 0;
-                $resw = "*Puedes reservar por WhatsApp.";
+                if($row['reservados'] < 1){
+                    $abierta = 0;
+                    $resw = "*Puedes reservar por WhatsApp.";
+                }else{
+                    $abierta = 1;
+                }
             }
         }
 
@@ -218,8 +222,13 @@ if ($day) {
             if ($now <= $limite2) {
                 $abierta = 1;
             }else{
-                $abierta = 0;
-                $resw = "*Puedes reservar por WhatsApp.";
+                if($row['reservados'] < 1){
+                    $abierta = 0;
+                    $resw = "*Puedes reservar por WhatsApp.";
+                }else{
+                    $abierta = 1;
+                }
+                
             }
         }
         $clases[] = [
