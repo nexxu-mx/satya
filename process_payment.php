@@ -38,7 +38,7 @@ use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 
 // Configurar SDK // PR::: APP_USR-3515522472050913-080415-812b617b5fdf41c6856319cc2ff95872-327557794 TEST::: TEST-7009180377754289-091823-3aea4b50c4898192e8bd32dac3b11d7c-1940582280
-MercadoPagoConfig::setAccessToken("APP_USR-3515522472050913-080415-812b617b5fdf41c6856319cc2ff95872-327557794 ");
+MercadoPagoConfig::setAccessToken("APP_USR-3515522472050913-080415-812b617b5fdf41c6856319cc2ff95872-327557794");
 
 
 // Obtener información del paquete
@@ -226,7 +226,7 @@ try {
     $stmt_trans->execute();
 
     // 4. Guardar tarjeta si es necesario
-    if (($data['save_card'] ?? false) === true && isset($payment->card->id)) {
+    if ($data['save_card'] == true) {
         $card_id = $payment->card->id;
         
         // Verificar si la tarjeta ya está registrada

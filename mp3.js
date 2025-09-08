@@ -296,6 +296,16 @@ const renderPaymentBrick = async () => {
                     <p>Vuelve a intentar el pago nuevamente.</p>
                     <a href="checkout.php" style="margin-top: 25px" class="c3">Reintentar</a>
                 </div>
+            `,
+             bienvenida: `
+                <div class="success-message">
+                    <div style="display: flex; justify-content: center;">
+                        <img src="./assets/images/revoque.svg" alt="Error en pago" style="width: 100px;">
+                    </div>
+                    <h2 style="color: var(--light-brown-3);">¡Ocurrió un Error!</h2>
+                    <p>No puedes volver a adquirir una clase de prueba, porque solo se puede comprar una sola vez.</p>
+                    <a href="paquetes.php" style="margin-top: 25px" class="c3">Comprar otro paquete</a>
+                </div>
             `
         };
     
@@ -313,7 +323,11 @@ const renderPaymentBrick = async () => {
             }
             resqueElement.innerHTML = templates.pending;
         } else {
+            if (resultado.error === "CLASE BIENVENIDA UTILIZADA") {
+                resqueElement.innerHTML = templates.bienvenida;
+            }else{
             resqueElement.innerHTML = templates.error;
+            }
         }
         
         // Mostrar el contenedor de resultados si estaba oculto
