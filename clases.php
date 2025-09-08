@@ -75,7 +75,7 @@ session_start();
                         $pathVideo = './assets/images/disciplinas/vids/'. $fila['id'] .'.mp4';
                         if(file_exists($pathVideo)){
                           $imgp = '<figure class="fig-class">
-                                    <video class="video-class" src="' . $pathVideo . '" poster="./assets/images/disciplinas/'. $fila['id'] .'.png"></video>
+                                    <video class="video-class" src="' . $pathVideo . '" poster="./assets/images/disciplinas/'. $fila['id'] .'.png" loop muted></video>
                                       <button class="play-btn" aria-label="play intro">
                                         <ion-icon name="play" aria-hidden="true" role="img" class="md hydrated"></ion-icon>
                                       </button>
