@@ -18,6 +18,32 @@ session_start();
       rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css?v=<?php echo time(); ?>">
     <?php include 'head.php'; ?>
+    <style>
+      .video-class{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .fig-class{
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      .play-btn{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.5;
+        background-color: var(--white);
+        color: var(--charcoal);
+        font-size: 2rem;
+        padding: 25px;
+        border-radius: var(--radius-circle);
+        transition: var(--transition-1);
+        animation: pulse 2s ease infinite;
+      }
+    </style>
   </head>
   <body id="top" style="background: var(--background)">
     <div class="preloader" data-preloader>
@@ -46,12 +72,22 @@ session_start();
                       $resultado = $conn->query($query);
 
                       while($fila = mysqli_fetch_assoc($resultado)) {
-                        $path = './assets/images/disciplinas/'. $fila['id'] .'.png';
-
-                        if(file_exists($path)){
-                          $imgp = $path;
+                        $pathVideo = './assets/images/disciplinas/vids/'. $fila['id'] .'.mp4';
+                        if(file_exists($pathVideo)){
+                          $imgp = '<figure class="fig-class">
+                                    <video class="video-class" src="' . $pathVideo . '" poster="./assets/images/disciplinas/'. $fila['id'] .'.png"></video>
+                                      <button class="play-btn" aria-label="play intro">
+                                        <ion-icon name="play" aria-hidden="true" role="img" class="md hydrated"></ion-icon>
+                                      </button>
+                                  </figure>';
                         }else{
-                          $imgp = './assets/images/disciplinas/unknow.jpg';
+                              $path = './assets/images/disciplinas/'. $fila['id'] . '.png';
+
+                            if(file_exists($path)){
+                              $imgp = '<img src="./assets/images/disciplinas/'. $fila['id'] .'.png?v=' . time() . '" class="cla8" alt="">';;
+                            }else{
+                              $imgp = '<img src="./assets/images/disciplinas/unknow.jpg" class="cla8" alt="">';
+                            }
                         }
                         // 
                         echo '
@@ -63,7 +99,7 @@ session_start();
                               </p>
                             </div>
                             <div class="cla7">
-                                <img src="'. $imgp .'" class="cla8" alt="">
+                               '. $imgp .'
                             </div>
                       </div>';
                       
@@ -75,7 +111,7 @@ session_start();
           </div>
             
         </section>
-
+                     
       </article>
     </main>
     <?php include 'footer.php'; ?>
@@ -87,7 +123,69 @@ session_start();
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
       <?php include 'script.php'; ?>
       <script>
-        
+         // Seleccionamos todos los botones
+document.querySelectorAll(".play-btn").forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation(); // Prevenir que el clic se propague al documento
+    const video = btn.previousElementSibling;
+    const icon = btn.querySelector("ion-icon");
+
+    if (video.paused) {
+      // Pausar cualquier otro video en reproducción
+      document.querySelectorAll("video").forEach(v => {
+        if (!v.paused) {
+          v.pause();
+          v.nextElementSibling.querySelector("ion-icon").setAttribute("name", "play");
+          v.nextElementSibling.style.display = 'block'; // Mostrar botón al pausar
+        }
+      });
+
+      video.play();
+      video.classList.remove('img-cover');
+
+     
+      icon.setAttribute("name", "pause");
+      btn.style.display = 'none'; // Ocultar botón al reproducir
+    } else {
+      video.pause();
+      video.classList.add('img-cover');
+      icon.setAttribute("name", "play");
+      btn.style.display = 'block'; // Mostrar botón al pausar
+    }
+  });
+});
+
+// Pausar video al hacer clic en cualquier parte de la pantalla
+document.addEventListener('click', (e) => {
+  // Verificar que el clic no fue en el botón de play
+  if (!e.target.closest('.play-btn')) {
+    document.querySelectorAll("video").forEach(video => {
+      if (!video.paused) {
+        video.pause();
+  
+        const btn = video.nextElementSibling;
+        btn.querySelector("ion-icon").setAttribute("name", "play");
+        btn.style.display = 'block'; // Mostrar botón al pausar
+              video.classList.add('img-cover');
+    
+      }
+    });
+  }
+});
+
+// Mostrar botón cuando el video se pausa automáticamente
+document.querySelectorAll("video").forEach(video => {
+  video.addEventListener('pause', () => {
+    const btn = video.nextElementSibling;
+    btn.querySelector("ion-icon").setAttribute("name", "play");
+    btn.style.display = 'block';
+  });
+  
+  video.addEventListener('play', () => {
+    const btn = video.nextElementSibling;
+    btn.style.display = 'none';
+  });
+});
  
 </script>
 
