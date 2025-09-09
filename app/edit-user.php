@@ -73,7 +73,7 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
                                 if (!file_exists($profilePath)) {
                                     $profilePath = $defaultPath;
                                 }
-                                $smt = $conn->prepare("SELECT iduser, tipoUser, nombre, apellido, mail, numero, pass, fecha_nacimiento, credit, venceCredit, fechaCredit, maxInvitados, claseBienvenida, activo FROM users WHERE id = ?");
+                                $smt = $conn->prepare("SELECT iduser, tipoUser, founder, nombre, apellido, mail, numero, pass, fecha_nacimiento, credit, venceCredit, fechaCredit, maxInvitados, claseBienvenida, activo FROM users WHERE id = ?");
                                 $smt->bind_param("i", $idUsr);
                                 $smt->execute();
                                 $resultadosmt = $smt->get_result();
@@ -86,6 +86,7 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
                                 $mail = $fsmt['mail'];
                                 $numero = $fsmt['numero'];
                                 $pass = $fsmt['pass'];
+                                $founder = $fsmt['founder'];
                                 $fechanacimiento = $fsmt['fecha_nacimiento'];
                                 $formatoOriginal = DateTime::createFromFormat('d-m-Y', $fechanacimiento);
                                 $fecha_nacimiento = $fsmt['fecha_nacimiento'];
@@ -94,7 +95,11 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
 
                                 $iniciales = strtoupper(($nombre[0] ?? '').($apellido[0] ?? ''));
                                 if (empty($iniciales)) $iniciales = 'NA';
-
+                                if($founder == 1){
+                                    $itsfounder = 'checked=""';
+                                }else{
+                                    $itsfounder = "";
+                                }
                                 if((int)$fsmt['tipoUser'] == 1){
                                     $tipus = '<option value="1" selected="">Cliente</option>
                                                     <option value="2">Coach</option>
@@ -260,7 +265,7 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
                             }
                             
                             if((int)$_SESSION['tipoUser'] == 4){
-                                $tipus = '<option value="1" selected="">Cliente</option>';
+                                $tipus = '<option value="1" selected="">-</option>';
                             }
                             ?>
 								<div class="card-body"> 
@@ -314,6 +319,7 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
                                        </div>
                                        <div class="col-md-3">
                                             <div class="form-floating form-floating-custom mb-3">
+                                                
                                                 <input type="<?php 
                                                                 if ((int)$_SESSION['tipoUser'] == 4) {
                                                                 echo "hidden";
@@ -323,7 +329,10 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
                                                                 ?>" class="form-control" id="pass" name="pass" value="<?php echo $pass;?>" placeholder="name@example.com"  minlength="5" required="">
                                                 <label for="pass" <?php if((int)$_SESSION['tipoUser'] == 4){echo "style='display: none'";};?>>Contraseña</label>
                                             </div>
+                                            
                                        </div>
+
+                                       
                                     </div>
                                     <div class="row">
                                        <div class="col-md-6">
@@ -345,12 +354,29 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
                                             </div>
                                        </div>
                                        <div class="col-md-3" >
-                                          
-                                            <div class="form-floating form-floating-custom mb-3">
-                                                <?php echo $btnPaq; ?>
-                                          
-                                       </div>
+                                          <div class="row">
 
+                                            <div class="form-floating form-floating-custom mb-3 col-6">
+                                                <?php echo $btnPaq; ?>
+                                            </div>
+                                            
+                                            <?php 
+                                                if ((int)$_SESSION['tipoUser'] == 4) {
+                                                    echo '<input type="hidden" name="founder" id="founder" value="">';
+                                                } else {
+
+                                                    echo '
+                                                            <div class="form-check col-6">
+                                                                <input class="form-check-input" type="checkbox" id="founder" ' . $itsfounder .  ' name="founder">
+                                                                <label class="form-check-label" for="founder">
+                                                                    Founder
+                                                                </label>
+                                                            </div>
+                                                    ';
+                                                }
+                                            ?>
+                                          </div>
+                                           
                                     </div>
                                     <div style="display: flex; justify-content: center;margin-block: 20px;">
                                         <button class="btn btn-success" type="submit" id="btnsub">

@@ -14,15 +14,22 @@ $credit = $_POST['creditos'] ?? null;
 $vencecreditos = $_POST['vencecreditos'] ?? null;
 $tipouser = $_POST['tipouser'] ?? null;
 
+
+if (isset($_POST['founder'])) {
+    $founder = 1;
+} else {
+    $founder = null;
+}
+
         // Si ID está vacío => INSERTAR 
         
         if (empty($id)) {
-            $stmt = $conn->prepare("INSERT INTO users (tipoUser, nombre, apellido, mail, numero, pass, fecha_nacimiento, credit) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssssss", $tipouser, $nombre, $apellido, $mail, $numero, $pass, $fecha, $credit);
+            $stmt = $conn->prepare("INSERT INTO users (tipoUser, founder, nombre, apellido, mail, numero, pass, fecha_nacimiento, credit) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sisssssss", $tipouser, $founder, $nombre, $apellido, $mail, $numero, $pass, $fecha, $credit);
         } else {
             // Si ID tiene valor => ACTUALIZAR
-            $stmt = $conn->prepare("UPDATE users SET tipoUser = ?, nombre = ?, apellido = ?, mail = ?, numero = ?, pass = ?, fecha_nacimiento = ?, credit = ?, fechaCredit = ? WHERE id = ?");
-            $stmt->bind_param("sssssssssi", $tipouser, $nombre, $apellido, $mail, $numero, $pass, $fecha, $credit, $vencecreditos, $id);
+            $stmt = $conn->prepare("UPDATE users SET tipoUser = ?, founder = ?, nombre = ?, apellido = ?, mail = ?, numero = ?, pass = ?, fecha_nacimiento = ?, credit = ?, fechaCredit = ? WHERE id = ?");
+            $stmt->bind_param("sissssssssi", $tipouser, $founder, $nombre, $apellido, $mail, $numero, $pass, $fecha, $credit, $vencecreditos, $id);
         }
 
 

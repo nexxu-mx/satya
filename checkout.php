@@ -109,7 +109,69 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                                                 http_response_code(400);
                                                 die(json_encode(['error' => 'Paquete no encontrado']));
                                             }
+                                            //Consulta Founder 
+                                           if(!empty($_SESSION['idUser'])){
+                                               
+                                                $idUsr = $_SESSION['idUser'];
+                                                $sqlU = ("SELECT founder FROM users WHERE id = ?");
+                                                $smt = $conn->prepare($sqlU);
+                                                $smt->bind_param("i", $idUsr);
+                                                $smt->execute();
+                                                $resultU = $smt->get_result();
+                                                if($resultU->num_rows === 0){
+                                                    $founder = null;
+                                                }
+                                                $rowU = $resultU->fetch_assoc();
+                                                $founder = $rowU['founder'];
+                                               
+                                           }else{
+                                                $founder = null;
+                                           }
                                             $rowP = $resultP->fetch_assoc();
+                                             if($founder == 1){
+                                                switch ($IDpaquete) {
+                                                    case 2:
+                                                        $rowP['costo'] = 859;
+                                                        break;
+                                                    case 3:
+                                                        $rowP['costo'] = 1129;
+                                                        break;
+                                                    case 4:
+                                                        $rowP['costo'] = 1449;
+                                                        break;
+                                                    case 5:
+                                                        $rowP['costo'] = 16999;
+                                                        break;
+                                                    case 6:
+                                                        $rowP['costo'] = 999;
+                                                        break;
+                                                    case 7:
+                                                        $rowP['costo'] = 1299;
+                                                        break;
+                                                    case 8:
+                                                        $rowP['costo'] = 1599;
+                                                        break;
+                                                    case 9:
+                                                        $rowP['costo'] = 17999;
+                                                        break;
+                                                    case 10:
+                                                        $rowP['costo'] = 1129;
+                                                        break;
+                                                    case 11:
+                                                        $rowP['costo'] = 1479;
+                                                        break;
+                                                    case 12:
+                                                        $rowP['costo'] = 1799;
+                                                        break;
+                                                    case 13:
+                                                        $rowP['costo'] = 20999;
+                                                        break;
+                                                    default:
+                                                        $rowP['costo'] = $rowP['costo'];
+                                                        break;
+                                                }
+                                            }
+                                           
                                             if($rowP['clases'] == "ILIMITADO" || $rowP['clases'] == "ANUALIDAD"){
                                                 $nclases = '<p class="numero-clases-card" style="font-size: 34px;  color: var(--c6);margin-top: 30%;">' . $rowP['clases'] . '</p>';
                                             }else{
