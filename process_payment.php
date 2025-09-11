@@ -39,9 +39,9 @@ use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 
 // Configurar SDK // PR::: APP_USR-8424105593741503-091100-e03eeb503a13580672c58898a1578630-327557794 TEST::: TEST-5756813474456112-091100-4eb89d95d1eda1cbf82d38fd07883664-1940582280
-MercadoPagoConfig::setAccessToken("APP_USR-8126254666416836-081816-26a9a0c82336250bf1ac1cec65f3ab2b-2521441034");
+MercadoPagoConfig::setAccessToken("TEST-5756813474456112-091100-4eb89d95d1eda1cbf82d38fd07883664-1940582280");
 
-
+//APP_USR-8126254666416836-081816-26a9a0c82336250bf1ac1cec65f3ab2b-2521441034
 // Obtener información del paquete
 $sqlP = "SELECT clases, costo, vigencia, invitados, descuento FROM paquetes WHERE id = ?";
 $stmtP = $conn->prepare($sqlP);
@@ -201,36 +201,36 @@ if (empty($customer_id)) {
     
 }
     // 2. Procesar el pago
-    // $paymentData = [
-    //     "transaction_amount" => $cargo1,
-    //     "description" => $data['description'] ?? "SATYA Studio",
-    //     "payment_method_id" => $data['payment_method_id'],
-    //     "payer" => [
-    //         "email" => $mail,
-    //         "identification" => [
-    //             "type" => $data['payer']['identification']['type'] ?? "DNI",
-    //             "number" => $data['payer']['identification']['number'] ?? ""
-    //         ]
-    //     ]
-    // ];
-
     $paymentData = [
-        "transaction_amount" => (float)$cargo1,
-        "token" => $data['token'],              // token generado por el Brick
-        "description" => $data['description'] ?? "SATYA",
+        "transaction_amount" => $cargo1,
+        "description" => $data['description'] ?? "SATYA Studio",
         "payment_method_id" => $data['payment_method_id'],
-        "installments" => (int)$data['installments'],
-        "issuer_id" => $data['issuer_id'],
         "payer" => [
             "email" => $mail,
-            "id"    => $customer_id, // customer_id de Mercado Pago
             "identification" => [
                 "type" => $data['payer']['identification']['type'] ?? "DNI",
                 "number" => $data['payer']['identification']['number'] ?? ""
-            ],
-        ],
-        "save_card" => true // 👈 aquí va, no dentro de metadata
+            ]
+        ]
     ];
+
+    // $paymentData = [
+    //     "transaction_amount" => (float)$cargo1,
+    //     "token" => $data['token'],              // token generado por el Brick
+    //     "description" => $data['description'] ?? "SATYA",
+    //     "payment_method_id" => $data['payment_method_id'],
+    //     "installments" => (int)$data['installments'],
+    //     "issuer_id" => $data['issuer_id'],
+    //     "payer" => [
+    //         "email" => $mail,
+    //         "id"    => $customer_id, // customer_id de Mercado Pago
+    //         "identification" => [
+    //             "type" => $data['payer']['identification']['type'] ?? "DNI",
+    //             "number" => $data['payer']['identification']['number'] ?? ""
+    //         ],
+    //     ],
+    //     "save_card" => true // 👈 aquí va, no dentro de metadata
+    // ];
 
 
 
