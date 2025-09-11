@@ -183,6 +183,7 @@ if ($day) {
             if ($Alumno = $resultU->fetch_assoc()) {
                 $estatus = '<img class="icono-reserva" src="assets/images/svg/reservado.svg" alt="Clase reservada ícono">';
                 $abierta = 0;
+                continue;
             }
         }
         if($row['estatus'] == 2){

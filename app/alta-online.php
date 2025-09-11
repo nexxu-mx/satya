@@ -46,6 +46,27 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
             width: 60px;
         }
     </style>
+    <style>
+#video {
+width: 100%; height: 100%; border: dotted 1px #999;display: flex;justify-content: center;align-items: center;color: #999; position: relative; z-index: 0;
+}
+#video.dragover {
+  border-color: #007bff;
+  color: #007bff;
+}
+#miniature {
+    width: auto;height: 100%; border: dotted 1px #999;display: flex; justify-content: center;align-items: center;color: #999; position: relative; z-index: 0;
+}
+#miniature.dragover {
+  border-color: #28a745;
+  color: #28a745;
+}
+#miniature img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+</style>
 </head>
 
 <body>
@@ -77,106 +98,69 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
                                 <i class="icon-arrow-right"></i>
                             </li>
                             <li class="nav-item">
-                                <a href="#">Nueva</a>
+                                <a href="#">Nueva Clase</a>
                             </li>
 
                         </ul>
                     </div>
-                    <div id="form-disc" class="container-sm w-50 form-control p-5 mt-5">
-                        <form action="procesar_online.php" method="POST" enctype="multipart/form-data">
+                    <div id="form-disc" style="display: flex; justify-content: center;">
+                        <form action="procesar_online.php" style="max-width: 545px" method="POST" enctype="multipart/form-data">
                             <?php
                             include '../db.php';
 
                             if (isset($_GET['id'])) {
                                
-                                $idDisciplinaEdit = $_GET['id'];
-
-                                $selectDisciplina = $conn->prepare("SELECT id, nombre_disciplina, descripcion_disciplina, subdescripcion_texto1, subdescripcion_texto2, subdescripcion_texto3, aforo, esp, activo FROM disciplinas WHERE id = ?");
-                                $selectDisciplina->bind_param("i", $idDisciplinaEdit);
-                                $selectDisciplina->execute();
-                                $resultadoSelectDisciplina = $selectDisciplina->get_result();
-
-                                $filaSelectDisciplina = $resultadoSelectDisciplina->fetch_assoc();
-
-                                $button = "Guardar Edición";
-                                $nombreDisciplina = $filaSelectDisciplina['nombre_disciplina'];
-                                $descDisc = $filaSelectDisciplina['descripcion_disciplina'];
-                                $subdesctext1 = $filaSelectDisciplina['subdescripcion_texto1'];
-                                $subdesctext2 = $filaSelectDisciplina['subdescripcion_texto2'];
-                                $subdesctext3 = $filaSelectDisciplina['subdescripcion_texto3'];
-                                $aforo = $filaSelectDisciplina['aforo'];
-                                $activo = $filaSelectDisciplina['activo'];
-                                $esp = $filaSelectDisciplina['esp'];
-
-                                if($esp == 1){
-                                    $selectEsp = '<div class="form-group form-group-default">
-                                                <label for="esp">Tipo de Lugar</label>
-                                                <select class="form-select" id="esp" name="esp">
-                                                    <option value="0">Ninguno</option>
-                                                    <option value="1" selected="">Mat</option>
-                                                    <option value="2">Reformer</option>
-                                                </select>
-                                            </div>';
-                                }elseif($esp == 2){
-                                    $selectEsp = '<div class="form-group form-group-default">
-                                                <label for="esp">Tipo de Lugar</label>
-                                                <select class="form-select" id="esp" name="esp">
-                                                    <option value="0">Ninguno</option> 
-                                                    <option value="1">Mat</option>
-                                                    <option value="2" selected="">Reformer</option>
-                                                </select>
-                                            </div>';
-                                }else{
-                                    $selectEsp = '<div class="form-group form-group-default">
-                                                <label for="esp">Tipo de Lugar</label>
-                                                <select class="form-select" id="esp" name="esp">
-                                                    <option value="0" selected="">Ninguno</option>
-                                                    <option value="1">Mat</option>
-                                                    <option value="2">Reformer</option>
-                                                </select>
-                                            </div>';
-                                }
-
                             } else{
-                                $button = "Agregar Disciplina";
-                                $nombreDisciplina = "";
-                                $descDisc = "";
-                                $subdesctext1 = "";
-                                $subdesctext2 = "";
-                                $subdesctext3 = "";
-                                $idCoach = "";
-                                $activo = "";
-                                $aforo = "";
-                                $idDisciplinaEdit = "0";
-                                
-                                $selectEsp = '<div class="form-group form-group-default">
-                                                <label for="esp">Tipo de Lugar</label>
-                                                <select class="form-select" id="esp" name="esp">
-                                                    <option value="0" selected="">Ninguno</option>
-                                                    <option value="1">Mat</option>
-                                                    <option value="2">Reformer</option>
-                                                </select>
-                                            </div>';
+                              
+                               
                             }
                             ?>
-                            <input type="text" id="nombre_disc" name="nombre_disc" placeholder="Nombre de la Disciplina..." class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" value="<?php echo $nombreDisciplina;?>" required>
-                                    <textarea name="desc_disc" id="desc_disc" class="form-control no-resize mb-3 p-3 bg-body-secondary" required><?php echo $descDisc;?></textarea>
+                                <div class="col-md-12">
+                                    <div class="card card-post card-round">
+                                        <div style="height: 330px; background: #f0f0f0; overflow: hidden; display: flex; align-items: center;justify-content: center; position: relative" >
+                                              <div id="video">+ Agrega Video</div>       
+                                        </div>
+                                            <input type="file" id="videoFile" name="videoFile" accept="video/mp4" hidden>
+                                            <input type="hidden" id="videoInput">
+                                            <input type="file" id="miniatureFile" name="miniatureFile" accept="image/png" hidden>
+                                            <input type="hidden" id="miniatureInput">
+                                        <div class="card-body" style="position: relative">
+                                            <div style="position: absolute; top: 10px; z-index: 5;width: 190px;height: 120px;box-shadow: 0 0 12px #0000009e; right: -15px;background: #eee;" >
+                                                    <div id="miniature">+ Agrega miniatura</div>
+                                                </div>
+                                            <div class="d-flex">
+                                                <div class="avatar">
+                                                    <img src="../assets/images/unknow.jpg" alt="..." class="avatar-img rounded-circle">
+                                                </div>
+                                                
+                                                <div class="info-post ms-2">
+                                                    <select name="type" id="type" class="form-select username">
+                                                        <option value="pilates_mat">Pilates Mat</option>
+                                                        <option value="yoga">Yoga</option>
+                                                        <option value="barre">Barre</option>
+                                                        <option value="pilates_reformer">Pilates Reformer</option>
+                                                    </select>
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="separator-solid"></div>
+                                            <select name="level" id="level" class="form-select card-category text-info" style="border: none;width: auto;">
+                                                <option value="Principiante">Principiante</option>
+                                                <option value="Amateur">Amateur</option>
+                                                <option value="Intermedio">Intermedio</option>
+                                                <option value="Avanzado">Avanzado</option>
+                                            </select>
+                                            <input type="text" class="card-title" name="title" id="title" placeholder="Título de la clase..." style="width: 100%;border: none;" required>
+                                            <textarea name="description" id="description" class="card-text" placeholder="Descripción de la clase..." style="width: 100%;height: 120px;border: none;" required></textarea>
+                                           <input type="text" name="equipment" id="equipment" placeholder="Equipamiento..." style="width: 100%;margin-block: 30px;border: none;" required>
+                                            <div>
+                                                <button type="submit" class="btn btn-primary btn-rounded btn-sm">Guardar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                    <div class="d-flex justify-content-lg-center gap-3 mb-3">
-                                        <input type="text" id="palabra-desc-1" name="palabra-desc-1" class="p-3 flex-fill form-control bg-body-secondary" value="<?php echo $subdesctext1; ?>" placeholder="Keyword" required>
-                                        <input type="text" id="palabra-desc-2" name="palabra-desc-2" class="p-3 flex-fill form-control bg-body-secondary" value="<?php echo $subdesctext2; ?>" placeholder="Keyword" required>
-                                        <input type="text" id="palabra-desc-3" name="palabra-desc-3" class="p-3 flex-fill form-control bg-body-secondary" value="<?php echo $subdesctext3; ?>" placeholder="Keyword" required>
-                                    </div>
-                                    <?php echo $selectEsp;?>
-                                    <input type="text" id="aforo" name="aforo" class="form-control p-3 bg-body-secondary" placeholder="Aforo" value="<?php echo $aforo; ?>" required>
-                                    <label for="imagen" class="my-3">SUBE UN VIDEO DE LA DISCIPLINA</label>
-                                    <input type="file" id="imagen-disciplina" name="imagen-disciplina" class="form-control mt-0 p-3 bg-body-secondary" accept=".mp4,.mov,.avi,.wmv" onchange="mostrarVistaPrevia(event)" >
-                                    <div class="d-flex justify-content-center">
-                                        <video id="vistaPrevia" style="max-width: 50%; margin-top: 20px;" autoplay muted></video>
-                                    </div>
-                                    <input type="hidden" value="<?php echo $idDisciplinaEdit; ?>" id="id_disciplina_edit" name="id_disciplina_edit"/>
-                            <div class="d-flex justify-content-center mt-3">
-                            <button type="submit" class="btn btn-primary"><?php echo $button; ?></button>
                             </div>
                         </form>
                     </div>
@@ -218,12 +202,89 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
     <script src="./assets/js/plugin/sweetalert/sweetalert.min.js"></script>
     <script src="./assets/js/next.min.js"></script>
 
-    <script>
-        function mostrarVistaPrevia(event) {
-            const video = document.getElementById('vistaPrevia');
-            video.src = URL.createObjectURL(event.target.files[0]);
-        }
-    </script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  // ---------- VIDEO ----------
+  const dropVideo = document.getElementById("video");
+  const fileVideo = document.getElementById("videoFile");
+
+  // Abrir selector de archivo al tocar/click
+  dropVideo.addEventListener("click", () => fileVideo.click());
+
+  // Previsualizar video
+  function previewVideo(file) {
+    if (!file || file.type !== "video/mp4") {
+      alert("Selecciona un archivo en formato MP4");
+      return;
+    }
+
+    const url = URL.createObjectURL(file);
+    dropVideo.innerHTML = `
+      <video controls width="100%" height="100%" style="object-fit: cover;">
+        <source src="${url}" type="video/mp4">
+      </video>
+    `;
+  }
+
+  // Drag & drop
+  dropVideo.addEventListener("dragover", e => { e.preventDefault(); dropVideo.classList.add("dragover"); });
+  dropVideo.addEventListener("dragleave", e => { dropVideo.classList.remove("dragover"); });
+  dropVideo.addEventListener("drop", e => {
+    e.preventDefault();
+    dropVideo.classList.remove("dragover");
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      previewVideo(file);
+      fileVideo.files = e.dataTransfer.files; // esto sí funciona aquí: el input recibe el archivo arrastrado
+    }
+  });
+
+  // Selección manual
+  fileVideo.addEventListener("change", e => {
+    const file = e.target.files[0];
+    previewVideo(file);
+  });
+
+
+  // ---------- MINIATURA ----------
+  const dropImg = document.getElementById("miniature");
+  const fileImg = document.getElementById("miniatureFile");
+
+  // Abrir selector al tocar/click
+  dropImg.addEventListener("click", () => fileImg.click());
+
+  // Previsualizar imagen
+  function previewImage(file) {
+    if (!file || file.type !== "image/png") {
+      alert("Selecciona una imagen PNG");
+      return;
+    }
+    const url = URL.createObjectURL(file);
+    dropImg.innerHTML = `<img src="${url}" alt="Miniatura" style="max-width:100%; max-height:100%; object-fit:contain;">`;
+  }
+
+  // Drag & drop
+  dropImg.addEventListener("dragover", e => { e.preventDefault(); dropImg.classList.add("dragover"); });
+  dropImg.addEventListener("dragleave", e => { dropImg.classList.remove("dragover"); });
+  dropImg.addEventListener("drop", e => {
+    e.preventDefault();
+    dropImg.classList.remove("dragover");
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      previewImage(file);
+      fileImg.files = e.dataTransfer.files; // el input recibe el archivo arrastrado
+    }
+  });
+
+  // Selección manual
+  fileImg.addEventListener("change", e => {
+    const file = e.target.files[0];
+    previewImage(file);
+  });
+
+});
+</script>
 
 </body>
 

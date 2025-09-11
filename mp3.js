@@ -1,6 +1,6 @@
 console.log('inicia SDK.');
 //PR::: APP_USR-51df598b-b434-4aee-9f64-d4f2365eac7c TEST::: TEST-df88f0fd-9bd4-4762-8e08-9814912fc5a2
-const mp = new MercadoPago("APP_USR-51df598b-b434-4aee-9f64-d4f2365eac7c", {
+const mp = new MercadoPago("TEST-df88f0fd-9bd4-4762-8e08-9814912fc5a2", {
     locale: "es-MX"
 });
 
