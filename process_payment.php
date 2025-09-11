@@ -201,18 +201,36 @@ if (empty($customer_id)) {
     
 }
     // 2. Procesar el pago
-    $paymentData = [
-        "transaction_amount" => $cargo1,
-        "description" => $data['description'] ?? "SATYA Studio",
-        "payment_method_id" => $data['payment_method_id'],
-        "payer" => [
-            "email" => $mail,
-            "identification" => [
-                "type" => $data['payer']['identification']['type'] ?? "DNI",
-                "number" => $data['payer']['identification']['number'] ?? ""
+    // $paymentData = [
+    //     "transaction_amount" => $cargo1,
+    //     "description" => $data['description'] ?? "SATYA Studio",
+    //     "payment_method_id" => $data['payment_method_id'],
+    //     "payer" => [
+    //         "email" => $mail,
+    //         "identification" => [
+    //             "type" => $data['payer']['identification']['type'] ?? "DNI",
+    //             "number" => $data['payer']['identification']['number'] ?? ""
+    //         ]
+    //     ]
+    // ];
+
+            $paymentData = [
+            "transaction_amount" => $cargo1,
+            "token" => $data['token'],              // token generado por el Brick
+            "description" => $data['description'] ?? "SATYA Studio",
+            "installments" => $data['installments'],
+            "payment_method_id" => $data['payment_method_id'],
+            "payer" => [
+                "email" => $mail,
+                "id"    => $customer_id // cliente existente
+            ],
+            "metadata" => [
+                "save_card" => true
+            ],
+            "additional_info" => [
+                "store_payment_method" => true
             ]
-        ]
-    ];
+        ];
 
 
 
@@ -314,8 +332,8 @@ if (empty($customer_id)) {
 
     // 4. Guardar tarjeta si es necesario
     if ($data['save_card'] == true) {
-       // $card_id = $payment->card->id;
-         $card_id = $data['token'];
+       $card_id = $payment->card->id;
+        // $card_id = $data['token'];
         // Verificar si la tarjeta ya está registrada
         $stmt_check = $conn->prepare("SELECT id FROM user_cards WHERE user_id = ? AND card_id = ?");
         $stmt_check->bind_param("is", $idusrv, $card_id);
