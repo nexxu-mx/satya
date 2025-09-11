@@ -226,9 +226,6 @@ if (empty($customer_id)) {
             ],
             "metadata" => [
                 "save_card" => true
-            ],
-            "additional_info" => [
-                "store_payment_method" => true
             ]
         ];
 
