@@ -228,8 +228,7 @@ if (empty($customer_id)) {
                 "type" => $data['payer']['identification']['type'] ?? "DNI",
                 "number" => $data['payer']['identification']['number'] ?? ""
             ],
-        ],
-        "save_card" => true // 👈 aquí va, no dentro de metadata
+        ]
     ];
 
 
