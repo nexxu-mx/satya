@@ -162,14 +162,14 @@ if (empty($customer_id)) {
             'Content-Type: application/json'
         ]);
         
-        $response = curl_exec($ch);
+        $response1 = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
         
         if ($httpCode === 200) {
-            $data = json_decode($response, true);
-            if (!empty($data['results'])) {
-                $customer_id = $data['results'][0]['id'];
+            $data1 = json_decode($response1, true);
+            if (!empty($data1['results'])) {
+                $customer_id = $data1['results'][0]['id'];
             } else {
                 // Crear nuevo customer
                 $customerData = [
@@ -178,7 +178,7 @@ if (empty($customer_id)) {
                     "last_name" => $apellido,
                     "phone" => [
                         "area_code" => substr($numero, 0, 5),
-                        "number" => substr($numero, 5)
+                        "number" => $data['payer']['identification']['number'] ?? ""
                     ]
                 ];
                 
@@ -192,15 +192,15 @@ if (empty($customer_id)) {
                     'Content-Type: application/json'
                 ]);
                 
-                $response = curl_exec($ch);
+                $response1 = curl_exec($ch);
                 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
                 curl_close($ch);
                 
                 if ($httpCode === 201) {
-                    $customer = json_decode($response, true);
+                    $customer = json_decode($response1, true);
                     $customer_id = $customer['id'];
                 } else {
-                    throw new Exception("Error creando customer: " . $response);
+                    throw new Exception("Error creando customer: " . $response1);
                 }
             }
         }
@@ -241,8 +241,9 @@ if (empty($customer_id)) {
         $paymentData['installments'] = $data['installments'] ?? 1;
         $paymentData['issuer_id'] = $data['issuer_id'] ?? null;
     } else {
-        
-        throw new Exception('Datos de pago incompletos');
+         ob_end_clean();
+        echo json_encode(['error' => "no hay datos de pago"]);
+        exit;
     }
 
    // Versión corregida para SDK v3.x
