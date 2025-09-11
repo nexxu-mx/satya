@@ -216,14 +216,15 @@ if (empty($customer_id)) {
 
     $paymentData = [
         "transaction_amount" => (float)$cargo1,
-        "token" => $data['token'],              // token generado por el Brick
+        "token" => $data['token'], // token generado por el Brick
         "description" => $data['description'] ?? "SATYA",
         "payment_method_id" => $data['payment_method_id'],
         "installments" => (int)$data['installments'],
         "issuer_id" => $data['issuer_id'],
+        "save_card" => true, // ← ESTO ES LO QUE NECESITAS AGREGAR
         "payer" => [
             "email" => $mail,
-            "id"    => $customer_id, // customer_id de Mercado Pago
+            "id" => $customer_id, // customer_id de Mercado Pago
             "identification" => [
                 "type" => $data['payer']['identification']['type'] ?? "DNI",
                 "number" => $data['payer']['identification']['number'] ?? ""
