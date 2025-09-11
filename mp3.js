@@ -190,6 +190,7 @@ const renderPaymentBrick = async () => {
                         body: JSON.stringify({
                             idusrv: userId,
                             card_id: card.card_id,
+                            payment_method_id: card.payment_method,
                             cvv: cvv,
                             amount: amount,
                             customer_id: card.customer_id
