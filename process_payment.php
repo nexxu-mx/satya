@@ -362,6 +362,7 @@ if (empty($customer_id)) {
     $response = [
         'payment_id' => $payment->id,
         'payment_status' => $payment_status,
+        'card_id' => $payment->card->id,
         'transaction_details' => [
             'net_received_amount' => $payment->transaction_details->net_received_amount,
             'total_paid_amount' => $payment->transaction_details->total_paid_amount,
