@@ -252,7 +252,6 @@ if (isset($data['card_id']) && isset($data['cvv'])) {
     ];
     
     $tokenUrl = "https://api.mercadopago.com/v1/card_tokens";
-    
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $tokenUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -267,33 +266,67 @@ if (isset($data['card_id']) && isset($data['cvv'])) {
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
     
+    error_log("Token creation response - HTTP: " . $httpCode . " Body: " . $tokenResponse);
+    
     if ($httpCode === 201) {
         $tokenResult = json_decode($tokenResponse, true);
         $token = $tokenResult['id'];
-        
         error_log("Token creado desde card_id: " . $token);
+        
+        // PASO 2: Obtener información de la tarjeta guardada
+        $cardUrl = "https://api.mercadopago.com/v1/customers/{$customer_id}/cards/{$data['card_id']}";
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $cardUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Authorization: Bearer ' . $accessToken,
+            'Content-Type: application/json'
+        ]);
+        
+        $cardResponse = curl_exec($ch);
+        $cardHttpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        
+        error_log("Card info response - HTTP: " . $cardHttpCode . " Body: " . $cardResponse);
+        
+        if ($cardHttpCode === 200) {
+            $cardInfo = json_decode($cardResponse, true);
+            
+            // PASO 3: Configurar todos los datos del pago
+            $paymentData['token'] = $token;
+            $paymentData['payment_method_id'] = $cardInfo['payment_method']['id'];
+            $paymentData['issuer_id'] = $cardInfo['issuer']['id'];
+            $paymentData['installments'] = $data['installments'] ?? 1;
+            $paymentData['payer']['id'] = $customer_id;
+            
+            error_log("Payment data with saved card: " . json_encode($paymentData));
+            
+        } else {
+            error_log("Error obteniendo info de tarjeta: " . $cardResponse);
+            echo json_encode(['error' => "Error obteniendo información de tarjeta guardada"]);
+            exit;
+        }
+        
     } else {
         error_log("Error creando token: " . $tokenResponse);
-        echo json_encode(['error' => "Error creando token desde tarjeta guardada"]);
+        echo json_encode(['error' => "Error creando token desde tarjeta guardada: " . $tokenResponse]);
         exit;
     }
     
-    // PASO 2: Usar el token en el pago
-    $paymentData['token'] = $token; // Usar el token generado, NO el card_id
-    $paymentData['payer']['id'] = $customer_id;
-  
 }
-    // Si es pago con nueva tarjeta
-    elseif (isset($data['token'])) {
-        $paymentData['token'] = $data['token'];
-        $paymentData['installments'] = $data['installments'] ?? 1;
-        $paymentData['issuer_id'] = $data['issuer_id'] ?? null;
-    } else {
-         ob_end_clean();
-        echo json_encode(['error' => "no hay datos de pago"]);
-        exit;
-    }
-
+// Si es pago con nueva tarjeta
+elseif (isset($data['token'])) {
+    $paymentData['token'] = $data['token'];
+    $paymentData['payment_method_id'] = $data['payment_method_id'];
+    $paymentData['installments'] = $data['installments'] ?? 1;
+    $paymentData['issuer_id'] = $data['issuer_id'] ?? null;
+    
+} else {
+    ob_end_clean();
+    echo json_encode(['error' => "No hay datos de pago"]);
+    exit;
+}
    // Versión corregida para SDK v3.x
 
 
