@@ -201,36 +201,36 @@ if (empty($customer_id)) {
     
 }
     // 2. Procesar el pago
-    // $paymentData = [
-    //     "transaction_amount" => $cargo1,
-    //     "description" => $data['description'] ?? "SATYA Studio",
-    //     "payment_method_id" => $data['payment_method_id'],
-    //     "payer" => [
-    //         "email" => $mail,
-    //         "identification" => [
-    //             "type" => $data['payer']['identification']['type'] ?? "DNI",
-    //             "number" => $data['payer']['identification']['number'] ?? ""
-    //         ]
-    //     ]
-    // ];
-
     $paymentData = [
-        "transaction_amount" => (float)$cargo1,
-        "token" => $data['token'], // token generado por el Brick
-        "description" => $data['description'] ?? "SATYA",
+        "transaction_amount" => $cargo1,
+        "description" => $data['description'] ?? "SATYA Studio",
         "payment_method_id" => $data['payment_method_id'],
-        "installments" => (int)$data['installments'],
-        "issuer_id" => $data['issuer_id'],
-        "save_card" => true, // ← ESTO ES LO QUE NECESITAS AGREGAR
         "payer" => [
             "email" => $mail,
-            "id" => $customer_id, // customer_id de Mercado Pago
             "identification" => [
                 "type" => $data['payer']['identification']['type'] ?? "DNI",
                 "number" => $data['payer']['identification']['number'] ?? ""
-            ],
+            ]
         ]
     ];
+
+    // $paymentData = [
+    //     "transaction_amount" => (float)$cargo1,
+    //     "token" => $data['token'], // token generado por el Brick
+    //     "description" => $data['description'] ?? "SATYA",
+    //     "payment_method_id" => $data['payment_method_id'],
+    //     "installments" => (int)$data['installments'],
+    //     "issuer_id" => $data['issuer_id'],
+    //     "save_card" => true, // ← ESTO ES LO QUE NECESITAS AGREGAR
+    //     "payer" => [
+    //         "email" => $mail,
+    //         "id" => $customer_id, // customer_id de Mercado Pago
+    //         "identification" => [
+    //             "type" => $data['payer']['identification']['type'] ?? "DNI",
+    //             "number" => $data['payer']['identification']['number'] ?? ""
+    //         ],
+    //     ]
+    // ];
 
 
 
@@ -333,7 +333,23 @@ if (empty($customer_id)) {
 
     // 4. Guardar tarjeta si es necesario
     if ($data['save_card'] == true) {
-       $card_id = $payment->card->id;
+        $customerData = [
+            "email" => $mail,
+            "identification" => [
+                "type" => $data['payer']['identification']['type'] ?? "DNI",
+                "number" => $data['payer']['identification']['number'] ?? ""
+            ]
+        ];
+
+        // 2. Crear la tarjeta guardada usando el token
+        $cardData = [
+            "token" => $data['token']
+        ];
+
+        // Llamada a la API para crear la tarjeta
+        $card = $client->post("/v1/customers/{$customer_id}/cards", $cardData);
+        $card_id = $card['id'];
+       //$card_id = $payment->card->id;
         // $card_id = $data['token'];
         // Verificar si la tarjeta ya está registrada
         $stmt_check = $conn->prepare("SELECT id FROM user_cards WHERE user_id = ? AND card_id = ?");
@@ -381,7 +397,7 @@ if (empty($customer_id)) {
     $response = [
         'payment_id' => $payment->id,
         'payment_status' => $payment_status,
-        'card_id' => $payment->card->id,
+        'card_id' => $card_id,
         'transaction_details' => [
             'net_received_amount' => $payment->transaction_details->net_received_amount,
             'total_paid_amount' => $payment->transaction_details->total_paid_amount,
