@@ -44,6 +44,9 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
       color: #fff;
       box-shadow: 0px 2px 12px #00000038;
     }
+    .c5{
+        font-size: 27px
+    }
           .ver-mas-paquetes-btn {
             width: 100%;
             display: flex;
