@@ -146,13 +146,13 @@ $founder = $row['founder'];
 $payment_client = new PaymentClient();
 $customer_client = new CustomerClient();
 $customer_card_client = new CustomerCardClient();
-
+ $accessToken = MercadoPagoConfig::getAccessToken();
 try {
     // 1. Manejo del Customer en Mercado Pago
 
 if (empty($customer_id)) {
     
-        $accessToken = MercadoPagoConfig::getAccessToken();
+       
         
         // Buscar customer usando API REST directamente
         $url = "https://api.mercadopago.com/v1/customers/search?email=" . urlencode($mail);
@@ -333,22 +333,36 @@ if (empty($customer_id)) {
 
     // 4. Guardar tarjeta si es necesario
     if ($data['save_card'] == true) {
-        $customerData = [
-            "email" => $mail,
-            "identification" => [
-                "type" => $data['payer']['identification']['type'] ?? "DNI",
-                "number" => $data['payer']['identification']['number'] ?? ""
-            ]
-        ];
+       // 2. Crear la tarjeta guardada usando cURL
+                            $cardData = [
+                                "token" => $data['token']
+                            ];
 
-        // 2. Crear la tarjeta guardada usando el token
-        $cardData = [
-            "token" => $data['token']
-        ];
+                            $url1 = "https://api.mercadopago.com/v1/customers/{$customer_id}/cards";
 
-        // Llamada a la API para crear la tarjeta
-        $card = $client->post("/v1/customers/{$customer_id}/cards", $cardData);
-        $card_id = $card['id'];
+                            $ch = curl_init();
+                            curl_setopt($ch, CURLOPT_URL, $url1);
+                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                            curl_setopt($ch, CURLOPT_POST, true);
+                            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($cardData));
+                            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                                'Authorization: Bearer ' . $accessToken, // Tu access token
+                                'Content-Type: application/json'
+                            ]);
+
+                            $response2 = curl_exec($ch);
+                            $httpCode2 = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                            curl_close($ch);
+
+                            if ($httpCode2 == 201) {
+                                $cardResponse = json_decode($response2, true);
+                                $card_id = $cardResponse['id'];
+                                
+                            } else {
+                                ob_end_clean();
+                                echo json_encode(['error' => "card_id: $response2"]);
+                                exit;
+                            }
        //$card_id = $payment->card->id;
         // $card_id = $data['token'];
         // Verificar si la tarjeta ya está registrada
