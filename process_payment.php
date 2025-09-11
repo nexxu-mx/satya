@@ -201,34 +201,34 @@ if (empty($customer_id)) {
     
 }
     // 2. Procesar el pago
-    // $paymentData = [
-    //     "transaction_amount" => $cargo1,
-    //     "description" => $data['description'] ?? "SATYA Studio",
-    //     "payment_method_id" => $data['payment_method_id'],
-    //     "payer" => [
-    //         "email" => $mail,
-    //         "identification" => [
-    //             "type" => $data['payer']['identification']['type'] ?? "DNI",
-    //             "number" => $data['payer']['identification']['number'] ?? ""
-    //         ]
-    //     ]
-    // ];
-
-            $paymentData = [
-            "transaction_amount" => $cargo1,
-            "token" => $data['token'],              // token generado por el Brick
-            "description" => $data['description'] ?? "SATYA Studio",
-            "payment_method_id" => $data['payment_method_id'],
-            "installments" => (int)$data['installments'],
-            "issuer_id" => isset($data['issuer_id']) ? (int)$data['issuer_id'] : null,
-            "payer" => [
-                "email" => $mail,
-                "id"    => $customer_id // cliente existente
-            ],
-            "metadata" => [
-                "save_card" => true
+    $paymentData = [
+        "transaction_amount" => $cargo1,
+        "description" => $data['description'] ?? "SATYA Studio",
+        "payment_method_id" => $data['payment_method_id'],
+        "payer" => [
+            "email" => $mail,
+            "identification" => [
+                "type" => $data['payer']['identification']['type'] ?? "DNI",
+                "number" => $data['payer']['identification']['number'] ?? ""
             ]
-        ];
+        ]
+    ];
+
+        //     $paymentData = [
+        //     "transaction_amount" => $cargo1,
+        //     "token" => $data['token'],              // token generado por el Brick
+        //     "description" => $data['description'] ?? "SATYA Studio",
+        //     "payment_method_id" => $data['payment_method_id'],
+        //     "installments" => (int)$data['installments'],
+        //     "issuer_id" => isset($data['issuer_id']) ? (int)$data['issuer_id'] : null,
+        //     "payer" => [
+        //         "email" => $mail,
+        //         "id"    => $customer_id // cliente existente
+        //     ],
+        //     "metadata" => [
+        //         "save_card" => true
+        //     ]
+        // ];
 
 
 
