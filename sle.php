@@ -10,7 +10,7 @@ echo "<br>";
 if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
     echo "no logeado";
 } else {
-    echo "logeado como: " . $_SESSION['nombre'];
+    echo "logeado como: " . $_SESSION['nombre'] . " id:" . $_SESSION['idUser'];
 }
 
 ?>

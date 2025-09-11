@@ -22,7 +22,7 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SATYA Studio</title>
     <meta name="title" content="SATYA Studio">
-    <meta name="description" content="SATYA es un espacio dedicado al bienestar y la conexión entre cuerpo y mente, creado por dos hermanas que comparten la pasión por el movimiento y el cuidado integral.">
+    <meta name="description" content="Un espacio minimalista y acogedor, diseñado para moverte con calma, fuerza y conexión.">
     <link rel="shortcut icon" href="./favicon.png" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,7 +74,7 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
     </style>
 </head>
 
-<body id="top">
+<body id="top" style="background: #C7b19e;">
     <div class="preloader" data-preloader>
         <div class="circle"></div>
     </div>
@@ -219,9 +219,9 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                                          
                                     </div>
                                 
-                                   <div id="metodo_pago" >
+                                   <div id="metodo_pago" style="width: 100%">
                                         <input type="hidden" id="coust" name="coust" value="<?php echo $IDpaquete; ?>"/>
-                                        <input type="hidden" id="idusrv" name="idusrv" value="3"/>
+                                        <input type="hidden" id="idusrv" name="idusrv" value="0"/>
                                         <div id="paymentBrick_container" class="c10"></div>
                                    </div>
                                     

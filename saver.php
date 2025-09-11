@@ -37,8 +37,8 @@ use MercadoPago\Client\Customer\CustomerCardClient;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 
-// Configurar SDK // PR::: APP_USR-8424105593741503-091100-e03eeb503a13580672c58898a1578630-327557794 TEST::: TEST-5756813474456112-091100-4eb89d95d1eda1cbf82d38fd07883664-1940582280
-MercadoPagoConfig::setAccessToken("APP_USR-8424105593741503-091100-e03eeb503a13580672c58898a1578630-327557794");
+// Configurar SDK // PR::: APP_USR-3515522472050913-080415-812b617b5fdf41c6856319cc2ff95872-327557794 TEST::: TEST-5756813474456112-091100-4eb89d95d1eda1cbf82d38fd07883664-1940582280
+MercadoPagoConfig::setAccessToken("APP_USR-3515522472050913-080415-812b617b5fdf41c6856319cc2ff95872-327557794");
 
 
 // Obtener información del paquete
@@ -146,8 +146,10 @@ $customer_card_client = new CustomerCardClient();
 try {
     // 1. Manejo del Customer en Mercado Pago
 
+echo 'prepara el customer id';
 if (empty($customer_id)) {
     
+    echo 'no extrajo el cid';
         $accessToken = MercadoPagoConfig::getAccessToken();
         
         // Buscar customer usando API REST directamente
@@ -211,10 +213,11 @@ if (empty($customer_id)) {
 
     
 }
+echo 'procesa el pago';
     // 2. Procesar el pago
     $paymentData = [
         "transaction_amount" => $cargo1,
-        "description" => $data['description'] ?? "SATYA Studio",
+        "description" => $data['description'] ?? "Compra de clases",
         "payment_method_id" => $data['payment_method_id'],
         "payer" => [
             "email" => $mail,
@@ -224,7 +227,6 @@ if (empty($customer_id)) {
             ]
         ]
     ];
-
 
 
 
@@ -323,8 +325,8 @@ if (empty($customer_id)) {
 
     // 4. Guardar tarjeta si es necesario
     if ($data['save_card'] == true) {
-       // $card_id = $payment->card->id;
-         $card_id = $data['token'];
+        $card_id = $payment->card->id;
+        
         // Verificar si la tarjeta ya está registrada
         $stmt_check = $conn->prepare("SELECT id FROM user_cards WHERE user_id = ? AND card_id = ?");
         $stmt_check->bind_param("is", $idusrv, $card_id);
@@ -346,7 +348,7 @@ if (empty($customer_id)) {
                 $payment_method = $payment->payment_method_id ?? 'unknown';
                 $card_type = $payment->card->card_type ?? 'credit';
                 ///uso token como card id
-               
+                $card_id = $data['token'];
                 $stmt_save = $conn->prepare("INSERT INTO user_cards 
                     (user_id, customer_id, card_id, last_four_digits, payment_method, card_type, created_at) 
                     VALUES (?, ?, ?, ?, ?, ?, NOW())");
@@ -362,7 +364,7 @@ if (empty($customer_id)) {
     }
     } else {
     $status_update = ($payment_status === "pending") ? $payment_status : "Rechazo por MP";
-    $stmt_update = $conn->prepare("UPDATE users SET statu = ?, idpago = ?, montoPagado = ? WHERE id = ?");
+    $stmt_update = $conn->prepare("UPDATE users SET status = ?, idpago = ?, montoPagado = ? WHERE id = ?");
     $stmt_update->bind_param("sssi", $status_update, $payment->id, $cargo1, $idusrv);
     $stmt_update->execute();
     }
