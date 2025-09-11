@@ -281,6 +281,8 @@ if (isset($data['card_id']) && isset($data['cvv'])) {
     // PASO 2: Usar el token en el pago
     $paymentData['token'] = $token; // Usar el token generado, NO el card_id
     $paymentData['payer']['id'] = $customer_id;
+     echo json_encode(['error' => "toten:  $token , customer; $customer_id;"]);
+        exit;
 }
     // Si es pago con nueva tarjeta
     elseif (isset($data['token'])) {
