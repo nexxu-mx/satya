@@ -238,10 +238,50 @@ if (empty($customer_id)) {
 
 
     // Si es pago con tarjeta guardada
-    if (isset($data['card_id']) && isset($data['cvv'])) {
-        $paymentData['token'] = $data['card_id'];
-        $paymentData['payer']['id'] = $customer_id;
-    } 
+    // if (isset($data['card_id']) && isset($data['cvv'])) {
+    //     $paymentData['token'] = $data['card_id'];
+    //     $paymentData['payer']['id'] = $customer_id;
+    // } 
+    // Si es pago con tarjeta guardada
+if (isset($data['card_id']) && isset($data['cvv'])) {
+    
+    // PASO 1: Crear token desde card_id + CVV
+    $tokenData = [
+        "card_id" => $data['card_id'],
+        "security_code" => $data['cvv']
+    ];
+    
+    $tokenUrl = "https://api.mercadopago.com/v1/card_tokens";
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $tokenUrl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($tokenData));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Authorization: Bearer ' . $accessToken,
+        'Content-Type: application/json'
+    ]);
+    
+    $tokenResponse = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    
+    if ($httpCode === 201) {
+        $tokenResult = json_decode($tokenResponse, true);
+        $token = $tokenResult['id'];
+        
+        error_log("Token creado desde card_id: " . $token);
+    } else {
+        error_log("Error creando token: " . $tokenResponse);
+        echo json_encode(['error' => "Error creando token desde tarjeta guardada"]);
+        exit;
+    }
+    
+    // PASO 2: Usar el token en el pago
+    $paymentData['token'] = $token; // Usar el token generado, NO el card_id
+    $paymentData['payer']['id'] = $customer_id;
+}
     // Si es pago con nueva tarjeta
     elseif (isset($data['token'])) {
         $paymentData['token'] = $data['token'];
