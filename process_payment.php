@@ -241,15 +241,15 @@ if (empty($customer_id)) {
         $paymentData['installments'] = $data['installments'] ?? 1;
         $paymentData['issuer_id'] = $data['issuer_id'] ?? null;
     } else {
-        $tofkd = $data['token'];
-         echo json_encode(['error' => "TOKEN $tofkd"]);
-        exit;
+        
         throw new Exception('Datos de pago incompletos');
     }
 
    // Versión corregida para SDK v3.x
 
-
+$tofkd = $data['token'];
+         echo json_encode(['error' => "TOKEN $tofkd"]);
+        exit;
     $request_options = new RequestOptions();
     $request_options->setCustomHeaders([
         'x-idempotency-key' => uniqid()
