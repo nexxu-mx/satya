@@ -172,36 +172,21 @@ if (empty($customer_id)) {
                 $customer_id = $data1['results'][0]['id'];
             } else {
                 // Crear nuevo customer
-                $customerData = [
+                 $customer = $customer_client->create([
                     "email" => $mail,
                     "first_name" => $nombre,
                     "last_name" => $apellido,
                     "phone" => [
-                        "area_code" => substr($numero, 0, 5),
-                        "number" => $data['payer']['identification']['number'] ?? ""
+                        "area_code" => "",
+                        "number" => $numero
                     ]
-                ];
-                
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, "https://api.mercadopago.com/v1/customers");
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_POST, true);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($customerData));
-                curl_setopt($ch, CURLOPT_HTTPHEADER, [
-                    'Authorization: Bearer ' . $accessToken,
-                    'Content-Type: application/json'
                 ]);
-                
-                $response1 = curl_exec($ch);
-                $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-                curl_close($ch);
-                
-                if ($httpCode === 201) {
-                    $customer = json_decode($response1, true);
-                    $customer_id = $customer['id'];
-                } else {
-                    throw new Exception("Error creando customer: " . $response1);
-                }
+                $customer_id = $customer->id;
+                if (empty($customer_id)) {
+                       ob_end_clean();
+                        echo json_encode(['error' => "customer_ID: N092"]);
+                        exit;
+                } 
             }
         }
         
