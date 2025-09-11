@@ -144,38 +144,52 @@ $customer_client = new CustomerClient();
 $customer_card_client = new CustomerCardClient();
 
 try {
-    // 1. Manejo del Customer en Mercado Pago
-    if (empty($customer_id)) {
-        $customer = $customer_client->create([
-            "email" => $mail,
-            "first_name" => $nombre,
-            "last_name" => $apellido,
-            "phone" => [
-                "area_code" => "",
-                "number" => $numero
-            ]
+   // 1. Manejo del Customer en Mercado Pago
+if (empty($customer_id)) {
+    // Intentar buscar si ya existe en Mercado Pago por email
+    try {
+        $existingCustomers = $customer_client->search([
+            "email" => $mail
         ]);
-        $customer_id = $customer->id;
 
-        // Actualizar customer_id en la base de datos
+        if (!empty($existingCustomers->results)) {
+            // Usar el primer customer encontrado
+            $customer_id = $existingCustomers->results[0]->id;
+        } else {
+            // Crear nuevo customer
+            $customer = $customer_client->create([
+                "email" => $mail,
+                "first_name" => $nombre,
+                "last_name" => $apellido,
+                "phone" => [
+                    "area_code" => "",
+                    "number" => $numero
+                ]
+            ]);
+            $customer_id = $customer->id;
+        }
+
+        // Guardar customer_id en tu DB
         $stmt_update_customer = $conn->prepare("UPDATE users SET customer_id = ? WHERE id = ?");
         $stmt_update_customer->bind_param("si", $customer_id, $idusrv);
         $stmt_update_customer->execute();
-    }
 
-    // 2. Procesar el pago
-    $paymentData = [
-        "transaction_amount" => $cargo1,
-        "description" => $data['description'] ?? "Compra de clases",
-        "payment_method_id" => $data['payment_method_id'],
-        "payer" => [
-            "email" => $mail,
-            "identification" => [
-                "type" => $data['payer']['identification']['type'] ?? "DNI",
-                "number" => $data['payer']['identification']['number'] ?? ""
-            ]
-        ]
-    ];
+    } catch (\Exception $e) {
+        // Manejar errores de Mercado Pago
+        error_log("Error Customer MP: " . $e->getMessage());
+    }
+}
+
+// 2. Procesar el pago usando el customer_id
+$paymentData = [
+    "transaction_amount" => $cargo1,
+    "description" => $data['description'] ?? "Compra de clases",
+    "payment_method_id" => $data['payment_method_id'],
+    "payer" => [
+        "id" => $customer_id  // <-- usar el ID del customer
+    ]
+];
+
 
     // Si es pago con tarjeta guardada
     if (isset($data['card_id']) && isset($data['cvv'])) {
