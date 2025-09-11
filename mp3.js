@@ -326,7 +326,15 @@ const renderPaymentBrick = async () => {
             if (resultado.error === "CLASE BIENVENIDA UTILIZADA") {
                 resqueElement.innerHTML = templates.bienvenida;
             }else{
-            resqueElement.innerHTML = templates.error;
+            resqueElement.innerHTML = `<div class="success-message">
+                    <div style="display: flex; justify-content: center;">
+                        <img src="./assets/images/revoque.svg" alt="Error en pago" style="width: 100px;">
+                    </div>
+                    <h2 style="color: var(--light-brown-3);">¡Ocurrió un Error!</h2>
+                    <p>Vuelve a intentar el pago nuevamente.</p><br>
+                        <small>${resultado.payment_status}</small>
+                    <a href="checkout.php" style="margin-top: 25px" class="c3">Reintentar</a>
+                </div>`;
             }
         }
         
