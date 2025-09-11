@@ -218,7 +218,6 @@ if (empty($customer_id)) {
             "transaction_amount" => $cargo1,
             "token" => $data['token'],              // token generado por el Brick
             "description" => $data['description'] ?? "SATYA Studio",
-            "installments" => $data['installments'],
             "payment_method_id" => $data['payment_method_id'],
             "payer" => [
                 "email" => $mail,
