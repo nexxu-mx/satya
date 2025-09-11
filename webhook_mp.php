@@ -28,7 +28,7 @@ if (isset($data["type"]) && $data["type"] === "payment" && isset($data["action"]
     // Puedes validar el header X-Signature si lo necesitas para mayor seguridad
 
     // Llamar a la API de MP para obtener detalles del pago
-    $access_token = "APP_USR-8424105593741503-091100-e03eeb503a13580672c58898a1578630-327557794"; // tu token de producción
+    $access_token = "APP_USR-8126254666416836-081816-26a9a0c82336250bf1ac1cec65f3ab2b-2521441034"; // tu token de producción
     $url = "https://api.mercadopago.com/v1/payments/" . $payment_id;
 
     $ch = curl_init();
