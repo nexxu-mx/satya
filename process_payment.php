@@ -39,7 +39,7 @@ use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 
 // Configurar SDK // PR::: APP_USR-8424105593741503-091100-e03eeb503a13580672c58898a1578630-327557794 TEST::: TEST-5756813474456112-091100-4eb89d95d1eda1cbf82d38fd07883664-1940582280
-MercadoPagoConfig::setAccessToken("TEST-5756813474456112-091100-4eb89d95d1eda1cbf82d38fd07883664-1940582280");
+MercadoPagoConfig::setAccessToken("APP_USR-8424105593741503-091100-e03eeb503a13580672c58898a1578630-327557794");
 
 
 // Obtener información del paquete
@@ -247,9 +247,7 @@ if (empty($customer_id)) {
 
    // Versión corregida para SDK v3.x
 
-$tofkd = $data['token'];
-         echo json_encode(['error' => "TOKEN $tofkd"]);
-        exit;
+
     $request_options = new RequestOptions();
     $request_options->setCustomHeaders([
         'x-idempotency-key' => uniqid()
