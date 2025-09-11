@@ -11,7 +11,7 @@ file_put_contents("webhook_log.txt", date("Y-m-d H:i:s") . " - " . $raw_post . "
 // Verificamos que sea de tipo "payment" y acción "payment.updated"
 if (isset($data["type"]) && $data["type"] === "payment" && isset($data["action"]) && $data["action"] === "payment.updated") {
     $payment_id = $data["data"]["id"];
-    $sqlP = "SELECT id FROM users WHERE idpago = ?";
+    $sqlP = "SELECT id, paquete, numero FROM users WHERE idpago = ?";
     $smtP = $conn->prepare($sqlP);
     $smtP->bind_param("i", $payment_id); // "s" para string, "i" si es integer
     $smtP->execute();
@@ -19,6 +19,8 @@ if (isset($data["type"]) && $data["type"] === "payment" && isset($data["action"]
    if($resultP->num_rows > 0){
         $rowP = $resultP->fetch_assoc();
         $idusrv = $rowP['id'];
+        $paquete = $rowP['paquete'];
+        $numero = $rowP['numero'];
     }else{
         http_response_code(200);
         echo "OK";
@@ -28,7 +30,7 @@ if (isset($data["type"]) && $data["type"] === "payment" && isset($data["action"]
     // Puedes validar el header X-Signature si lo necesitas para mayor seguridad
 
     // Llamar a la API de MP para obtener detalles del pago
-    $access_token = "APP_USR-8126254666416836-081816-26a9a0c82336250bf1ac1cec65f3ab2b-2521441034"; // tu token de producción
+    $access_token = "APP_USR-8424105593741503-091100-e03eeb503a13580672c58898a1578630-327557794"; // tu token de producción
     $url = "https://api.mercadopago.com/v1/payments/" . $payment_id;
 
     $ch = curl_init();
@@ -55,16 +57,28 @@ if (isset($data["type"]) && $data["type"] === "payment" && isset($data["action"]
         
         if ($result_user->num_rows > 0) {
             $user = $result_user->fetch_assoc();
-            // Suponiendo que tienes estos valores en tu base de datos
-            $paquete = $user['paquete'];
-            $vigencia = $user['vigencia']; // o de donde corresponda
-            $invitados = $user['maxInvitados']; // o de donde corresponda
+
+            // Obtener información del paquete
+                $sqlP = "SELECT clases, costo, vigencia, invitados, descuento FROM paquetes WHERE id = ?";
+                $stmtP = $conn->prepare($sqlP);
+                $stmtP->bind_param("i", $paquete);
+                $stmtP->execute();
+                $resultP = $stmtP->get_result();
+
+                if ($resultP->num_rows === 0) {
+                    ob_end_clean();
+                    http_response_code(400);
+                    die(json_encode(['error' => 'Paquete no encontrado']));
+                }
+
+                $rowP = $resultP->fetch_assoc();
+                $credits = $rowP['clases'];
+                $vigencia = $rowP['vigencia'];
+                $invitados = $rowP['invitados'];
             
             if (isset($payment_info["status"])) {
                 $payment_status = $payment_info["status"];
                 $cargo1 = $payment_info["transaction_amount"]; // monto del pago
-                $credits = 0; // Definir según tu lógica de negocio
-                $numero = ""; // Definir según tu lógica de negocio
                 
                 if ($payment_status === "approved") {
                     $fechaCredit = date('Y-m-d');
@@ -72,7 +86,7 @@ if (isset($data["type"]) && $data["type"] === "payment" && isset($data["action"]
                     $vence = date('Y-m-d', strtotime("+{$dias} days"));
                     
                     // Calcular el nuevo crédito
-                    $new_credit = $user['credit'] + $credits; // Ajusta según tu lógica
+                    $new_credit = $credits; // Ajusta según tu lógica
                     
                     $bienvenida = ($paquete == 1 || $user['claseBienvenida'] == 1) ? 1 : 0;
 
