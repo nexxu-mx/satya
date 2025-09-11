@@ -82,6 +82,9 @@ if($row['claseBienvenida'] == 1 && $paquete == 1){
 
 $nombre = $row['nombre'];
 $apellido = $row['apellido'];
+if(empty($apellido)){
+    $apellido = "lópez";
+}
 $numero = $row['numero'];
 $creditos = $row['credit'];
 $mail = $row['mail'];
