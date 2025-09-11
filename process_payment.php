@@ -400,6 +400,12 @@ if (empty($customer_id)) {
             }
         }
     }
+    }else if ($payment_status === "in_process") {
+            $status_update = "Procesando...";
+            $stmt_update = $conn->prepare("UPDATE users SET statu = ?, idpago = ?, montoPagado = ? WHERE id = ?");
+            $stmt_update->bind_param("sssi", $status_update, $payment->id, $cargo1, $idusrv);
+            $stmt_update->execute();
+
     } else {
     $status_update = ($payment_status === "pending") ? $payment_status : "Rechazo por MP";
     $stmt_update = $conn->prepare("UPDATE users SET statu = ?, idpago = ?, montoPagado = ? WHERE id = ?");
