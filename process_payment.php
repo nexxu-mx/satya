@@ -9,8 +9,7 @@ header('Content-Type: application/json');
 
 // Obtener datos del request
 $data = json_decode(file_get_contents('php://input'), true);
-var_dump($data);
-exit;
+
 include './db.php';
 include './error_log.php';
 
@@ -29,7 +28,7 @@ if (!$idusrv || !$paquete) {
     http_response_code(400);
     die(json_encode(['error' => 'Datos de sesión inválidos']));
 }
-echo 'prepara el customer id';
+
 // SDK Mercado Pago v3.3.0 
 require_once 'vendor/autoload.php';
 use MercadoPago\Client\Common\RequestOptions;
@@ -242,6 +241,9 @@ if (empty($customer_id)) {
         $paymentData['installments'] = $data['installments'] ?? 1;
         $paymentData['issuer_id'] = $data['issuer_id'] ?? null;
     } else {
+        $tofkd = $data['token'];
+         echo json_encode(['error' => "TOKEN $tofkd"]);
+        exit;
         throw new Exception('Datos de pago incompletos');
     }
 
