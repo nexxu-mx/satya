@@ -220,8 +220,7 @@ if (empty($customer_id)) {
         "description" => $data['description'] ?? "SATYA",
         "payment_method_id" => $data['payment_method_id'],
         "installments" => (int)$data['installments'],
-        // solo envías issuer_id si existe
-        ...(isset($data['issuer_id']) ? ["issuer_id" => (int)$data['issuer_id']] : []),
+        "issuer_id" => $data['issuer_id'],
         "payer" => [
             "email" => $mail,
             "id"    => $customer_id, // customer_id de Mercado Pago
