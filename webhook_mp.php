@@ -25,7 +25,7 @@ if (isset($data["type"]) && $data["type"] === "payment") {
     curl_close($ch);
 
     $payment_info = json_decode($response, true);
-
+    $idusrv = 1;
     if (isset($payment_info["status"])) {
        // 3. Si el pago fue aprobado
        $payment_status = $payment_info["status"];
@@ -94,34 +94,7 @@ if (isset($data["type"]) && $data["type"] === "payment") {
                 $stmt_check->execute();
                 $stmt_check->store_result();
                 
-                if ($stmt_check->num_rows === 0) {
-                    try {
-                        // Registrar tarjeta en Mercado Pago
-                        $card = $customer_card_client->create($customer_id, [
-                            "token" => $data['token'],
-                            "issuer" => [
-                                "id" => $data['issuer_id'] ?? null
-                            ]
-                        ]);
-                        
-                        // Guardar en nuestra base de datos
-                        $last_four = substr($payment->card->last_four_digits ?? '0000', -4);
-                        $payment_method = $payment->payment_method_id ?? 'unknown';
-                        $card_type = $payment->card->card_type ?? 'credit';
-                        ///uso token como card id
-                    
-                        $stmt_save = $conn->prepare("INSERT INTO user_cards 
-                            (user_id, customer_id, card_id, last_four_digits, payment_method, card_type, created_at) 
-                            VALUES (?, ?, ?, ?, ?, ?, NOW())");
-                        $stmt_save->bind_param("isssss", $idusrv, $customer_id, $card_id, $last_four, $payment_method, $card_type);
-                        $stmt_save->execute();
-                        
-                        $response['card_id'] = $card_id;
-                        $response['customer_id'] = $customer_id;
-                    } catch (Exception $e) {
-                        error_log("Excepción al guardar tarjeta: " . $e->getMessage());
-                    }
-                }
+                
             }
             } else {
             $status_update = ($payment_status === "pending") ? $payment_status : "Rechazo por MP";
