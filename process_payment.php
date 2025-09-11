@@ -219,6 +219,8 @@ if (empty($customer_id)) {
             "token" => $data['token'],              // token generado por el Brick
             "description" => $data['description'] ?? "SATYA Studio",
             "payment_method_id" => $data['payment_method_id'],
+            "installments" => (int)$data['installments'],
+            "issuer_id" => isset($data['issuer_id']) ? (int)$data['issuer_id'] : null,
             "payer" => [
                 "email" => $mail,
                 "id"    => $customer_id // cliente existente
