@@ -47,6 +47,65 @@ if((int)$_SESSION['tipoUser'] !== 3){
 			fill: #fff;
 			width: 60px;
 		}
+
+		/* From Uiverse.io by guilhermeyohan */ 
+		.checkbox-apple {
+		position: relative;
+		width: 50px;
+		height: 25px;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		}
+
+		.checkbox-apple label {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 50px;
+		height: 25px;
+		border-radius: 50px;
+		background: linear-gradient(to bottom, #b3b3b3, #e6e6e6);
+		cursor: pointer;
+		transition: all 0.3s ease;
+		}
+
+		.checkbox-apple label:after {
+		content: '';
+		position: absolute;
+		top: 1px;
+		left: 1px;
+		width: 23px;
+		height: 23px;
+		border-radius: 50%;
+		background-color: #fff;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+		transition: all 0.3s ease;
+		}
+
+		.checkbox-apple input[type="checkbox"]:checked + label {
+		background: linear-gradient(to bottom, #4cd964, #5de24e);
+		}
+
+		.checkbox-apple input[type="checkbox"]:checked + label:after {
+		transform: translateX(25px);
+		}
+
+		.checkbox-apple label:hover {
+		background: linear-gradient(to bottom, #b3b3b3, #e6e6e6);
+		}
+
+		.checkbox-apple label:hover:after {
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+		}
+.yep {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+		
 	</style>
 </head>
 
@@ -134,8 +193,48 @@ if((int)$_SESSION['tipoUser'] !== 3){
 	<script src="./assets/js/next.min.js"></script>
 
 	<script src="./assets/js/paquetes.js?v=<?php echo time(); ?>"></script>
-	
 
+	<script>
+		function enviarEstado(id, estado) {
+			fetch("actualizar_estado.php", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ id, estado })
+			})
+			.then(res => res.json())
+			.then(data => console.log("Servidor:", data))
+			.catch(err => console.error("Error:", err));
+			
+		}
+		// escuchamos en el contenedor general
+	document.addEventListener('change', e => {
+	if (e.target.matches('.yep')) {
+		const el = e.target; 
+		console.log(el.dataset.id); // ahora sí existe
+		const id = el.dataset.id;
+		const estado = el.checked ? 1 : 0;
+		enviarEstado(id, estado);
+	}
+	});
+	function cargarEstados() {
+		fetch("obtener_estados.php")
+			.then(res => res.json())
+			.then(data => {
+			data.forEach(item => {
+				const chk = document.querySelector(`.yep[data-id="${item.id}"]`);
+				if (chk) {
+				chk.checked = (item.activo === 1);
+				}
+			});
+			})
+			.catch(err => console.error("Error al cargar estados:", err));
+	}
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   cargarEstados();
+// });
+
+	</script>
 </body>
 
 </html>

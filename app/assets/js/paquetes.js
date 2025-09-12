@@ -24,7 +24,12 @@ function getPaquetes() {
                     <div class="col-md-4 mb-4">
                         <div class="card card-post card-round">
                             <div class="card-body">
-                                
+                                <div style="display: flex;justify-content: end;">
+                                    <div class="checkbox-apple">
+                                    <input class="yep" id="check-apple-${paquete.id}" type="checkbox" data-id="${paquete.id}">
+                                    <label for="check-apple-${paquete.id}"></label>
+                                    </div>
+                                </div>
                                 <div class="separator-solid"></div>
                                 <h3 class="card-title">
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#cursoModal${paquete.id}">${paquete.nombre}</a>
@@ -52,6 +57,7 @@ function getPaquetes() {
 }
 $(document).ready(function () {
     getPaquetes();
+    cargarEstados();
 });
 
 function eliminarPaquete(id) {

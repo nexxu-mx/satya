@@ -178,6 +178,7 @@ include './db.php';
             }
 
             while ($fila = mysqli_fetch_assoc($resultado)) {
+           
                 // Validación de disciplina
                 $disciplina = isset($idDisciplinas[$fila['id_disciplina']]) 
                                 ? $idDisciplinas[$fila['id_disciplina']] 
@@ -237,7 +238,7 @@ include './db.php';
               <div class="swiper-container">
                 <div class="swiper-wrapper">
                   <?php
-                    $sqlPI = ("SELECT id, clases, costo, nombre, vigencia FROM paquetes WHERE nombre = 'Pilates Reformer'  ORDER BY CAST(costo AS DECIMAL(10,2)) ASC");
+                    $sqlPI = ("SELECT id, clases, costo, nombre, vigencia, activo FROM paquetes WHERE nombre = 'Pilates Reformer'  ORDER BY CAST(costo AS DECIMAL(10,2)) ASC");
                     $stmtPI = $conn->prepare($sqlPI);
                     $stmtPI->execute();
                     $resultPI = $stmtPI->get_result();
@@ -263,6 +264,9 @@ include './db.php';
                               $nclases = '<p class="numero-clases-card" style="color: ' . $colorActual . '">' . $rowPI['clases'] . '</p>
                                           <p class="clases-card" style="color: ' . $colorActual . ');">' . $claz . '</p>';
                           }
+                           if($rowPI['activo'] !== 1){
+                              continue;
+                            }
                       echo '
                       <div class="swiper-slide">
                         <div class="card">
@@ -302,7 +306,7 @@ include './db.php';
               <div class="swiper-container">
                 <div class="swiper-wrapper">
                   <?php
-                    $sqlPI = ("SELECT id, clases, costo, nombre, vigencia FROM paquetes WHERE nombre = 'Movement' ORDER BY CAST(costo AS DECIMAL(10,2)) ASC");
+                    $sqlPI = ("SELECT id, clases, costo, nombre, vigencia, activo FROM paquetes WHERE nombre = 'Movement' ORDER BY CAST(costo AS DECIMAL(10,2)) ASC");
                     $stmtPI = $conn->prepare($sqlPI);
                     $stmtPI->execute();
                     $resultPI = $stmtPI->get_result();
@@ -328,6 +332,9 @@ include './db.php';
                               $nclases = '<p class="numero-clases-card" style="color: ' . $colorActual . '">' . $rowPI['clases'] . '</p>
                                           <p class="clases-card" style="color: ' . $colorActual . ');">' . $claz . '</p>';
                           }
+                           if($rowPI['activo'] !== 1){
+                              continue;
+                            }
                       echo '
                       <div class="swiper-slide">
                         <div class="card">
@@ -366,7 +373,7 @@ include './db.php';
               <div class="swiper-container">
                 <div class="swiper-wrapper">
                   <?php
-                    $sqlPI = ("SELECT id, clases, costo, nombre, vigencia FROM paquetes WHERE nombre = 'Mixto' ORDER BY CAST(costo AS DECIMAL(10,2)) ASC");
+                    $sqlPI = ("SELECT id, clases, costo, nombre, vigencia, activo FROM paquetes WHERE nombre = 'Mixto' ORDER BY CAST(costo AS DECIMAL(10,2)) ASC");
                     $stmtPI = $conn->prepare($sqlPI);
                     $stmtPI->execute();
                     $resultPI = $stmtPI->get_result();
@@ -392,6 +399,9 @@ include './db.php';
                               $nclases = '<p class="numero-clases-card" style="color: ' . $colorActual . '">' . $rowPI['clases'] . '</p>
                                           <p class="clases-card" style="color: ' . $colorActual . ');">' . $claz . '</p>';
                           }
+                           if($rowPI['activo'] !== 1){
+                continue;
+              }
                       echo '
                       <div class="swiper-slide">
                         <div class="card">

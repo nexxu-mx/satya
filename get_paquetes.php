@@ -54,7 +54,9 @@ $result = $stmt->get_result();
 $paquetes = [];
 
 while ($row = $result->fetch_assoc()) {
-    
+    if($row['activo'] !== 1){
+        continue;
+    }
     //logica costo fundador
         if($founder == 1){
             switch ($row['id']) {
