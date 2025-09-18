@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 date_default_timezone_set('America/Mexico_City'); 
 
-$mysqli = new mysqli("127.0.0.1", "u379047759_sencia", "Sencia25*", "u379047759_studio");
+$mysqli = new mysqli("127.0.0.1", "u379047759_satyaestudio", "Satya2025*", "u379047759_satyabase");
 
 if ($mysqli->connect_error) {
     die("Error de conexión: " . $mysqli->connect_error);
@@ -36,7 +36,7 @@ while ($row = $result->fetch_assoc()) {
         // Actualizar tabla users de forma segura
         $stmtUpdate = $mysqli->prepare("
             UPDATE users 
-            SET fechaCredit = NULL, venceCredit = NULL, credit = 0, maxInvitados = NULL
+            SET fechaCredit = NULL, venceCredit = NULL, credit = 0, elearning = NULL, maxInvitados = NULL
             WHERE id = ?
         ");
         $stmtUpdate->bind_param("i", $id);
