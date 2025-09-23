@@ -262,6 +262,7 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
                                 $valemail = 'onblur="validarCorreo()"';
                                 $valnum = 'onblur="validarNumero()"';
                                 $profilePath = "../assets/images/profiles/unknow.jpg";
+                                 $itsfounder = "";
                             }
                             
                             if((int)$_SESSION['tipoUser'] == 4){

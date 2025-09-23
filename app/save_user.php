@@ -5,6 +5,10 @@ include '../error_log.php'; // opcional si usas manejo de errores
 // Recibir datos del formulario
 $id = $_POST['idu'] ?? null;
 $nombre = $_POST['nombre'] ?? null;
+if(empty($nombre)){
+    header("Location: clientes.php?undef=1");
+    exit();
+}
 $apellido = $_POST['apellido'] ?? null;
 $mail = $_POST['mail'] ?? null;
 $numero = $_POST['numero'] ?? null;

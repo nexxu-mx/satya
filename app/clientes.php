@@ -78,8 +78,10 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
 													<th>Nombre</th>
 													<th>Teléfono</th>
 													<th>Email</th>
-													<th>Creditos</th>
+													<th>Créditos</th>
+													<th>Status</th>
 													<th>Tipo</th>
+													
 												</tr>
 											</thead>
 											
@@ -146,6 +148,7 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
                     lead.telefono,
                     lead.email,
                     lead.interes,
+					lead.satatus,
 					lead.tipo
                 ];
             });
@@ -157,6 +160,7 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
                     { title: "Teléfono" },
                     { title: "Email" },
                     { title: "Créditos" },
+					{ title: "Suscripción" },
 					{ title: "Tipo" }
                 ]
             });

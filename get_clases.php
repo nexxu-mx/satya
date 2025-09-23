@@ -38,13 +38,13 @@ if ($day) {
 
         // 3. Construir la consulta SQL
         if($busqueda){
-                $sql = "SELECT id, id_coach, hora_inicio, hora_fin, aforo, reservados, id_disciplina, estatus 
+                $sql = "SELECT id, id_coach, hora_inicio, hora_fin, aforo, reservados, id_disciplina, evento, estatus 
                 FROM clases 
                 WHERE hora_inicio LIKE ?
                 AND id_disciplina = $busqueda
                 ORDER BY hora_inicio ASC";   
         }else{
-        $sql = "SELECT id, id_coach, hora_inicio, hora_fin, aforo, reservados, id_disciplina, estatus 
+        $sql = "SELECT id, id_coach, hora_inicio, hora_fin, aforo, reservados, id_disciplina, evento, estatus 
                 FROM clases 
                 WHERE hora_inicio LIKE ?
                 ORDER BY hora_inicio ASC";
@@ -66,6 +66,7 @@ if ($day) {
     $stmtU = $conn->prepare("SELECT activo FROM reservaciones WHERE alumno = ? AND idClase = ?");
     $clases = [];
     while ($row = $result->fetch_assoc()) {
+        
         $id_coach = $row['id_coach'];
         $stmtC->bind_param("i", $id_coach);
         $stmtC->execute();
@@ -82,15 +83,17 @@ if ($day) {
         $stmtD->execute();
         $resultD = $stmtD->get_result();
     
+       
         if ($disciplina = $resultD->fetch_assoc()) {
-            $nombre_disciplina =  $disciplina['nombre_disciplina'];
-            $especial_disciplina =  $disciplina['esp'];
-
-            ///aquí logica para manejar el tapete si esp es 1 o 2
-
+            
+                $nombre_disciplina =  $disciplina['nombre_disciplina'];
+                $especial_disciplina =  $disciplina['esp'];
+            
             
         } else {
             $nombre_disciplina = "-";
+            $nombre_disciplina =  "-";
+            $especial_disciplina =  null;
         }
         
     
@@ -198,6 +201,7 @@ if ($day) {
         }else{
             $pathimg = $pathimg . "?v=" . time();
         }
+        
         if($abierta == 1){
             ///Anticipacion para reservar
                 $hoy = new DateTime('today');
@@ -239,6 +243,27 @@ if ($day) {
                 }
 
         }
+        ///manejo eventos especiales
+        if(!empty($row['evento'])){
+            $sqe = ("SELECT nombre, lugar FROM eventos WHERE id = ?");
+            $sme = $conn->prepare($sqe);
+            $sme->bind_param("i", $row['evento']);
+            $sme->execute();
+            $rese = $sme->get_result();
+            if($rese->num_rows > 0){
+                $ree = $rese->fetch_assoc();
+            }
+            $nombre_disciplina = $ree['nombre'];
+            $idDisc = $row['evento'];
+            $nombre_coach = $ree['lugar'];
+
+            $pathimg = "./assets/images/events/1.png";
+
+            $event = true;
+        }else{
+            $idDisc = $row['id_disciplina'];
+            $event = false;
+        }
         $clases[] = [
             "id" => $row['id'],
             "id_coach" => $row['id_coach'],
@@ -249,10 +274,11 @@ if ($day) {
             "aforo" => $aforo,
             "estatus" => $estatus,
             "disciplina" => $nombre_disciplina,
-            "id_disciplina" => $row['id_disciplina'],
+            "id_disciplina" => $idDisc,
             "esp_disciplina" => $especial_disciplina,
             "abierta" => $abierta,
-            "nota" => $resw
+            "nota" => $resw,
+            "evento" => $event
         ];
         
     }
