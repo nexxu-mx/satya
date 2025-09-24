@@ -12,10 +12,10 @@ $fechaFiltro = isset($_GET['fecha']) ? $_GET['fecha'] : '';
 // Si se ha enviado un filtro de fecha, ajustar la consulta SQL
 if ($fechaFiltro) {
     // Filtrar por mes (en formato yyyy-mm)
-    $sql = "SELECT id, fecha, concepto, tipo, monto FROM egr WHERE DATE_FORMAT(fecha, '%Y-%m') = '$fechaFiltro'";
+    $sql = "SELECT id, fecha, concepto, tipo, monto FROM ing WHERE DATE_FORMAT(fecha, '%Y-%m') = '$fechaFiltro'";
 } else {
     // Si no hay filtro, traer todos los registros
-    $sql = "SELECT id, fecha, concepto, tipo, monto FROM egr";
+    $sql = "SELECT id, fecha, concepto, tipo, monto FROM ing";
 }
 
 $result = $conn->query($sql);

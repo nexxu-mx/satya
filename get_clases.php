@@ -253,7 +253,7 @@ if ($day) {
             if($rese->num_rows > 0){
                 $ree = $rese->fetch_assoc();
             }
-            $nombre_disciplina = $ree['nombre'];
+            $nameEvent = $ree['nombre'];
             $idDisc = $row['evento'];
             $nombre_coach = $ree['lugar'];
 
@@ -278,7 +278,8 @@ if ($day) {
             "esp_disciplina" => $especial_disciplina,
             "abierta" => $abierta,
             "nota" => $resw,
-            "evento" => $event
+            "evento" => $event,
+            "name" => $nameEvent
         ];
         
     }

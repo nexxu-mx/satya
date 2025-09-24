@@ -247,8 +247,8 @@ function cargarClases(day) {
                                     <!--img-->
                                     <div class="clase-img-container" style="position: unset;">
                                          <img style="position: absolute;width: 100%;left: 50%;transform: translate(-50%);opacity: 0.3;" src="${clase.pathimg}" alt="Foto Coach">
-                                        <div class="disci-clase" style="left: 0;height: 17%;">
-                                            <h3 style="font-size: 2rem;">event</h3>
+                                        <div class="disci-clase" style="left: 0;height: 17%; z-index: 0;">
+                                            <h3 style="font-size: 2rem;">${clase.disciplina} Event</h3>
                                         </div>
                                         <p class="coache-clase" >${clase.nombre_coach}</p>
                                     </div>
@@ -257,7 +257,7 @@ function cargarClases(day) {
 
                                         <div class="disciplina-clase-container">
                                             
-                                            <h3>${clase.disciplina}</h3>
+                                            <h3>${clase.name}</h3>
                                             <div class="detalles-clase-disciplina-container">
                                                 <p class="detalles-disciplina" onclick="mostrarModal(detallesDisciplinaModal, ${clase.id_disciplina}, 2)">«Detalles»</p>
                                             </div>

@@ -1,3 +1,4 @@
+let periodo
 $(document).ready(function() {
     // Inicializar DataTable con la opción de orden descendente en la primera columna
     let tabla = $('#basic-datatables').DataTable({
@@ -58,10 +59,10 @@ $(document).ready(function() {
                         producto.fecha !== undefined) {
                         
                         // Crear botón de eliminar
-                        var botonEliminar = `<button class="btn btn-danger btn-sm eliminar-btn" 
+                        var botonEliminar = `<button class="btn eliminar-btn" style="color: red; font-size: 1.4rem;"
                                            data-idpago="${producto.id}" 
-                                           title="Eliminar transacción">
-                                           <i class="fa fa-trash"></i> Cancelar
+                                           title="Cancelar transacción">
+                                           <i class="icon-ban"></i>
                                          </button>`;
                         
                         // Agregar una fila a la tabla con los datos de cada producto
@@ -95,10 +96,17 @@ $(document).ready(function() {
 
     // Cargar productos cuando se cargue la página
     cargarProductos();
-
+    cargarBalance(obtenerFechaFiltro(''));
+  
+    
     // Hacer la solicitud AJAX al archivo PHP para el balance
-    $.ajax({
-        url: 'balance.php', // El archivo PHP que devuelve los datos en formato JSON
+   
+});
+function cargarBalance(filtro) {
+   
+    const url = `balance.php?mes=${filtro}`;
+     $.ajax({
+        url: url, // El archivo PHP que devuelve los datos en formato JSON
         method: 'GET',
         dataType: 'json',
         success: function (data) {
@@ -106,16 +114,18 @@ $(document).ready(function() {
             document.getElementById('uti').textContent = `$${data.utilidades.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
             document.getElementById('eg').textContent = `$${data.egresos.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
             document.getElementById('ing').textContent = `$${data.ingresos.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            document.getElementById('ocupacion').textContent = `${data.ocupacion.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%`;
 
         
             // Gráfico Pie (Balance)
+            document.getElementById('pieChart').innerHTML = '';
             var pieChart = $('#pieChart')[0].getContext('2d');
             new Chart(pieChart, {
                 type: 'pie',
                 data: {
                     datasets: [{
                         data: [data.ingresos, data.egresos, data.utilidades],
-                        backgroundColor: ["#1d7af3", "#f3545d", "#fdaf4b"],
+                        backgroundColor: ["#1d7af3", "#f2757bff", "#76d56bff"],
                         borderWidth: 0
                     }],
                     labels: ['Ingresos', 'Egresos', 'Utilidad']
@@ -220,9 +230,16 @@ $(document).ready(function() {
             });
 
             // Insertar las operaciones en la tabla
+            document.getElementById('operaciones').innerHTML = '';
             data.operaciones.forEach(function (op) {
-                var row = `<tr><td>${op.tipo}</td><td>$${op.monto.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-<td>${op.fecha}</td></tr>`;
+                var row = `<tr>
+                                <td>${op.fecha}</td>
+                                <td>${op.tipo}</td>
+                                <td>${op.ingreso}</td>
+                                <td>${op.egreso}</td>
+                                <td>${op.saldo}</td>
+                            </tr>`;
+                
                 $('#operaciones').append(row);
             });
         },
@@ -230,8 +247,7 @@ $(document).ready(function() {
             console.error("Error al obtener los datos:", error);
         }
     });
-});
-
+}
 function formatearPrecio(input) {
     let valor = parseFloat(input.value);
     if (!isNaN(valor)) {
@@ -258,7 +274,20 @@ inputConcepto.addEventListener('blur', function() {
 inputTipo.addEventListener('blur', function() {
     convertirAMayusculas(this);
 });
+/// ingresos formateo
+const inputPrecioI = document.getElementById('montoi');
+const inputConceptoI = document.getElementById('conceptoi');
+const inputTipoI = document.getElementById('tipoi');
 
+inputPrecioI.addEventListener('blur', function() {
+    formatearPrecio(this);
+});
+inputConceptoI.addEventListener('blur', function() {
+    convertirAMayusculas(this);
+});
+inputTipoI.addEventListener('blur', function() {
+    convertirAMayusculas(this);
+});
 // Función para obtener el nombre del mes
 function obtenerNombreMes(fecha) {
     const opciones = { year: 'numeric', month: 'long' }; // Configuración para obtener el mes completo
@@ -283,7 +312,7 @@ function cargarEgresos(filtroFecha = '') {
                         <td>${egreso.concepto}</td>
                         <td>${egreso.tipo}</td>
                         <td>${egreso.monto}</td>
-                        <td><button class="btn btn-icon btn-link btn-danger op-8 eliminar-btn">
+                        <td><button class="btn btn-icon btn-link btn-danger op-8 eliminar-btne">
                             <i class="fas fa-ban"></i>
                         </button></td>
                     </tr>
@@ -295,8 +324,70 @@ function cargarEgresos(filtroFecha = '') {
             console.error("Error al cargar egresos: ", error);
         }
     });
+    cargarBalance(obtenerFechaFiltro(''));
+    
+}
+function cargarOcupacion(periodo) {
+    $.ajax({
+        url: 'ocupaciones.php',
+    type: 'GET',
+    data: { periodo: periodo },
+    dataType: 'json', // 👈 importante
+    success: function(ocupacion) {
+        const lisemp = $('#liocup');
+        lisemp.empty();
+
+            ocupacion.forEach(function (ocupa) {
+                const ocupaHTML = `
+                    <tr class="imsnhd">
+                        <td>${ocupa.coach}</td>
+                        <td>${ocupa.clases}</td>
+                        <td>${ocupa.reservas}</td>
+                        <td class="text-success">${ocupa.asistencias}</td>
+                        <td>${ocupa.horas_totales}hrs</td>
+                    </tr>
+                `;
+                lisemp.append(ocupaHTML);
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error("Error al cargar ocupaciones: ", error);
+        }
+    });
 }
 
+// Función para cargar la lista de egresos con el filtro de fecha
+function cargarIngresos(filtroFecha = '') {
+    $.ajax({
+        url: 'listar_ingresos.php',
+        type: 'GET',
+        data: { fecha: filtroFecha }, // Enviar el filtro de fecha
+        success: function(response) {
+            const egresos = JSON.parse(response);
+            const lisemp = $('#lisig');
+            lisemp.empty(); // Limpiar la lista antes de cargar los nuevos datos
+
+            egresos.forEach(function (egreso) {
+                const egresoHTML = `
+                    <tr class="imsnhd" data-id="${egreso.id}">
+                        <td>${egreso.fecha}</td>
+                        <td>${egreso.concepto}</td>
+                        <td>${egreso.tipo}</td>
+                        <td>${egreso.monto}</td>
+                        <td><button class="btn btn-icon btn-link btn-danger op-8 eliminar-btni">
+                            <i class="fas fa-ban"></i>
+                        </button></td>
+                    </tr>
+                `;
+                lisemp.append(egresoHTML);
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error("Error al cargar ingresos: ", error);
+        }
+    });
+    cargarBalance(obtenerFechaFiltro(''));
+}
 // Función para obtener la fecha del mes pasado, hace dos meses, etc.
 function obtenerFechaFiltro(opcion) {
     const fechaHoy = new Date();
@@ -305,11 +396,30 @@ function obtenerFechaFiltro(opcion) {
     switch(opcion) {
         case '1m':
             fechaFiltro.setMonth(fechaHoy.getMonth() - 1); // Mes pasado
+            
             break;
         case '2m':
             fechaFiltro.setMonth(fechaHoy.getMonth() - 2); // Hace dos meses
             break;
         case '3m':
+            fechaFiltro.setMonth(fechaHoy.getMonth() - 3); // Hace tres meses
+            break;
+        case '1a':
+            fechaFiltro.setMonth(fechaHoy.getMonth() - 1); // Mes pasado
+            break;
+        case '2a':
+            fechaFiltro.setMonth(fechaHoy.getMonth() - 2); // Hace dos meses
+            break;
+        case '3a':
+            fechaFiltro.setMonth(fechaHoy.getMonth() - 3); // Hace tres meses
+            break;
+        case '1i':
+            fechaFiltro.setMonth(fechaHoy.getMonth() - 1); // Mes pasado
+            break;
+        case '2i':
+            fechaFiltro.setMonth(fechaHoy.getMonth() - 2); // Hace dos meses
+            break;
+        case '3i':
             fechaFiltro.setMonth(fechaHoy.getMonth() - 3); // Hace tres meses
             break;
         default:
@@ -323,14 +433,34 @@ function obtenerFechaFiltro(opcion) {
 }
 
 $(document).ready(function() {
+    //carga balance
+     $('.balanc').on('click', function() {
+        const opcion = $(this).attr('id');
+        const fechaFiltro = obtenerFechaFiltro(opcion);
+        cargarBalance(fechaFiltro); // Recargar los egresos con el filtro aplicado
+
+        // Actualizar el título del mes
+        const nombreMes = {
+            '': obtenerNombreMes(new Date()), // Mes actual
+            '0a': obtenerNombreMes(new Date()), // Mes actual
+            '1a': obtenerNombreMes(new Date(new Date().setMonth(new Date().getMonth() - 1))), // Mes pasado
+            '2a': obtenerNombreMes(new Date(new Date().setMonth(new Date().getMonth() - 2))), // Hace dos meses
+            '3a': obtenerNombreMes(new Date(new Date().setMonth(new Date().getMonth() - 3)))  // Hace tres meses
+        };
+
+        $('#tituloMeshome').text(`${nombreMes[opcion]}`); // Actualiza el título con el nombre del mes
+    });
+
     // Cargar los egresos del mes actual por defecto
     cargarEgresos(obtenerFechaFiltro(''));
+    cargarIngresos(obtenerFechaFiltro(''));
 
     // Mostrar el mes actual en el título
-    $('#tituloMes').text(`Egresos de ${obtenerNombreMes(new Date())}`); // Mostrar "Egresos de Noviembre" (mes actual)
-
+    $('#tituloMes').text(`${obtenerNombreMes(new Date())}`); // Mostrar "Egresos de Noviembre" (mes actual)
+    $('#tituloMeshome').text(`${obtenerNombreMes(new Date())}`);
+    $('#tituloMesIng').text(`${obtenerNombreMes(new Date())}`);
     // Filtrar por fecha seleccionada en el dropdown
-    $('.dropdown-item').on('click', function() {
+    $('.deg').on('click', function() {
         const opcion = $(this).attr('id');
         const fechaFiltro = obtenerFechaFiltro(opcion);
         cargarEgresos(fechaFiltro); // Recargar los egresos con el filtro aplicado
@@ -338,18 +468,36 @@ $(document).ready(function() {
         // Actualizar el título del mes
         const nombreMes = {
             '': obtenerNombreMes(new Date()), // Mes actual
+            '0m': obtenerNombreMes(new Date()), // Mes actual
             '1m': obtenerNombreMes(new Date(new Date().setMonth(new Date().getMonth() - 1))), // Mes pasado
             '2m': obtenerNombreMes(new Date(new Date().setMonth(new Date().getMonth() - 2))), // Hace dos meses
             '3m': obtenerNombreMes(new Date(new Date().setMonth(new Date().getMonth() - 3)))  // Hace tres meses
         };
 
-        $('#tituloMes').text(`Egresos de ${nombreMes[opcion]}`); // Actualiza el título con el nombre del mes
+        $('#tituloMes').text(`${nombreMes[opcion]}`); // Actualiza el título con el nombre del mes
     });
+    /// ingreso 
+        $('.dig').on('click', function() {
+        const opcion = $(this).attr('id');
+        const fechaFiltro = obtenerFechaFiltro(opcion);
+        cargarIngresos(fechaFiltro); // Recargar los egresos con el filtro aplicado
 
+        // Actualizar el título del mes
+        const nombreMes = {
+            '': obtenerNombreMes(new Date()), // Mes actual
+            '0i': obtenerNombreMes(new Date()), // Mes actual
+            '1i': obtenerNombreMes(new Date(new Date().setMonth(new Date().getMonth() - 1))), // Mes pasado
+            '2i': obtenerNombreMes(new Date(new Date().setMonth(new Date().getMonth() - 2))), // Hace dos meses
+            '3i': obtenerNombreMes(new Date(new Date().setMonth(new Date().getMonth() - 3)))  // Hace tres meses
+        };
+
+        $('#tituloMesIng').text(`${nombreMes[opcion]}`); // Actualiza el título con el nombre del mes
+    });
     // Eliminar un egreso al hacer clic en el botón de eliminar
-    $('#liseg').on('click', '.eliminar-btn', function () {
+    $('#liseg').on('click', '.eliminar-btne', function () {
+        const egr = new Date();
         const egresoId = $(this).closest('.imsnhd').data('id');
-        console.log(egresoId); 
+         
 
         // Confirmar la eliminación con SweetAlert 1.x
         swal({
@@ -381,13 +529,65 @@ $(document).ready(function() {
                     data: { id: egresoId },
                     success: function(response) {
                         swal("Eliminado!", "El egreso ha sido eliminado.", "success");
-                        cargarEgresos(); // Recargar la lista de egresos
+                         cargarEgresos(obtenerFechaFiltro(''));
+                        
                     },
                     error: function(xhr, status, error) {
                         swal("Error!", "Hubo un problema al eliminar al egreso.", "error");
                     }
                 });
+                
             }
+            
+        });
+        
+    });
+
+    // Eliminar un ingreso al hacer clic en el botón de eliminar
+    $('#lisig').on('click', '.eliminar-btni', function () {
+        const egr = new Date();
+        const egresoId = $(this).closest('.imsnhd').data('id');
+       
+        // Confirmar la eliminación con SweetAlert 1.x
+        swal({
+            title: '¿Estás seguro?',
+            text: "No podrás revertir esta acción.",
+            icon: 'warning',
+            buttons: {
+                cancel: {
+                    text: 'Cancelar',
+                    value: null,
+                    visible: true,
+                    className: 'btn btn-primary',
+                    closeModal: true
+                },
+                confirm: {
+                    text: '¡Sí, eliminar!',
+                    value: true,
+                    visible: true,
+                    className: 'btn btn-danger',
+                    closeModal: true
+                }
+            }
+        }).then((result) => {
+            if (result) {
+                // Enviar solicitud para eliminar el ingreso
+                $.ajax({
+                    url: 'eliminar_ingreso.php',
+                    type: 'POST',
+                    data: { id: egresoId },
+                    success: function(response) {
+                        swal("Eliminado!", "El ingreso ha sido eliminado.", "success");
+                         cargarIngresos(obtenerFechaFiltro(''));
+                        
+                    },
+                    error: function(xhr, status, error) {
+                        swal("Error!", "Hubo un problema al eliminar al ingreso.", "error");
+                    }
+                });
+                
+            }
+            
         });
     });
 
@@ -415,9 +615,8 @@ $(document).ready(function() {
                 $('#concepto').val('');
                 $('#tipo').val('');
                 $('#monto').val('');
-
-                console.log(response);
-                cargarEgresos(); // Recargar la lista de egresos
+                closeF();
+                cargarEgresos(obtenerFechaFiltro(''));
             },
             error: function(xhr, status, error) {
                 alert('Hubo un error al registrar el usuario');
@@ -425,4 +624,81 @@ $(document).ready(function() {
             }
         });
     });
+
+    // Manejo del formulario de ingreso
+    $('#ingreForm').on('submit', function (e) {
+        e.preventDefault(); // Prevenir el envío del formulario tradicional
+
+        // Recolectar los datos del formulario
+        const formData = {
+            fecha: $('#fechai').val(),
+            concepto: $('#conceptoi').val(),
+            tipo: $('#tipoi').val(),
+            monto: $('#montoi').val()
+        };
+
+        // Enviar los datos con AJAX a un archivo PHP
+        $.ajax({
+            url: 'nuevo_ingreso.php',  // Ruta de tu archivo PHP
+            type: 'POST',
+            data: JSON.stringify(formData),  // Enviar los datos como JSON
+            contentType: 'application/json',
+            success: function(response) {
+
+                $('#fechai').val('');
+                $('#conceptoi').val('');
+                $('#tipoi').val('');
+                $('#montoi').val('');
+                closeF();
+                cargarIngresos(obtenerFechaFiltro(''));
+            },
+            error: function(xhr, status, error) {
+                alert('Hubo un error al registrar el usuario');
+                console.error(error);
+            }
+        });
+    });
+
+
+});
+function newEgr() {
+    document.getElementById('overl').style.display = 'block';
+    document.getElementById('newegr').style.display = 'block';
+}
+function newIng() {
+    document.getElementById('overl').style.display = 'block';
+    document.getElementById('newing').style.display = 'block';
+}
+function closeF() {
+    document.getElementById('overl').style.display = 'none';
+    document.getElementById('newegr').style.display = 'none';
+    document.getElementById('newing').style.display = 'none';
+}
+document.addEventListener("DOMContentLoaded", function () {
+    // Calcular último rango de 7 días
+    let hoy = new Date();
+    let hace7 = new Date();
+    hace7.setDate(hoy.getDate() - 7);
+
+    // Inicializar flatpickr en el botón
+    const picker = flatpickr("#btnPeriodo", {
+        mode: "range",
+        dateFormat: "Y-m-d",
+        locale: "es", // 👈 Aquí activamos español
+        defaultDate: [hace7, hoy], 
+        onClose: function(selectedDates, dateStr, instance) {
+            if (selectedDates.length === 2) {
+                const inicio = instance.formatDate(selectedDates[0], "Y-m-d");
+                const fin = instance.formatDate(selectedDates[1], "Y-m-d");
+                const periodo = `${inicio}/${fin}`;
+                console.log("Periodo seleccionado:", periodo);
+                cargarOcupacion(periodo);
+            }
+        }
+    });
+
+    // Ejecutar al cargar el DOM con la última semana
+    const inicioAuto = picker.formatDate(hace7, "Y-m-d");
+    const finAuto = picker.formatDate(hoy, "Y-m-d");
+    cargarOcupacion(`${inicioAuto}/${finAuto}`);
 });
