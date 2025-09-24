@@ -28,6 +28,7 @@ $(document).ready(function() {
                     if (response.success) {
                         alert('Transacción eliminada correctamente');
                         cargarProductos(); // Recargar la tabla
+                        cargarBalance(obtenerFechaFiltro(''));
                     } else {
                         alert('Error al eliminar la transacción: ' + (response.message || 'Error desconocido'));
                     }
@@ -324,7 +325,7 @@ function cargarEgresos(filtroFecha = '') {
             console.error("Error al cargar egresos: ", error);
         }
     });
-    cargarBalance(obtenerFechaFiltro(''));
+   
     
 }
 function cargarOcupacion(periodo) {
@@ -386,7 +387,7 @@ function cargarIngresos(filtroFecha = '') {
             console.error("Error al cargar ingresos: ", error);
         }
     });
-    cargarBalance(obtenerFechaFiltro(''));
+    
 }
 // Función para obtener la fecha del mes pasado, hace dos meses, etc.
 function obtenerFechaFiltro(opcion) {
@@ -530,6 +531,7 @@ $(document).ready(function() {
                     success: function(response) {
                         swal("Eliminado!", "El egreso ha sido eliminado.", "success");
                          cargarEgresos(obtenerFechaFiltro(''));
+                         cargarBalance(obtenerFechaFiltro(''));
                         
                     },
                     error: function(xhr, status, error) {
@@ -579,7 +581,7 @@ $(document).ready(function() {
                     success: function(response) {
                         swal("Eliminado!", "El ingreso ha sido eliminado.", "success");
                          cargarIngresos(obtenerFechaFiltro(''));
-                        
+                        cargarBalance(obtenerFechaFiltro(''));
                     },
                     error: function(xhr, status, error) {
                         swal("Error!", "Hubo un problema al eliminar al ingreso.", "error");
@@ -617,6 +619,7 @@ $(document).ready(function() {
                 $('#monto').val('');
                 closeF();
                 cargarEgresos(obtenerFechaFiltro(''));
+                cargarBalance(obtenerFechaFiltro(''));
             },
             error: function(xhr, status, error) {
                 alert('Hubo un error al registrar el usuario');
@@ -651,6 +654,7 @@ $(document).ready(function() {
                 $('#montoi').val('');
                 closeF();
                 cargarIngresos(obtenerFechaFiltro(''));
+                cargarBalance(obtenerFechaFiltro(''));
             },
             error: function(xhr, status, error) {
                 alert('Hubo un error al registrar el usuario');
