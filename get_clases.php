@@ -263,6 +263,7 @@ if ($day) {
         }else{
             $idDisc = $row['id_disciplina'];
             $event = false;
+            $nameEvent = false;
         }
         $clases[] = [
             "id" => $row['id'],
