@@ -40,7 +40,7 @@ $invitados = $rowP['invitados'];
 
     $cargo_stripe = $cargo1 * 100;
 \Stripe\Stripe::setApiKey(''); 
-// TEST:::::sk_test_51S5pGNAL9Ya1TisE8mYmJ01QDV53cRwgv2ZWnmgFgv8xMxUd94G3NcwNidhvVGY7v0hCcemcZ7zum4aSZ3AthFJ900EH0qI4RI
+// TEST:::::
 header('Content-Type: application/json');
 
 // Obtener el monto del frontend (en centavos)
