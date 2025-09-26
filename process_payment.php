@@ -139,9 +139,14 @@ $founder = $row['founder'];
         $costo1 = ($rowP['costo'] / 100) * $rowP['descuento'];
         $costo2 = $rowP['costo'] - $costo1;
         $cargo1 = (float) $costo2;
+    }elseif(!empty($_SESSION['codeD'])){
+        $costo1 = ($rowP['costo'] / 100) * $_SESSION['codeD'];
+        $costo2 = $rowP['costo'] - $costo1;
+        $cargo1 = (float) $costo2;
     }else{
         $cargo1 = (float) $rowP['costo'];
     }
+
 // Inicializar clientes
 $payment_client = new PaymentClient();
 $customer_client = new CustomerClient();
@@ -351,7 +356,7 @@ elseif (isset($data['token'])) {
     
     // 3. Si el pago fue aprobado
     if ($payment_status === "approved") {
-    
+    $_SESSION['codeD'] = null;
 
     $fechaCredit = date('Y-m-d');
     $dias = (int)$vigencia; // si vigencia viene como número de días

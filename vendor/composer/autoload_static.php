@@ -23,6 +23,7 @@ class ComposerStaticInitf7012b615a7ebc37af98fdf3391c41e5
             'Symfony\\Contracts\\HttpClient\\' => 29,
             'Symfony\\Component\\OptionsResolver\\' => 34,
             'Symfony\\Component\\HttpClient\\' => 29,
+            'Stripe\\' => 7,
         ),
         'P' => 
         array (
@@ -81,6 +82,10 @@ class ComposerStaticInitf7012b615a7ebc37af98fdf3391c41e5
         'Symfony\\Component\\HttpClient\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/http-client',
+        ),
+        'Stripe\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
         ),
         'Psr\\Log\\' => 
         array (

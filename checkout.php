@@ -7,6 +7,8 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
     if(isset($_GET['id'])) {
         $IDpaquete = $_GET['id'];
         $_SESSION['paquete'] = $IDpaquete;
+        $_SESSION['intentosDsc'] = 0;
+        $_SESSION['codeD'] = null; 
     } else {
         header("Location: paquetes.php");
         exit;  
@@ -32,6 +34,7 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
     <?php include 'head.php'; ?>
     <script src="https://sdk.mercadopago.com/js/v2"></script>
     <link rel="stylesheet" href="./assets/css/profile.css?v=<?php echo time(); ?>">
+    <script src="https://js.stripe.com/v3/"></script>
     <style>
     .dsco{
       position: absolute;
@@ -72,8 +75,159 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
             .card{
                 position: relative;
             }
-            
-            
+    .inp-desc{
+        width: auto;
+        margin: 3px;
+        border: 1px solid #d2d2d2;
+        border-radius: 10px;
+        padding-left: 10px;
+        text-align: center;
+    }
+    .inp-desc::placeholder{
+        font-size: 1.3rem;
+    }
+    .inp-cont{
+        background: #f4f0e7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .btn-desc{
+        background: var(--c6);
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        width: 70px;
+        height: 30px;
+        color: #fff;
+        transition: all 0.5s ease;
+    }
+    .btn-desc:hover, .btn-desc:focus{
+        background: #616057ff;
+    }
+    .spinner{
+        animation: spin 0.8s linear infinite;
+        border-radius: 50%;
+        background: conic-gradient(white, transparent);
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 23px;
+        height: 23px;
+    }
+    .spinner-content{
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: var(--c6); /* color interior */
+
+    }
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    #payment-form {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 24px;
+  border-radius: 12px;
+  background: rgb(244, 240, 231);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
+#payment-form h2 {
+font-family: var(--ff-Avenir);
+font-weight: 400;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2.4rem;
+  color: var(--c9);
+  display: flex;
+  justify-content: center;
+  align-items: normal;
+  gap: 10px;
+}
+.pay-seg{
+    font-size: 3rem;
+  color: #cecece;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #555;
+}
+
+#card-element {
+  border: 1px solid #ccd0d5;
+  padding: 14px;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.buttoncd {
+  background-color: var(--c6);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.buttoncd:hover {
+  background-color: #616057ff;
+}
+
+#error-message {
+  margin-top: 12px;
+  color: #fa755a;
+  font-size: 14px;
+  min-height: 18px;
+  text-align: center;
+}
+.c1{
+    flex-direction: column;
+}
+.btn-next2{
+    background: var(--c6);
+    font-size: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 50%;
+    color: #fff;
+    transition: all 0.5s ease;
+    margin-top: 30px;
+}
+ .c2{
+        display: none;
+    }
+.p1{
+    padding: 0;
+}
+@media (min-width: 500px) {
+    .btn-next2{
+        display: none;
+    }
+    .c2{
+        display: flex;
+    }
+    .p1{
+        padding: 20px;
+    }
+}
     </style>
 </head>
 
@@ -97,8 +251,8 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                        <div class="p1">
                         <h1 style="text-align: center;font-size: 3rem;font-weight: 400;">Comprar Paquete</h1>
                             <div class="c0" id="data-pago">
-                                <div class="c1">
-                                    <div class="card">
+                                <div class="c1" id="preslid">
+                                    <div class="card" style="min-width: 300px;">
                                         <?php
                                             include 'db.php';
                                             // Obtener información del paquete
@@ -131,49 +285,7 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                                                 $founder = null;
                                            }
                                             $rowP = $resultP->fetch_assoc();
-                                             if($founder == 1){
-                                                switch ($IDpaquete) {
-                                                    case 2:
-                                                        $rowP['costo'] = 859;
-                                                        break;
-                                                    case 3:
-                                                        $rowP['costo'] = 1129;
-                                                        break;
-                                                    case 4:
-                                                        $rowP['costo'] = 1449;
-                                                        break;
-                                                    case 5:
-                                                        $rowP['costo'] = 16999;
-                                                        break;
-                                                    case 6:
-                                                        $rowP['costo'] = 999;
-                                                        break;
-                                                    case 7:
-                                                        $rowP['costo'] = 1299;
-                                                        break;
-                                                    case 8:
-                                                        $rowP['costo'] = 1599;
-                                                        break;
-                                                    case 9:
-                                                        $rowP['costo'] = 17999;
-                                                        break;
-                                                    case 10:
-                                                        $rowP['costo'] = 1129;
-                                                        break;
-                                                    case 11:
-                                                        $rowP['costo'] = 1479;
-                                                        break;
-                                                    case 12:
-                                                        $rowP['costo'] = 1799;
-                                                        break;
-                                                    case 13:
-                                                        $rowP['costo'] = 20999;
-                                                        break;
-                                                    default:
-                                                        $rowP['costo'] = $rowP['costo'];
-                                                        break;
-                                                }
-                                            }
+                                             
                                            
                                             if($rowP['clases'] == "ILIMITADO" || $rowP['clases'] == "ANUALIDAD"){
                                                 $nclases = '<p class="numero-clases-card" style="font-size: 34px;  color: var(--c6);margin-top: 30%;">' . $rowP['clases'] . '</p>';
@@ -206,26 +318,48 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
                                                         Vigencia ' . $rowP['vigencia'] . ' días
                                                         </p>
                                                         
-                                                        <div class="coust" style="background: var(--c6)">
+                                                        <div class="coust" id="price-container" style="background: var(--c6)">
                                                         ' . $costo . '
                                                        
+                                                            <div class="inp-cont">
+                                                                <input type="text" name="descuento" id="descuento" class="inp-desc" placeholder="Tengo un código de descuento" maxlength="10" minlength="5">
+                                                                <button class="btn-desc" id="btn-descuento" onclick="validateCode()">Aplicar</button>
+                                                            </div>
                                                         </div>';
 
                                         ?>
                                        
                                     </div>
+                                     
+                                    <button class="btn-next2" onclick="nextPay()">Pagar</button>
                                 </div>
-                                
-                                <div class="c2">
-                                    <div id="eleccion_pago">
+                               
+                                <div class="c2" id="nextslid">
+                                    <!-- <div id="eleccion_pago">
                                         <button onclick="payTarjet()" class="elect"><img src="./assets/images/card.svg" style="width: 50px" alt="">Tarjeta Crédito/Débito</button>
                                          
-                                    </div>
+                                    </div> -->
                                 
-                                   <div id="metodo_pago" style="width: 100%">
-                                        <input type="hidden" id="coust" name="coust" value="<?php echo $IDpaquete; ?>"/>
+                                   <div id="metodo_pago" style="width: 100%; height: auto;">
+                                        <!-- <input type="hidden" id="coust" name="coust" value="<?php echo $IDpaquete; ?>"/>
                                         <input type="hidden" id="idusrv" name="idusrv" value="0"/>
-                                        <div id="paymentBrick_container" class="c10"></div>
+                                        <div id="paymentBrick_container" class="c10"></div> -->
+
+                                        <!-- stripe -->
+                                         <form id="payment-form">
+                                            <h2><ion-icon name="lock-closed" role="img" class="pay-seg"></ion-icon> Pago seguro</h2>
+                                            
+                                            <div class="form-group">
+                                                <label for="card-element">Datos de la tarjeta</label>
+                                                <div id="card-element"></div>
+                                            </div>
+
+                                            <button id="submit" class="buttoncd">
+                                                <span id="button-text">Pagar ahora</span>
+                                            </button>
+
+                                        </form>
+
                                    </div>
                                     
                                 </div>
@@ -248,12 +382,19 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
     </a>
    
     <script src="./assets/js/script.js?v=<?php echo time(); ?>"></script>
-    <script src="./mp3.js?v=<?php echo time(); ?>"></script>
+    <!-- <script src="./mp3.js?v=<?php echo time(); ?>"></script> -->
+     <script src="./stripe.js?v=<?php echo time(); ?>"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script>
-        payTarjet();
+        // payTarjet();
+
+        function nextPay() {
+            document.getElementById('nextslid').style.display = "flex";
+            document.getElementById('preslid').style.display = "none";
+        }
     </script>
+   
 </body>
 
 </html>

@@ -1169,3 +1169,56 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+/// validar codigo de descuento
+function validateCode() {
+  const code = document.getElementById('descuento').value;
+  if(code){
+    document.getElementById('btn-descuento').innerHTML = '<div class="spinner"><div class="spinner-content"</div></div>';
+    fetch("validar_descuento.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: `code=${encodeURIComponent(code)}`
+    })
+      .then(response => response.json())
+      .then(data => {
+        const inp = document.getElementById('descuento');
+        const btn = document.getElementById('btn-descuento');
+        if(data.success == true){
+      
+          inp.style.border = "1px solid green";
+          inp.style.color = "green";
+          inp.readOnly = true;
+
+          btn.style.fontSize = "2.3rem";
+          btn.innerHTML = '<ion-icon name="checkmark-circle-outline" role="img" aria-label="Descuento aplciado"></ion-icon>';
+          //aplica 
+          const precioEl = document.getElementById("costto");
+          const precio = parseFloat(precioEl.textContent.replace(/[^0-9.]/g, ""));
+          const precioFinal = precio - (precio * data.descuento / 100);
+
+          const contenedor = document.getElementById('price-container');
+
+          contenedor.innerHTML = `<p class="dsco">${data.descuento}%</p>
+                                  <del style="color: #a0a0a0;">$ ${precio}</del>
+                                  <p class="precio-card" style="margin-top: -20px;" id="costto">$ ${precioFinal}<small>MX</small></p>`
+
+        }else if(data.success == false){
+          inp.style.border = "1px solid red";
+          inp.style.color = "red";
+
+          btn.innerHTML = "Aplicar";
+        }else{
+          console.log(data);
+          btn.innerHTML = "Aplicar";
+        }
+
+
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
+  }
+  
+}
