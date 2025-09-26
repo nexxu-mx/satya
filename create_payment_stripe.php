@@ -57,7 +57,7 @@ $invitados = $rowP['invitados'];
     }
 
     $cargo_stripe = $cargo1 * 100;
-\Stripe\Stripe::setApiKey(''); 
+\Stripe\Stripe::setApiKey($stripeSecret); 
 // TEST:::::
 header('Content-Type: application/json');
 
