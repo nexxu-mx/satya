@@ -1,5 +1,5 @@
      const stripe = Stripe(''); 
-    //  TEST:::
+    //  TEST::: 
 const elements = stripe.elements();
 const card = elements.create('card');
 card.mount('#card-element');
