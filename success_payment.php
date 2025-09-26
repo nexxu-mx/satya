@@ -150,7 +150,7 @@ $paquete = $_SESSION['paquete'] ?? null;
         $mail_asunto = "Gracias por tu compra";
         $mail_motivo = "Confirmación de compra";
         $mail_motivo2 = "Adquiriste un nuevo paquete con $clases clases";
-        $mail_descripcion = "Tu compra se procesó correctamente, ahora tienes $clases créditos, y expiran el $vence. Puedes revistar los detalles de tus créditos en tu perfil.";
+        $mail_descripcion = "Tu compra se procesó correctamente, ahora cuantas con $clases créditos, y expiran el $vence. Puedes revistar los detalles de tus créditos en tu perfil.";
         $mail_tabla = "Tu ID de aprobación es el $payment_id";
         include 'success_mail.php';
 
