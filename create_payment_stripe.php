@@ -43,7 +43,7 @@ $invitados = $rowP['invitados'];
 // TEST:::::
 header('Content-Type: application/json');
 
-// Obtener el monto del frontend (en centavos)
+// Obtener el monto del frontend (en centavos) 
 
 try {
     $paymentIntent = \Stripe\PaymentIntent::create([
