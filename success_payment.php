@@ -144,6 +144,16 @@ $paquete = $_SESSION['paquete'] ?? null;
     $stmt_trans->bind_param("ssssssss", $idusrv, $cargo1, $credits, $numero, $method, $payment_id, $net_received_amount, $dateNow);
     $stmt_trans->execute();
 
+
+    ///confirmacion por email
+        $mail_mailing = $_SESSION['email'];
+        $mail_asunto = "Gracias por tu compra";
+        $mail_motivo = "Confirmación de compra";
+        $mail_motivo2 = "Adquiriste un nuevo paquete con $credits clases";
+        $mail_descripcion = "Tu compra se procesó correctamente, ahora tienes $clases créditos, y expiran el $vence. Puedes revistar los detalles de tus créditos en tu perfil.";
+        $mail_tabla = "Tu ID de aprobación es el $payment_id";
+        include 'success_mail.php';
+
     echo json_encode([
         'pass' => true,
         'payment_id' => $payment_id,
@@ -152,7 +162,7 @@ $paquete = $_SESSION['paquete'] ?? null;
     ]);
 
     $_SESSION['codeD'] = null;
-
+ 
 }else{
     
 
