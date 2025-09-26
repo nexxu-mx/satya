@@ -39,7 +39,7 @@ $invitados = $rowP['invitados'];
     }
 
     $cargo_stripe = $cargo1 * 100;
-\Stripe\Stripe::setApiKey('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'); 
+\Stripe\Stripe::setApiKey(''); 
 // TEST:::::sk_test_51S5pGNAL9Ya1TisE8mYmJ01QDV53cRwgv2ZWnmgFgv8xMxUd94G3NcwNidhvVGY7v0hCcemcZ7zum4aSZ3AthFJ900EH0qI4RI
 header('Content-Type: application/json');
 
