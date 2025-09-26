@@ -7,7 +7,7 @@ card.mount('#card-element');
 const form = document.getElementById('payment-form');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
+    document.getElementById('metodo_pago').innerHTML = '<div class="spinnerpay"></div>';
     // Pedir al backend el client secret
     const {clientSecret} = await fetch('create_payment_stripe.php', {
         method: 'POST',

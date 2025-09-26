@@ -138,6 +138,23 @@ if (empty($_SESSION['idUser']) || empty($_SESSION['nombre'])) {
   box-shadow: 0 6px 16px rgba(0,0,0,0.1);
 }
 
+
+
+.spinnerpay {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;   /* color del fondo del círculo */
+  border-top: 5px solid #eab58100; /* color de la parte animada */
+  border-radius: 50%;            /* círculo */
+  animation: spin 1s linear infinite; /* animación */
+  margin: 50px auto; /* centrar */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 #payment-form h2 {
 font-family: var(--ff-Avenir);
 font-weight: 400;
@@ -341,6 +358,7 @@ label {
                                     </div> -->
                                 
                                    <div id="metodo_pago" style="width: 100%; height: auto;">
+                                    
                                         <!-- <input type="hidden" id="coust" name="coust" value="<?php echo $IDpaquete; ?>"/>
                                         <input type="hidden" id="idusrv" name="idusrv" value="0"/>
                                         <div id="paymentBrick_container" class="c10"></div> -->
