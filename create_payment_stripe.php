@@ -6,6 +6,24 @@ session_start();
 $idusrv = $_SESSION['idUser'] ?? null;
 $paquete = $_SESSION['paquete'] ?? null;
 
+/// carga key
+
+require __DIR__ . '/vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->safeLoad(); // lee el archivo .env
+
+// Detecta el entorno (test o live)
+$stripeMode = $_ENV['STRIPE_MODE'] ?? 'test';
+
+if ($stripeMode === 'live') {
+    $stripeSecret = $_ENV['STRIPE_LIVE_SECRET'];
+    $stripePublishable = $_ENV['STRIPE_LIVE_PUBLISHABLE'];
+} else {
+    $stripeSecret = $_ENV['STRIPE_TEST_SECRET'];
+    $stripePublishable = $_ENV['STRIPE_TEST_PUBLISHABLE'];
+}
+
 // Obtener información del paquete
 $sqlP = "SELECT clases, costo, vigencia, invitados, descuento FROM paquetes WHERE id = ?";
 $stmtP = $conn->prepare($sqlP);

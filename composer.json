@@ -17,7 +17,8 @@
         "cloudconvert/cloudconvert-php": "^3.4",
         "symfony/http-client": "^7.3",
         "nyholm/psr7": "^1.8",
-        "stripe/stripe-php": "^17.6"
+        "stripe/stripe-php": "^17.6",
+        "vlucas/phpdotenv": "^5.6"
     },
     "config": {
         "allow-plugins": {
