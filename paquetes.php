@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const card = document.createElement("div");
           card.className = "card";
 
-          const token = generarToken();
+          const token = generarToken(); 
           let colorActual 
 
           if(p.nombre == "MOVEMENT"){
@@ -125,6 +125,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
           }else if(p.nombre == "MIXTO"){
             colorActual = "var(--c7)";
+          }else if(p.founder == 1){
+            colorActual = "var(--c1)";
           }else{
             colorActual = "var(--c2)";
           }
