@@ -257,9 +257,7 @@ label {
     <?php include 'header.php'; ?>
 
     
-    <div style="position: fixed; z-index: -1; top: 0; left: 0; width: 100%; heigth: 100%">
-        <video src="./assets/images/SATYA_gradient.mp4" autoplay loop muted></video>
-    </div>
+    
     <!-- MAIN SECTION -->
     <main>
         <article>
@@ -272,8 +270,9 @@ label {
                                     <div class="card" style="min-width: 300px;">
                                         <?php
                                             include 'db.php';
+                                           
                                             // Obtener información del paquete
-                                            $sqlP = "SELECT clases, nombre, costo, vigencia, descuento FROM paquetes WHERE id = ?";
+                                            $sqlP = "SELECT clases, nombre, costo, vigencia, founder, descuento FROM paquetes WHERE id = ?";
                                             $stmtP = $conn->prepare($sqlP);
                                             $stmtP->bind_param("i", $IDpaquete);
                                             $stmtP->execute();
@@ -283,7 +282,9 @@ label {
                                                 http_response_code(400);
                                                 die(json_encode(['error' => 'Paquete no encontrado']));
                                             }
+                                            $rowP = $resultP->fetch_assoc();
                                             //Consulta Founder 
+                                            
                                            if(!empty($_SESSION['idUser'])){
                                                
                                                 $idUsr = $_SESSION['idUser'];
@@ -294,15 +295,25 @@ label {
                                                 $resultU = $smt->get_result();
                                                 if($resultU->num_rows === 0){
                                                     $founder = null;
+                                                }else{
+                                                     $rowU = $resultU->fetch_assoc();
+                                                    $founder = $rowU['founder'];
+                                                    if($founder !== 1 && $rowP['founder'] == 1){
+                                                        echo '<script>
+window.location.href = "paquetes.php";
+</script>
+';
+                                                        exit;  
+                                                    }
                                                 }
-                                                $rowU = $resultU->fetch_assoc();
-                                                $founder = $rowU['founder'];
+                                               
                                                
                                            }else{
                                                 $founder = null;
                                            }
-                                            $rowP = $resultP->fetch_assoc();
+                                            
                                              
+
                                            
                                             if($rowP['clases'] == "ILIMITADO" || $rowP['clases'] == "ANUALIDAD"){
                                                 $nclases = '<p class="numero-clases-card" style="font-size: 34px;  color: var(--c6);margin-top: 30%;">' . $rowP['clases'] . '</p>';

@@ -111,24 +111,35 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
                             if (isset($_GET['id'])) {
                                 $idPaqueteEdit = $_GET['id'];
 
-                                $selectPaquete = "SELECT id, clases, costo, nombre, vigencia, disciplinas, invitados, persona, descuento, finalizadsc FROM paquetes WHERE id = '$idPaqueteEdit'";
+                                $selectPaquete = "SELECT id, clases, costo, nombre, vigencia, disciplinas, founder, invitados, persona, descuento, finalizadsc FROM paquetes WHERE id = '$idPaqueteEdit'";
 
                                 $resultadoSelectPaquete = $conn->query($selectPaquete);
 
                                 while ($filaPaquete = mysqli_fetch_assoc($resultadoSelectPaquete)) {
+                                    if($filaPaquete['founder'] == 1){
+                                        $its_founder = 'checked=""';
+                                    }else{
+                                        $its_founder = "";
+                                    }
                                     echo '
                                     <label for="nombre_paquete">Nombre del Paquete:</label>
                                     <input type="text" id="nombre_paquete" name="nombre_paquete" placeholder="Agrega el Nombre del Paquete" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required value="'. $filaPaquete['nombre'] .'">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" ' . $its_founder . '  id="founder" name="founder">
+                                        <label class="form-check-label" for="founder">
+                                            Paquete Fundador
+                                        </label>
+                                    </div>
                                     <label for="numero_clases">Número de Clases:</label>
                                     <input type="text" id="numero_clases" name="numero_clases" placeholder="Agrega el número de clases" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required value="'. $filaPaquete['clases'] .'">
                                     <label for="costo_paquete">Costo del Paquete:</label>
                                     <input type="text" id="costo_paquete" name="costo_paquete" placeholder="Agrega el costo del Paquete" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required value="'. $filaPaquete['costo'] .'">
                                     <label for="vigencia_paquete">Vigencia del Paquete (Días):</label>
                                     <input type="text" id="vigencia_paquete" name="vigencia_paquete" placeholder="Agrega la vigencia del Paquete en Días" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required value="'. $filaPaquete['vigencia'] .'">
-                                    <label for="invitados_paquete">Número de Invitados Máximos:</label>
-                                    <input type="text" id="invitados_paquete" name="invitados_paquete" placeholder="Agrega el Número de Invitados que puede tener el Paquete" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required value="'. $filaPaquete['invitados'] .'">
-                                    <label for="personas_paquete">Personas en el Paquete:</label>
-                                    <input type="text" id="personas_paquete" name="personas_paquete" placeholder="Personas que están Invitadas al Paquete" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required value="'. $filaPaquete['persona'] .'">
+                                    
+                                    <input type="hidden" id="invitados_paquete" name="invitados_paquete" placeholder="Agrega el Número de Invitados que puede tener el Paquete" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required value="'. $filaPaquete['invitados'] .'">
+                                    
+                                    <input type="hidden" id="personas_paquete" name="personas_paquete" placeholder="Personas que están Invitadas al Paquete" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required value="'. $filaPaquete['persona'] .'">
                                     
                                     <div class="form-group">
                                         <label class="form-label">Disciplinas incluidas</label>
@@ -168,16 +179,22 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
                                 echo '
                                     <label for="nombre_paquete">Nombre del Paquete:</label>
                                     <input type="text" id="nombre_paquete" name="nombre_paquete" placeholder="Agrega el Nombre del Paquete" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox"  id="founder" name="founder">
+                                        <label class="form-check-label" for="founder">
+                                            Paquete Fundador
+                                        </label>
+                                    </div>
                                     <label for="numero_clases">Número de Clases:</label>
                                     <input type="text" id="numero_clases" name="numero_clases" placeholder="Agrega el número de clases" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required>
                                     <label for="costo_paquete">Costo del Paquete:</label>
                                     <input type="text" id="costo_paquete" name="costo_paquete" placeholder="Agrega el costo del Paquete" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required>
                                     <label for="vigencia_paquete">Vigencia del Paquete (Días):</label>
                                     <input type="text" id="vigencia_paquete" name="vigencia_paquete" placeholder="Agrega la vigencia del Paquete en Días" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required>
-                                    <label for="invitados_paquete">Número de Invitados Máximos:</label>
-                                    <input type="text" id="invitados_paquete" name="invitados_paquete" placeholder="Agrega el Número de Invitados que puede tener el Paquete" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required>
-                                    <label for="personas_paquete">Personas en el Paquete:</label>
-                                    <input type="text" id="personas_paquete" name="personas_paquete" placeholder="Personas que están Invitadas al Paquete" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required>
+                                   
+                                    <input type="hidden" id="invitados_paquete" name="invitados_paquete" placeholder="Agrega el Número de Invitados que puede tener el Paquete" value="0" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required>
+                                
+                                    <input type="hidden" id="personas_paquete" name="personas_paquete" placeholder="Personas que están Invitadas al Paquete" value="1" class="form-control mb-3 input-group input-group-lg p-3 bg-body-secondary" maxlength="20" required>
 
                                     <div class="form-group">
                                         <label class="form-label">Disciplinas incluidas</label>
