@@ -91,49 +91,7 @@ $mail = $row['mail'];
 $customer_id = $row['customer_id'];
 $founder = $row['founder'];
 ///Datos sobre el costo del paquete
- if($founder == 1){
-            switch ($paquete) {
-                case 2:
-                    $rowP['costo'] = 859;
-                    break;
-                case 3:
-                    $rowP['costo'] = 1129;
-                    break;
-                case 4:
-                    $rowP['costo'] = 1449;
-                    break;
-                case 5:
-                    $rowP['costo'] = 16999;
-                    break;
-                case 6:
-                    $rowP['costo'] = 999;
-                    break;
-                case 7:
-                    $rowP['costo'] = 1299;
-                    break;
-                case 8:
-                    $rowP['costo'] = 1599;
-                    break;
-                case 9:
-                    $rowP['costo'] = 17999;
-                    break;
-                case 10:
-                    $rowP['costo'] = 1129;
-                    break;
-                case 11:
-                    $rowP['costo'] = 1479;
-                    break;
-                case 12:
-                    $rowP['costo'] = 1799;
-                    break;
-                case 13:
-                    $rowP['costo'] = 20999;
-                    break;
-                default:
-                    $rowP['costo'] = $rowP['costo'];
-                    break;
-            }
-        }
+
 
     if(!empty($rowP['descuento'])){
         $costo1 = ($rowP['costo'] / 100) * $rowP['descuento'];

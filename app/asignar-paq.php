@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $method = $_POST['metod'];
     
     // Obtener información del paquete
-    $sqlP = "SELECT clases, costo, vigencia, invitados FROM paquetes WHERE id = ?";
+    $sqlP = "SELECT clases, costo, vigencia, invitados, descuento FROM paquetes WHERE id = ?";
     $stmtP = $conn->prepare($sqlP);
     $stmtP->bind_param("i", $paquete);
     $stmtP->execute();
@@ -24,7 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $credits = $rowP['clases'];
     $vigencia = $rowP['vigencia'];
     $invitados = $rowP['invitados'];
-    $cargo1 = (float) $rowP['costo'];
+
+    if(!empty($rowP['descuento'])){
+        $costo1 = ($rowP['costo'] / 100) * $rowP['descuento'];
+        $costo2 = $rowP['costo'] - $costo1;
+        $cargo1 = (float) $costo2;
+    }else{
+        $cargo1 = (float) $rowP['costo'];
+    }
 
     // Datos del usuario
     $sql = "SELECT nombre, apellido, mail, numero, credit, claseBienvenida, customer_id FROM users WHERE id = ?";
