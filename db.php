@@ -1,6 +1,6 @@
 <?php
 $devON = true;
-if($devON == false){
+if($devON == true){
     $servername = "127.0.0.1";
     $username = "u379047759_satyaestudio";
     $password = "Satya2025*";
