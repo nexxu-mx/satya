@@ -400,8 +400,12 @@ function mostrarDetalle(ocupa) {
                 <div style="margin-bottom:20px; border-bottom:1px solid #ddd; padding-bottom:10px;">
                     <h4>${clase.disciplina}</h4>
                     <p><b>Inicio:</b> ${clase.hora_inicio} - <b>Fin:</b> ${clase.hora_fin}</p>
-                    <p><b>Reservados:</b> ${clase.reservados}</p>
-                    ${alumnosHTML}
+                    <p><b>Reservados:</b> ${clase.reservados} - <b>Asistencias:</b> ${clase.asistencias}</p>
+                    
+                    <div>
+                        ${alumnosHTML}
+                    </div>
+                   
                 </div>
             `);
         });
@@ -414,12 +418,14 @@ function mostrarDetalle(ocupa) {
 // 🟢 Cerrar popup
 $('#cerrarPopup').on('click', function() {
     $('#popupDetalle').fadeOut();
+    closeF();
 });
 
 // 🟢 Cerrar si se hace click fuera del contenido
 $(window).on('click', function(e) {
     if ($(e.target).is('#popupDetalle')) {
         $('#popupDetalle').fadeOut();
+        closeF();
     }
 });
 
