@@ -381,31 +381,36 @@ function mostrarDetalle(ocupa) {
             let alumnosHTML = "";
             if (clase.alumnos.length > 0) {
                 alumnosHTML = `
-                    <ul>
-                        ${clase.alumnos.map(a => `
-                            <li>
-                                <b>${a.nombre}</b> (ID: ${a.id}) - 
-                                Asistencia: <span style="color:${a.asistencia ? 'green' : 'red'}">
-                                    ${a.asistencia ? '✔' : '✘'}
-                                </span>
-                            </li>
-                        `).join('')}
-                    </ul>
+                    <div class="toggle-container">
+                        <div class="toggle-btn" style="cursor:pointer; color:#007bff;">
+                            <i class="icon-arrow-down"></i> Detalles de asistentes
+                        </div>
+                        <div class="toggle-content" style="display:none; margin-left:15px; margin-top:8px;">
+                            <ul>
+                                ${clase.alumnos.map(a => `
+                                    <li>
+                                        <b>${a.nombre}</b> (ID: ${a.id}) - 
+                                        Asistencia: <span style="color:${a.asistencia ? 'green' : 'red'}">
+                                            ${a.asistencia ? '✔' : '✘'}
+                                        </span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
                 `;
             } else {
                 alumnosHTML = "<p>No hubo reservaciones.</p>";
             }
 
+
             cont.append(`
                 <div style="margin-bottom:20px; border-bottom:1px solid #ddd; padding-bottom:10px;">
                     <h4>${clase.disciplina}</h4>
                     <p><b>Inicio:</b> ${clase.hora_inicio} - <b>Fin:</b> ${clase.hora_fin}</p>
-                    <p><b>Reservados:</b> ${clase.reservados} - <b>Asistencias:</b> ${clase.asistentes}</p>
-                    
-                    <div>
-                        ${alumnosHTML}
-                    </div>
-                   
+                    <p><b>Reservados:</b> ${clase.reservados} - <b>Asistencias:</b> ${clase.asistencias}</p>
+               
+                    ${alumnosHTML}
                 </div>
             `);
         });
@@ -413,6 +418,13 @@ function mostrarDetalle(ocupa) {
 
     document.getElementById('popupDetalle').style.display = 'flex';
     document.getElementById('overl').style.display = 'block';
+
+    // Activar toggles
+$('.toggle-btn').off().on('click', function() {
+    $(this).next('.toggle-content').slideToggle();
+    $(this).find('i').toggleClass('rotated'); // opcional: girar icono
+});
+
 }
 
 // 🟢 Cerrar popup
