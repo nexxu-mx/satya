@@ -400,7 +400,7 @@ function mostrarDetalle(ocupa) {
                 <div style="margin-bottom:20px; border-bottom:1px solid #ddd; padding-bottom:10px;">
                     <h4>${clase.disciplina}</h4>
                     <p><b>Inicio:</b> ${clase.hora_inicio} - <b>Fin:</b> ${clase.hora_fin}</p>
-                    <p><b>Reservados:</b> ${clase.reservados} - <b>Asistencias:</b> ${clase.asistencias}</p>
+                    <p><b>Reservados:</b> ${clase.reservados} - <b>Asistencias:</b> ${clase.asistentes}</p>
                     
                     <div>
                         ${alumnosHTML}

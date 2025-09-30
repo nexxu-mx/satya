@@ -94,6 +94,7 @@ if ($result->num_rows > 0) {
                     "hora_inicio" => $clase['hora_inicio'],
                     "hora_fin" => $clase['hora_fin'],
                     "reservados" => (int)$clase['reservados'],
+                    "asistentes" => $total_asistencias,
                     "alumnos" => $alumnos
                 ];
             }
