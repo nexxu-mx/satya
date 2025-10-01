@@ -25,7 +25,7 @@ try {
     $stmt = $conn->prepare($query);
     $stmt->execute();
     $result = $stmt->get_result();
-    var_dump($result);
+   
 
     $leads = [];
     
