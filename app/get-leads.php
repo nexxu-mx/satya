@@ -49,30 +49,33 @@ try {
 
         ///maneja vencimiento 
 
-        $vencimiento = $row['fechaCredit'];
-        if(empty($vencimiento)){
-            $vencimiento = '2026-12-31';
-        }
-        $hoy = new DateTime(); 
-        $fechaVenc = new DateTime($vencimiento);
-        $diff = (int)$hoy->diff($fechaVenc)->format("%r%a"); 
-      
+        $estatus = "";
+        if(!empty($row['fechaCredit'])){
+            $vencimiento = $row['fechaCredit'];
+            $hoy = new DateTime(); 
+            $fechaVenc = new DateTime($vencimiento);
+            $diff = (int)$hoy->diff($fechaVenc)->format("%r%a"); 
+        
 
-        if ($diff < 0) {
-            $estatus = '<span class="badge badge-danger">Vencida</span>';
-        } elseif ($diff < 3) {
-            $estatus = '<span class="badge badge-warning">Por Vencer</span>';
-        } else {
-            if($row['credit'] < 3){
-                $estatus = '<span class="badge badge-warning">Por Vencer</span>';
-            }elseif($row['credit'] == 0){
+            if ($diff < 0) {
                 $estatus = '<span class="badge badge-danger">Vencida</span>';
-            }else{
+            } elseif ($diff < 3) {
+                $estatus = '<span class="badge badge-warning">Por Vencer</span>';
+            } else {
+                if($row['credit'] < 3){
+                    $estatus = '<span class="badge badge-warning">Por Vencer</span>';
+                }elseif($row['credit'] == 0){
+                    $estatus = '<span class="badge badge-danger">Vencida</span>';
+                }else{
 
-                $estatus = '<span class="badge badge-success">Activo</span>';
-            }
-            
+                    $estatus = '<span class="badge badge-success">Activo</span>';
+                }
+                
+            }  
+        }else{
+            $estatus = '<span class="badge badge-danger">Sin Créditos</span>';
         }
+        
         if($row['credit'] == 0){
             $estatus = '<span class="badge badge-danger">Vencida</span>';
         }
