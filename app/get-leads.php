@@ -50,9 +50,16 @@ try {
         ///maneja vencimiento 
 
         $vencimiento = $row['fechaCredit'];
-        $hoy = new DateTime(); 
-       $fechaVenc = new DateTime($vencimiento ?? 'now');
-        $diff = (int)$hoy->diff($fechaVenc)->format("%r%a"); 
+        $hoy = new DateTime();
+
+        if (!empty($vencimiento)) {
+            $fechaVenc = new DateTime($vencimiento);
+            $diff = (int)$hoy->diff($fechaVenc)->format("%r%a");
+        } else {
+            // Si no tiene fecha de vencimiento, podemos decidir un valor por defecto:
+            $diff = 0; // o null
+        }
+
       
 
         if ($diff < 0) {
