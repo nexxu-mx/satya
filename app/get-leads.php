@@ -51,7 +51,7 @@ try {
 
         $vencimiento = $row['fechaCredit'];
         $hoy = new DateTime(); 
-        $fechaVenc = new DateTime($vencimiento);
+       $fechaVenc = new DateTime($vencimiento ?? 'now');
         $diff = (int)$hoy->diff($fechaVenc)->format("%r%a"); 
       
 
