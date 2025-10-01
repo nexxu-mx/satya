@@ -50,6 +50,9 @@ try {
         ///maneja vencimiento 
 
         $vencimiento = $row['fechaCredit'];
+        if(empty($vencimiento)){
+            $vencimiento = '2026-12-31';
+        }
         $hoy = new DateTime(); 
         $fechaVenc = new DateTime($vencimiento);
         $diff = (int)$hoy->diff($fechaVenc)->format("%r%a"); 
