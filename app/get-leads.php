@@ -1,5 +1,7 @@
 <?php
 require_once('../db.php');
+require '../error_log.php';
+
 date_default_timezone_set('America/Mexico_City');
 header('Content-Type: application/json');
 
@@ -19,7 +21,7 @@ try {
             ORDER BY id DESC
         ";
 
-
+ 
     $stmt = $conn->prepare($query);
     $stmt->execute();
     $result = $stmt->get_result();
