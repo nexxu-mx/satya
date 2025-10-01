@@ -3,6 +3,7 @@ require_once('../db.php');
 require '../error_log.php';
 
 date_default_timezone_set('America/Mexico_City');
+
 header('Content-Type: application/json');
 
 try {
@@ -30,14 +31,13 @@ try {
     $leads = [];
     
     while ($row = $result->fetch_assoc()) {
+        
         // Extraer nombre y apellido
         $nombreCompleto = $row['nombre'] . ' ' . $row['apellido'];
         $nombre = $row['nombre'];
         $apellido = $row['apellido'];
         
-        // Obtener iniciales
-        $iniciales = strtoupper(($nombre[0] ?? '').($apellido[0] ?? ''));
-        if (empty($iniciales)) $iniciales = 'NA';
+        
         if($row['tipoUser'] == 1){
             $tipo = "Cliente";
         }elseif($row['tipoUser'] == 2){
@@ -50,8 +50,11 @@ try {
 
         ///maneja vencimiento 
 
-        $estatus = "";
+        $estatus = '-';
         if(!empty($row['fechaCredit'])){
+            
+             
+             
             $vencimiento = $row['fechaCredit'];
             $hoy = new DateTime(); 
             $fechaVenc = new DateTime($vencimiento);
@@ -75,22 +78,26 @@ try {
             }  
         }else{
             $estatus = '<span class="badge badge-danger">Sin Créditos</span>';
+            
         }
         
         if($row['credit'] == 0){
             $estatus = '<span class="badge badge-danger">Vencida</span>';
         }
-
+        
+        
         $leads[] = [
             'id' => $row['id'],
             'nombre_completo' => $nombreCompleto,
-            'iniciales' => $iniciales,
             'email' => $row['mail'] ?? 'No especificado',
             'telefono' => $row['numero'] ?? 'No especificado',
             'interes' => $row['credit'] ?? 'No especificado',
             'satatus' => $estatus,
             'tipo' => $tipo
         ];
+        
+        
+       
     }
 
     echo json_encode(['leads' => $leads]);
