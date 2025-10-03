@@ -86,9 +86,9 @@ session_start();
                                 $defaultPath = "./assets/images/coaches/pro/" . $fila['id'] . "png";
                         
                                 if (!file_exists($coachPath)) {
-                                    $imgC = '<img src="'. $defaultPath .'?v' . time() . '" alt="SATYA - '. $fila['nombre_disciplina'] .'">';
+                                    $imgC = '<img src="'. $defaultPath .'?v' . time() . '" alt="SATYA León">';
                                     if (!file_exists($defaultPath)) {
-                                        $imgC = '<img src="./assets/images/coaches/pro/unknow.jpg" alt="SATYA - '. $fila['nombre_disciplina'] .'">';
+                                        $imgC = '<img src="./assets/images/coaches/pro/unknow.jpg" alt="SATYA León">';
                                     }
 
                                 }else{
