@@ -47,7 +47,6 @@ headerToolbar: {
 },
 locale: 'es',
 events: 'fetch-events.php',
-
 eventClick: function(info) {
     info.jsEvent.preventDefault();
     document.getElementById('modalTitulo').textContent = info.event.title;
@@ -187,6 +186,10 @@ eventClick: function(info) {
 
         }
         };
+}
+
+function notausuario(nota) {
+    alert(nota);
 }
 function cancelableFalse(){
     alert("Por política de SATYA, solo puedes cancelar la clase con 10 horas de anticipación.");
