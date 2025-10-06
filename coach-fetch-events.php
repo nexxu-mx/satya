@@ -29,9 +29,9 @@ function generarToken16Digitos() {
 }
 
 // CONSULTA CON FILTRO DE FECHAS 
-$sql = "SELECT id, alumno, clase, idClase, instructor, invitado, activo, dura, inicio, fin, fechaReserva 
-        FROM reservaciones 
-        WHERE idInstructor = ? AND inicio BETWEEN ? AND ?";
+$sql = "SELECT id, hora_inicio, hora_fin, aforo, reservados, id_disciplina, estatus 
+        FROM clases 
+        WHERE id_coach = ? AND hora_inicio BETWEEN ? AND ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("iss", $id, $start, $end);
 $stmt->execute();
@@ -41,19 +41,36 @@ $eventos = [];
 
 while ($row = $result->fetch_assoc()) {
   $token = generarToken16Digitos();
-  $invitado = $row["invitado"] ?? "0";
 
-  $cancelable = (time() - $row["fechaReserva"]) > 7200 ? false : true;
-  $sqlF = ("SELECT aforo, reservados FROM clases WHERE id = ?");
+  $cancelable = (time() - $row["hora_inicio"]) > 7200 ? false : true;
+  $sqlF = ("SELECT nombre_disciplina FROM disciplinas WHERE id = ?");
   $stmtF = $conn->prepare($sqlF);
-  $stmtF->bind_param("i", $row["idClase"]);
+  $stmtF->bind_param("i", $row["id_disciplina"]);
   $stmtF->execute();
   $resultF = $stmtF->get_result();
   if($rowF = $resultF->fetch_assoc()){
-    $aforo = $rowF['reservados'] . "/" . $rowF['aforo'];
+    $n_disciplina = $rowF['nombre_disciplina']; 
   }else{
-    $aforo = "-";
+    $n_disciplina = "-";
   }
+ //CONSULTA DURACION DE LA CLASE
+      $hora_inicio = $row['hora_inicio'];
+      $hora_fin = $row['hora_fin'];   
+
+      $inicio = new DateTime($hora_inicio);
+      $fin = new DateTime($hora_fin);
+
+      // Calcula la diferencia
+      $intervalo = $inicio->diff($fin);
+
+      // Convierte todo a minutos
+      $diferencia_minutos = ($intervalo->h * 60) + $intervalo->i;
+
+      // Guarda en formato "50 min"
+      $dura = $diferencia_minutos . " min";
+
+
+  $name_coach = $_SESSION['nombre'];
  
   $estatus = '<svg xmlns="http://www.w3.org/2000/svg" class="ionicon clase-en-curso-punto" viewBox="0 0 512 512">
                 <defs><style>.ionicon { fill: #986C5D; }</style></defs>
@@ -111,16 +128,16 @@ while ($row = $result->fetch_assoc()) {
                 
   $eventos[] = [
     "id" => $row["id"],
-    "title" => $row["clase"],
-    "instructor" => $row["instructor"],
+    "title" => $n_disciplina,
+    "instructor" => $name_coach,
     "invitado" => $invitado,
     "aforo" => $aforo,
     "estatus" => $estatus,
     "alm" => $alumnos,
-    "dura" => $row["dura"],
+    "dura" => $dura,
     "cancelable" => $cancelable,
-    "start" => $row["inicio"],
-    "end" => $row["fin"]
+    "start" => $row["hora_inicio"],
+    "end" => $row["hora_fin"]
   ];
 }
 

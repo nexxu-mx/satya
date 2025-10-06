@@ -98,7 +98,7 @@ $stmtCheck->close();
         $stmtUser->execute();
         $resultUser = $stmtUser->get_result();
     if ($resultUser->num_rows === 0) {
-        echo json_encode(["error" => "usuario no encontrado"]);
+        echo json_encode(["status" => "nocredit"]);
         exit();
     }else{
         if ($rowUser = $resultUser->fetch_assoc()) {
