@@ -80,7 +80,7 @@
 						</li>
 						
 							
-						<li class="nav-item">fas fa-shopping-bag
+						<li class="nav-item">
 							<a href="paquetes.php">
 							  <i class="fas fa-boxes"></i>
 							  <p>Paquetes</p>
