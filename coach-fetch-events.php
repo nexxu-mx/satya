@@ -53,6 +53,9 @@ while ($row = $result->fetch_assoc()) {
   }else{
     $n_disciplina = "-";
   }
+
+
+  $aforo = $row['aforo'] . "/" . $row['reservados'];
  //CONSULTA DURACION DE LA CLASE
       $hora_inicio = $row['hora_inicio'];
       $hora_fin = $row['hora_fin'];   
@@ -130,7 +133,7 @@ while ($row = $result->fetch_assoc()) {
     "id" => $row["id"],
     "title" => $n_disciplina,
     "instructor" => $name_coach,
-    "invitado" => $invitado,
+    "invitado" => 0,
     "aforo" => $aforo,
     "estatus" => $estatus,
     "alm" => $alumnos,
