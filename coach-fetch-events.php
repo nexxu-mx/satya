@@ -55,7 +55,7 @@ while ($row = $result->fetch_assoc()) {
   }
 
 
-  $aforo = $row['aforo'] . "/" . $row['reservados'];
+  $aforo = $row['reservados'] . "/" . $row['aforo'];
  //CONSULTA DURACION DE LA CLASE
       $hora_inicio = $row['hora_inicio'];
       $hora_fin = $row['hora_fin'];   
