@@ -238,7 +238,10 @@ if ($day) {
                 if ($start->format('Y-m-d') === $hoy->format('Y-m-d')) {
                     if ($now < $limite3) {
                         // 🔴 Antes de las 12:00 -> siempre cerrado
-                        $abierta = 0;
+                         if($row['reservados'] < 1){
+                            $abierta = 0;
+                            $resw = "*Puedes reservar por WhatsApp.";
+                        }
                     }
                 }
 
