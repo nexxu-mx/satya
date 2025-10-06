@@ -120,7 +120,7 @@ while ($row = $result->fetch_assoc()) {
                     if($rowA['notas'] !== null){
                       $nuser = $rowA['notas'];
                       $nota = "notausuario('$nuser')";
-                      $iconota = '<ion-icon name="information-circle-outline" style="font-size: 2.5rem;color: var(--c2);" aria-hidden="true" onclick="' . $nota . '"></ion-icon>';
+                      $iconota = '<button onclick="' . $nota . '"><ion-icon name="information-circle-outline" style="font-size: 2.5rem;color: var(--c2);" aria-hidden="true"></ion-icon></button>';
                     }else{
                       $iconota = "";
                     }
