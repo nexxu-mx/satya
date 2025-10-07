@@ -29,10 +29,10 @@ if ($row = $result->fetch_assoc()) {
     $stmtC->execute();
     $resultC = $stmtC->get_result();
     if ($rowC = $resultC->fetch_assoc()) {
-        
+        //invitados mas 1, en esta ocacion no se manejan invitados por lo que debe ser uno
         $lugares = 1;
 
-        if($lugares <= $rowC['asiste']){
+        if($lugares >= $rowC['asiste']){
           $stmtR = $conn->prepare("UPDATE reservaciones SET asiste = 1 WHERE id = ?");
           $stmtR->bind_param("i", $id_event);
       
