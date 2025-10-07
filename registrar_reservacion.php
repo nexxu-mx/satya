@@ -128,7 +128,7 @@ if (in_array($id_disciplina, $array_autorizados)) {
     exit();
 }
 
-
+ 
 // CUARTO: Insertar la reserva (si pasó todas las validaciones)
 $stmt = $conn->prepare("INSERT INTO reservaciones (clase, idClase, alumno, notas, dura, instructor, idInstructor, invitado, activo, inicio, fin, lugar, fechaReserva) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 $stmt->bind_param("sssssssssssss", $clase, $idClase, $alumno, $nota, $dura, $instructor, $idInstructor, $invitado, $activo, $inicio, $fin, $lugar, $fechaReserva);

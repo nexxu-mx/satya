@@ -41,15 +41,16 @@ if ($resultC->num_rows === 0) {
     $fin = $rowC['hora_fin'];
 }
 //----
-$stmtCredit = $conn->prepare("SELECT credit FROM users WHERE id = ?");
+$stmtCredit = $conn->prepare("SELECT mail, credit FROM users WHERE id = ?");
 $stmtCredit->bind_param("i", $alumno);
 $stmtCredit->execute();
 $resultCredit = $stmtCredit->get_result();
 if ($resultCredit->num_rows === 0) {
     echo json_encode(["error" => "clase no encontrada"]);
 } else {
-    $rowCredit = $resultCredit->fetch_assoc(); // <-- aquí extraes la fila
-    $creditDisponible = $rowCredit['credit'];   // ahora sí puedes acceder
+    $rowCredit = $resultCredit->fetch_assoc(); 
+    $creditDisponible = $rowCredit['credit'];
+    $email_user = $rowCredit['mail'];  
     
     if ($creditDisponible <= 0) {
         echo json_encode(["status" => "nocredit"]);
@@ -70,7 +71,8 @@ if ($stmt->execute()) {
                 $stmtUR->bind_param("i", $alumno);
                 if ($stmtUR->execute()) {
                 
-                $mail_mailing = $_SESSION['email'];
+
+                $mail_mailing = $email_user;
                 $mail_asunto = "Reservaste $clase";
                 $mail_motivo = "$clase";
                 $mail_motivo2 = "Te esperamos en $clase el $inicio";

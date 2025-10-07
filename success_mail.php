@@ -25,9 +25,7 @@ $message = '
     </head>
     <body>
         <div class="email-container">
-            <div class="header">
-                <img src="" alt="">
-            </div>
+          
             <div class="header">
                 <div style="width: 100%; display: flex; justify-content: center; align-items: center;">
                     <img src="" style="width: 60%;" alt="SATYA Studio">
