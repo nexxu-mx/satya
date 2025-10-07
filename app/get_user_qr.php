@@ -30,7 +30,7 @@ if ($row = $result->fetch_assoc()) {
     $resultC = $stmtC->get_result();
     if ($rowC = $resultC->fetch_assoc()) {
         
-        $lugares = $invitados = 1;
+        $lugares = 1;
 
         if($lugares <= $rowC['asiste']){
           $stmtR = $conn->prepare("UPDATE reservaciones SET asiste = 1 WHERE id = ?");
