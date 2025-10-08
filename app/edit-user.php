@@ -296,10 +296,7 @@ if((int)$_SESSION['tipoUser'] !== 3 && (int)$_SESSION['tipoUser'] !== 4){
                                         <div class="form-group form-group-default">
                                                 <label for="tipouser">Tipo de Usuario</label>
                                                 <select class="form-select" id="tipouser" name="tipouser">
-                                                    <?php echo $tipus; 
-                                                    
-                                                    
-                                                    ?>
+                                                    <?php echo $tipus;  ?>
                                                     
                                                 </select>
                                             </div>
