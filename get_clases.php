@@ -214,7 +214,7 @@ if ($day) {
                     }else{
                         if($row['reservados'] < 1){
                             $abierta = 0;
-                            $resw = "*Puedes reservar por WhatsApp.";
+                            $resw = "*Puedes reservar por WhatsApp.1";
                         }
                     }
                 }
@@ -227,7 +227,7 @@ if ($day) {
                     }else{
                         if($row['reservados'] < 1){
                             $abierta = 0;
-                            $resw = "*Puedes reservar por WhatsApp.";
+                            $resw = "*Puedes reservar por WhatsApp.2";
                         }
                         
                     }
@@ -240,7 +240,7 @@ if ($day) {
                         // 🔴 Antes de las 12:00 -> siempre cerrado
                          if($row['reservados'] < 1){
                             $abierta = 0;
-                            $resw = "*Puedes reservar por WhatsApp.";
+                            $resw = "*Puedes reservar por WhatsApp.3";
                         }
                     }
                 }
