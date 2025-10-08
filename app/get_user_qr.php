@@ -31,8 +31,8 @@ if ($row = $result->fetch_assoc()) {
     if ($rowC = $resultC->fetch_assoc()) {
         //invitados mas 1, en esta ocacion no se manejan invitados por lo que debe ser uno
         $lugares = 1;
-
-        if($lugares >= $rowC['asiste']){
+        $asistencias = (int)$rowC['asiste'];
+        if($asistencias == $lugares){
           $stmtR = $conn->prepare("UPDATE reservaciones SET asiste = 1 WHERE id = ?");
           $stmtR->bind_param("i", $id_event);
       
@@ -44,7 +44,7 @@ if ($row = $result->fetch_assoc()) {
                       "clase" => $rowC["clase"],
                       "duracion" => $rowC["dura"],
                       "instructor" => $rowC["instructor"],
-                      "invitados" => $rowC["invitado"],
+                      "invitados" => $invitados,
                       "inicia" => $rowC["inicio"]
                     ];
               }
