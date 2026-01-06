@@ -1,17 +1,15 @@
 <?php
-$devON = true;
-if($devON == true){
+$devON = false;
+if ($devON == true) {
     $servername = "127.0.0.1";
     $username = "u379047759_satyaestudio";
     $password = "Satya2025*";
     $database = "u379047759_satyabase";
-}else{
-    $servername = "localhost";
+} else {
+    $servername = "db";
     $username = "root";
-    $password = "";
+    $password = "root";
     $database = "satya";
 }
 
 $conn = new mysqli($servername, $username, $password, $database);
-
-?>
