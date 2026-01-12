@@ -31,26 +31,24 @@ try {
 
     $Tcyc = $cursos;
 
-    // 4. Total de clientes (paymentusrs con idpago NOT NULL y skus academy)
+    // 4. Total de clientes activos (paymentusrs con idpago NOT NULL y skus academy)
     $query_clientes = "
         SELECT COUNT(DISTINCT mail) as total
-        FROM users WHERE tipoUser = 1
+        FROM users WHERE paquete is not null
     ";
     $stmt = $conn->prepare($query_clientes);
     $stmt->execute();
-    $Tclientes = $stmt->get_result()->fetch_assoc()['total'];
+    $TclientesActivos = $stmt->get_result()->fetch_assoc()['total'];
 
     echo json_encode([
         'visitas' => $Tvisitas,
         'leads' => $Tleads,
         'cyc' => $Tcyc,
-        'clientes' => $Tclientes
+        'clientes' => $TclientesActivos
     ]);
-
 } catch (Exception $e) {
     echo json_encode([
         'error' => true,
         'message' => 'Error: ' . $e->getMessage()
     ]);
 }
-?>
