@@ -1,41 +1,42 @@
+window.classIdSelected;
+
 document.addEventListener('DOMContentLoaded', function () {
-    renderCalendar();
-    
+  renderCalendar();
 
-  });
-  function shownota(el) {
-      const nota = el.dataset.nota; // lee el atributo data-nota
-      alert(nota);
-    }
-  function cargarOpciones() {
-    fetch('get_disciplinas_couches.php')
-      .then(response => response.json())
-      .then(data => {
-        const disciplinaSelect = document.getElementById('disciplina-select');
-        const coachSelect = document.getElementById('coach-select');
-  
-        disciplinaSelect.innerHTML = '';
-        coachSelect.innerHTML = '';
-  
-        data.disciplinas.forEach(d => {
-          const option = document.createElement('option');
-          option.value = d.id;
-          option.textContent = d.nombre_disciplina;
-          disciplinaSelect.appendChild(option);
+});
+function shownota(el) {
+  const nota = el.dataset.nota; // lee el atributo data-nota
+  alert(nota);
+}
+function cargarOpciones() {
+  fetch('get_disciplinas_couches.php')
+    .then(response => response.json())
+    .then(data => {
+      const disciplinaSelect = document.getElementById('disciplina-select');
+      const coachSelect = document.getElementById('coach-select');
 
-        });
-  
-        data.couches.forEach(c => {
-          const option = document.createElement('option');
-          option.value = c.id;
-          option.textContent = c.nombre_coach;
-          coachSelect.appendChild(option);
-        });
+      disciplinaSelect.innerHTML = '';
+      coachSelect.innerHTML = '';
+
+      data.disciplinas.forEach(d => {
+        const option = document.createElement('option');
+        option.value = d.id;
+        option.textContent = d.nombre_disciplina;
+        disciplinaSelect.appendChild(option);
+
       });
-  }
 
-  
-  let calendar;
+      data.couches.forEach(c => {
+        const option = document.createElement('option');
+        option.value = c.id;
+        option.textContent = c.nombre_coach;
+        coachSelect.appendChild(option);
+      });
+    });
+}
+
+
+let calendar;
 
 function renderCalendar() {
   const calendarEl = document.getElementById('calendar');
@@ -52,13 +53,13 @@ function renderCalendar() {
       hour12: true
     },
 
-   dateClick: function (info) {
-    const fechaSeleccionada = new Date(info.date);
-    document.getElementById('oves').style.display = 'block';
-    document.getElementById('evento-form').style.display = 'block';
-    document.getElementById('fech').innerHTML = fechaSeleccionada.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
+    dateClick: function (info) {
+      const fechaSeleccionada = new Date(info.date);
+      document.getElementById('oves').style.display = 'block';
+      document.getElementById('evento-form').style.display = 'block';
+      document.getElementById('fech').innerHTML = fechaSeleccionada.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
 
-    document.getElementById('form-evento').onsubmit = function (e) {
+      document.getElementById('form-evento').onsubmit = function (e) {
         e.preventDefault();
 
         const disciplina = document.getElementById('disciplina-select').value;
@@ -67,77 +68,77 @@ function renderCalendar() {
         const horafin = document.getElementById('hora-fin').value;
 
         const diasSeleccionados = Array.from(document.querySelectorAll('input[name="dayrepeat"]:checked'))
-            .map(cb => parseInt(cb.value));
+          .map(cb => parseInt(cb.value));
 
         const eventos = [];
         const fechaInicio = new Date(fechaSeleccionada);
-        
+
         // Si no hay días seleccionados, solo crea el evento para la fecha seleccionada
         if (diasSeleccionados.length === 0) {
-            const yearStr = fechaInicio.getFullYear();
-            const monthStr = String(fechaInicio.getMonth() + 1).padStart(2, '0');
-            const dayStr = String(fechaInicio.getDate()).padStart(2, '0');
-            const fechaStr = `${yearStr}-${monthStr}-${dayStr}`;
+          const yearStr = fechaInicio.getFullYear();
+          const monthStr = String(fechaInicio.getMonth() + 1).padStart(2, '0');
+          const dayStr = String(fechaInicio.getDate()).padStart(2, '0');
+          const fechaStr = `${yearStr}-${monthStr}-${dayStr}`;
 
-            eventos.push({
-                title: disciplina,   
-                start: fechaStr,     
-                end: fechaStr,       
-                horain: horain,      
-                horafin: horafin,   
-                coach: coach
-            });
+          eventos.push({
+            title: disciplina,
+            start: fechaStr,
+            end: fechaStr,
+            horain: horain,
+            horafin: horafin,
+            coach: coach
+          });
         } else {
-            // Si hay días seleccionados, crea eventos para esos días durante el mes
-            const year = fechaInicio.getFullYear();
-            const month = fechaInicio.getMonth();
-            const fechaFin = new Date(year, month + 1, 0); // último día del mes
+          // Si hay días seleccionados, crea eventos para esos días durante el mes
+          const year = fechaInicio.getFullYear();
+          const month = fechaInicio.getMonth();
+          const fechaFin = new Date(year, month + 1, 0); // último día del mes
 
-            for (let d = new Date(fechaInicio); d <= fechaFin; d.setDate(d.getDate() + 1)) {
-                if (diasSeleccionados.includes(d.getDay())) {
-                    const yearStr = d.getFullYear();
-                    const monthStr = String(d.getMonth() + 1).padStart(2, '0');
-                    const dayStr = String(d.getDate()).padStart(2, '0');
-                    const fechaStr = `${yearStr}-${monthStr}-${dayStr}`;
+          for (let d = new Date(fechaInicio); d <= fechaFin; d.setDate(d.getDate() + 1)) {
+            if (diasSeleccionados.includes(d.getDay())) {
+              const yearStr = d.getFullYear();
+              const monthStr = String(d.getMonth() + 1).padStart(2, '0');
+              const dayStr = String(d.getDate()).padStart(2, '0');
+              const fechaStr = `${yearStr}-${monthStr}-${dayStr}`;
 
-                    eventos.push({
-                        title: disciplina,   
-                        start: fechaStr,     
-                        end: fechaStr,       
-                        horain: horain,      
-                        horafin: horafin,   
-                        coach: coach
-                    });
-                }
+              eventos.push({
+                title: disciplina,
+                start: fechaStr,
+                end: fechaStr,
+                horain: horain,
+                horafin: horafin,
+                coach: coach
+              });
             }
+          }
         }
 
         console.log("Eventos a crear:", eventos);
 
         fetch('add_event.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(eventos)
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(eventos)
         })
-        .then(response => response.json())
-        .then(data => {
+          .then(response => response.json())
+          .then(data => {
             if (data.success) {
-                calendar.refetchEvents();
+              calendar.refetchEvents();
             } else {
-                alert('Error al crear eventos');
+              alert('Error al crear eventos');
             }
             closeEv();
-        })
-        .catch(error => {
+          })
+          .catch(error => {
             console.error('Error al enviar los datos:', error);
             alert('Error al crear eventos');
-        });
-    };
+          });
+      };
 
-    cargarOpciones();
-},
+      cargarOpciones();
+    },
 
-    eventClick: function(info) {
+    eventClick: function (info) {
       info.jsEvent.preventDefault();
       openEventModal(info.event);
     }
@@ -154,6 +155,8 @@ function openEventModal(event) {
   document.getElementById('modalInstructor').textContent = event.extendedProps.coach || "No especificado";
   document.getElementById('modalDuracion').textContent = event.extendedProps.dura || "No especificado";
   document.getElementById("alumnos").innerHTML = event.extendedProps.alumnos;
+
+  window.classIdSelected = event.id;
 
   if (event.extendedProps.open == true) {
     document.getElementById("buttonModal").innerHTML = `
@@ -180,115 +183,115 @@ function openEventModal(event) {
 }
 
 
-  function addClient(id_event, disciplina, coach, duracion, idcoach, esp){
-      document.getElementById('id-event').value = id_event;
-      document.getElementById('disciplina-event').value = disciplina;
-      document.getElementById('coach-event').value = coach;
-      document.getElementById('duracion-event').value = duracion;
-      document.getElementById('idcoach-event').value = idcoach;
-      document.getElementById('add_alumnos').style.display = "flex";
-      document.getElementById("esp").innerHTML = "";
-      if(esp != null){
-        
-          if(esp == 1){
-              fetch(`../get-lugares.php?especial=1&id=${id_event}`)
-                  .then(res => {
-                      if (!res.ok) {
-                          throw new Error('Error en la respuesta del servidor');
-                      }
-                      return res.json();
-                  })
-                  .then(data => {
-                      // Verificar que data.ocupados exista y sea un array
-                      const ocupados = data.ocupados || [];
-                      
-                      // Crear SELECT
-                      const select = document.createElement("select");
-                      select.className = "form-select";
-                      select.setAttribute("id", `lugar-event`);
+function addClient(id_event, disciplina, coach, duracion, idcoach, esp) {
+  document.getElementById('id-event').value = id_event;
+  document.getElementById('disciplina-event').value = disciplina;
+  document.getElementById('coach-event').value = coach;
+  document.getElementById('duracion-event').value = duracion;
+  document.getElementById('idcoach-event').value = idcoach;
+  document.getElementById('add_alumnos').style.display = "flex";
+  document.getElementById("esp").innerHTML = "";
+  if (esp != null) {
 
-                      // Generar 10 lugares (1 al 10)
-                      for (let i = 1; i <= 10; i++) {
-                          const option = document.createElement("option");
-                          option.textContent = i;
-                          option.value = i;
+    if (esp == 1) {
+      fetch(`../get-lugares.php?especial=1&id=${id_event}`)
+        .then(res => {
+          if (!res.ok) {
+            throw new Error('Error en la respuesta del servidor');
+          }
+          return res.json();
+        })
+        .then(data => {
+          // Verificar que data.ocupados exista y sea un array
+          const ocupados = data.ocupados || [];
 
-                          if (ocupados.includes(i)) {
-                              // Lugar ocupado - CORRECCIÓN AQUÍ
-                              option.disabled = true;
-                              option.textContent += " (Ocupado)";
-                          }
+          // Crear SELECT
+          const select = document.createElement("select");
+          select.className = "form-select";
+          select.setAttribute("id", `lugar-event`);
 
-                          select.appendChild(option);
-                      }
+          // Generar 10 lugares (1 al 10)
+          for (let i = 1; i <= 10; i++) {
+            const option = document.createElement("option");
+            option.textContent = i;
+            option.value = i;
 
-                      document.getElementById("esp").appendChild(select);
-                  })
-                  .catch(err => console.error("Error consultando lugares:", err));
-          }else if(esp == 2){
-          
-              fetch(`../get-lugares.php?especial=2&id=${id_event}`)
-                  .then(res => {
-                      if (!res.ok) {
-                          throw new Error('Error en la respuesta del servidor');
-                      }
-                      return res.json();
-                  })
-                  .then(data => {
-                      // Verificar que data.ocupados exista y sea un array
-                      const ocupados = data.ocupados || [];
-                      
-                      // Crear SELECT
-                      const select = document.createElement("select");
-                      select.className = "form-select";
-                      select.setAttribute("id", `lugar-event`);
+            if (ocupados.includes(i)) {
+              // Lugar ocupado - CORRECCIÓN AQUÍ
+              option.disabled = true;
+              option.textContent += " (Ocupado)";
+            }
 
-                      // Generar 10 lugares (1 al 10)
-                      for (let i = 1; i <= 8; i++) {
-                          const option = document.createElement("option");
-                          option.textContent = i;
-                          option.value = i;
-
-                          if (ocupados.includes(i)) {
-                              // Lugar ocupado - CORRECCIÓN AQUÍ
-                              option.disabled = true;
-                              option.textContent += " (Ocupado)";
-                          }
-
-                          select.appendChild(option);
-                      }
-
-                      document.getElementById("esp").appendChild(select);
-                  })
-                  .catch(err => console.error("Error consultando lugares:", err));
-          }else{
-            const div = document.getElementById('esp');
-            const input = document.createElement("input");
-            input.setAttribute("type", 'hidden');
-            input.setAttribute("id", `lugar_event`);
-            div.appendChild(input);
+            select.appendChild(option);
           }
 
-        
-      }else{
-            const div = document.getElementById('esp');
-            const input = document.createElement("input");
-            input.setAttribute("type", 'hidden');
-            input.setAttribute("id", `lugar-event`);
-            input.value = '0';
-            div.appendChild(input);
+          document.getElementById("esp").appendChild(select);
+        })
+        .catch(err => console.error("Error consultando lugares:", err));
+    } else if (esp == 2) {
+
+      fetch(`../get-lugares.php?especial=2&id=${id_event}`)
+        .then(res => {
+          if (!res.ok) {
+            throw new Error('Error en la respuesta del servidor');
           }
-      
+          return res.json();
+        })
+        .then(data => {
+          // Verificar que data.ocupados exista y sea un array
+          const ocupados = data.ocupados || [];
+
+          // Crear SELECT
+          const select = document.createElement("select");
+          select.className = "form-select";
+          select.setAttribute("id", `lugar-event`);
+
+          // Generar 10 lugares (1 al 10)
+          for (let i = 1; i <= 8; i++) {
+            const option = document.createElement("option");
+            option.textContent = i;
+            option.value = i;
+
+            if (ocupados.includes(i)) {
+              // Lugar ocupado - CORRECCIÓN AQUÍ
+              option.disabled = true;
+              option.textContent += " (Ocupado)";
+            }
+
+            select.appendChild(option);
+          }
+
+          document.getElementById("esp").appendChild(select);
+        })
+        .catch(err => console.error("Error consultando lugares:", err));
+    } else {
+      const div = document.getElementById('esp');
+      const input = document.createElement("input");
+      input.setAttribute("type", 'hidden');
+      input.setAttribute("id", `lugar_event`);
+      div.appendChild(input);
+    }
+
+
+  } else {
+    const div = document.getElementById('esp');
+    const input = document.createElement("input");
+    input.setAttribute("type", 'hidden');
+    input.setAttribute("id", `lugar-event`);
+    input.value = '0';
+    div.appendChild(input);
   }
-  function registrarReservaInterna() {
+
+}
+function registrarReservaInterna() {
   const idEvento = document.getElementById('id-event').value;
   const disciplina = document.getElementById('disciplina-event').value;
   const coach = document.getElementById('coach-event').value;
   const duracion = document.getElementById('duracion-event').value;
   const idCoach = document.getElementById('idcoach-event').value;
   const idAlumno = document.getElementById('alumn-event').value;
-   const LugarAlumno = document.getElementById('lugar-event').value;
-  
+  const LugarAlumno = document.getElementById('lugar-event').value;
+
 
   // Validar que haya alumno seleccionado
   if (!idAlumno) {
@@ -311,119 +314,119 @@ function openEventModal(event) {
       lugar: LugarAlumno
     })
   })
-  .then(response => response.json())
-  .then(data => {
-        if (data.success) {
-        
-             renderCalendar();
-            closeEv();
-        }else if(data.status == 'nocredit'){
-          alert("El Usuario no cuenta con créditos para reservar");
-        }else{
-          alert("Hubo un error al registrar la reservación")
-        }
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
 
-  })
-  .catch(error => {
-    console.error('Error en la solicitud:', error);
-  });
-}
-
-  function closeEv() {
-    document.getElementById('eventoModal').style.display = "none";
-    document.getElementById('evento-form').style.display = 'none';
-    document.getElementById('oves').style.display = "none";
-    document.getElementById('add_alumnos').style.display = "none";
-  }
-
-  function cancelReserv(eventId, userId, clasId, tieneInvitado, title) {
-    if (confirm("¿Cancelar esta reservación?")) {
-      const datos = new URLSearchParams();
-      datos.append("evento", eventId);
-      datos.append("usuario", userId);
-      datos.append("classID", clasId);
-      datos.append("title", title);
-      datos.append("invitado", tieneInvitado);
-   
-      fetch("../cancel_reserv.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: datos.toString()
-      })
-      .then(response => response.text())
-      .then(data => {
-       
         renderCalendar();
         closeEv();
-           
+      } else if (data.status == 'nocredit') {
+        alert("El Usuario no cuenta con créditos para reservar");
+      } else {
+        alert("Hubo un error al registrar la reservación")
+      }
+
+    })
+    .catch(error => {
+      console.error('Error en la solicitud:', error);
+    });
+}
+
+function closeEv() {
+  document.getElementById('eventoModal').style.display = "none";
+  document.getElementById('evento-form').style.display = 'none';
+  document.getElementById('oves').style.display = "none";
+  document.getElementById('add_alumnos').style.display = "none";
+}
+
+function cancelReserv(eventId, userId, clasId, tieneInvitado, title) {
+  if (confirm("¿Cancelar esta reservación?")) {
+    const datos = new URLSearchParams();
+    datos.append("evento", eventId);
+    datos.append("usuario", userId);
+    datos.append("classID", clasId);
+    datos.append("title", title);
+    datos.append("invitado", tieneInvitado);
+
+    fetch("../cancel_reserv.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: datos.toString()
+    })
+      .then(response => response.text())
+      .then(data => {
+
+        renderCalendar();
+        closeEv();
+
       })
       .catch(error => {
         console.error("Error:", error);
         alert("Hubo un error al cancelar.");
       });
-    }
   }
+}
 
-  function cerrarFormulario() {
-    closeEv();
-    
+function cerrarFormulario() {
+  closeEv();
+
+}
+
+function addInvitado(eventId, userId, clasId) {
+  if (confirm("¿Deseas agregar un invitado?")) {
+    const datos = new URLSearchParams();
+    datos.append("evento", eventId);
+    datos.append("usuario", userId);
+    datos.append("classID", clasId);
+
+    fetch("add_invitado.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: datos.toString()
+    })
+      .then(response => response.json()) // <-- aquí cambiamos a .json()
+      .then(data => {
+        if (data.status === "nocredit") {
+          alert("No cuenta con Créditos disponibles.");
+          return; // No seguimos ejecutando el resto
+        }
+
+        renderCalendar();
+        closeEv();
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("Hubo un error al cancelar.");
+      });
   }
-  
-  function addInvitado(eventId, userId, clasId) {
-    if (confirm("¿Deseas agregar un invitado?")) {
-        const datos = new URLSearchParams();
-        datos.append("evento", eventId);
-        datos.append("usuario", userId);
-        datos.append("classID", clasId);
-
-        fetch("add_invitado.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: datos.toString()
-        })
-        .then(response => response.json()) // <-- aquí cambiamos a .json()
-        .then(data => {
-            if (data.status === "nocredit") {
-                alert("No cuenta con Créditos disponibles.");
-                return; // No seguimos ejecutando el resto
-            }
-
-            renderCalendar();
-            closeEv();
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("Hubo un error al cancelar.");
-        });
-    }
 }
 function cancelClass(id) {
-    if (!confirm("¿Estás seguro de que quieres eliminar esta clase?")) return;
+  if (!confirm("¿Estás seguro de que quieres eliminar esta clase?")) return;
 
-    fetch('eliminar-clase.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ id: id })
-    })
+  fetch('eliminar-clase.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ id: id })
+  })
     .then(response => response.text())
     .then(data => {
-        if (data === "ok") {
-            renderCalendar();
-            closeEv();
-        } else {
-            alert(data);
-            renderCalendar();
-            closeEv();
-        }
+      if (data === "ok") {
+        renderCalendar();
+        closeEv();
+      } else {
+        alert(data);
+        renderCalendar();
+        closeEv();
+      }
     })
     .catch(error => {
-        console.error("Error:", error);
-        alert("Error en la solicitud.");
+      console.error("Error:", error);
+      alert("Error en la solicitud.");
     });
 }

@@ -45,6 +45,7 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="./assets/css/demo.css">
+	<link rel="stylesheet" href="./assets/css/estilos-clases.css">
 	<style>
 		.icon {
 			fill: #fff;
@@ -289,6 +290,11 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
 					</div>
 				</div>
 			</div>
+			<div class="cambiarInstructorModal">
+				<button class="closeChangeInstructorBtn">X</button>
+				<div class="container">
+				</div>
+			</div>
 			<div id="evento-form" class="card colso">
 				<h3 style="color: #986C5D; text-align: center;">Agendar Clase</h3>
 				<p id="fech" style="text-align: center;"></p>
@@ -373,6 +379,80 @@ if (!isset($_SESSION['idUser']) || !isset($_SESSION['tipoUser'])) {
 
 		<script>
 			const cambiarInstructorBtn = document.querySelector('.cambiar-instructor-clase-btn');
+			const cambiarInstructorModal = document.querySelector('.cambiarInstructorModal');
+			const closeCambiarInstructorModal = document.querySelector('.closeChangeInstructorBtn');
+			const selectNewCoachContainer = document.querySelector('.cambiarInstructorModal .container');
+			let coachesBtns;
+
+			closeCambiarInstructorModal.addEventListener('click', () => {
+				cambiarInstructorModal.style.display = "none";
+			});
+
+			const updateClassCoach = async (ids, nuevoNombre) => {
+				try {
+					const response = await fetch('cambiar-coach-clase.php', {
+						method: "POST",
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(ids)
+					});
+
+					if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+
+					const result = await response.json();
+
+					if (result.status === "success") {
+						console.log(result.message);
+						cambiarInstructorModal.style.display = "none";
+						document.getElementById('modalInstructor').textContent = nuevoNombre;
+
+						if (calendar) {
+							calendar.refetchEvents();
+						}
+					} else {
+						console.error("Error: " + result.message);
+					}
+				} catch (error) {
+					console.error(`Error al cambiar Coach: ${error}`);
+				}
+			}
+
+			const getCoaches = async () => {
+				try {
+					const response = await fetch('get-coaches.php');
+					if (!response.ok) throw new Error("Error cargando coaches");
+
+					const data = await response.json();
+					const coaches = [...data.cursos];
+
+					cambiarInstructorBtn.addEventListener('click', () => {
+						cambiarInstructorModal.style.display = "flex";
+						selectNewCoachContainer.innerHTML = '';
+
+						coaches.forEach(coach => {
+							const coachBtn = document.createElement('button');
+							coachBtn.classList.add('instructorNameOpt');
+							coachBtn.textContent = coach.nombre;
+
+							coachBtn.onclick = () => {
+								const idsUpdate = {
+									idClase: window.classIdSelected,
+									idInstructor: coach.id
+								};
+
+								updateClassCoach(idsUpdate, coach.nombre);
+							};
+
+							selectNewCoachContainer.appendChild(coachBtn);
+						});
+					});
+				} catch (error) {
+					console.error(error);
+				}
+			};
+
+			getCoaches();
 		</script>
 
 </body>

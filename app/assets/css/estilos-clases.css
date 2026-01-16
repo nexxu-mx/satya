@@ -1,0 +1,74 @@
+.cambiar-instructor-clase-btn {
+    background-color: #fff;
+    border: none;
+    padding-block: .5rem;
+    transition: all 200ms ease;
+    border-radius: .5rem;
+}
+
+.cambiar-instructor-clase-btn:hover {
+    background-color: #C49675;
+    color: #fff;
+}
+
+.cambiarInstructorModal {
+    background-color: #fff;
+    border-radius: 2rem;
+    box-shadow: .5px 1rem 1rem #ccc;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: 25rem;
+    height: fit-content;
+    max-height: 25rem;
+    flex-direction: column;
+    z-index: 10001;
+    padding: 3rem;
+    overflow: hidden;
+    display: none;
+}
+
+.cambiarInstructorModal .container {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.cambiarInstructorModal .container button {
+    flex-shrink: 0;
+    margin-bottom: 8px;
+}
+
+.closeChangeInstructorBtn {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    z-index: 10;
+    border: none;
+    border-radius: 100%;
+    padding: .3rem .7rem;
+    transition: all 200ms ease;
+    background-color: #fff;
+}
+
+.closeChangeInstructorBtn:hover {
+    background-color: #C49675;
+    color: #fff;
+}
+
+.instructorNameOpt {
+    border: none;
+    padding-block: .5rem;
+    transition: all 200ms ease;
+    border-radius: .5rem;
+}
+
+.instructorNameOpt:hover {
+    background-color: #C49675;
+    color: #fff;
+}
